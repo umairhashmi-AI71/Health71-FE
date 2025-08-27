@@ -93,66 +93,13 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
   }
 
   return (
-    <div className="h-screen flex bg-gray-50">
-      {/* Sidebar */}
-      <div className={`fixed inset-y-0 left-0 z-50 w-64 bg-white shadow-lg transform ${
-        sidebarOpen ? 'translate-x-0' : '-translate-x-full'
-      } transition-transform duration-200 ease-in-out lg:translate-x-0 lg:static lg:h-full`}>
-        
-        {/* Sidebar Header */}
-        <div className="flex items-center justify-between h-16 px-6 border-b border-gray-200 bg-blue-600">
-          <div className="flex items-center">
-            <div className="flex-shrink-0">
-              <div className="w-8 h-8 bg-white rounded-lg flex items-center justify-center">
-                <span className="text-blue-600 font-bold text-sm">H71</span>
-              </div>
-            </div>
-            <span className="ml-3 text-xl font-semibold text-white">Health71 RCM</span>
-          </div>
-          <button
-            onClick={() => setSidebarOpen(false)}
-            className="lg:hidden text-white hover:text-gray-200"
-          >
-            <X className="w-6 h-6" />
-          </button>
-        </div>
-        
-        {/* Navigation */}
-        <nav className="flex-1 px-4 py-6 space-y-2">
-          {sidebarItems.map((item) => {
-            const Icon = item.icon;
-            const active = isActive(item.href);
-            return (
-              <Link
-                key={item.label}
-                href={item.href}
-                className={`flex items-center px-4 py-3 text-sm font-medium rounded-lg transition-colors duration-200 ${
-                  active 
-                    ? 'bg-blue-50 text-blue-700 border-r-2 border-blue-700' 
-                    : 'text-gray-700 hover:bg-blue-50 hover:text-blue-700'
-                }`}
-              >
-                <Icon className="w-5 h-5 mr-3" />
-                {item.label}
-              </Link>
-            );
-          })}
-          
-          {/* Logout Button */}
-          <button
-            onClick={handleLogout}
-            className="w-full flex items-center px-4 py-3 text-sm font-medium text-red-600 rounded-lg hover:bg-red-50 transition-colors duration-200 mt-8"
-          >
-            <LogOut className="w-5 h-5 mr-3" />
-            Logout
-          </button>
-        </nav>
-      </div>
+    <div className="h-screen flex">
+      
 
       {/* Main Content Area */}
-      <div className="flex-1 flex flex-col lg:ml-0">
+      <div className=" m-auto w-full max-w-7xl m-auto">
         {/* Top Navigation Bar - Fixed */}
-        <header className="sticky top-0 z-40 bg-white shadow-sm border-b border-gray-200 h-16">
+        <header className="sticky top-0 z-40 bg-white shadow-sm border-b border-gray-200 h-16 ">
           <div className="flex items-center justify-between h-full px-6">
             <div className="flex items-center">
               <button
@@ -176,14 +123,14 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
                 <div className="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center">
                   <User className="w-4 h-4 text-white" />
                 </div>
-                <span className="hidden md:block font-medium text-gray-700">{getUserDisplayName()}</span>
+                {/* <span className="hidden md:block font-medium text-gray-700">{getUserDisplayName()}</span> */}
               </div>
             </div>
           </div>
         </header>
 
         {/* Page Content */}
-        <main className="flex-1 overflow-auto p-6">
+        <main className="overflow-auto">
           {children}
         </main>
       </div>

@@ -7,6 +7,8 @@
   --card-foreground: #736E68;
   --base-primary: #212D45;
   --base-green: #0D826B;
+  --base-card: #F9F7F6;
+  --border-base: #736E68;
 } 
 
 @theme inline {
@@ -26,6 +28,7 @@
 body {
   background: #ffff;
   color: var(--base-primary);
+  font-size: 14px;
 }
 
 .text-sm {
@@ -52,3 +55,10 @@ body {
 } 
 
 
+.bg-basecard {
+  background-color: var(--base-card);
+}
+
+.border-base {
+  border-color: var(--border-base);
+}
