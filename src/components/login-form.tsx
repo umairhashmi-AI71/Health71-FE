@@ -162,7 +162,7 @@ export function LoginForm({ onSuccess }: LoginFormProps) {
             </Button>
           </form>
           <p className="text-sm text-center">
-            Don't have an account?{" "}
+            {`Don't have an account?`}
             <a href="#" className="text-green">
               Sign up
             </a>
