@@ -4,6 +4,7 @@ import AIConstructionExpert from "@/components/AIConstructionExpert";
 import { DashboardLayout } from "@/components/dashboard-layout";
 import PatientProfileCard from "@/components/PatientProfileCard";
 import HealthcareCard, { ProcessStep } from "@/components/HealthcareCard";
+import SOAPNote from "@/components/SOAPNote";
 
 export default function DashboardPage() {
   const authorizationData = {
@@ -14,6 +15,8 @@ export default function DashboardPage() {
     "CPT Codes": "29880",
     "Drug Codes": "NDC-0002",
   };
+
+  
 
   const claimSteps: ProcessStep[] = [
     { id: "1", label: "Compliance Check & Adjustment", status: "completed" },
@@ -45,7 +48,7 @@ export default function DashboardPage() {
     <DashboardLayout>
       <div className="min-h-full">
         <main className="p-6 space-y-6">
-          <PatientProfileCard
+           <PatientProfileCard
             name="Sara Al Nuaimi"
             id="101300"
             emiratesId="748-1985-2233445-4"
@@ -107,7 +110,7 @@ export default function DashboardPage() {
  
           <AIConstructionExpert />
 
-         
+          <SOAPNote />
         </main>
       </div>
     </DashboardLayout>
