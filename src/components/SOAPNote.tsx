@@ -10,9 +10,10 @@ export type TabType = {
 interface SOAPNoteProps {
   tabs: TabType[];
   defaultActiveTab?: string;
+  height?: string;
 }
 
-const SOAPNote: React.FC<SOAPNoteProps> = ({ tabs, defaultActiveTab }) => {
+const SOAPNote: React.FC<SOAPNoteProps> = ({ tabs, defaultActiveTab, height = '' }) => {
   const [activeTab, setActiveTab] = useState(defaultActiveTab);
   return (
     <div className="mx-auto bg-white border border-base rounded-lg drop-shadow-sm ">
@@ -34,7 +35,7 @@ const SOAPNote: React.FC<SOAPNoteProps> = ({ tabs, defaultActiveTab }) => {
       </div>
 
       {/* Tab Content */}
-      <div className="p-2.5 overflow-y-auto h-94 text-muted ">
+      <div className={`p-2.5 overflow-y-auto text-muted ${height}`}>
         {tabs.map(
           (tab, index) =>
             activeTab === tab.id && (

@@ -1,12 +1,18 @@
 "use client";
 
-import AIConstructionExpert from "@/components/AIConstructionExpert";
 import { DashboardLayout } from "@/components/dashboard-layout";
 import ICDCodes from "@/components/ICDCode";
 import PatientProfileCard from "@/components/PatientProfileCard";
 import HealthcareCard, { ProcessStep } from "@/components/HealthcareCard";
 import SOAPNote, { TabType } from "@/components/SOAPNote";
-import { HeartPlus, Microscope, NotepadText, Paperclip, Pill, Stethoscope } from "lucide-react";
+import {
+  HeartPlus,
+  Microscope,
+  NotepadText,
+  Paperclip,
+  Pill,
+  Stethoscope,
+} from "lucide-react";
 import SoapContent, { attachments } from "@/lib/soapdata";
 
 export default function DashboardPage() {
@@ -19,24 +25,32 @@ export default function DashboardPage() {
     "Drug Codes": "NDC-0002",
   };
 
-  const tabs : TabType[]= [
-      { id: 'soap', label: 'SOAP Note', data: SoapContent,  icon: NotepadText },
-      { id: 'vitals', label: 'Care Coordination', data: "empty", icon: HeartPlus }, 
-      { id: 'attachments', label: 'Attachments', data: attachments, icon: Paperclip },
-    ];
+  const tabs: TabType[] = [
+    { id: "soap", label: "SOAP Note", data: SoapContent, icon: NotepadText },
+    {
+      id: "vitals",
+      label: "Care Coordination",
+      data: "empty",
+      icon: HeartPlus,
+    },
+    {
+      id: "attachments",
+      label: "Attachments",
+      data: attachments,
+      icon: Paperclip,
+    },
+  ];
 
-    const icdTabs : TabType[]= [
-      { id: 'icd', label: 'ICD', data: ICDCodes,  icon: Microscope },
-      { id: 'cpt', label: 'CPT', data: "empty", icon: Stethoscope }, 
-      { id: 'drug', label: 'DRUG', data: 'empty', icon: Pill },
-    ];
-
-
+  const icdTabs: TabType[] = [
+    { id: "icd", label: "ICD", data: ICDCodes, icon: Microscope },
+    { id: "cpt", label: "CPT", data: "empty", icon: Stethoscope },
+    { id: "drug", label: "DRUG", data: "empty", icon: Pill },
+  ];
 
   const claimSteps: ProcessStep[] = [
-    { id: "1", label: "Compliance Check & Adjustment", status: "completed" },
-    { id: "2", label: "XML File Generated", status: "completed" },
-    { id: "3", label: "Claim Posted", status: "current" },
+    { id: "1", label: "Compliance Check & Adjustment", status: "pending" },
+    { id: "2", label: "XML File Generated", status: "pending" },
+    { id: "3", label: "Claim Posted", status: "pending" },
     { id: "4", label: "Claim ID Received & Updated", status: "pending" },
   ];
 
@@ -61,36 +75,30 @@ export default function DashboardPage() {
 
   return (
     <DashboardLayout>
-      <div className="min-h-full">
-        <main className="p-6 space-y-6">
-           <PatientProfileCard
-            name="Sara Al Nuaimi"
-            id="101300"
-            emiratesId="748-1985-2233445-4"
-            sex="Female"
-            dateOfBirth="1985-07-21"
-            nationality="UAE"
-            language="Arabic"
-            phone="97155467830"
-            email="Sara.nuaimi@gmail.com"
-            avatarUrl="/avatar.png"
-          />
-
-          <HealthcareCard
-            title="Eligibility Check"
-            status="covered"
-            mode="grid"
-            gridData={eligibilityCheck}
-            isInsuranceInfoCard={true}
-          />
-
-          <HealthcareCard
-                title="Prior Authorization"
-                status="approved"
-                mode="grid"
-                gridData={authorizationData}
+      <div>
+        <main className="p-6">
+          <div className="grid grid-cols-[23%_1fr] gap-4 mb-6">
+            <PatientProfileCard
+                name="Sara Al Nuaimi"
+                id="101300"
+                emiratesId="748-1985-2233445-4"
+                sex="Female"
+                dateOfBirth="1985-07-21"
+                nationality="UAE"
+                language="Arabic"
+                phone="97155467830"
+                email="Sara.nuaimi@gmail.com"
+                avatarUrl="/avatar.png"
               />
 
+            <div className="grid grid-cols-3 gap-4">
+              <HealthcareCard
+                title="Eligibility Check"
+                status="covered"
+                mode="grid"
+                gridData={eligibilityCheck}
+                isInsuranceInfoCard={true}
+              />
               <HealthcareCard
                 title="Medical Coding"
                 status="inprogress"
@@ -103,12 +111,6 @@ export default function DashboardPage() {
                 }}
               />
 
-               <HealthcareCard
-                title="Claim Submission"
-                status="pending"
-                mode="process"
-                processSteps={claimSteps}
-              />
               <HealthcareCard
                 title="Denial Management"
                 status="pending"
@@ -117,19 +119,35 @@ export default function DashboardPage() {
               />
 
               <HealthcareCard
+                title="Prior Authorization"
+                status="approved"
+                mode="grid"
+                gridData={authorizationData}
+              />
+
+              <HealthcareCard
+                title="Claim Submission"
+                status="pending"
+                mode="process"
+                processSteps={claimSteps}
+              />
+
+              <HealthcareCard
                 title="Post Payment"
                 status="pending"
                 mode="process"
                 processSteps={postPayment}
               />
- 
-          <AIConstructionExpert />
-        <div className="grid grid-cols-[70%_1fr] gap-4">
-          <div><SOAPNote tabs={tabs} defaultActiveTab="soap"/></div>
-          <div><SOAPNote tabs={icdTabs} defaultActiveTab="icd"/></div>
-</div>
-          
-          
+            </div>
+          </div>
+          <div className="grid grid-cols-[70%_1fr] gap-4">
+            <div>
+              <SOAPNote tabs={tabs} defaultActiveTab="soap" height="h-200" />
+            </div>
+            <div>
+              <SOAPNote tabs={icdTabs} defaultActiveTab="icd" />
+            </div>
+          </div>
         </main>
       </div>
     </DashboardLayout>
