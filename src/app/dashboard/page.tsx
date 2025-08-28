@@ -1,8 +1,10 @@
 "use client";
 
+import AIConstructionExpert from "@/components/AIConstructionExpert";
 import { DashboardLayout } from "@/components/dashboard-layout";
 import InsuranceInfoCard from "@/components/InsuranceInfoCard";
 import PatientProfileCard from "@/components/PatientProfileCard";
+import PriorAuthorizationCard from "@/components/PriorAuthorizationCard";
 
 export default function DashboardPage() {
   return (
@@ -28,6 +30,19 @@ export default function DashboardPage() {
             network="Daman-AUH-001"
             logoUrl="image.png"
           />
+           <PriorAuthorizationCard
+        status="Approved"
+        encounterId="ENC-2025-0789"
+        priorAuthId="PA-556677"
+        physician="Dr. Al Shamsi"
+        icdCode="M23.2"
+        cptCode="29880"
+        drugCode="NDC-0002"
+      />
+
+      <AIConstructionExpert />
+
+     
         </main>
       </div>
     </DashboardLayout>

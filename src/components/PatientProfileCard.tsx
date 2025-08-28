@@ -31,7 +31,7 @@ const PatientProfileCard: React.FC<PatientProfileProps> = ({
         <img
           src={avatarUrl}
           alt={name}
-          className="w-20 h-20 rounded-full object-cover"
+          className="w-25 h-25 rounded-full object-cover"
         />
         <div>
           <h2 className="text-xl font-semibold">{name}</h2>
