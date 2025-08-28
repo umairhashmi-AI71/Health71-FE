@@ -26,14 +26,14 @@ const PatientProfileCard: React.FC<PatientProfileProps> = ({
   avatarUrl,
 }) => {
   return (
-    <div className="bg-basecard  rounded-lg  p-6 space-y-2 max-w-xs">
-      <div className="flex items-center space-x-4">
+    <div className="bg-basecard border border-base rounded-2xl drop-shadow-sm p-6 space-y-2 max-w-xs">
+      <div className="flex justify-between items-center">
         <img
           src={avatarUrl}
           alt={name}
           className="w-25 h-25 rounded-full object-cover"
         />
-        <div>
+        <div className="text-center">
           <h2 className="text-xl font-semibold">{name}</h2>
           <p className="text-green-600 font-bold">{id}</p>
         </div>

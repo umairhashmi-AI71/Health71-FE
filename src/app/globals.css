@@ -9,6 +9,11 @@
   --base-green: #0D826B;
   --base-card: #F9F7F6;
   --border-base: #736E68;
+  --alpha-80: #09090B;
+  --base-agent-10: #FCD2C5;
+  --pixel-bloom: #F88265;
+  --primary-foreground: #CAE8E4;
+  --warm-gray: #A9A197;
 } 
 
 @theme inline {
@@ -38,6 +43,9 @@ body {
 .text-muted {
   color: var(--muted-foreground);
 }
+.text-pixel-bloom {
+  color: var(--pixel-bloom);
+}
 .text-green {
   color: var(--base-green);
 }
@@ -54,11 +62,28 @@ body {
   background-color: var(--base-green);
 } 
 
+.bg-warm-gray {
+  background-color: var(--warm-gray);
+}
+.bg-primary-foreground {
+  background-color: var(--primary-foreground);
+}
+.bg-base-agent-10 {
+  background-color: var(--base-agent-10);
+}
 
 .bg-basecard {
   background-color: var(--base-card);
 }
 
 .border-base {
-  border-color: var(--border-base);
+  border: 1px solid rgba(115, 110, 104, 0.30)
+  
+}
+.border-alpha {
+  border-color:  rgba(9, 9, 11);
+
+}
+.text-alpha {
+  color:  rgba(9, 9, 11);
 }
