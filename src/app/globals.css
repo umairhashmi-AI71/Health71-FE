@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
+  --background: #FFFFFF;
   --foreground: #171717;
   --muted-foreground:  #6B6661;
   --card-foreground: #736E68;
@@ -15,6 +15,9 @@
   --primary-foreground: #CAE8E4;
   --warm-gray: #A9A197;
   --base-muted: #F5F2EF;
+  --deep-ocean: #283754;
+  --base-destructive: #CB3914;
+  --sidebar-background: #E8E2DB;
 } 
 
 @theme inline {
@@ -32,7 +35,7 @@
 }
 
 body {
-  background: #ffff;
+  background: #ffffff;
   color: var(--base-primary);
   font-size: 14px;
 }
@@ -89,6 +92,32 @@ body {
   color:  rgba(9, 9, 11);
 }
 
+.bg-alpha {
+  background-color:  rgba(9, 9, 11);
+}
+
 .bg-base-muted {
   background-color: var(--base-muted);
+}
+
+.text-deep-ocean {
+  color: var(--deep-ocean);
+} 
+.border-deep-ocean {
+  border-color: var(--deep-ocean);
+}
+
+.text-base-destructive {
+  color: var(--base-destructive);
+}
+.bg-base-destructive {
+  background-color: var(--base-destructive);
+}
+
+.bg-sidebar {
+  background-color: var(--sidebar-background);
+}
+
+.text-alpha-80 {
+  color: var(--alpha-80);
 }

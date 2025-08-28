@@ -64,7 +64,7 @@ export function LoginForm({ onSuccess }: LoginFormProps) {
             fill="none"
             className="mb-6"
           >
-            <g clip-path="url(#clip0_7_2991)">
+            <g >
               <path
                 d="M78 0.587891H73.7943V31.3986H78V0.587891Z"
                 fill="#F88265"
