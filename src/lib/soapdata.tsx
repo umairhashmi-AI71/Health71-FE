@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 
   
- const SoapContent: React.FC<any> = () => {
+ const SoapContent: React.FC = () => {
     const chiefComplaint = "Pain in the left knee, moderate to severe, lasting for 3 weeks.";
 const  hpiDescription = "The patient, a 52-year-old Caucasian male named John Smith, presents with complaints of moderate to severe pain in the left knee that has persisted for the past three weeks. The pain is associated with occasional swelling and stiffness, particularly pronounced in the mornings. The symptoms are exacerbated by physical activity and have a significant impact on daily activities, including walking, climbing stairs, and prolonged standing.";
 const  rosFindings = {
@@ -74,7 +74,7 @@ const  vitalSigns = {
           </div></div>)
  };
 
- export const attachments : React.FC<any> = () => {
+ export const attachments : React.FC = () => {
     return ( <div className="text-center py-12">
               <Paperclip className="w-12 h-12 text-gray-400 mx-auto mb-4" />
               <p className="text-gray-500">No attachments found</p>
