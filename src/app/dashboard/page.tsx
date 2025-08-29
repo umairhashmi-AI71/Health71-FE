@@ -18,18 +18,7 @@ export default function DashboardPage() {
     "CPT Codes": "29880",
     "Drug Codes": "NDC-0002",
   };
-
-  const tabs : TabType[]= [
-      { id: 'soap', label: 'SOAP Note', data: SoapContent,  icon: NotepadText },
-      { id: 'vitals', label: 'Care Coordination', data: "empty", icon: HeartPlus }, 
-      { id: 'attachments', label: 'Attachments', data: attachments, icon: Paperclip },
-    ];
-
-    const icdTabs : TabType[]= [
-      { id: 'icd', label: 'ICD', data: ICDCodes,  icon: Microscope },
-      { id: 'cpt', label: 'CPT', data: "empty", icon: Stethoscope }, 
-      { id: 'drug', label: 'DRUG', data: 'empty', icon: Pill },
-    ];
+ 
 
 
 
@@ -125,8 +114,7 @@ export default function DashboardPage() {
  
           <AIConstructionExpert />
         <div className="grid grid-cols-[70%_1fr] gap-4">
-          <div><SOAPNote tabs={tabs} defaultActiveTab="soap"/></div>
-          <div><SOAPNote tabs={icdTabs} defaultActiveTab="icd"/></div>
+         
 </div>
           
           
