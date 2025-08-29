@@ -110,8 +110,9 @@ The patient, a 52-year-old Caucasian male named John Smith, presents with compla
     {
       id: "attachments",
       label: "Attachments",
-      data: "empty",
+      data: "Empty",
       icon: Paperclip,
+      className: "h-200",
     },
   ];
 
@@ -200,7 +201,7 @@ The patient, a 52-year-old Caucasian male named John Smith, presents with compla
     Coverage: "100%",
   };
 
-  const [modal, setModal] = React.useState<String>();
+  const [modal, setModal] = React.useState<string>();
   const buttons = [
     { label: "Cancel", style: "border border-base " },
     { label: "Save", style: "border border-base " },
