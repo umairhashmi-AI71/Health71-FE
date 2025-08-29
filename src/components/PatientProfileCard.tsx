@@ -34,18 +34,39 @@ const PatientProfileCard: React.FC<PatientProfileProps> = ({
           className="w-25 h-25 rounded-full object-cover"
         />
         <div className="text-center">
-          <h2 className="text-xl font-semibold">{name}</h2>
-          <p className="text-green-600 font-bold">{id}</p>
+          <h2 className="text-lg font-semibold">{name}</h2>
+          <p className="font-medium fong-base text-green ">{id}</p>
         </div>
       </div> 
       <div className="grid grid-cols-2 gap-y-4 mt-4 text-sm">
-        <p className="col-span-2"><span className="font-medium block text-foreground">Emirates ID:</span> {emiratesId}</p>
-        <p><span className="font-medium block text-foreground">Date of Birth:</span> {dateOfBirth}</p>
-        <p><span className="font-medium block text-foreground">Sex:</span> {sex}</p>
-        <p><span className="font-medium block text-foreground">Nationality:</span> {nationality}</p>
-        <p><span className="font-medium block text-foreground">Language:</span> {language}</p>
-        <p className="col-span-2"><span className="font-medium block text-foreground ">Phone:</span> {phone}</p>
-        <p className="col-span-2"><span className="font-medium block text-foreground">Email:</span> {email}</p>
+        <div className="col-span-2">
+          <p className="text-base block text-foreground mb-1">Emirates ID:</p>
+          <p className="text-base font-semibold">{emiratesId}</p>
+        </div>
+         <div>
+          <p className="text-base block text-foreground mb-1">Date of Birth:</p>
+          <p className="text-base font-semibold"> {dateOfBirth}</p>
+        </div>
+         <div>
+          <p className="text-base block text-foreground mb-1">Sex:</p>
+          <p className="text-base font-semibold">{sex}</p>
+        </div>
+         <div>
+          <p className="text-base block text-foreground mb-1">Nationality:</p>
+          <p className="text-base font-semibold">{nationality}</p>
+        </div>
+         <div>
+          <p className="text-base block text-foreground mb-1">Language:</p>
+          <p className="text-base font-semibold">{language}</p>
+        </div>
+         <div className="col-span-2">
+          <p className="text-base block text-foreground mb-1">Phone:</p>
+          <p className="text-base font-semibold">{phone}</p>
+        </div>
+         <div className="col-span-2">
+          <p className="text-base block text-foreground mb-1">Email:</p>
+          <p className="text-base font-semibold">{email}</p>
+        </div>
       </div>
     </div>
   );

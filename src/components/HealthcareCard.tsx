@@ -115,7 +115,7 @@ const HealthcareCard: React.FC<HealthcareCardProps> = ({
     <div className={`max-w-sm bg-basecard border border-base rounded-2xl drop-shadow-sm p-6 ${className}`}>
       {/* Header */}
       <div className="flex items-center justify-between mb-6">
-        <h2 className="text-xl font-semibold text-gray-900">{title}</h2>
+        <h2 className="text-lg font-semibold">{title}</h2>
         <div className={`flex items-center space-x-1 px-3 py-1 rounded-lg text-sm font-medium ${statusConfig.className} py-1 px-2.5`}>
           <span>{statusConfig.text}</span>
         </div>
@@ -128,7 +128,7 @@ const HealthcareCard: React.FC<HealthcareCardProps> = ({
         <img src={"image.png"} alt="Insurance Logo" className="max-w-15.5 max-h-15.5 mr-3.5" />
         <div>
           <h3 className="text-lg font-semibold mb-3">Daman-AUH-001</h3>
-          <p className="text-gray-500 text-sm">42122566</p>
+          <p className="text-sm font-medium">42122566</p>
         </div>
       </div>
     )}
@@ -142,13 +142,13 @@ const HealthcareCard: React.FC<HealthcareCardProps> = ({
               acc.push(
                 <div key={index} className="grid grid-cols-2 gap-6">
                   <div>
-                    <h3 className="font-medium block text-foreground">{key}</h3>
-                    <p >{value}</p>
+                    <h3 className="text-base block text-foreground">{key}</h3>
+                    <p className='text-base font-semibold'>{value}</p>
                   </div>
                   {nextEntry && (
                     <div>
-                      <h3 className="font-medium block text-foreground">{nextEntry[0]}</h3>
-                      <p className="">{nextEntry[1]}</p>
+                      <h3 className="text-base block text-foreground">{nextEntry[0]}</h3>
+                      <p className="text-base font-semibold">{nextEntry[1]}</p>
                     </div>
                   )}
                 </div>

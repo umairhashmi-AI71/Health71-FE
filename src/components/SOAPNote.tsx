@@ -1,10 +1,13 @@
 import React, { JSX, useState } from "react";
 import { LucideIcon } from "lucide-react";
+import Markdown from 'react-markdown'
+import rehypeRaw from 'rehype-raw'
 
 export type TabType = {
   id: string;
   label: string;
-  data: React.FC | string | (() => JSX.Element);
+  data: string | React.ReactElement | React.FC | (() => JSX.Element);
+  className?: string;
   icon: LucideIcon;
 };
 interface SOAPNoteProps {
@@ -34,23 +37,26 @@ const SOAPNote: React.FC<SOAPNoteProps> = ({ tabs, defaultActiveTab, height = ''
         ))}
       </div>
 
-      {/* Tab Content */}
-      <div className={`p-2.5 overflow-y-auto text-muted ${height}`}>
-        {tabs.map(
-          (tab, index) =>
-            activeTab === tab.id && (
-              <div key={tab.label} className="space-y-6">
-                {
-                  <div className="space-y-6" key={tab.id}>
-                    {typeof tab.data === "function"
-                      ? React.createElement(tab.data)
-                      : tab.data}
-                  </div>
-                }
-              </div>
-            )
-        )}
+      <div className="relative">
+  {tabs.map((tab, index) => {
+    let content;
+    if (typeof tab.data === "string") {
+      content = <Markdown rehypePlugins={[rehypeRaw]}>{tab.data}</Markdown>;
+    } else if (typeof tab.data === "function") {
+      content = React.createElement(tab.data);
+    } else {
+      content = tab.data;
+    }
+    return (
+      <div
+        key={tab.label}
+        className={`p-2.5 overflow-y-auto ${tab.className} ${height} ${activeTab === tab.id ? "" : "hidden"}`}
+      >
+        <div className="space-y-6">{content}</div>
       </div>
+    );
+  })}
+</div>
     </div>
   );
 };

@@ -93,7 +93,7 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
   }
 
   return (
-    <div className="flex bg-sidebar pl-16 pr-5 pt-5">
+    <div className="flex h-screen bg-sidebar pl-16 pr-5 pt-5">
       {/* Sidebar */}
       <div
         className={`fixed left-0 transform ${
@@ -178,7 +178,7 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
           <Menu className="w-6 h-6" />
         </button> */}
         {/* Page Content */}
-        <main className="">{children}</main>
+        <main className="size-full max-w-360 xl:mx-auto">{children}</main>
       </div>
     </div>
   );
