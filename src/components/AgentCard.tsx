@@ -1,5 +1,5 @@
 import { ClipboardCheck, Flag, Zap } from "lucide-react";
-import type { Agent, Feature } from "../types/agent";
+import type { Agent } from "../types/agent";
 
 interface AgentCardProps extends Agent {}
 

@@ -1,6 +1,6 @@
   
   import { Paperclip } from 'lucide-react';
-import React, { useState } from 'react';
+import React from 'react';
 
   
  const SoapContent: React.FC = () => {

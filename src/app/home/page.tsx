@@ -12,19 +12,16 @@ import {
   AlertCircle,
 } from "lucide-react";
 import type { Agent } from "../../types/agent";
-import React, { useState, useEffect, useCallback, useMemo, useRef } from "react";
+import React, { useState, useEffect, useCallback, useMemo } from "react";
 import { AgGridReact } from "ag-grid-react";
 import {
   ModuleRegistry,
   AllCommunityModule,
-  ColDef,
   SelectionChangedEvent,
 } from "ag-grid-community";
 import { patientPersona  } from "@/lib/mockPersona";
-import {  PatientListProps, PatientPersona, PatientTableRow } from "@/types/patient";
+import {  PatientTableRow } from "@/types/patient";
 import { patientColumnDef } from "./columnDefs";
-import ReactMarkdown from "react-markdown";
-import { id } from "zod/locales";
 
 ModuleRegistry.registerModules([AllCommunityModule]);
 
