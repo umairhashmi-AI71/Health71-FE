@@ -158,7 +158,7 @@ export default function DashboardPage() {
           ...agent,
           feature: agent.feature.map((f) => ({
             ...f,
-            count: f.count + Math.floor(Math.random() * 3), // random increment
+            count: f.count || 0 + Math.floor(Math.random() * 3), // random increment
           })),
         }))
       );

@@ -1,7 +1,7 @@
 import { ClipboardCheck, Flag, Zap } from "lucide-react";
-import type { Agent } from "../types/agent";
+import { Agent } from "../types/agent";
 
-interface AgentCardProps extends Agent {}
+ 
 
 export default function AgentCard({
   image,
@@ -10,7 +10,7 @@ export default function AgentCard({
   savedHours,
   feature,
   background = "",
-}: AgentCardProps) {
+}: Agent) {
   const defaultIcons = [ClipboardCheck, Flag, Zap];
 
   return (
