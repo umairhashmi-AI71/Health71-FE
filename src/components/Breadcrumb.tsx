@@ -10,7 +10,7 @@ const breadcrumbMap: Record<string, string> = {
 
 export default function Breadcrumb() {
   const pathname = usePathname();
-  const segments = pathname.split("/").filter(Boolean);
+ const segments = pathname.replace(/^\/home/, "").split("/").filter(Boolean);
 
   // Always start with Home
   const items = [
@@ -22,9 +22,11 @@ export default function Breadcrumb() {
   ];
 
   segments.forEach((seg, idx) => {
-    const href = "/" + segments.slice(0, idx + 1).join("/");
+    let href = "/" + segments.slice(0, idx + 1).join("/");
     const label = breadcrumbMap[seg] || seg;
     const isLast = idx === segments.length - 1;
+         href = label === "Patient Registery" ? "/home" : href;
+
     items.push(
       <span key={href} className="flex items-center">
         <ChevronRight className="w-5 h-5 text-muted mx-2" />
@@ -40,7 +42,7 @@ export default function Breadcrumb() {
   });
 
   return (
-    <nav className="flex items-center py-4 px-6 bg-white">
+    <nav className="flex items-center py-4">
       {items}
     </nav>
   );

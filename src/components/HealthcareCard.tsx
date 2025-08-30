@@ -130,7 +130,7 @@ const HealthcareCard: React.FC<HealthcareCardProps> = ({
 
     {isInsuranceInfoCard && (
       <div className="flex items-center space-x-3 mb-3">
-        <img src={"image.png"} alt="Insurance Logo" className="max-w-15.5 max-h-15.5 mr-3.5" />
+        <img src={"/insurance-image.png"} alt="Insurance Logo" className="max-w-15.5 max-h-15.5 mr-3.5" />
         <div>
           <h3 className="text-lg font-semibold mb-1">Daman-AUH-001</h3>
           <p className="text-sm font-medium">42122566</p>
