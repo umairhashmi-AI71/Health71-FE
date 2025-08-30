@@ -58,7 +58,7 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
   };
 
   const sidebarItems = [
-    { icon: Home, label: "Home", href: "/dashboard" },
+    { icon: Home, label: "Home", href: "/home" },
     { icon: Search, label: "Search", href: "/" },
     {
       icon: User2,
@@ -178,7 +178,7 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
           <Menu className="w-6 h-6" />
         </button> */}
         {/* Page Content */}
-        <main className="size-full max-w-360 xl:mx-auto">{children}</main>
+        <main className="size-full max-w-345 xl:mx-auto">{children}</main>
       </div>
     </div>
   );

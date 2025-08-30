@@ -9,7 +9,9 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@ai-sdk/openai": "^2.0.23",
     "@hookform/resolvers": "^5.2.1",
+    "ai": "^5.0.28",
     "lucide-react": "^0.540.0",
     "next": "15.4.6",
     "react": "19.1.0",
@@ -17,6 +19,7 @@
     "react-hook-form": "^7.62.0",
     "react-markdown": "^10.1.0",
     "rehype-raw": "^7.0.0",
+    "remark-gfm": "^4.0.1",
     "zod": "^4.0.17"
   },
   "devDependencies": {

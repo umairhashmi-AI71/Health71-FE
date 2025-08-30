@@ -3,7 +3,7 @@ import { ChevronRight } from "lucide-react";
 import { usePathname } from "next/navigation";
 
 const breadcrumbMap: Record<string, string> = {
-  dashboard: "Home",
+  home: "Home",
   patient: "Patient Registery",
   // Add more mappings as needed
 };
@@ -15,7 +15,7 @@ export default function Breadcrumb() {
   // Always start with Home
   const items = [
     <span key="home" className="flex items-center">
-      <Link href="/dashboard" className="text-muted hover:underline">
+      <Link href="/home" className="text-muted hover:underline">
         Home
       </Link>
     </span>,

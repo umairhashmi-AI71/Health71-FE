@@ -28,7 +28,10 @@ interface HealthcareCardProps {
   gridData?: GridData;
   processSteps?: ProcessStep[];
   isInsuranceInfoCard?:boolean;
-  className?:string
+  className?:string;
+  titleGap?:string;
+  processGap?:string;
+
 }
 
 const HealthcareCard: React.FC<HealthcareCardProps> = ({
@@ -38,7 +41,9 @@ const HealthcareCard: React.FC<HealthcareCardProps> = ({
   gridData = {},
   processSteps = [],
   isInsuranceInfoCard = false,
-  className =''
+  className ='',
+  titleGap = 'mb-6',
+  processGap = 'h-3.5'
 }) => {
   const getStatusConfig = (status: StatusType): StatusConfig => {
     switch (status) {
@@ -112,9 +117,9 @@ const HealthcareCard: React.FC<HealthcareCardProps> = ({
   };
 
   return (
-    <div className={`max-w-sm bg-basecard border border-base rounded-2xl drop-shadow-sm p-6 ${className}`}>
+    <div className={`max-w-sm bg-basecard border border-base rounded-2xl drop-shadow-sm p-4 ${className}`}>
       {/* Header */}
-      <div className="flex items-center justify-between mb-6">
+      <div className={`flex items-center justify-between ${titleGap}`}>
         <h2 className="text-lg font-semibold">{title}</h2>
         <div className={`flex items-center space-x-1 px-3 py-1 rounded-lg text-sm font-medium ${statusConfig.className} py-1 px-2.5`}>
           <span>{statusConfig.text}</span>
@@ -124,10 +129,10 @@ const HealthcareCard: React.FC<HealthcareCardProps> = ({
     {/* if insurance eligiblity card*/}
 
     {isInsuranceInfoCard && (
-      <div className="flex items-center space-x-3 mb-4">
+      <div className="flex items-center space-x-3 mb-3">
         <img src={"image.png"} alt="Insurance Logo" className="max-w-15.5 max-h-15.5 mr-3.5" />
         <div>
-          <h3 className="text-lg font-semibold mb-3">Daman-AUH-001</h3>
+          <h3 className="text-lg font-semibold mb-1">Daman-AUH-001</h3>
           <p className="text-sm font-medium">42122566</p>
         </div>
       </div>
@@ -135,18 +140,18 @@ const HealthcareCard: React.FC<HealthcareCardProps> = ({
 
       {/* Content */}
       {mode === 'grid' && (
-        <div className="space-y-6">
+        <div className="space-y-4">
           {Object.entries(gridData).reduce<JSX.Element[]>((acc, [key, value], index, array) => {
             if (index % 2 === 0) {
               const nextEntry: [string, string | number] | undefined = array[index + 1];
               acc.push(
-                <div key={index} className="grid grid-cols-2 gap-6">
-                  <div>
+                <div key={index} className="flex justify-between">
+                  <div className='min-w-[48%]'>
                     <h3 className="text-base block text-foreground">{key}</h3>
                     <p className='text-base font-semibold'>{value}</p>
                   </div>
                   {nextEntry && (
-                    <div>
+                    <div className='min-w-[48%]'>
                       <h3 className="text-base block text-foreground">{nextEntry[0]}</h3>
                       <p className="text-base font-semibold">{nextEntry[1]}</p>
                     </div>
@@ -166,7 +171,7 @@ const HealthcareCard: React.FC<HealthcareCardProps> = ({
               <div className="flex flex-col items-center">
                 {getStepIcon(step.status)}
                 {index < processSteps.length - 1 && (
-                  <div className="w-0.5 h-3 bg-gray-200" />
+                  <div className={`w-0.5 ${processGap} bg-gray-200`} />
                 )}
               </div>
               <div className="flex-1">

@@ -50,7 +50,7 @@ const SOAPNote: React.FC<SOAPNoteProps> = ({ tabs, defaultActiveTab, height = ''
     return (
       <div
         key={tab.label}
-        className={`p-2.5 overflow-y-auto ${tab.className} ${height} ${activeTab === tab.id ? "" : "hidden"}`}
+        className={`p-2.5 overflow-y-auto ${tab.className || ''} ${height} ${activeTab === tab.id ? "" : "hidden"}`}
       >
         <div className="space-y-6">{content}</div>
       </div>

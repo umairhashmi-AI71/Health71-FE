@@ -12,6 +12,7 @@ import {
   Pill,
   Stethoscope,
 } from "lucide-react";
+import AttachmentGrid from "./AttachmentGrid";
 import AlertModal from "@/components/AlertModal";
 import React from "react";
 import Breadcrumb from "@/components/Breadcrumb";
@@ -110,9 +111,8 @@ The patient, a 52-year-old Caucasian male named John Smith, presents with compla
     {
       id: "attachments",
       label: "Attachments",
-      data: "Empty",
+      data: <AttachmentGrid attachments={attachments}  />,
       icon: Paperclip,
-      className: "h-200",
     },
   ];
 
@@ -130,7 +130,7 @@ The patient, a 52-year-old Caucasian male named John Smith, presents with compla
               confidence: 10,
               isApproved: false,
               desc: "Unilateral primary osteoarthritis affecting the left knee",
-            }
+            },
           ]}
         />
       ),
@@ -165,12 +165,7 @@ The patient, a 52-year-old Caucasian male named John Smith, presents with compla
     {
       id: "drug",
       label: "DRUG",
-      data: (
-        <ICDCodes
-          title="Drug Codes"
-          initialCodes={[]}
-        />
-      ),
+      data: <ICDCodes title="Drug Codes" initialCodes={[]} />,
       icon: Pill,
     },
   ];
@@ -228,30 +223,44 @@ The patient, a 52-year-old Caucasian male named John Smith, presents with compla
               ))}
             </div>
           </div>
-          <div className="grid grid-cols-[23%_1fr] gap-4 mb-6">
-            <PatientProfileCard
-              name="Sara Al Nuaimi"
-              id="101300"
-              emiratesId="748-1985-2233445-4"
-              sex="Female"
-              dateOfBirth="1985-07-21"
-              nationality="UAE"
-              language="Arabic"
-              phone="97155467830"
-              email="Sara.nuaimi@gmail.com"
-              avatarUrl="/avatar.png"
-            />
+          <div className=" flex gap-4 mb-6 ">
+            <div className="flex-1 max-w-xs">
+              <PatientProfileCard
+                name="Sara Al Nuaimi"
+                id="101300"
+                emiratesId="748-1985-2233445-4"
+                sex="Female"
+                dateOfBirth="1985-07-21"
+                nationality="UAE"
+                language="Arabic"
+                phone="97155467830"
+                email="Sara.nuaimi@gmail.com"
+                avatarUrl="/avatar.png"
+              />
+            </div>
 
-            <div className="grid grid-cols-3 gap-4">
+            <div className="flex flex-col gap-4 flex-1 max-w-[315px]">
               <HealthcareCard
                 title="Eligibility Check"
                 status="covered"
                 mode="grid"
                 gridData={eligibilityCheck}
                 isInsuranceInfoCard={true}
+                titleGap="mb-3.5"
               />
+
+              <HealthcareCard
+                title="Prior Authorization"
+                status="approved"
+                mode="grid"
+                gridData={authorizationData}
+                titleGap="mb-5"
+              />
+            </div>
+            <div className="flex flex-col gap-4 flex-1 max-w-[330px]">
               <HealthcareCard
                 title="Medical Coding"
+                titleGap="mb-7"
                 status="inprogress"
                 mode="grid"
                 gridData={{
@@ -263,31 +272,30 @@ The patient, a 52-year-old Caucasian male named John Smith, presents with compla
               />
 
               <HealthcareCard
-                title="Denial Management"
-                status="pending"
-                mode="process"
-                processSteps={dentalManagement}
-              />
-
-              <HealthcareCard
-                title="Prior Authorization"
-                status="approved"
-                mode="grid"
-                gridData={authorizationData}
-              />
-
-              <HealthcareCard
                 title="Claim Submission"
                 status="pending"
                 mode="process"
                 processSteps={claimSteps}
+                processGap="h-5"
               />
+            </div>
 
+            <div className="flex flex-col gap-4 flex-1 max-w-[330px]">
+              <HealthcareCard
+                title="Denial Management"
+                status="pending"
+                mode="process"
+                processSteps={dentalManagement}
+                                titleGap="mb-4.5"
+
+              />
               <HealthcareCard
                 title="Post Payment"
                 status="pending"
                 mode="process"
                 processSteps={postPayment}
+                titleGap="mb-4"
+
               />
             </div>
           </div>

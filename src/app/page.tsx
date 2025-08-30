@@ -13,7 +13,7 @@ export default function Home() {
     localStorage.setItem('user', JSON.stringify(response.user));
     
     // Navigate to dashboard
-    router.push('/dashboard');
+    router.push('/home');
   };
 
   return (
