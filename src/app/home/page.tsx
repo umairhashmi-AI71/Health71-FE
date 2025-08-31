@@ -151,7 +151,6 @@ export default function DashboardPage() {
 
   useEffect(() => {
 
-
     const interval = setInterval(() => {
       setAgents((prev) =>
         prev.map((agent) => ({
