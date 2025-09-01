@@ -25,10 +25,10 @@ interface PatientProfile {
 
 export interface MedicalCodingDetail {
   label: string;
-  value: string;
+  value:  string | number;
 }
 
-export type StatusType = 'approved' | 'inprogress' | 'pending' | 'rejected' | 'covered' | 'paused' ;
+export type StatusType = 'approved' | 'inprogress' | 'pending' | 'rejected' | 'covered' | 'paused' | "completed" | "current"  ;
 
 
 interface MedicalCoding {
@@ -40,7 +40,7 @@ interface PriorAuthorizationDetail {
   label: string;
   value: string;
 }
-
+ 
 interface PriorAuthorization {
   status: StatusType;  // Status of prior authorization
   details: PriorAuthorizationDetail[];  // Array of label-value pairs
@@ -49,7 +49,7 @@ interface PriorAuthorization {
 export interface ClaimStep {
   id: string;
   label: string;
-  status: "pending" | "completed" | "failed" | "in-progress";
+  status: StatusType;
 }
 
 type processStepStatusType = 'completed' | 'current' | 'pending' | 'paused';

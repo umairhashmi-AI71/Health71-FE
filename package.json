@@ -13,6 +13,7 @@
     "@hookform/resolvers": "^5.2.1",
     "@reduxjs/toolkit": "^2.8.2",
     "ag-grid-community": "^34.1.2",
+    "ag-grid-enterprise": "^34.1.2",
     "ag-grid-react": "^34.1.2",
     "ai": "^5.0.28",
     "lucide-react": "^0.540.0",
@@ -22,7 +23,6 @@
     "react-hook-form": "^7.62.0",
     "react-markdown": "^10.1.0",
     "react-redux": "^9.2.0",
-    "redux-persist": "^6.0.0",
     "rehype-raw": "^7.0.0",
     "remark-gfm": "^4.0.1",
     "zod": "^4.0.17"

@@ -25,6 +25,7 @@ export const patientColumnDef: ColDef[] = [
     width: 50,
     pinned: "left",
   },
+
   {
     headerName: "Patient Name",
     field: "name",
@@ -33,26 +34,46 @@ export const patientColumnDef: ColDef[] = [
     //   filter: 'agTextColumnFilter',
   },
   {
-    headerName: "Age",
-    field: "age",
-    sortable: true,
-    //   filter: 'agNumberColumnFilter',
-    filterParams: {
-      buttons: ["reset", "apply"],
-      closeOnApply: true,
-      filterOptions: ["equals", "lessThan", "greaterThan", "inRange"],
-      defaultOption: "equals",
-    },
-    width: 60,
+    headerName: "MRN",
+    field: "id",
+    width: 100,
   },
+
+  {
+    headerName: "Last Updated",
+    field: "date",
+    sortable: false,
+     filter: true,
+     width: 130,
+     valueFormatter: params => {
+      if (!params.value) return "";
+      const date = new Date(params.value);
+      return date.toLocaleDateString("en-CA"); // gives YYYY-MM-DD
+    },
+  },
+  // {
+  //   headerName: "Age",
+  //   field: "age",
+  //   sortable: true,
+  //   //   filter: 'agNumberColumnFilter',
+  //   filterParams: {
+  //     buttons: ["reset", "apply"],
+  //     closeOnApply: true,
+  //     filterOptions: ["equals", "lessThan", "greaterThan", "inRange"],
+  //     defaultOption: "equals",
+  //   },
+  //   width: 60,
+  // },
 
   {
     headerName: "Agent Issue",
     field: "agentIssue",
     sortable: true,
     width: 150,
-    filter: true,
-    
+    hide: true,
+       filter: true,  
+      // filter: "agSetColumnFilter", // ✅ this enables the set filter type
+
   },
   {
     headerName: "Agent Suggestion",
@@ -82,14 +103,6 @@ export const patientColumnDef: ColDef[] = [
     //  pinned: 'right',
     width: 80,
     filter: false,
-  },
-  {
-    headerName: "Date",
-    field: "date",
-    flex: 0.8,
-    sortable: false,
-    hide: true,
-    filter: true,
   },
   // {
   //   headerName: 'More Info',

@@ -3,6 +3,7 @@
 import AgentCard from "@/components/AgentCard";
 import Breadcrumb from "@/components/Breadcrumb";
 import { DashboardLayout } from "@/components/dashboard-layout";
+
 import {
   ClipboardCheck,
   Flag,
@@ -28,6 +29,7 @@ import {
   Column,
   GridReadyEvent,
 } from "ag-grid-community";
+ 
 import { PatientTableRow } from "@/types/patient";
 import { patientColumnDef } from "./columnDefs";
 import { RootState } from "@/store";
@@ -234,6 +236,7 @@ export default function DashboardPage() {
   // Filter function using ag-Grid API
   const filterBy = useCallback(
     (option: FilterOption) => {
+      
       if (!gridApi) return;
 
       if (option === "all") {

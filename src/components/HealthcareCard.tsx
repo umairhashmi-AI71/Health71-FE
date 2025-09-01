@@ -1,10 +1,14 @@
-import React, { JSX } from 'react';
-import { Check } from 'lucide-react';
-import { ClaimStep, InsuranDetials, MedicalCodingDetail, StatusType } from '@/types/patient';
+import React, { JSX } from "react";
+import { Check } from "lucide-react";
+import {
+  ClaimStep,
+  InsuranDetials,
+  MedicalCodingDetail,
+  StatusType,
+} from "@/types/patient";
 
 // Type definitions for better type safety
- type ModeType = 'grid' | 'process';
-type StepStatusType = 'completed' | 'current' | 'pending';
+type ModeType = "grid" | "process";
 
 interface GridData {
   [key: string]: string | number;
@@ -13,7 +17,7 @@ interface GridData {
 export interface ProcessStep {
   id: string;
   label: string;
-  status: StepStatusType;
+  status: StatusType;
 }
 
 interface StatusConfig {
@@ -27,12 +31,11 @@ interface HealthcareCardProps {
   mode: ModeType;
   gridData?: MedicalCodingDetail[];
   processSteps?: ClaimStep[];
-  isInsuranceInfoCard?:boolean;
-  className?:string;
-  titleGap?:string;
-  processGap?:string;
-  insuranceDetails?: InsuranDetials
-
+  isInsuranceInfoCard?: boolean;
+  className?: string;
+  titleGap?: string;
+  processGap?: string;
+  insuranceDetails?: InsuranDetials;
 }
 
 const HealthcareCard: React.FC<HealthcareCardProps> = ({
@@ -42,139 +45,169 @@ const HealthcareCard: React.FC<HealthcareCardProps> = ({
   gridData = {},
   processSteps = [],
   isInsuranceInfoCard = false,
-  className ='',
-  titleGap = 'mb-6',
-  processGap = 'h-3.5',
-  insuranceDetails
+  className = "",
+  titleGap = "mb-6",
+  processGap = "h-3.5",
+  insuranceDetails,
 }) => {
   const getStatusConfig = (status: StatusType): StatusConfig => {
     switch (status) {
-      case 'approved':
+      case "approved":
         return {
-          text: 'Approved',
-          className: 'bg-primary-foreground text-green',
+          text: "Approved",
+          className: "bg-primary-foreground text-green",
         };
-        case 'covered':
+      case "covered":
         return {
-          text: 'Covered',
-          className: 'bg-primary-foreground text-green',
+          text: "Covered",
+          className: "bg-primary-foreground text-green",
         };
-    case 'inprogress':
-     return {
-          text: 'In Process',
-          className: 'bg-base-agent-10 text-pixel-bloom',
-        };
-      case 'pending':
+      case "inprogress":
         return {
-          text: 'Pending',
-          className: 'bg-warm-gray text-white',
+          text: "In Process",
+          className: "bg-base-agent-10 text-pixel-bloom",
         };
-      case 'paused':
+      case "pending":
         return {
-          text: 'Paused',
-          className: 'bg-warm-gray text-white',
+          text: "Pending",
+          className: "bg-warm-gray text-white",
         };
-      case 'rejected':
+      case "paused":
         return {
-          text: 'Rejected',
-          className: 'bg-base-agent-10 text-pixel-bloom',
+          text: "Paused",
+          className: "bg-warm-gray text-white",
+        };
+      case "rejected":
+        return {
+          text: "Rejected",
+          className: "bg-base-agent-10 text-pixel-bloom",
         };
       default:
         // TypeScript will catch if we add new status types without handling them
-        const exhaustiveCheck: never = status;
+        const exhaustiveCheck = status;
         return {
           text: status,
-          className: 'bg-primary-foreground text-green',
+          className: "bg-primary-foreground text-green",
         };
     }
   };
 
   const statusConfig = getStatusConfig(status);
-
-  const getStepIcon = (stepStatus: StepStatusType): JSX.Element => {
+   const getStepIcon = (stepStatus: StatusType ): JSX.Element => {
     switch (stepStatus) {
-      case 'completed':
-        return <div className="w-6.5 h-6.5 rounded-full border-2 border-alpha flex items-center justify-center opacity-20">
-          <Check className="w-4.5 h-4.5 text-base " />
-        </div>;
-      case 'current':
-        return <div className="w-6.5 h-6.5 rounded-full border-2 border-alpha opacity-20" />;
-      case 'pending':
-        return <div className="w-6.5 h-6.5 rounded-full border-2 border-alpha opacity-20"  />;
-      
+      case "completed":
+      case "approved":
+        return (
+          <div className="w-6.5 h-6.5 rounded-full border-2 border-alpha flex items-center justify-center opacity-20">
+            <Check className="w-4.5 h-4.5 text-base " />
+          </div>
+        );
+      case "current":
+        return (
+          <div className="w-6.5 h-6.5 rounded-full border-2 border-alpha opacity-20" />
+        );
+      case "pending":
+      case 'paused':
+        return (
+          <div className="w-6.5 h-6.5 rounded-full border-2 border-alpha opacity-20" />
+        );
+
       default:
         // Exhaustive check for TypeScript
-        const exhaustiveCheck: never = stepStatus;
-        return <div className="w-6.5 h-6.5 rounded-full border-2 border-alpha opacity-20" />;
+        const exhaustiveCheck = stepStatus;
+        return (
+          <div className="w-6.5 h-6.5 rounded-full border-2 border-alpha opacity-20" />
+        );
     }
   };
 
-  const getStepTextColor = (stepStatus: StepStatusType): string => {
+  const getStepTextColor = (stepStatus: StatusType): string => {
     switch (stepStatus) {
-      case 'completed':
-        return 'text-alpha opacity-30';
-      case 'current':
-        return 'text-alpha opacity-30';
-      case 'pending':
-        return 'text-alpha opacity-30';
+      case "completed":
+        return "text-alpha opacity-30";
+      case "current":
+        return "text-alpha opacity-30";
+      case "pending":
+        return "text-alpha opacity-30";
       default:
         // Exhaustive check for TypeScript
-        const exhaustiveCheck: never = stepStatus;
-        return 'text-alpha opacity-30';
+        const exhaustiveCheck = stepStatus;
+        return "text-alpha opacity-30";
     }
   };
 
   return (
-    <div className={`max-w-sm bg-basecard border border-base rounded-2xl drop-shadow-sm p-4 ${className}`}>
+    <div
+      className={`max-w-sm bg-basecard border border-base rounded-2xl drop-shadow-sm p-4 ${className}`}
+    >
       {/* Header */}
       <div className={`flex items-center justify-between ${titleGap}`}>
         <h2 className="text-lg font-semibold">{title}</h2>
-        <div className={`flex items-center space-x-1 px-3 py-1 rounded-lg text-sm font-medium ${statusConfig.className} py-1 px-2.5`}>
+        <div
+          className={`flex items-center space-x-1 px-3 py-1 rounded-lg text-sm font-medium ${statusConfig.className} py-1 px-2.5`}
+        >
           <span>{statusConfig.text}</span>
         </div>
       </div>
 
-    {/* if insurance eligiblity card*/}
+      {/* if insurance eligiblity card*/}
 
-    {isInsuranceInfoCard && (
-      <div className="flex items-center space-x-3 mb-3">
-        <img src={insuranceDetails?.imageUrl} alt="Insurance Logo" className="max-w-15.5 max-h-15.5 mr-3.5" />
-        <div>
-          <h3 className="text-lg font-semibold mb-1">{insuranceDetails?.insuranceProvider}</h3>
-          <p className="text-sm font-medium">{insuranceDetails?.policyNumber}</p>
-        </div>
-      </div>
-    )}
-
-      {/* Content */}
-      {mode === 'grid' && (
-        <div className="space-y-4">
-          
-          {Object.entries(gridData).reduce<JSX.Element[]>((acc, [key, value], index, array) => {
-            if (index % 2 === 0) {
-              const nextEntry: [string, string | number ] | undefined  = array[index + 1];
-
-              acc.push(
-                <div key={index} className="flex justify-between">
-                  <div className='min-w-[48%]'>
-                    <h3 className="text-base block text-foreground">{value.label}</h3>
-                    <p className='text-base font-semibold'>{value.value}</p>
-                  </div>
-                  {nextEntry && (
-                    <div className='min-w-[48%]'>
-                      <h3 className="text-base block text-foreground">{nextEntry[1].label}</h3>
-                      <p className="text-base font-semibold">{nextEntry[1].value}</p>
-                    </div>
-                  )}
-                </div>
-              );
-            }
-            return acc;
-          }, [])}
+      {isInsuranceInfoCard && (
+        <div className="flex items-center space-x-3 mb-3">
+          <img
+            src={insuranceDetails?.imageUrl}
+            alt="Insurance Logo"
+            className="max-w-15.5 max-h-15.5 mr-3.5"
+          />
+          <div>
+            <h3 className="text-lg font-semibold mb-1">
+              {insuranceDetails?.insuranceProvider}
+            </h3>
+            <p className="text-sm font-medium">
+              {insuranceDetails?.policyNumber}
+            </p>
+          </div>
         </div>
       )}
 
-      {mode === 'process' && (
+      {/* Content */}
+      {mode === "grid" && (
+        <div className="space-y-4">
+          {Object.entries(gridData).reduce<JSX.Element[]>(
+            (acc, [key, value], index, array) => {
+              if (index % 2 === 0) {
+               const nextEntry = array[index + 1] as [string, MedicalCodingDetail] | undefined;
+console.log(nextEntry)
+
+                acc.push(
+                  <div key={index} className="flex justify-between">
+                    <div className="min-w-[48%]">
+                      <h3 className="text-base block text-foreground">
+                        {value.label}
+                      </h3>
+                      <p className="text-base font-semibold">{value.value}</p>
+                    </div>
+                    {nextEntry && (
+                      <div className="min-w-[48%]">
+                        <h3 className="text-base block text-foreground">
+                          {nextEntry[1].label}
+                        </h3>
+                        <p className="text-base font-semibold">
+                          {nextEntry[1].value}
+                        </p>
+                      </div>
+                    )}
+                  </div>
+                );
+              }
+              return acc;
+            },
+            []
+          )}
+        </div>
+      )}
+
+      {mode === "process" && (
         <div className="">
           {processSteps.map((step, index) => (
             <div key={step.id} className="flex   space-x-3 ">
@@ -185,7 +218,11 @@ const HealthcareCard: React.FC<HealthcareCardProps> = ({
                 )}
               </div>
               <div className="flex-1">
-                <p className={`text-base  text-sm font-medium ${getStepTextColor(step.status)} pt-1` }>
+                <p
+                  className={`text-base  text-sm font-medium ${getStepTextColor(
+                    step.status
+                  )} pt-1`}
+                >
                   {step.label}
                 </p>
               </div>
@@ -196,5 +233,5 @@ const HealthcareCard: React.FC<HealthcareCardProps> = ({
     </div>
   );
 };
- 
+
 export default HealthcareCard;
