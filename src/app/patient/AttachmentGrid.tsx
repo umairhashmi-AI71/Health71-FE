@@ -1,12 +1,9 @@
 import AttachmentCard from "@/components/ui/AttachmentCard";
+import { Attachment } from "@/types/patient";
 
  
 interface AttachmentGridProps {
-  attachments: {
-    fileName: string;
-    fileSize: string;
-    ecgImageUrl: string;
-  }[];
+  attachments:Attachment[]
   columns?: number;
 }
 
@@ -16,7 +13,7 @@ const AttachmentGrid: React.FC<AttachmentGridProps> = ({
 }) => {
   return (
     <div className={`grid gap-2.5 grid-cols-3`}>
-      {attachments.map((att, idx) => (
+      {attachments?.map((att, idx) => (
         <AttachmentCard
           key={idx}
           fileName={att.fileName}

@@ -1,9 +1,9 @@
 import React, { JSX } from 'react';
-import { Check, Clock, AlertCircle } from 'lucide-react';
+import { Check } from 'lucide-react';
+import { ClaimStep, InsuranDetials, MedicalCodingDetail, StatusType } from '@/types/patient';
 
 // Type definitions for better type safety
-type StatusType = 'approved' | 'inprogress' | 'pending' | 'rejected' | 'covered' ;
-type ModeType = 'grid' | 'process';
+ type ModeType = 'grid' | 'process';
 type StepStatusType = 'completed' | 'current' | 'pending';
 
 interface GridData {
@@ -25,12 +25,13 @@ interface HealthcareCardProps {
   title: string;
   status: StatusType;
   mode: ModeType;
-  gridData?: GridData;
-  processSteps?: ProcessStep[];
+  gridData?: MedicalCodingDetail[];
+  processSteps?: ClaimStep[];
   isInsuranceInfoCard?:boolean;
   className?:string;
   titleGap?:string;
   processGap?:string;
+  insuranceDetails?: InsuranDetials
 
 }
 
@@ -43,7 +44,8 @@ const HealthcareCard: React.FC<HealthcareCardProps> = ({
   isInsuranceInfoCard = false,
   className ='',
   titleGap = 'mb-6',
-  processGap = 'h-3.5'
+  processGap = 'h-3.5',
+  insuranceDetails
 }) => {
   const getStatusConfig = (status: StatusType): StatusConfig => {
     switch (status) {
@@ -65,6 +67,11 @@ const HealthcareCard: React.FC<HealthcareCardProps> = ({
       case 'pending':
         return {
           text: 'Pending',
+          className: 'bg-warm-gray text-white',
+        };
+      case 'paused':
+        return {
+          text: 'Paused',
           className: 'bg-warm-gray text-white',
         };
       case 'rejected':
@@ -94,6 +101,7 @@ const HealthcareCard: React.FC<HealthcareCardProps> = ({
         return <div className="w-6.5 h-6.5 rounded-full border-2 border-alpha opacity-20" />;
       case 'pending':
         return <div className="w-6.5 h-6.5 rounded-full border-2 border-alpha opacity-20"  />;
+      
       default:
         // Exhaustive check for TypeScript
         const exhaustiveCheck: never = stepStatus;
@@ -130,10 +138,10 @@ const HealthcareCard: React.FC<HealthcareCardProps> = ({
 
     {isInsuranceInfoCard && (
       <div className="flex items-center space-x-3 mb-3">
-        <img src={"/insurance-image.png"} alt="Insurance Logo" className="max-w-15.5 max-h-15.5 mr-3.5" />
+        <img src={insuranceDetails?.imageUrl} alt="Insurance Logo" className="max-w-15.5 max-h-15.5 mr-3.5" />
         <div>
-          <h3 className="text-lg font-semibold mb-1">Daman-AUH-001</h3>
-          <p className="text-sm font-medium">42122566</p>
+          <h3 className="text-lg font-semibold mb-1">{insuranceDetails?.insuranceProvider}</h3>
+          <p className="text-sm font-medium">{insuranceDetails?.policyNumber}</p>
         </div>
       </div>
     )}
@@ -141,19 +149,21 @@ const HealthcareCard: React.FC<HealthcareCardProps> = ({
       {/* Content */}
       {mode === 'grid' && (
         <div className="space-y-4">
+          
           {Object.entries(gridData).reduce<JSX.Element[]>((acc, [key, value], index, array) => {
             if (index % 2 === 0) {
-              const nextEntry: [string, string | number] | undefined = array[index + 1];
+              const nextEntry: [string, string | number ] | undefined  = array[index + 1];
+
               acc.push(
                 <div key={index} className="flex justify-between">
                   <div className='min-w-[48%]'>
-                    <h3 className="text-base block text-foreground">{key}</h3>
-                    <p className='text-base font-semibold'>{value}</p>
+                    <h3 className="text-base block text-foreground">{value.label}</h3>
+                    <p className='text-base font-semibold'>{value.value}</p>
                   </div>
                   {nextEntry && (
                     <div className='min-w-[48%]'>
-                      <h3 className="text-base block text-foreground">{nextEntry[0]}</h3>
-                      <p className="text-base font-semibold">{nextEntry[1]}</p>
+                      <h3 className="text-base block text-foreground">{nextEntry[1].label}</h3>
+                      <p className="text-base font-semibold">{nextEntry[1].value}</p>
                     </div>
                   )}
                 </div>

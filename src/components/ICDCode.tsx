@@ -1,22 +1,19 @@
 import React, { useMemo, useState } from "react";
 import { Plus, Trash2, Check, X, Square, SquarePen, Pill } from "lucide-react";
+import { ICDCode } from "@/types/patient";
 
-interface ICDCode {
-  id: string;
-  code: string;
-  confidence: number;
-  isApproved?: boolean;
-  desc?: string;
-}
+
 
 interface ICDCodesProps {
   initialCodes?: ICDCode[];
   title: string;
+  id:string;
 }
 
 const ICDCodes: React.FC<ICDCodesProps> = ({
   initialCodes = [],
-  title = ''
+  title = '',
+  id
 }) => {
   const [newCode, setNewCode] = useState("");
   const [isAdding, setIsAdding] = useState(false);
@@ -31,8 +28,8 @@ const ICDCodes: React.FC<ICDCodesProps> = ({
       const newICDCode: ICDCode = {
         id: Date.now().toString(),
         code: newCode.toUpperCase(),
-        confidence: Math.floor(Math.random() * 40) + 60, // Random confidence 60-100%
         isApproved: false,
+        desc: id ==='cpt' ? 'Diagnostic Radiology Procedures of the Lower Extremities' : '',
       };
       setCodes([...codes, newICDCode]);
       setNewCode("");
@@ -118,9 +115,13 @@ const ICDCodes: React.FC<ICDCodesProps> = ({
                 <Check className="w-5 h-5 text-green " />
               </button>
             </div>
-            <div className="text-deep-ocean text-xs">
+            <div className={`text-deep-ocean text-xs ${id == 'icd' ? 'cursor-pointer' : ''} `} onClick={() => {
+              if(id==='icd') {
+                alert('sdf')
+              }
+            }}>
               <p>{icdCode.desc}</p>
-              <p>Confidence Score: {icdCode.confidence}</p>
+              {icdCode.confidence && (<p>Confidence Score: {icdCode.confidence}</p>)}
             </div>
           </div>
         ))}

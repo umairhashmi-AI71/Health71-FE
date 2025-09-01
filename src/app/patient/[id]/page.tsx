@@ -3,7 +3,7 @@
 import { DashboardLayout } from "@/components/dashboard-layout";
 import ICDCodes from "@/components/ICDCode";
 import PatientProfileCard from "@/components/PatientProfileCard";
-import HealthcareCard, { ProcessStep } from "@/components/HealthcareCard";
+import HealthcareCard from "@/components/HealthcareCard";
 import SOAPNote, { TabType } from "@/components/SOAPNote";
 import {
   Microscope,
@@ -14,106 +14,44 @@ import {
 } from "lucide-react";
 import AttachmentGrid from "../AttachmentGrid";
 import AlertModal from "@/components/AlertModal";
-import React, { useRef, useState } from "react";
- 
+import React, { useEffect, useRef, useState } from "react";
+
 import Breadcrumb from "@/components/Breadcrumb";
 import { useRouter } from "next/navigation";
+import { useParams } from "next/navigation";
+import { useSelector, useDispatch } from "react-redux";
+import { RootState } from "@/store";
+import { Attachment, StatusType } from "@/types/patient";
+import {  markPatientSubmitted } from "@/store/slice/Patient";
 
 export default function DashboardPage() {
-  const authorizationData = {
-    EncounterID: "ENC-2025-0789",
-    "Prior AuthID": "PA-556677",
-    Physician: "DR. Al Shamsi",
-    "ICD Codes": "M23.2",
-    "CPT Codes": "29880",
-    "Drug Codes": "NDC-0002",
-  };
-  const markdown = `## **Subjective**
+  const params = useParams();
+  const router = useRouter();
 
-### **Chief Complaint (CC):**
-Pain in the left knee, moderate to severe, lasting for 3 weeks.
+  const dispatch = useDispatch();
+  const patients = useSelector((state: RootState) =>
+    state.patientlist.find((p) => p.id === params.id)
+  );
 
-### **History of Present Illness (HPI):**
-The patient, a 52-year-old Caucasian male named John Smith, presents with complaints of moderate to severe pain in the left knee that has persisted for the past three weeks. The pain is associated with occasional swelling and stiffness, particularly pronounced in the mornings. The symptoms are exacerbated by physical activity and have a significant impact on daily activities, including walking, climbing stairs, and prolonged standing.
-
-### **Review of Systems (ROS):**
-- **Musculoskeletal**: Positive for knee pain, swelling, and stiffness.
-- **General**: Negative for fever or weight loss.
-- **Cardiovascular**: Negative for chest pain or palpitations.
-- **Constitutional**: Sleep disruption due to knee pain; otherwise stable.
-
-<br /><br />
-
-## Objective
-
-### **Vital Signs:**
-- Blood Pressure: 128/82 mmHg  
-- Heart Rate: 72 bpm  
-- Respiratory Rate: 16 breaths per minute  
-- Temperature: 98.6°F
-
-### **Physical Examination:**
-- **Inspection**: Swelling around the left knee; no visible deformity.  
-- **Palpation**: Tenderness over the medial and lateral joint lines.  
-- **Range of Motion**: Reduced flexion and extension due to pain.  
-- **Stability Tests**: Negative Lachman's and McMurray’s tests; slight discomfort with varus and valgus stress tests.
-
-<br /><br />
-
-## **Assessment:**
-- <span style="background: #EAF481; padding:8px; margin-bottom:5px; display:inline-block">Pain in the left knee (ICD-10 code M25.562).</span>
-- Possible exacerbation of pre-existing mild osteoarthritis.
-
-<br />
-
-### **Plan:**
-
-### **Treatment:**
-- Initiate physical therapy focusing on strength and flexibility exercises for the left knee.
-- Advise the patient on lifestyle modifications to reduce knee strain.
-- Prescribe over-the-counter NSAIDs as needed for pain management.
-
-### **Follow-up Recommendations:**
-- Schedule a follow-up appointment in 4 weeks to assess the response to the treatment plan.
-
-### **Referrals:**
-- Order X-ray of the left knee to rule out structural abnormalities.
-- Consider MRI if the X-ray is inconclusive to evaluate any potential soft tissue damage.
- 
-`;
-
-  const attachments = [
-    { fileName: "SOB.pdf", fileSize: "200 KB", ecgImageUrl: "/ecg-report.png" },
-    {
-      fileName: "Exclusion.pdf",
-      fileSize: "150 KB",
-      ecgImageUrl: "/ecg-report.png",
-    },
-    {
-      fileName: "Scan.pdf",
-      fileSize: "180 KB",
-      ecgImageUrl: "/ecg-report.png",
-    },
-    { fileName: "ECG.pdf", fileSize: "220 KB", ecgImageUrl: "/ecg-report.png" },
-    {
-      fileName: "Fibro_Scan.pdf",
-      fileSize: "210 KB",
-      ecgImageUrl: "/ecg-report.png",
-    },
-  ];
-
+  useEffect(() => {
+    if (patients == undefined) {
+      router.push("/home");
+    }
+  }, []);
   const tabs: TabType[] = [
     {
       id: "soap",
       label: "SOAP Note",
-      data: markdown,
+      data: patients?.markdown as string,
       icon: NotepadText,
       className: "text-muted h-200",
     },
     {
       id: "attachments",
       label: "Attachments",
-      data: <AttachmentGrid attachments={attachments}  />,
+      data: (
+        <AttachmentGrid attachments={patients?.attachments as Attachment[]} />
+      ),
       icon: Paperclip,
     },
   ];
@@ -124,16 +62,9 @@ The patient, a 52-year-old Caucasian male named John Smith, presents with compla
       label: "ICD",
       data: () => (
         <ICDCodes
+          id="icd"
           title="ICD Codes"
-          initialCodes={[
-            {
-              id: "1",
-              code: "M25562",
-              confidence: 10,
-              isApproved: false,
-              desc: "Unilateral primary osteoarthritis affecting the left knee",
-            },
-          ]}
+          initialCodes={patients?.icdCodes}
         />
       ),
       icon: Microscope,
@@ -142,55 +73,16 @@ The patient, a 52-year-old Caucasian male named John Smith, presents with compla
       id: "cpt",
       label: "CPT",
       data: () => (
-        <ICDCodes
-          title="CPT Codes"
-          initialCodes={[
-            {
-              id: "1",
-              code: "M25.562",
-              confidence: 100,
-              isApproved: false,
-              desc: "Pain in left knee",
-            },
-            {
-              id: "2",
-              code: "M17.12",
-              confidence: 10,
-              isApproved: false,
-              desc: "Unilateral primary osteoarthritis affecting the left knee",
-            },
-          ]}
-        />
+        <ICDCodes id="cpt" title="CPT Codes" initialCodes={patients?.cptCode} />
       ),
       icon: Stethoscope,
     },
     {
       id: "drug",
       label: "DRUG",
-      data: <ICDCodes title="Drug Codes" initialCodes={[]} />,
+      data: <ICDCodes id="drug" title="Drug Codes" initialCodes={[]} />,
       icon: Pill,
     },
-  ];
-
-  const claimSteps: ProcessStep[] = [
-    { id: "1", label: "Compliance Check & Adjustment", status: "pending" },
-    { id: "2", label: "XML File Generated", status: "pending" },
-    { id: "3", label: "Claim Posted", status: "pending" },
-    { id: "4", label: "Claim ID Received & Updated", status: "pending" },
-  ];
-
-  const dentalManagement: ProcessStep[] = [
-    { id: "1", label: "Denial Code Analyzed", status: "pending" },
-    { id: "2", label: "Suggested Edits", status: "pending" },
-    { id: "3", label: "Appeal Generated", status: "pending" },
-    { id: "4", label: "Appeal Submitted", status: "pending" },
-  ];
-
-  const postPayment: ProcessStep[] = [
-    { id: "1", label: "Payment Retrieved", status: "pending" },
-    { id: "2", label: "Payment Matched", status: "pending" },
-    { id: "3", label: "Adjustments Applied", status: "pending" },
-    { id: "4", label: "Ledger Updated", status: "pending" },
   ];
 
   const eligibilityCheck = {
@@ -199,15 +91,16 @@ The patient, a 52-year-old Caucasian male named John Smith, presents with compla
   };
 
   const [modal, setModal] = React.useState<string>();
+  const [isSubmitted, setIsSubmitted] = React.useState<boolean>(false);
   const buttons = [
     { label: "Cancel", style: "border border-base " },
     { label: "Save", style: "border border-base " },
     { label: "Submit", style: "filled bg-green text-primary-foreground " },
   ];
 
-  const rounte = useRouter();
+  const route = useRouter();
 
-  const [highlightedText, setHighlightedText] = useState<string>('');
+  const [highlightedText, setHighlightedText] = useState<string>("");
   const textRef = useRef<HTMLDivElement>(null);
   return (
     <DashboardLayout>
@@ -248,18 +141,19 @@ The patient, a 52-year-old Caucasian male named John Smith, presents with compla
             <div className="flex flex-col gap-4 flex-1 max-w-[315px]">
               <HealthcareCard
                 title="Eligibility Check"
-                status="covered"
+                status={patients?.eligibilityCheck.status as StatusType}
                 mode="grid"
-                gridData={eligibilityCheck}
+                gridData={patients?.eligibilityCheck.details}
+                insuranceDetails={patients?.eligibilityCheck.insuranDetials}
                 isInsuranceInfoCard={true}
                 titleGap="mb-3.5"
               />
 
               <HealthcareCard
                 title="Prior Authorization"
-                status="approved"
+                status={patients?.priorAuthorization.status as StatusType}
                 mode="grid"
-                gridData={authorizationData}
+                gridData={patients?.priorAuthorization.details}
                 titleGap="mb-5"
               />
             </div>
@@ -267,21 +161,16 @@ The patient, a 52-year-old Caucasian male named John Smith, presents with compla
               <HealthcareCard
                 title="Medical Coding"
                 titleGap="mb-7"
-                status="inprogress"
+                status={patients?.medicalCoding.status as StatusType}
                 mode="grid"
-                gridData={{
-                  "Encounter Date": "1985-07-21",
-                  "Encounter Type": "Out patient",
-                  Physician: "Dr. Al Shamsi",
-                  Department: "Orthopaedics",
-                }}
+                gridData={patients?.medicalCoding.details}
               />
 
               <HealthcareCard
                 title="Claim Submission"
-                status="pending"
+                status={patients?.claimSubmission.status as StatusType}
                 mode="process"
-                processSteps={claimSteps}
+                processSteps={patients?.claimSubmission.steps}
                 processGap="h-5.25"
               />
             </div>
@@ -289,19 +178,17 @@ The patient, a 52-year-old Caucasian male named John Smith, presents with compla
             <div className="flex flex-col gap-4 flex-1 max-w-[330px]">
               <HealthcareCard
                 title="Denial Management"
-                status="pending"
+                status={patients?.denialManagement.status as StatusType}
                 mode="process"
-                processSteps={dentalManagement}
-                                titleGap="mb-4.75"
-
+                processSteps={patients?.denialManagement.steps}
+                titleGap="mb-4.75"
               />
               <HealthcareCard
                 title="Post Payment"
-                status="pending"
+                status={patients?.postPayment.status as StatusType}
                 mode="process"
-                processSteps={postPayment}
+                processSteps={patients?.postPayment.steps}
                 titleGap="mb-5.25"
-
               />
             </div>
           </div>
@@ -328,13 +215,18 @@ The patient, a 52-year-old Caucasian male named John Smith, presents with compla
             <div className="flex justify-end gap-4">
               <button
                 className="border rounded-xl px-5 py-2 text-base-primary bg-white"
-                onClick={() => setModal("")}
+                onClick={() => {
+                  setModal("");
+                }}
               >
                 No
               </button>
               <button
                 className="rounded-xl px-5 py-2 text-white bg-base-destructive"
-                onClick={() => setModal("")}
+                onClick={() => {
+                  setModal("");
+                  route.push("/home");
+                }}
               >
                 Yes
               </button>
@@ -383,12 +275,12 @@ The patient, a 52-year-old Caucasian male named John Smith, presents with compla
             <div className="mb-6">
               {/* Example claim steps, you can style as needed */}
 
-              {claimSteps.map((step, index) => (
+              {patients?.claimSubmission.steps.map((step, index) => (
                 <div key={step.id} className="flex   space-x-3 ">
                   <div className="flex flex-col items-center">
                     <div className="w-6.5 h-6.5 rounded-full border-2 border-base" />
 
-                    {index < claimSteps.length - 1 && (
+                    {index < patients?.claimSubmission.steps.length - 1 && (
                       <div className="w-0.5 h-4 bg-gray-200" />
                     )}
                   </div>
@@ -402,16 +294,36 @@ The patient, a 52-year-old Caucasian male named John Smith, presents with compla
                 </div>
               ))}
             </div>
-            <div className="flex justify-end">
+            <div className="flex justify-end gap-3">
               <button
-                className="rounded-xl px-4 py-4 text-white bg-green"
-                onClick={() => {
-                   setModal("")
-                   rounte.push('/home');
-                }}
+                className="border rounded-xl px-5 py-2 text-base-primary bg-white cursor-pointer"
+                onClick={() => setModal("")}
               >
-                OK
+                Cancel
               </button>
+              {!isSubmitted && (
+                <button
+                  className="rounded-xl px-4 py-4 text-white bg-green cursor-pointer"
+                  onClick={() => {
+                    setIsSubmitted(true);
+                    dispatch(markPatientSubmitted(params.id as string));
+                  }}
+                >
+                  Submit
+                </button>
+              )}
+
+              {isSubmitted && (
+                <button
+                  className="rounded-xl px-4 py-4 text-white bg-green cursor-pointer"
+                  onClick={() => {
+                    setIsSubmitted(false);
+                    route.push("/home");
+                  }}
+                >
+                  Go to Dashboard
+                </button>
+              )}
             </div>
           </div>
         </AlertModal>

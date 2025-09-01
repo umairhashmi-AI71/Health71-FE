@@ -1,3 +1,4 @@
+import { attachments } from "@/lib/soapdata";
 import { LucideIcon } from "lucide-react";
 
 export interface Feature {
@@ -5,6 +6,7 @@ export interface Feature {
   label: string;       // e.g. "Verified", "Flagged", etc.
   count?: number;       // Dynamic numeric value
 }
+
 
 export interface Agent {
     image: string; // URL or path to the agent's image

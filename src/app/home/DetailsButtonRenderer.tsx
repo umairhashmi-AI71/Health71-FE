@@ -14,10 +14,10 @@ const DetailsButtonRenderer: React.FC<ICellRendererParams> = (params) => {
       return (
         <button
           onClick={handleDetailsClick}
-          className="flex items-center gap-2 px-3 py-2 border border-sidebar  rounded-lg text-sm transition-colors"
+          className="flex items-center gap-2 px-3 py-2 border border-sidebar cursor-pointer rounded-lg text-sm transition-colors"
         >
           <ScanSearch className="w-4 h-4" />
-          Details
+          
         </button>
       );
 };

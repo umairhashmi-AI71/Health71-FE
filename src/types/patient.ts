@@ -1,3 +1,6 @@
+import { ProcessStep } from "@/components/HealthcareCard";
+import { int } from "zod";
+
  
 export interface PatientListProps {
   initialPatients?: PatientPersona[];
@@ -18,22 +21,14 @@ interface PatientProfile {
   age: number;
   
 }
+ 
 
-interface EligibilityCheck {
-  network: string;  // Yes or No
-  coverage: string; // e.g., "100%"
-  insuranceProvider: string;
-  policyNumber: string;
-  status: string;  // e.g., "Covered", "Pending", "Rejected"
-  imageUrl: string; // URL to the insurance provider's logo
-}
-
-interface MedicalCodingDetail {
+export interface MedicalCodingDetail {
   label: string;
   value: string;
 }
 
-type StatusType = 'approved' | 'inprogress' | 'pending' | 'rejected' | 'covered' ;
+export type StatusType = 'approved' | 'inprogress' | 'pending' | 'rejected' | 'covered' | 'paused' ;
 
 
 interface MedicalCoding {
@@ -51,7 +46,7 @@ interface PriorAuthorization {
   details: PriorAuthorizationDetail[];  // Array of label-value pairs
 }
 
-interface ClaimStep {
+export interface ClaimStep {
   id: string;
   label: string;
   status: "pending" | "completed" | "failed" | "in-progress";
@@ -75,9 +70,36 @@ interface PostPayment {
   steps: ClaimStep[];  // Array of steps for post-payment process
 }
 
+export interface Attachment {
+  fileName: string;
+  fileSize: string;
+  ecgImageUrl: string;
+}
+
+export interface ICDCode {
+  id: string;
+  code: string;
+  confidence?: number;
+  isApproved?: boolean;
+  desc?: string;
+}
+
+export interface InsuranDetials {
+   insuranceProvider: string,
+        imageUrl: string,
+        policyNumber: string,
+}
+export interface EligibilityCheck {
+  status: StatusType,
+  insuranDetials: InsuranDetials,
+  details: MedicalCodingDetail[]
+}
+
 // Main User Persona Interface that integrates all the sections
 export interface PatientPersona {
   id: string;
+  profileCreatedDate: string;
+  isSubmitted: boolean;
   agentDetails?: {
     agentIssue: string;
     agentSuggestion: string;
@@ -90,6 +112,13 @@ export interface PatientPersona {
   claimSubmission: ClaimSubmission;
   denialManagement: DenialManagement;
   postPayment: PostPayment;
+  attachments?: Attachment[];
+  markdown?: string; // Markdown content for the patient notes
+  icdCodes?: ICDCode[];
+  cptCode?:ICDCode[];
+  claimStepStatus?:ProcessStep[]
+  postPaymentStatus?:ProcessStep[]
+  dentalManagementStatus?:ProcessStep[]
 }
 
 

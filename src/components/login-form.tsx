@@ -43,7 +43,6 @@ export function LoginForm({ onSuccess }: LoginFormProps) {
       }
 
       // You can add navigation logic here
-      console.log("Login successful:", response);
     } catch (error) {
       const apiError = error as ApiError;
       setApiError(apiError.message || "Login failed. Please try again.");
@@ -169,10 +168,8 @@ export function LoginForm({ onSuccess }: LoginFormProps) {
           </p>
         </div>
       </div>
-      <div className="w-1/2 bg-gray-100 flex items-center justify-center">
-        <div className="w-[300px] h-[300px] border border-gray-300 rounded flex items-center justify-center">
-          <span className="text-gray-400">[Image Placeholder]</span>
-        </div>
+      <div className="w-1/2 bg-gray-100 flex items-center justify-center login-bg">
+        
       </div>
     </div>
   );

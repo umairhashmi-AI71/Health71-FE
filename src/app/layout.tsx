@@ -1,16 +1,13 @@
-import type { Metadata } from "next";
+"use client"
 import { Inter } from "next/font/google";
 import "./globals.css";
 import ChatWidget from "@/components/ChatWidget";
+import { Provider } from 'react-redux';
+import { store } from '../store';
 
 const inter = Inter({ subsets: ['latin'] });
 
- 
-
-export const metadata: Metadata = {
-  title: "Health71 RCM",
-  description: "Healthcare Revenue Cycle Management System",
-};
+  
 
 export default function RootLayout({
   children,
@@ -18,11 +15,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
+    
     <html lang="en">
       <body
         className={inter.className}
       >
+        <Provider store={store}>
+
         {children}
+          </Provider>
+
         <ChatWidget />
       </body>
     </html>

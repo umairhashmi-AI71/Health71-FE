@@ -44,7 +44,6 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
       const parsedUser = JSON.parse(userData);
       setUser(parsedUser);
     } catch (error) {
-      console.error("Error parsing user data:", error);
       localStorage.removeItem("access_token");
       localStorage.removeItem("user");
       router.push("/");
@@ -70,7 +69,8 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
     { icon: LogOutIcon, label: "Logout", href: "/" },
   ];
 
-  const isActive = (href: string) => pathname === href;
+const isActive = (href: string) =>   pathname === href || pathname.startsWith(`${href}/`);
+
 
   const getUserDisplayName = () => {
     if (user?.firstName && user?.lastName) {
