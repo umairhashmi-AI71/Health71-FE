@@ -136,8 +136,8 @@ export default function DashboardPage() {
     });
 /* eslint-disable */
     if (target) {
-      target.scrollIntoView({ behavior: "smooth", block: "center" });
-      target.classList.add("scroll-hightlight");
+       (target as HTMLElement).scrollIntoView({ behavior: "smooth", block: "center" });
+       (target as HTMLElement).classList.add("scroll-hightlight");
       // target.a("background: #EAF481; padding:8px; margin-bottom:5px; display:inline-block")
       // setTimeout(() => target?.classList.remove("bg-yellow-200"), 2000);
     }
