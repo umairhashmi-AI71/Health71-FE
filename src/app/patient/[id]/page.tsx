@@ -206,7 +206,7 @@ export default function DashboardPage() {
                 status={patients?.priorAuthorization.status as StatusType}
                 mode="grid"
                 gridData={patients?.priorAuthorization.details}
-                titleGap="mb-[22px]"
+                titleGap="mb-[34px]"
               />
             </div>
             <div className="flex flex-col gap-4 flex-1 max-w-[330px]">
@@ -223,7 +223,7 @@ export default function DashboardPage() {
                 status={patients?.claimSubmission.status as StatusType}
                 mode="process"
                 processSteps={patients?.claimSubmission.steps}
-                processGap="h-5.25"
+                processGap="h-[23px]"
               />
             </div>
 
