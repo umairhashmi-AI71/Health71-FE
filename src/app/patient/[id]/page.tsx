@@ -156,7 +156,6 @@ export default function DashboardPage() {
       "p, h1, h2, h3, li, strong"
     );
 
-    let target: HTMLElement | null = null;
     if (word == "M17.12") {
       word = "Possible exacerbation of pre-existing mild osteoarthritis.";
     }
