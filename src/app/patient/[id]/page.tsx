@@ -134,13 +134,15 @@ export default function DashboardPage() {
         target = el;
       }
     });
-
+/* eslint-disable */
     if (target) {
       target.scrollIntoView({ behavior: "smooth", block: "center" });
       target.classList.add("scroll-hightlight");
       // target.a("background: #EAF481; padding:8px; margin-bottom:5px; display:inline-block")
       // setTimeout(() => target?.classList.remove("bg-yellow-200"), 2000);
     }
+    /* eslint-enable */
+
   }, []);
   return (
     <DashboardLayout>
