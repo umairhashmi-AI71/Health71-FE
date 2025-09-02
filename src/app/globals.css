@@ -279,7 +279,7 @@ body {
 .ag-row-focus,
 .ag-row-hover,
 .ag-row-focus {
-  background: rgba(175, 216, 212, 0.20) !important;
+  background: none!important;
  }
 
 /* Remove selected (clicked) row background */
