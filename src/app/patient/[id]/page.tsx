@@ -17,11 +17,11 @@ import AlertModal from "@/components/AlertModal";
 import React, { useCallback, useEffect, useRef, useState } from "react";
 
 import Breadcrumb from "@/components/Breadcrumb";
-import { useRouter , useParams} from "next/navigation";
- import { useSelector, useDispatch } from "react-redux";
+import { useRouter, useParams } from "next/navigation";
+import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "@/store";
 import { Attachment, StatusType } from "@/types/patient";
-import {  markPatientSubmitted } from "@/store/slice/Patient";
+import { markPatientSubmitted } from "@/store/slice/Patient";
 import ClaimSubmissionComponent from "@/components/Submitform";
 
 export default function DashboardPage() {
@@ -32,7 +32,10 @@ export default function DashboardPage() {
   const patients = useSelector((state: RootState) =>
     state.patientlist.find((p) => p.id === params.id)
   );
-   useEffect(() => {
+
+  const markdownRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
     if (patients == undefined) {
       router.push("/home");
     }
@@ -64,6 +67,7 @@ export default function DashboardPage() {
           id="icd"
           title="ICD Codes"
           initialCodes={patients?.icdCodes}
+          icdHandeler={handleHighlight}
         />
       ),
       icon: Microscope,
@@ -98,12 +102,46 @@ export default function DashboardPage() {
   ];
 
   const route = useRouter();
-  const cancelHandel = useCallback(()=> {
-    setModal("")
-  }, [])
+  const cancelHandel = useCallback(() => {
+    setModal("");
+  }, []);
 
   const [highlightedText, setHighlightedText] = useState<string>("");
   const textRef = useRef<HTMLDivElement>(null);
+  const handleHighlight = useCallback((word: string) => {
+    if (!markdownRef.current) return;
+
+    const elements = markdownRef.current.querySelectorAll<HTMLElement>(
+      "p, h1, h2, h3, li, strong"
+    );
+
+    let target: HTMLElement | null = null;
+    if (word == "M17.12") {
+      word = "Possible exacerbation of pre-existing mild osteoarthritis.";
+    }
+
+    markdownRef.current.querySelectorAll(".scroll-hightlight").forEach((el) => {
+      el.classList.remove("scroll-hightlight");
+    });
+
+    elements.forEach((el) => {
+      if (highlightedText.length) {
+        if (el.textContent?.includes(highlightedText) && !target) {
+          target = el;
+        }
+      }
+      if (el.textContent?.includes(word) && !target) {
+        target = el;
+      }
+    });
+
+    if (target) {
+      target.scrollIntoView({ behavior: "smooth", block: "center" });
+      target.classList.add("scroll-hightlight");
+      // target.a("background: #EAF481; padding:8px; margin-bottom:5px; display:inline-block")
+      // setTimeout(() => target?.classList.remove("bg-yellow-200"), 2000);
+    }
+  }, []);
   return (
     <DashboardLayout>
       <div>
@@ -194,7 +232,7 @@ export default function DashboardPage() {
               />
             </div>
           </div>
-          <div className="grid grid-cols-[70%_1fr] gap-4">
+          <div className="grid grid-cols-[70%_1fr] gap-4" ref={markdownRef}>
             <div>
               <SOAPNote tabs={tabs} defaultActiveTab="soap" />
             </div>
@@ -275,10 +313,11 @@ export default function DashboardPage() {
               notify you if anything else is needed.
             </div>
             <div className="mb-6">
-             
-              <ClaimSubmissionComponent cancelHandel={cancelHandel} userId={params.id as string} />
+              <ClaimSubmissionComponent
+                cancelHandel={cancelHandel}
+                userId={params.id as string}
+              />
             </div>
-           
           </div>
         </AlertModal>
       </div>

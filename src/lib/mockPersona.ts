@@ -58,7 +58,7 @@ The patient, a 52-year-old Caucasian male named John Smith, presents with compla
 <br /><br />
 
 ## **Assessment:**
-- <span style="background: #EAF481; padding:8px; margin-bottom:5px; display:inline-block">Pain in the left knee (ICD-10 code M25.562).</span>
+- Pain in the left knee (ICD-10 code M25.562).
 - Possible exacerbation of pre-existing mild osteoarthritis.
 
 <br />

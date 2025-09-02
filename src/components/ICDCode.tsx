@@ -8,12 +8,14 @@ interface ICDCodesProps {
   initialCodes?: ICDCode[];
   title: string;
   id:string;
-}
+  icdHandeler?: (word: string) => void;
+ }
 
 const ICDCodes: React.FC<ICDCodesProps> = ({
   initialCodes = [],
   title = '',
-  id
+  id,
+  icdHandeler
 }) => {
   const [newCode, setNewCode] = useState("");
   const [isAdding, setIsAdding] = useState(false);
@@ -116,8 +118,8 @@ const ICDCodes: React.FC<ICDCodesProps> = ({
               </button>
             </div>
             <div className={`text-deep-ocean text-xs ${id == 'icd' ? 'cursor-pointer' : ''} `} onClick={() => {
-              if(id==='icd') {
-                alert('sdf')
+              if(id==='icd' && icdHandeler) {
+                icdHandeler(icdCode?.code as string)
               }
             }}>
               <p>{icdCode.desc}</p>
