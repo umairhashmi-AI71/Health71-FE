@@ -37,7 +37,7 @@ const ClaimSubmissionComponent = ({
 
     // Process each step with 3-second delay
     for (let i = 0; i < 3; i++) {
-      await new Promise(resolve => setTimeout(resolve, 3000));
+      await new Promise(resolve => setTimeout(resolve, 1000));
       setCompletedSteps(prev => new Set([...prev, steps[i].id]));
     }
 

@@ -20,7 +20,7 @@ import Breadcrumb from "@/components/Breadcrumb";
 import { useRouter, useParams } from "next/navigation";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "@/store";
-import { Attachment, StatusType } from "@/types/patient";
+import { Attachment, PatientProfile, StatusType } from "@/types/patient";
 import { markPatientSubmitted } from "@/store/slice/Patient";
 import ClaimSubmissionComponent from "@/components/Submitform";
 
@@ -68,6 +68,7 @@ export default function DashboardPage() {
           title="ICD Codes"
           initialCodes={patients?.icdCodes}
           icdHandeler={handleHighlight}
+          removeHighlight={removeHighlight}
         />
       ),
       icon: Microscope,
@@ -134,20 +135,41 @@ export default function DashboardPage() {
         target = el;
       }
     });
-/* eslint-disable */
+
+    /* eslint-disable */
     if (target) {
-       (target as HTMLElement).scrollIntoView({ behavior: "smooth", block: "center" });
-       (target as HTMLElement).classList.add("scroll-hightlight");
+      (target as HTMLElement).scrollIntoView({
+        behavior: "smooth",
+        block: "center",
+      });
+      (target as HTMLElement).classList.add("scroll-hightlight");
       // target.a("background: #EAF481; padding:8px; margin-bottom:5px; display:inline-block")
       // setTimeout(() => target?.classList.remove("bg-yellow-200"), 2000);
     }
     /* eslint-enable */
-
   }, []);
+
+  const removeHighlight = useCallback((word: string) => {
+    if (!markdownRef.current) return;
+
+    const elements = markdownRef.current.querySelectorAll<HTMLElement>(
+      "p, h1, h2, h3, li, strong"
+    );
+
+    let target: HTMLElement | null = null;
+    if (word == "M17.12") {
+      word = "Possible exacerbation of pre-existing mild osteoarthritis.";
+    }
+
+    markdownRef.current.querySelectorAll(".scroll-hightlight").forEach((el) => {
+      el.classList.remove("scroll-hightlight");
+    });
+  }, []);
+
   return (
     <DashboardLayout>
       <div>
-        <main className="p-6">
+        <main className="p-6 size-full max-w-345 xl:mx-auto">
           <div className="flex justify-between items-center items-start">
             <div>
               <Breadcrumb />
@@ -166,18 +188,7 @@ export default function DashboardPage() {
           </div>
           <div className=" flex gap-4 mb-6 ">
             <div className="flex-1 max-w-xs">
-              <PatientProfileCard
-                name="Sara Al Nuaimi"
-                id="101300"
-                emiratesId="748-1985-2233445-4"
-                sex="Female"
-                dateOfBirth="1985-07-21"
-                nationality="UAE"
-                language="Arabic"
-                phone="97155467830"
-                email="Sara.nuaimi@gmail.com"
-                avatarUrl="/avatar.png"
-              />
+              <PatientProfileCard details={patients?.profile as PatientProfile} mrn={patients?.id as string}/>
             </div>
 
             <div className="flex flex-col gap-4 flex-1 max-w-[315px]">
@@ -196,13 +207,13 @@ export default function DashboardPage() {
                 status={patients?.priorAuthorization.status as StatusType}
                 mode="grid"
                 gridData={patients?.priorAuthorization.details}
-                titleGap="mb-5"
+                titleGap="mb-[22px]"
               />
             </div>
             <div className="flex flex-col gap-4 flex-1 max-w-[330px]">
               <HealthcareCard
                 title="Medical Coding"
-                titleGap="mb-7"
+                titleGap="mb-[31px]"
                 status={patients?.medicalCoding.status as StatusType}
                 mode="grid"
                 gridData={patients?.medicalCoding.details}
@@ -230,7 +241,7 @@ export default function DashboardPage() {
                 status={patients?.postPayment.status as StatusType}
                 mode="process"
                 processSteps={patients?.postPayment.steps}
-                titleGap="mb-5.25"
+                titleGap="mb-[23px]"
               />
             </div>
           </div>

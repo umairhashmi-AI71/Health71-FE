@@ -41,7 +41,7 @@ The patient, a 52-year-old Caucasian male named John Smith, presents with compla
 
 <br /><br />
 
-## Objective
+## **Objective**
 
 ### **Vital Signs:**
 - Blood Pressure: 128/82 mmHg  
@@ -61,7 +61,7 @@ The patient, a 52-year-old Caucasian male named John Smith, presents with compla
 - Pain in the left knee (ICD-10 code M25.562).
 - Possible exacerbation of pre-existing mild osteoarthritis.
 
-<br />
+<br /><br />
 
 ### **Plan:**
 
@@ -90,8 +90,8 @@ export const patientPersona: PatientPersona[] = [
       coT: "Payer API returned inactive coverage; agent halted claim until renewal.",
     },
     profile: {
-      name: "Sara Al Nuaimi",
-      surname: "Al Nuaimi",
+      name: "Sara",
+      surname: "Al Naoumi",
       age: 55,
       emiratesId: "748-1985-2233445-4",
       sex: "Female",
@@ -100,6 +100,7 @@ export const patientPersona: PatientPersona[] = [
       language: "Arabic",
       phoneNumber: "97155467830",
       email: "Sara.nuaimi@gmail.com",
+      profilePhoto: "/avatar.png"
     },
     eligibilityCheck: {
       status: "covered",
@@ -109,8 +110,8 @@ export const patientPersona: PatientPersona[] = [
         policyNumber: "42122566"
       },
       details: [
-        { label: "network", value: "Yes" },
-        { label: "coverage", value: "100%" },
+        { label: "Network", value: "Yes" },
+        { label: "Coverage", value: "100%" },
       ],
     },
     medicalCoding: {
@@ -134,7 +135,7 @@ export const patientPersona: PatientPersona[] = [
       ],
     },
     claimSubmission: {
-      status: "paused", // Current status of the claim submission process
+      status: "waiting", // Current status of the claim submission process
       steps: [
         { id: "1", label: "Compliance Check & Adjustment", status: "pending" },
         { id: "2", label: "XML File Generated", status: "pending" },
@@ -232,7 +233,7 @@ export const patientPersona: PatientPersona[] = [
       "coT": "Diagnostic report mentioned in SOAP but not attached; agent cannot confirm if payer’s criteria for MRI are met."
     },
     profile: {
-      "name": "Fatima Rahman",
+      "name": "Fatima",
       surname: "Rahman",
       "age": 34,
       "emiratesId": "748-1985-2233445-4",
@@ -241,7 +242,8 @@ export const patientPersona: PatientPersona[] = [
       "nationality": "UAE",
       "language": "Arabic",
       "phoneNumber": "97155467830",
-      "email": "Sara.nuaimi@gmail.com"
+      "email": "Sara.nuaimi@gmail.com",
+      profilePhoto: "/avatar.png"
     },
     eligibilityCheck: {
       status: "covered",
@@ -251,8 +253,8 @@ export const patientPersona: PatientPersona[] = [
         policyNumber: "42122566"
       },
       details: [
-        { label: "network", value: "Yes" },
-        { label: "coverage", value: "100%" },
+        { label: "Network", value: "Yes" },
+        { label: "Coverage", value: "100%" },
       ],
     },
     medicalCoding: {
@@ -276,7 +278,7 @@ export const patientPersona: PatientPersona[] = [
       ],
     },
     claimSubmission: {
-      status: "paused", // Current status of the claim submission process
+      status: "waiting", // Current status of the claim submission process
       steps: [
         { id: "1", label: "Compliance Check & Adjustment", status: "pending" },
         { id: "2", label: "XML File Generated", status: "pending" },
@@ -373,7 +375,7 @@ export const patientPersona: PatientPersona[] = [
       "coT": "Denial code shows “insufficient medical necessity” → agent requests escalation with radiology justification."
     },
     "profile": {
-      "name": "Layla Mansour",
+      "name": "Layla",
       surname:"Mansour",
       "age": 55,
       "emiratesId": "748-1985-2233445-4",
@@ -382,7 +384,8 @@ export const patientPersona: PatientPersona[] = [
       "nationality": "UAE",
       "language": "Arabic",
       "phoneNumber": "97155467830",
-      "email": "Sara.nuaimi@gmail.com"
+      "email": "Sara.nuaimi@gmail.com",
+      profilePhoto: "/avatar.png"
     },
     eligibilityCheck: {
       status: "covered",
@@ -392,8 +395,8 @@ export const patientPersona: PatientPersona[] = [
         policyNumber: "42122566"
       },
       details: [
-        { label: "network", value: "Yes" },
-        { label: "coverage", value: "100%" },
+        { label: "Network", value: "Yes" },
+        { label: "Coverage", value: "100%" },
       ],
     },
     medicalCoding: {
@@ -417,7 +420,7 @@ export const patientPersona: PatientPersona[] = [
       ],
     },
     claimSubmission: {
-      status: "paused", // Current status of the claim submission process
+      status: "waiting", // Current status of the claim submission process
       steps: [
         { id: "1", label: "Compliance Check & Adjustment", status: "pending" },
         { id: "2", label: "XML File Generated", status: "pending" },
@@ -515,7 +518,7 @@ export const patientPersona: PatientPersona[] = [
       "coT": "Payer requires re-auth after 5 days; agent drafted but physician must confirm ongoing medical necessity."
     },
     "profile": {
-      "name": "Huda Mansoor",
+      "name": "Huda",
       surname: "Mansoor",
       "age": 36,
       "emiratesId": "748-1985-2233445-4",
@@ -524,7 +527,8 @@ export const patientPersona: PatientPersona[] = [
       "nationality": "UAE",
       "language": "Arabic",
       "phoneNumber": "97155467830",
-      "email": "Sara.nuaimi@gmail.com"
+      "email": "Sara.nuaimi@gmail.com",
+      profilePhoto: "/avatar.png"
     },
     eligibilityCheck: {
       status: "covered",
@@ -534,8 +538,8 @@ export const patientPersona: PatientPersona[] = [
         policyNumber: "42122566"
       },
       details: [
-        { label: "network", value: "Yes" },
-        { label: "coverage", value: "100%" },
+        { label: "Network", value: "Yes" },
+        { label: "Coverage", value: "100%" },
       ],
     },
     medicalCoding: {
@@ -559,7 +563,7 @@ export const patientPersona: PatientPersona[] = [
       ],
     },
     claimSubmission: {
-      status: "paused", // Current status of the claim submission process
+      status: "waiting", // Current status of the claim submission process
       steps: [
         { id: "1", label: "Compliance Check & Adjustment", status: "pending" },
         { id: "2", label: "XML File Generated", status: "pending" },
@@ -657,7 +661,7 @@ export const patientPersona: PatientPersona[] = [
       "coT": "Denial code 50; flagged for physician medical justification + supporting guidelines."
     },
     "profile": {
-      "name": "Olivier Dubois",
+      "name": "Olivier",
       surname: "Dubois",
       "age": 44,
       "emiratesId": "748-1985-2233445-4",
@@ -666,7 +670,8 @@ export const patientPersona: PatientPersona[] = [
       "nationality": "UAE",
       "language": "Arabic",
       "phoneNumber": "97155467830",
-      "email": "Sara.nuaimi@gmail.com"
+      "email": "Sara.nuaimi@gmail.com",
+      profilePhoto: "/avatar.png"
     },
     eligibilityCheck: {
       status: "covered",
@@ -676,8 +681,8 @@ export const patientPersona: PatientPersona[] = [
         policyNumber: "42122566"
       },
       details: [
-        { label: "network", value: "Yes" },
-        { label: "coverage", value: "100%" },
+        { label: "Network", value: "Yes" },
+        { label: "Coverage", value: "100%" },
       ],
     },
     medicalCoding: {
@@ -701,7 +706,7 @@ export const patientPersona: PatientPersona[] = [
       ],
     },
     claimSubmission: {
-      status: "paused", // Current status of the claim submission process
+      status: "waiting", // Current status of the claim submission process
       steps: [
         { id: "1", label: "Compliance Check & Adjustment", status: "pending" },
         { id: "2", label: "XML File Generated", status: "pending" },
@@ -789,26 +794,27 @@ export const patientPersona: PatientPersona[] = [
     ]
   },
    {
-    "id": "530412",
+    "id": "824691",
     "isSubmitted": false,
                  profileCreatedDate: new Date('9/2/2025 22:48:45').toISOString(),
 
     "agentDetails": {
       "agentIssue": "Dee",
-      "agentSuggestion": "Draft appeal: “not medically necessary” claim",
-      "coT": "Denial code 50; flagged for physician medical justification + supporting guidelines."
+      "agentSuggestion": "Denial reason: experimental procedure",
+      "coT": "Payer denial flagged as investigational; requires physician statement + clinical literature."
     },
     "profile": {
-      "name": "Olivier ",
-      surname: "Dubois",
-      "age": 44,
+      "name": "Mariam ",
+      surname: "Yusuf",
+      "age": 37,
       "emiratesId": "748-1985-2233445-4",
       "sex": "Female",
       "dateOfBirth": "1985-07-21",
       "nationality": "UAE",
       "language": "Arabic",
       "phoneNumber": "97155467830",
-      "email": "Sara.nuaimi@gmail.com"
+      "email": "Sara.nuaimi@gmail.com",
+      profilePhoto: "/avatar.png"
     },
     eligibilityCheck: {
       status: "covered",
@@ -818,8 +824,8 @@ export const patientPersona: PatientPersona[] = [
         policyNumber: "42122566"
       },
       details: [
-        { label: "network", value: "Yes" },
-        { label: "coverage", value: "100%" },
+        { label: "Network", value: "Yes" },
+        { label: "Coverage", value: "100%" },
       ],
     },
     medicalCoding: {
@@ -843,7 +849,7 @@ export const patientPersona: PatientPersona[] = [
       ],
     },
     claimSubmission: {
-      status: "paused", // Current status of the claim submission process
+      status: "waiting", // Current status of the claim submission process
       steps: [
         { id: "1", label: "Compliance Check & Adjustment", status: "pending" },
         { id: "2", label: "XML File Generated", status: "pending" },

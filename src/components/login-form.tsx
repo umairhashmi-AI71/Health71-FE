@@ -7,7 +7,7 @@ import { Button, Input } from "@/components/ui";
 import { loginSchema, LoginFormData } from "@/lib/validations";
 import { apiClient } from "@/lib/api";
 import { LoginResponse, ApiError } from "@/types/auth";
-import { AlertCircle, CheckCircle } from "lucide-react";
+import { AlertCircle, CheckCircle, Check } from "lucide-react";
 
 interface LoginFormProps {
   onSuccess?: (response: LoginResponse) => void;
@@ -17,6 +17,7 @@ export function LoginForm({ onSuccess }: LoginFormProps) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [apiError, setApiError] = useState<string | null>(null);
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
+  const [checked, setChecked] = useState(true);
 
   const {
     register,
@@ -91,7 +92,7 @@ export function LoginForm({ onSuccess }: LoginFormProps) {
             Sign in
           </h2>
           <p className="mb-6 text-sm text-col text-muted">
-            Log in to unlock tailored content and stay connected with your community.
+            Access your secure RCM71 agents and continue where you left off.
           </p>
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
             {/* Email Field */}
@@ -119,14 +120,19 @@ export function LoginForm({ onSuccess }: LoginFormProps) {
             />
 
             <div className="flex justify-between items-center mb-4 text-sm text-gray-600">
-              <label className="flex items-center text-base-primary font-medium">
-                <input
-                  type="checkbox"
-                  className="mr-2 bg-primary checked:bg-primary hover:bg-primary w-4 h-4"
-                  defaultChecked
-                />
-                Keep me signed in
-              </label>
+              
+              <label
+      className="flex items-center text-base-primary font-medium cursor-pointer select-none"
+      onClick={() => setChecked(!checked)}
+    >
+      <span
+        className={`mr-2 flex h-5 w-5 items-center justify-center rounded border transition 
+          ${checked ? "bg-primary border-primary" : "border-gray-400 bg-white"}`}
+      >
+        {checked && <Check size={14} className="text-white" />}
+      </span>
+      Keep me signed in
+    </label>
               <a href="#" className="text-muted">
                 Forgot password?
               </a>

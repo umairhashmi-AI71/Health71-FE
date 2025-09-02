@@ -1,6 +1,6 @@
 "use client";
 import { ColDef, ICellRendererParams } from "ag-grid-community";
-import DetailsButtonRenderer from "./DetailsButtonRenderer";
+import {CustomCheckbox, DetailsButtonRenderer, fullNameRenderer} from "./DetailsButtonRenderer";
 import { PatientPersona } from "@/types/patient";
 
 const truncatedCellRenderer = (
@@ -16,14 +16,21 @@ const truncatedCellRenderer = (
   return text.substring(0, maxLength);
 };
 
+
+
+
+
 export const patientColumnDef: ColDef[] = [
   {
     headerName: "",
     field: "select",
-    checkboxSelection: true,
+    // checkboxSelection: true,
     headerCheckboxSelection: true,
+     checkboxSelection: true,
     width: 50,
     pinned: "left",
+ 
+    // cellRenderer: CustomCheckbox,
   },
 
   {
@@ -31,7 +38,19 @@ export const patientColumnDef: ColDef[] = [
     field: "name",
     sortable: true,
     width: 140,
+    cellRenderer: fullNameRenderer,
+
     //   filter: 'agTextColumnFilter',
+  },
+  {
+    headerName: "Agent Name",
+    field: "agentIssue",
+    sortable: true,
+    width: 150,
+    // hide: true,
+       filter: true,  
+      // filter: "agSetColumnFilter", // ✅ this enables the set filter type
+
   },
   {
     headerName: "MRN",
@@ -65,16 +84,7 @@ export const patientColumnDef: ColDef[] = [
   //   width: 60,
   // },
 
-  {
-    headerName: "Agent Issue",
-    field: "agentIssue",
-    sortable: true,
-    width: 150,
-    hide: true,
-       filter: true,  
-      // filter: "agSetColumnFilter", // ✅ this enables the set filter type
-
-  },
+  
   {
     headerName: "Agent Suggestion",
     field: "agentSuggestion",
@@ -100,7 +110,7 @@ export const patientColumnDef: ColDef[] = [
     field: "action",
     cellRenderer: DetailsButtonRenderer,
     sortable: false,
-    //  pinned: 'right',
+     pinned: 'right',
     width: 80,
     filter: false,
   },

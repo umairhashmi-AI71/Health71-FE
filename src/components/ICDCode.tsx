@@ -2,20 +2,20 @@ import React, { useMemo, useState } from "react";
 import { Plus, Trash2, Check, X, Square, SquarePen, Pill } from "lucide-react";
 import { ICDCode } from "@/types/patient";
 
-
-
 interface ICDCodesProps {
   initialCodes?: ICDCode[];
   title: string;
-  id:string;
+  id: string;
   icdHandeler?: (word: string) => void;
- }
+  removeHighlight?: (word: string) => void;
+}
 
 const ICDCodes: React.FC<ICDCodesProps> = ({
   initialCodes = [],
-  title = '',
+  title = "",
   id,
-  icdHandeler
+  icdHandeler,
+  removeHighlight,
 }) => {
   const [newCode, setNewCode] = useState("");
   const [isAdding, setIsAdding] = useState(false);
@@ -31,7 +31,10 @@ const ICDCodes: React.FC<ICDCodesProps> = ({
         id: Date.now().toString(),
         code: newCode.toUpperCase(),
         isApproved: false,
-        desc: id ==='cpt' ? 'Diagnostic Radiology Procedures of the Lower Extremities' : '',
+        desc:
+          id === "cpt"
+            ? "Diagnostic Radiology Procedures of the Lower Extremities"
+            : "",
       };
       setCodes([...codes, newICDCode]);
       setNewCode("");
@@ -39,12 +42,14 @@ const ICDCodes: React.FC<ICDCodesProps> = ({
     }
   };
 
-
   const handleDeleteCode = (id: string) => {
     setCodes(codes.filter((code) => code.id !== id));
   };
 
   const handleApproveCode = (id: string) => {
+    if (removeHighlight) {
+      removeHighlight(id);
+    }
     setCodes(
       codes.map((code) =>
         code.id === id ? { ...code, isApproved: !code.isApproved } : code
@@ -58,6 +63,17 @@ const ICDCodes: React.FC<ICDCodesProps> = ({
     return "text-red-600";
   };
 
+  const getPlacehoder = () => {
+    switch (id) {
+      case "icd" :
+        return "Enter ICD code (e.g., M25562)";
+      case "cpt" :
+        return "Enter CPT code (e.g., 88192)";
+      case "drug" :
+        return "Enter Drug code";
+    }
+  }
+
   return (
     <div className="max-w-2xl mx-auto bg-white p-4">
       {/* Header */}
@@ -70,8 +86,6 @@ const ICDCodes: React.FC<ICDCodesProps> = ({
           <Plus className="w-5 h-5 text-gray-600" />
         </button>
       </div>
-
-     
 
       {/* ICD Codes List */}
       <div className="space-y-4 ">
@@ -91,17 +105,20 @@ const ICDCodes: React.FC<ICDCodesProps> = ({
 
               {/* Action Buttons */}
 
-
               <button
                 onClick={() => handleApproveCode(icdCode.id)}
-                className={`p-3 border border-sidebar bg-white rounded-lg transition-colors ${icdCode.isApproved ? "" : "hidden"}`}
+                className={`p-3 border border-sidebar bg-white rounded-lg transition-colors ${
+                  icdCode.isApproved ? "" : "hidden"
+                }`}
               >
                 <SquarePen className="w-5 h-5 " />
               </button>
 
               <button
                 onClick={() => handleDeleteCode(icdCode.id)}
-                className={`p-3 bg-base-agent-10 rounded-lg transition-colors ${icdCode.isApproved ? "hidden" : ""}`}
+                className={`p-3 bg-base-agent-10 rounded-lg transition-colors ${
+                  icdCode.isApproved ? "hidden" : ""
+                }`}
               >
                 <Trash2 className="w-5 h-5 text-base-destructive" />
               </button>
@@ -109,27 +126,32 @@ const ICDCodes: React.FC<ICDCodesProps> = ({
               <button
                 onClick={() => handleApproveCode(icdCode.id)}
                 className={`p-3 rounded-lg transition-colors ${
-                  icdCode.isApproved
-                    ? "hidden"
-                    : "bg-primary-foreground"
+                  icdCode.isApproved ? "hidden" : "bg-primary-foreground"
                 }`}
               >
                 <Check className="w-5 h-5 text-green " />
               </button>
             </div>
-            <div className={`text-deep-ocean text-xs ${id == 'icd' ? 'cursor-pointer' : ''} `} onClick={() => {
-              if(id==='icd' && icdHandeler) {
-                icdHandeler(icdCode?.code as string)
-              }
-            }}>
+            <div
+              className={`text-deep-ocean text-sm ${
+                id == "icd" ? "cursor-pointer" : ""
+              } `}
+              onClick={() => {
+                if (id === "icd" && icdHandeler) {
+                  icdHandeler(icdCode?.code as string);
+                }
+              }}
+            >
               <p>{icdCode.desc}</p>
-              {icdCode.confidence && (<p>Confidence Score: {icdCode.confidence}</p>)}
+              {icdCode.confidence && (
+                <p className="mt-1">Confidence Score: {icdCode.confidence}</p>
+              )}
             </div>
           </div>
         ))}
       </div>
 
-       {/* Add New Code Form */}
+      {/* Add New Code Form */}
       {isAdding && (
         <div className={`bg-basecard p-4 rounded-lg mt-3`}>
           <div className="flex items-center space-x-2 mb-3">
@@ -138,8 +160,8 @@ const ICDCodes: React.FC<ICDCodesProps> = ({
               type="text"
               value={newCode}
               onChange={(e) => setNewCode(e.target.value)}
-              placeholder="Enter ICD code (e.g., M25562)"
-              className="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              placeholder={getPlacehoder()}
+              className="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:outline-none  bg-white"
               onKeyPress={(e) => e.key === "Enter" && handleAddCode()}
             />
             {/* Action Buttons */}
@@ -163,16 +185,19 @@ const ICDCodes: React.FC<ICDCodesProps> = ({
         </div>
       )}
 
-      
-
-       {codes.length === 0 && !isAdding && (title.toLocaleLowerCase().lastIndexOf("drug") != -1) && (
-        <div className="text-center py-3 px-2 rounded-lg bg-basecard mt-5 ">
-          <div className="mb-4">
-            <Pill className="w-6 h-6 mx-auto" />
+      {codes.length === 0 &&
+        !isAdding &&
+        title.toLocaleLowerCase().lastIndexOf("drug") != -1 && (
+          <div className="text-center py-3 px-2 rounded-lg bg-basecard mt-5 ">
+            <div className="mb-4">
+              <Pill className="w-6 h-6 mx-auto" />
+            </div>
+            <p className="text-gray-500 mb-4">
+              No billable drug was prescribed or administered during this
+              encounter.
+            </p>
           </div>
-          <p className="text-gray-500 mb-4">No billable drug was prescribed or administered during this encounter.</p> 
-        </div>
-      )}
+        )}
     </div>
   );
 };

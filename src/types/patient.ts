@@ -9,7 +9,7 @@ export interface PatientListProps {
 
 
 // Define types for each part of the user persona
-interface PatientProfile {
+export interface PatientProfile {
   name: string;
   surname: string;
   emiratesId: string;
@@ -20,6 +20,7 @@ interface PatientProfile {
   phoneNumber: string;
   email: string;
   age: number;
+  profilePhoto: string;
   
 }
  
@@ -29,7 +30,7 @@ export interface MedicalCodingDetail {
   value:  string | number;
 }
 
-export type StatusType = 'approved' | 'inprogress' | 'pending' | 'rejected' | 'covered' | 'paused' | "completed" | "current"  ;
+export type StatusType = 'approved' | 'inprogress' | 'pending' | 'rejected' | 'covered' | 'paused' | "completed" | "current" | "waiting" ;
 
 
 interface MedicalCoding {
@@ -53,7 +54,7 @@ export interface ClaimStep {
   status: StatusType;
 }
 
-type processStepStatusType = 'completed' | 'current' | 'pending' | 'paused';
+type processStepStatusType = 'completed' | 'current' | 'pending' | 'paused' | 'waiting';
 
 
 interface ClaimSubmission {

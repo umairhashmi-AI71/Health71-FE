@@ -128,7 +128,7 @@ export default function ChatWidget() {
       <button
         aria-label="Open chat"
         onClick={() => setOpen((v) => !v)}
-        className="fixed bottom-4 right-4  rounded-xl bg-green text-primary-foreground shadow-lg flex items-center justify-center cursor-pointer hover:bg-gray-100"
+        className="fixed bottom-5 right-11  rounded-xl bg-green text-primary-foreground shadow-lg flex items-center justify-center cursor-pointer hover:bg-gray-100"
       >
         {open ? "" : <MessagesSquare className="w-8 h-8 m-4" />}
       </button>
@@ -142,7 +142,7 @@ export default function ChatWidget() {
       {open && (
         <div
           ref={containerRef}
-          className="fixed bottom-4 right-4 w-[420px] max-w-[calc(100vw-2rem)] bg-white border border-neutral-200 rounded-2xl shadow-2xl overflow-hidden flex flex-col"
+          className="fixed bottom-4 z-1 right-4 w-[420px] max-w-[calc(100vw-2rem)] bg-white border border-neutral-200 rounded-2xl shadow-2xl overflow-hidden flex flex-col"
         >
           {/* Header */}
           <div className="bg-green px-6 py-4 flex items-center justify-between">

@@ -77,6 +77,11 @@ const HealthcareCard: React.FC<HealthcareCardProps> = ({
           text: "Paused",
           className: "bg-warm-gray text-white",
         };
+      case "waiting":
+        return {
+          text: "Waiting",
+          className: "bg-warm-gray text-white",
+        };
       case "rejected":
         return {
           text: "Rejected",
@@ -87,7 +92,7 @@ const HealthcareCard: React.FC<HealthcareCardProps> = ({
         const exhaustiveCheck = status;
         return {
           text: status,
-          className: "bg-primary-foreground text-green",
+          className: "bg-warm-gray text-white",
         };
     }
   };

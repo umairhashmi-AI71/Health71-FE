@@ -11,6 +11,14 @@ import {
   ShieldCheck,
   ShieldX,
   AlertCircle,
+  SquareCheck,
+  NotepadText,
+  Binary,
+  Mailbox,
+  Text,
+  ClipboardX,
+  Check,
+  Banknote,
 } from "lucide-react";
 import type { Agent } from "../../types/agent";
 import React, {
@@ -48,8 +56,8 @@ export default function DashboardPage() {
       savedHours: "~0.5",
       feature: [
         { icon: ClipboardCheck, label: "Verified", count: 24 },
-        { icon: Flag, label: "Flagged", count: 234 },
-        { icon: Zap, label: "Cleared for Autho"},
+        { icon: Zap, label: "Flagged", count: 234 },
+        { icon: Flag, label: "Cleared for Autho"},
       ],
     },
     {
@@ -58,9 +66,9 @@ export default function DashboardPage() {
       role: "Prior authorization Agent",
       savedHours: "~0.1",
       feature: [
-        { icon: ShieldCheck, label: "Prior auto checked", count: 280 },
-        { icon: ShieldX, label: "Approvals secured", count: 200 },
-        { icon: AlertCircle, label: "Require human review", count: 80 },
+        { icon: SquareCheck, label: "Prior auto checked", count: 280 },
+        { icon: ShieldCheck, label: "Approvals secured", count: 200 },
+        { icon: Flag, label: "Require human review", count: 80 },
       ],
     },
     {
@@ -69,9 +77,9 @@ export default function DashboardPage() {
       role: "Prior authorization Agent",
       savedHours: "~2.2",
       feature: [
-        { icon: ShieldCheck, label: "Prior auto checked", count: 1400 },
-        { icon: ShieldX, label: "Approvals secured"},
-        { icon: AlertCircle, label: "Require human review", count: 280 },
+        { icon: NotepadText, label: "Prior auto checked", count: 1400 },
+        { icon: Binary, label: "Approvals secured"},
+        { icon: Flag, label: "Require human review", count: 280 },
       ],
     },
     {
@@ -80,9 +88,9 @@ export default function DashboardPage() {
       role: "Prior authorization Agent",
       savedHours: "~0.9",
       feature: [
-        { icon: ShieldCheck, label: "Prior auto checked", count: 1400 },
-        { icon: ShieldX, label: "Approvals secured", count: 70 },
-        { icon: AlertCircle, label: "Require human review", },
+        { icon: Mailbox, label: "Prior auto checked", count: 1400 },
+        { icon: Text, label: "Approvals secured", count: 70 },
+        { icon: Flag, label: "Require human review", },
       ],
     },
     {
@@ -91,9 +99,9 @@ export default function DashboardPage() {
       role: "Prior authorization Agent",
       savedHours: "~0.04",
       feature: [
-        { icon: ShieldCheck, label: "Prior auto checked", count: 260 },
-        { icon: ShieldX, label: "Approvals secured", count: 70 },
-        { icon: AlertCircle, label: "Require human review", count: 24 },
+        { icon: ClipboardX, label: "Prior auto checked", count: 260 },
+        { icon: Check, label: "Approvals secured", count: 70 },
+        { icon: Flag, label: "Require human review", count: 24 },
       ],
     },
     {
@@ -102,9 +110,9 @@ export default function DashboardPage() {
       role: "Prior authorization Agent",
       savedHours: "~0.1",
       feature: [
-        { icon: ShieldCheck, label: "Prior auto checked", count: 1400 },
-        { icon: ShieldX, label: "Approvals secured" },
-        { icon: AlertCircle, label: "Require human review", count: 140 },
+        { icon: Mailbox, label: "Prior auto checked", count: 1400 },
+        { icon: Banknote, label: "Approvals secured" },
+        { icon: Flag, label: "Require human review", count: 140 },
       ],
     },
   ];
@@ -123,6 +131,7 @@ export default function DashboardPage() {
         .filter((i) => i.isSubmitted === false)
         .map((i) => ({
           id: i.id,
+          surname: i.profile.surname,
           name: i.profile.name,
           age: i.profile.age,
           agentIssue: i.agentDetails?.agentIssue || "",
@@ -261,11 +270,11 @@ export default function DashboardPage() {
   
   return (
     <DashboardLayout>
-      <div className="min-h-full">
+      <div className="min-h-full size-full max-w-345 xl:mx-auto">
         <div style={{ marginBottom: "1rem", position: "relative" }}></div>
         <main className="p-6 space-y-6">
           {/* <Breadcrumb /> */}
-          <h3 className="text-lg font-semibold mb-0">Hi Neila,</h3>
+          <h3 className="text-2xl font-semibold mb-2">Hi Aisha,</h3>
           <p className="text-base text-muted mb-5">
             Together, we saved ~3.2 hours today 🙌. A few cases remain where
             your expertise is required.
@@ -395,7 +404,7 @@ export default function DashboardPage() {
             <p className="text-sm">{selectedRows.length} patient(s) selected</p>
           )}
           {/* AG-Grid Table */}
-          <div className="ag-theme-alpine border border-gray-200 rounded-lg">
+          <div className="ag-theme-alpine   rounded-lg">
             <AgGridReact
               // theme={themeQuartz}
               ref={gridRef}
@@ -426,7 +435,7 @@ export default function DashboardPage() {
                   : "  bg-green text-primary-foreground"
               }`}
             >
-              Submit
+              Accept
             </button>
           </div>
         </main>
