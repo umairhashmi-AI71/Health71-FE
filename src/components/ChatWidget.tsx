@@ -17,6 +17,12 @@ const AGENT = {
   status: "Online",
 };
 
+const User = {
+  
+    name: "Neila",
+  avatar: "/user-icon.png", // Replace with your agent avatar path
+  status: "Online",
+}
 export default function ChatWidget() {
   const [open, setOpen] = useState(false);
   const [input, setInput] = useState("");
@@ -206,8 +212,8 @@ export default function ChatWidget() {
                     </div>
                     {m.role === "user" && (
                       <img
-                        src={AGENT.avatar}
-                        alt={AGENT.name}
+                        src={User.avatar}
+                        alt={User.name}
                         className="w-10 h-10 rounded-full object-cover"
                       />
                     )}
@@ -235,7 +241,7 @@ export default function ChatWidget() {
                         anything related to medical billing.
                         <br />
                         <br />
-                         Just ask me your question, and I’ll guide you step by
+                        Just ask me your question, and I’ll guide you step by
                         step.
                       </div>
                     </div>
