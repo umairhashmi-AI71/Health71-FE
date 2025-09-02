@@ -11,7 +11,9 @@ import {
   ClipboardCheck,
   BellDot,
   LogOutIcon,
+  LayoutDashboard,
 } from "lucide-react";
+import AlertModal from "./AlertModal";
 
 interface DashboardLayoutProps {
   children: ReactNode;
@@ -29,6 +31,7 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
   const [user, setUser] = useState<UserData | null>(null);
   const router = useRouter();
   const pathname = usePathname();
+  const [modal, setModal] = useState('');
 
   useEffect(() => {
     // Check if user is authenticated
@@ -58,14 +61,15 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
 
   const sidebarItems = [
     { icon: Home, label: "Home", href: "/home" },
-    { icon: Search, label: "Search", href: "/" },
+    { icon: Search, label: "Search", href: "/search" },
     {
       icon: User2,
       label: "Patient Registery",
       href: "/patient",
     },
-    { icon: ClipboardCheck, label: "Board", href: "/" },
-    { icon: BellDot, label: "Notification", href: "/" },
+    { icon: ClipboardCheck, label: "Tasks", href: "/tasks" },
+    { icon: LayoutDashboard, label: "Dashboard", href: "/dashboard" },
+    { icon: BellDot, label: "Notification", href: "/notification" },
     { icon: LogOutIcon, label: "Logout", href: "/" },
   ];
 
@@ -143,7 +147,7 @@ const isActive = (href: string) =>   pathname === href || pathname.startsWith(`$
               return (
                 <button
                 key={item.label}
-                  onClick={handleLogout}
+                  onClick={() => setModal('confirm')}
                   className="flex items-center  text-sm font-medium rounded-lg transition-colors duration-200 p-2"
                 >
                   <LogOut className="w-4 h-4 text-alpha-80 " />
@@ -180,6 +184,33 @@ const isActive = (href: string) =>   pathname === href || pathname.startsWith(`$
         {/* Page Content */}
         <main className="size-full max-w-345 xl:mx-auto">{children}</main>
       </div>
+       <AlertModal open={modal === "confirm"} onClose={() => setModal("")}>
+          <div>
+            <div className="font-semibold text-lg mb-2 text-base-primary">
+              Log out confirmation
+            </div>
+            <div className="text-muted mb-6">
+             Are you sure you want to log out?
+            </div>
+            <div className="flex justify-end gap-4">
+              <button
+                className="border rounded-xl px-5 py-2 text-base-primary bg-white"
+                onClick={() => setModal("")}
+              >
+                No
+              </button>
+              <button
+                className="rounded-xl px-5 py-2 text-white bg-green"
+                onClick={() => {
+                   handleLogout();
+                  setModal("");
+                }}
+              >
+                Yes
+              </button>
+            </div>
+          </div>
+        </AlertModal>
     </div>
   );
 }

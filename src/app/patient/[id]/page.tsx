@@ -14,15 +14,15 @@ import {
 } from "lucide-react";
 import AttachmentGrid from "../AttachmentGrid";
 import AlertModal from "@/components/AlertModal";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 
 import Breadcrumb from "@/components/Breadcrumb";
-import { useRouter } from "next/navigation";
-import { useParams } from "next/navigation";
-import { useSelector, useDispatch } from "react-redux";
+import { useRouter , useParams} from "next/navigation";
+ import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "@/store";
 import { Attachment, StatusType } from "@/types/patient";
 import {  markPatientSubmitted } from "@/store/slice/Patient";
+import ClaimSubmissionComponent from "@/components/Submitform";
 
 export default function DashboardPage() {
   const params = useParams();
@@ -32,8 +32,7 @@ export default function DashboardPage() {
   const patients = useSelector((state: RootState) =>
     state.patientlist.find((p) => p.id === params.id)
   );
-
-  useEffect(() => {
+   useEffect(() => {
     if (patients == undefined) {
       router.push("/home");
     }
@@ -99,6 +98,9 @@ export default function DashboardPage() {
   ];
 
   const route = useRouter();
+  const cancelHandel = useCallback(()=> {
+    setModal("")
+  }, [])
 
   const [highlightedText, setHighlightedText] = useState<string>("");
   const textRef = useRef<HTMLDivElement>(null);
@@ -273,58 +275,10 @@ export default function DashboardPage() {
               notify you if anything else is needed.
             </div>
             <div className="mb-6">
-              {/* Example claim steps, you can style as needed */}
-
-              {patients?.claimSubmission.steps.map((step, index) => (
-                <div key={step.id} className="flex   space-x-3 ">
-                  <div className="flex flex-col items-center">
-                    <div className="w-6.5 h-6.5 rounded-full border-2 border-base" />
-
-                    {index < patients?.claimSubmission.steps.length - 1 && (
-                      <div className="w-0.5 h-4 bg-gray-200" />
-                    )}
-                  </div>
-                  <div className="flex-1">
-                    <p
-                      className={`text-base text-sm text-alpha-30  font-medium pt-1`}
-                    >
-                      {step.label}
-                    </p>
-                  </div>
-                </div>
-              ))}
+             
+              <ClaimSubmissionComponent cancelHandel={cancelHandel} userId={params.id as string} />
             </div>
-            <div className="flex justify-end gap-3">
-              <button
-                className="border rounded-xl px-5 py-2 text-base-primary bg-white cursor-pointer"
-                onClick={() => setModal("")}
-              >
-                Cancel
-              </button>
-              {!isSubmitted && (
-                <button
-                  className="rounded-xl px-4 py-4 text-white bg-green cursor-pointer"
-                  onClick={() => {
-                    setIsSubmitted(true);
-                    dispatch(markPatientSubmitted(params.id as string));
-                  }}
-                >
-                  Submit
-                </button>
-              )}
-
-              {isSubmitted && (
-                <button
-                  className="rounded-xl px-4 py-4 text-white bg-green cursor-pointer"
-                  onClick={() => {
-                    setIsSubmitted(false);
-                    route.push("/home");
-                  }}
-                >
-                  Go to Dashboard
-                </button>
-              )}
-            </div>
+           
           </div>
         </AlertModal>
       </div>

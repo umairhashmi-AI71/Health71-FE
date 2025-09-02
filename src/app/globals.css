@@ -173,7 +173,7 @@ backdrop-filter: blur(calc(4px / 2));
 .autho-bg {
   background: radial-gradient(85.95% 70.71% at 100% 0%, var(--base-agent-10, #FCD2C5) 10%, var(--base-sidebar-background, #F5F2EF) 75%);
 }
-.code-bg {
+.coda-bg {
   background: radial-gradient(85.95% 70.71% at 100% 0%, var(--base-sidebar-primary-foreground, #AFD8D4) 10%, var(--base-sidebar-background, #F5F2EF) 75%);
 
 }
@@ -272,3 +272,39 @@ background: radial-gradient(85.95% 70.71% at 100% 0%, var(--base-agent-9, #F5E78
  border-radius: 30px;
  
 }
+
+
+.comingsoon-time {
+  text-align: right;
+-webkit-text-stroke-width: 4px;
+-webkit-text-stroke-color: gray;
+ font-size: 200px;
+font-style: normal;
+font-weight: 700;
+line-height: normal;
+letter-spacing: 2px;
+color: transparent;
+
+
+}
+
+
+.smalltx {
+  font-size: 72px;
+  list-style: none;
+  padding-bottom: 30px;
+
+ }
+
+
+ .comingsoon-bg {
+  background: radial-gradient(85.95% 70.71% at 100% 0%, var(--base-sidebar-primary-foreground, #AFD8D4) 10%, var(--base-sidebar-background, #ffffff) 75%);
+
+}
+
+.eli-highlight { color: #3158A5;}
+.autho-highlight {  color: #F88265 ;}
+.coda-highlight { color: #427566;}
+.clara-highlight { color: #8F482C;}
+.dee-highlight { color: #A9A197;}
+.payne-highlight { color: #C9DA0B;}

@@ -20,7 +20,7 @@ export default function AgentCard({
       </div>
       <h2 className="text-lg font-semibold line-height-7 ">{title}</h2>
       <p className="text-sm font-medium py-1 line-height-5">{role}</p>
-      <p className="text-sm font-medium  line-height-5">{savedHours}</p>
+      <p className="text-sm font-medium  line-height-5">I saved <span className={`${title.toLocaleLowerCase()}-highlight`}>{savedHours} hours</span> today.</p>
 
       <div className="mt-4 space-y-2">
         {feature.map((item, index) => {

@@ -11,6 +11,7 @@ export interface PatientListProps {
 // Define types for each part of the user persona
 interface PatientProfile {
   name: string;
+  surname: string;
   emiratesId: string;
   sex: "Male" | "Female";
   dateOfBirth: string; // YYYY-MM-DD format

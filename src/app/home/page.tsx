@@ -45,18 +45,18 @@ export default function DashboardPage() {
       title: "Eli",
       image: "/eli.png",
       role: "Eligibility Agent",
-      savedHours: "I saved ~0.5 hours today.",
+      savedHours: "~0.5",
       feature: [
         { icon: ClipboardCheck, label: "Verified", count: 24 },
         { icon: Flag, label: "Flagged", count: 234 },
-        { icon: Zap, label: "Cleared for Autho", count: 1 },
+        { icon: Zap, label: "Cleared for Autho"},
       ],
     },
     {
       title: "Autho",
       image: "/autho.svg",
       role: "Prior authorization Agent",
-      savedHours: "I saved ~0.1 hours today.",
+      savedHours: "~0.1",
       feature: [
         { icon: ShieldCheck, label: "Prior auto checked", count: 280 },
         { icon: ShieldX, label: "Approvals secured", count: 200 },
@@ -64,47 +64,47 @@ export default function DashboardPage() {
       ],
     },
     {
-      title: "Code",
-      image: "/code.svg",
+      title: "Coda",
+      image: "/coda.svg",
       role: "Prior authorization Agent",
-      savedHours: "I saved ~0.1 hours today.",
+      savedHours: "~2.2",
       feature: [
-        { icon: ShieldCheck, label: "Prior auto checked", count: 280 },
-        { icon: ShieldX, label: "Approvals secured", count: 200 },
-        { icon: AlertCircle, label: "Require human review", count: 80 },
+        { icon: ShieldCheck, label: "Prior auto checked", count: 1400 },
+        { icon: ShieldX, label: "Approvals secured"},
+        { icon: AlertCircle, label: "Require human review", count: 280 },
       ],
     },
     {
       title: "Clara",
       image: "/clara.svg",
       role: "Prior authorization Agent",
-      savedHours: "I saved ~0.1 hours today.",
+      savedHours: "~0.9",
       feature: [
-        { icon: ShieldCheck, label: "Prior auto checked", count: 280 },
-        { icon: ShieldX, label: "Approvals secured", count: 200 },
-        { icon: AlertCircle, label: "Require human review", count: 80 },
+        { icon: ShieldCheck, label: "Prior auto checked", count: 1400 },
+        { icon: ShieldX, label: "Approvals secured", count: 70 },
+        { icon: AlertCircle, label: "Require human review", },
       ],
     },
     {
       title: "Dee",
       image: "/dee.svg",
       role: "Prior authorization Agent",
-      savedHours: "I saved ~0.1 hours today.",
+      savedHours: "~0.04",
       feature: [
-        { icon: ShieldCheck, label: "Prior auto checked", count: 280 },
-        { icon: ShieldX, label: "Approvals secured", count: 200 },
-        { icon: AlertCircle, label: "Require human review", count: 80 },
+        { icon: ShieldCheck, label: "Prior auto checked", count: 260 },
+        { icon: ShieldX, label: "Approvals secured", count: 70 },
+        { icon: AlertCircle, label: "Require human review", count: 24 },
       ],
     },
     {
       title: "Payne",
       image: "/payne.png",
       role: "Prior authorization Agent",
-      savedHours: "I saved ~0.1 hours today.",
+      savedHours: "~0.1",
       feature: [
-        { icon: ShieldCheck, label: "Prior auto checked", count: 280 },
-        { icon: ShieldX, label: "Approvals secured", count: 200 },
-        { icon: AlertCircle, label: "Require human review", count: 80 },
+        { icon: ShieldCheck, label: "Prior auto checked", count: 1400 },
+        { icon: ShieldX, label: "Approvals secured" },
+        { icon: AlertCircle, label: "Require human review", count: 140 },
       ],
     },
   ];
@@ -256,12 +256,15 @@ export default function DashboardPage() {
     },
     [gridApi]
   );
+
+
+  
   return (
     <DashboardLayout>
       <div className="min-h-full">
         <div style={{ marginBottom: "1rem", position: "relative" }}></div>
         <main className="p-6 space-y-6">
-          <Breadcrumb />
+          {/* <Breadcrumb /> */}
           <h3 className="text-lg font-semibold mb-0">Hi Neila,</h3>
           <p className="text-base text-muted mb-5">
             Together, we saved ~3.2 hours today 🙌. A few cases remain where

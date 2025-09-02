@@ -81,7 +81,7 @@ The patient, a 52-year-old Caucasian male named John Smith, presents with compla
 
 export const patientPersona: PatientPersona[] = [
   {
-    id: "9389300",
+    id: "101300",
     isSubmitted: false,
     profileCreatedDate: new Date('9/2/2025 20:00:00').toISOString(),
     agentDetails: {
@@ -91,6 +91,7 @@ export const patientPersona: PatientPersona[] = [
     },
     profile: {
       name: "Sara Al Nuaimi",
+      surname: "Al Nuaimi",
       age: 55,
       emiratesId: "748-1985-2233445-4",
       sex: "Female",
@@ -232,6 +233,7 @@ export const patientPersona: PatientPersona[] = [
     },
     profile: {
       "name": "Fatima Rahman",
+      surname: "Rahman",
       "age": 34,
       "emiratesId": "748-1985-2233445-4",
       "sex": "Female",
@@ -372,6 +374,7 @@ export const patientPersona: PatientPersona[] = [
     },
     "profile": {
       "name": "Layla Mansour",
+      surname:"Mansour",
       "age": 55,
       "emiratesId": "748-1985-2233445-4",
       "sex": "Female",
@@ -513,6 +516,7 @@ export const patientPersona: PatientPersona[] = [
     },
     "profile": {
       "name": "Huda Mansoor",
+      surname: "Mansoor",
       "age": 36,
       "emiratesId": "748-1985-2233445-4",
       "sex": "Female",
@@ -654,6 +658,7 @@ export const patientPersona: PatientPersona[] = [
     },
     "profile": {
       "name": "Olivier Dubois",
+      surname: "Dubois",
       "age": 44,
       "emiratesId": "748-1985-2233445-4",
       "sex": "Female",
@@ -794,7 +799,8 @@ export const patientPersona: PatientPersona[] = [
       "coT": "Denial code 50; flagged for physician medical justification + supporting guidelines."
     },
     "profile": {
-      "name": "Olivier Dubois",
+      "name": "Olivier ",
+      surname: "Dubois",
       "age": 44,
       "emiratesId": "748-1985-2233445-4",
       "sex": "Female",

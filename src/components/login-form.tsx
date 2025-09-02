@@ -91,8 +91,7 @@ export function LoginForm({ onSuccess }: LoginFormProps) {
             Sign in
           </h2>
           <p className="mb-6 text-sm text-col text-muted">
-            Log in to unlock tailored content and stay connected with your
-            community.
+            Log in to unlock tailored content and stay connected with your community.
           </p>
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
             {/* Email Field */}
