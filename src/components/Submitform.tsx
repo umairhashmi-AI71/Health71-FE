@@ -15,7 +15,7 @@ const ClaimSubmissionComponent = ({
 
 }: Props) => {
   const [isSubmited, setIsSubmited] = useState(false);
-  const [completedSteps, setCompletedSteps] = useState(new Set());
+  const [completedSteps, setCompletedSteps] = useState(new Set<number>());
   const dispatch = useDispatch()
     const route = useRouter();
   const steps = [
