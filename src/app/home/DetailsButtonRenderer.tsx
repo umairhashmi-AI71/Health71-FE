@@ -12,8 +12,8 @@ export const DetailsButtonRenderer: React.FC<ICellRendererParams> = (params) => 
       };
   
       return (
-        
-          <Search className="w-4 h-4  cursor-pointer  transition-colors"  onClick={handleDetailsClick} />
+        <button onClick={handleDetailsClick} className='p-4' > <Search className="w-4 h-4  cursor-pointer  transition-colors"   /></button>
+         
           
        
       );
