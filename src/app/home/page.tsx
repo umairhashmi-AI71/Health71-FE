@@ -74,7 +74,7 @@ export default function DashboardPage() {
     {
       title: "Coda",
       image: "/coda.svg",
-      role: "Prior authorization Agent",
+      role: "Coding Agent",
       savedHours: "~2.2",
       feature: [
         { icon: NotepadText, label: "Prior auto checked", count: 1400 },
@@ -85,7 +85,7 @@ export default function DashboardPage() {
     {
       title: "Clara",
       image: "/clara.svg",
-      role: "Prior authorization Agent",
+      role: "Claim Submission",
       savedHours: "~0.3",
       feature: [
         { icon: Mailbox, label: "Prior auto checked", count: 1400 },
@@ -96,7 +96,7 @@ export default function DashboardPage() {
     {
       title: "Dee",
       image: "/dee.svg",
-      role: "Prior authorization Agent",
+      role: "Denial Management",
       savedHours: "~0.04",
       feature: [
         { icon: ClipboardX, label: "Prior auto checked", count: 260 },
@@ -107,7 +107,7 @@ export default function DashboardPage() {
     {
       title: "Payne",
       image: "/payne.png",
-      role: "Prior authorization Agent",
+      role: "Payment Posting",
       savedHours: "~0.1",
       feature: [
         { icon: Mailbox, label: "Prior auto checked", count: 1400 },

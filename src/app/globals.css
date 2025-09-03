@@ -168,9 +168,10 @@ body {
   font-size: 14px;
 }
 
-.markdown-section h2  {
-  margin-bottom: 10px;
-  border-bottom: 1px solid ;
+.markdown-heading  {
+      margin-bottom: 10px;
+    display: block;
+    font-size: 16px;
 }
 .markdown-section h2,h3,h4 {
   margin-bottom: 0;

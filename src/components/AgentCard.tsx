@@ -19,7 +19,7 @@ export default function AgentCard({
         <img src={image} alt={title} className="w-16 h-16 rounded-full object-cover mt-0" />
       </div>
       <h2 className="text-lg font-semibold line-height-7 ">{title}</h2>
-      <p className="text-sm font-medium py-1 line-height-5">{role}</p>
+      <p className="text-sm font-medium py-2 line-height-5">{role}</p>
       <p className="text-sm font-medium  line-height-5">I saved <span className={`${title.toLocaleLowerCase()}-highlight`}>{savedHours} hours</span> today.</p>
 
       <div className="mt-4 space-y-2">

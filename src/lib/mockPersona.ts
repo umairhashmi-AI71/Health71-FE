@@ -25,7 +25,7 @@ export const mockFetchSuccessResponse = new Response(
   }
 );
 
-const markdown = `## **Subjective**
+const markdown = `### <u class="markdown-heading">**Subjective**</u>
 
 ### **Chief Complaint (CC):**
 Pain in the left knee, moderate to severe, lasting for 3 weeks.
@@ -39,9 +39,9 @@ The patient, a 52-year-old Caucasian male named John Smith, presents with compla
 - **Cardiovascular**: Negative for chest pain or palpitations.
 - **Constitutional**: Sleep disruption due to knee pain; otherwise stable.
 
-<br /><br />
+<br />
 
-## **Objective**
+## <u class="markdown-heading">**Objective**</u>
 
 ### **Vital Signs:**
 - Blood Pressure: 128/82 mmHg  
@@ -55,15 +55,15 @@ The patient, a 52-year-old Caucasian male named John Smith, presents with compla
 - **Range of Motion**: Reduced flexion and extension due to pain.  
 - **Stability Tests**: Negative Lachman's and McMurray’s tests; slight discomfort with varus and valgus stress tests.
 
-<br /><br />
+<br />
 
-## **Assessment:**
+## <u class="markdown-heading">**Assessment:**</u>
 - Pain in the left knee (ICD-10 code M25.562).
 - Possible exacerbation of pre-existing mild osteoarthritis.
 
-<br /><br />
+<br />
 
-### **Plan:**
+### <u class="markdown-heading">**Plan:**</u>
 
 ### **Treatment:**
 - Initiate physical therapy focusing on strength and flexibility exercises for the left knee.
