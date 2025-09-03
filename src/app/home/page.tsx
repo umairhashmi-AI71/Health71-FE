@@ -420,7 +420,7 @@ export default function DashboardPage() {
               onSelectionChanged={onSelectionChanged}
               animateRows={true}
               pagination={true}
-              paginationPageSize={7}
+              paginationPageSize={10}
               enableCellTextSelection={true}
               className="text-sm"
               domLayout="autoHeight"
