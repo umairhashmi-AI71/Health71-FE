@@ -57,7 +57,7 @@ const  getFileExtension = (path: string): string => {
           />
         )}
 
-        {fileType === "image" && (
+        {fileType !== "pdf" && (
           <img
           src={ecgImageUrl}
           alt="ECG Scan"

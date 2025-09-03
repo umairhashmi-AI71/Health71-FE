@@ -35,7 +35,7 @@ export default function Comingsoon() {
   // }, [targetDate]);
 
   return (
-    <div className="flex align-middle  min-h-[800px] comingsoon-bg items-center justify-center w-[100%]  mr-[-24px] rounded-xl ">
+    <div className="flex align-middle min-h-[100vh] comingsoon-bg items-center justify-center w-[100%]  mr-[-24px] rounded-xl ">
       <div className="space-y-6 flex flex-col flex-1 items-center align-middle justify-center ">
         <div>
           {/* Countdown */}
