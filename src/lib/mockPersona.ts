@@ -85,14 +85,14 @@ export const patientPersona: PatientPersona[] = [
     isSubmitted: false,
     profileCreatedDate: new Date('9/2/2025 20:00:00').toISOString(),
     agentDetails: {
-      agentIssue: "Autho",
-      agentSuggestion: "Coverage expired → verify new policy",
-      coT: "Payer API returned inactive coverage; agent halted claim until renewal.",
+      agentIssue: "Coda",
+      agentSuggestion: "Verify coding: M25.562 (Pain in left knee)	",
+      coT: "SOAP note indicates knee pain with imaging ordered; agent flagged to confirm ICD-10 and CPT alignment and ensure diagnosis supports X-ray medical necessity.	.",
     },
     profile: {
       name: "Sara",
-      surname: "Al Naoumi",
-      age: 55,
+      surname: "Al Nuaimi",
+      age: 40,
       emiratesId: "748-1985-2233445-4",
       sex: "Female",
       dateOfBirth: "1985-07-21", // YYYY-MM-DD format
@@ -144,7 +144,7 @@ export const patientPersona: PatientPersona[] = [
       ],
     },
     denialManagement: {
-      status: "paused", // Current status of the denial management process
+      status: "waiting", // Current status of the denial management process
       steps: [
         { id: "1", label: "Denial Code Analyzed", status: "pending" },
         { id: "2", label: "Suggested Edits", status: "pending" },
@@ -153,7 +153,7 @@ export const patientPersona: PatientPersona[] = [
       ],
     },
     postPayment: {
-      status: "paused", // Current status of the post-payment process
+      status: "waiting", // Current status of the post-payment process
       steps: [
         { id: "1", label: "Payment Retrieved", status: "pending" },
         { id: "2", label: "Payment Matched", status: "pending" },
@@ -165,26 +165,21 @@ export const patientPersona: PatientPersona[] = [
       {
         fileName: "SOB.pdf",
         fileSize: "200 KB",
-        ecgImageUrl: "/ecg-report.png",
+        ecgImageUrl: "/sob.pdf",
       },
       {
-        fileName: "Exclusion.pdf",
+        fileName: "exclusion.pdf",
         fileSize: "150 KB",
-        ecgImageUrl: "/ecg-report.png",
+        ecgImageUrl: "/exclusion.pdf",
       },
       {
-        fileName: "Scan.pdf",
+        fileName: "policy.pdf",
         fileSize: "180 KB",
-        ecgImageUrl: "/ecg-report.png",
+        ecgImageUrl: "/policy.pdf",
       },
       {
         fileName: "ECG.pdf",
         fileSize: "220 KB",
-        ecgImageUrl: "/ecg-report.png",
-      },
-      {
-        fileName: "Fibro_Scan.pdf",
-        fileSize: "210 KB",
         ecgImageUrl: "/ecg-report.png",
       },
     ],
@@ -657,7 +652,7 @@ export const patientPersona: PatientPersona[] = [
 
     "agentDetails": {
       "agentIssue": "Dee",
-      "agentSuggestion": "Draft appeal: “not medically necessary” claim",
+      "agentSuggestion": "Draft appeal: “not medically necessary”",
       "coT": "Denial code 50; flagged for physician medical justification + supporting guidelines."
     },
     "profile": {

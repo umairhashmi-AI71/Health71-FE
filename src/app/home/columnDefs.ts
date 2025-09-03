@@ -46,7 +46,7 @@ export const patientColumnDef: ColDef[] = [
     headerName: "Agent Name",
     field: "agentIssue",
     sortable: true,
-    width: 150,
+    width: 100,
     // hide: true,
        filter: true,  
       // filter: "agSetColumnFilter", // ✅ this enables the set filter type
@@ -89,7 +89,7 @@ export const patientColumnDef: ColDef[] = [
     headerName: "Agent Suggestion",
     field: "agentSuggestion",
     sortable: true,
-    width: 380,
+    width: 300,
 
     //   filter: 'agTextColumnFilter',
     //    cellRenderer: truncatedCellRenderer

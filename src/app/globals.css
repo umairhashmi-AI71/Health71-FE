@@ -36,7 +36,8 @@
 }
 
 body {
-  background: var(--sidebar-background);
+  background: #ffffff;
+
   color: var(--base-primary);
   font-size: 14px;
 }
@@ -167,8 +168,9 @@ body {
   font-size: 14px;
 }
 
-.markdown-section h1  {
+.markdown-section h2  {
   margin-bottom: 10px;
+  border-bottom: 1px solid ;
 }
 .markdown-section h2,h3,h4 {
   margin-bottom: 0;

@@ -167,6 +167,11 @@ export default function DashboardPage() {
 
   return (
     <DashboardLayout>
+
+      <div className={`flex-1 flex min-h-[100vh] flex-col lg:ml-0 rounded-xl bg-white`}>
+
+
+        <main className="size-full max-w-345 xl:mx-auto ">
       <div>
         <main className="p-6 size-full max-w-345 xl:mx-auto">
           <div className="flex justify-between items-center items-start">
@@ -332,7 +337,7 @@ export default function DashboardPage() {
             </div>
           </div>
         </AlertModal>
-      </div>
+      </div></main></div>
     </DashboardLayout>
   );
 }

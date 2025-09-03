@@ -14,7 +14,10 @@ const AttachmentCard: React.FC<AttachmentCardProps> = ({
   ecgImageUrl,
 }) => {
   const [open, setOpen] = useState(false);
-
+  const [fileType, setFileType] = useState<string>();
+const  getFileExtension = (path: string): string => {
+  return path.split(".").pop() || "";
+}
   return (
     <>
       <div className="bg-white border border-sidebar rounded-xl p-4 flex items-start gap-4 max-w-xs">
@@ -25,6 +28,7 @@ const AttachmentCard: React.FC<AttachmentCardProps> = ({
           <button
             className="text-green font-medium underline cursor-pointer"
             onClick={() => {
+              setFileType(getFileExtension(ecgImageUrl))
                 if(ecgImageUrl) setOpen(true);
             }}
           >
@@ -45,11 +49,21 @@ const AttachmentCard: React.FC<AttachmentCardProps> = ({
         >
           &times;
         </button> */}
-        <img
+        
+         {fileType === "pdf" && (
+          <iframe
+            src={ecgImageUrl}
+            className="w-full min-h-[80vh] rounded-lg"
+          />
+        )}
+
+        {fileType === "image" && (
+          <img
           src={ecgImageUrl}
           alt="ECG Scan"
           className="w-full h-auto rounded-lg max-h-[90vh] object-contain"
         />
+        )}
       </div>
     </div>,
     document.body

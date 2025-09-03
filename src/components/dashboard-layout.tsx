@@ -89,6 +89,23 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
     return currentPage?.label || "Dashboard";
   };
 
+  // const getpageclass = () => {
+  //   console.log('page', getPageTitle().toLocaleLowerCase())
+  //   switch (getPageTitle().toLocaleLowerCase()) {
+  //     case 'notification':
+  //     // case 'dashboard':
+  //     case 'tasks':
+  //     case 'search': 
+  //     return 'comingsoon-bg';
+
+  //     case 'patient/101300' :
+  //       return 'bg-white'
+
+  //     default:
+  //     return 'bg-white';
+
+  //   }
+  // }
   if (!user) {
     return (
       <div className="h-screen flex items-center justify-center">
@@ -96,6 +113,7 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
       </div>
     );
   }
+
 
   return (
     <div className="flex  bg-sidebar pl-16 pr-5 pt-5">
@@ -173,7 +191,7 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
       </div>
 
       {/* Main Content Area */}
-      <div className="flex-1 flex flex-col lg:ml-0 rounded-xl mb-4  bg-white">
+      <div className="flex-1 flex flex-col lg:ml-0 rounded-xl mb-4 flex h-vh  bg-white">
         {/* <button
           onClick={() => setSidebarOpen(true)}
           className=" text-gray-400 hover:text-gray-600 mr-4"
@@ -181,7 +199,8 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
           <Menu className="w-6 h-6" />
         </button> */}
         {/* Page Content */}
-        <main>{children}</main>
+        {children}
+             
       </div>
       <AlertModal open={modal === "confirm"} onClose={() => setModal("")}>
         <div>

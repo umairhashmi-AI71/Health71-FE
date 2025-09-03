@@ -86,7 +86,7 @@ export default function DashboardPage() {
       title: "Clara",
       image: "/clara.svg",
       role: "Prior authorization Agent",
-      savedHours: "~0.9",
+      savedHours: "~0.3",
       feature: [
         { icon: Mailbox, label: "Prior auto checked", count: 1400 },
         { icon: Text, label: "Approvals secured", count: 70 },
@@ -270,11 +270,16 @@ export default function DashboardPage() {
   
   return (
     <DashboardLayout>
-      <div className="min-h-full size-full max-w-345 xl:mx-auto">
+
+       <div className={`flex-1 flex min-h-[100vh] flex-col lg:ml-0 rounded-xl bg-white`}>
+
+
+        <main className="size-full max-w-345 xl:mx-auto ">
+          <div className="min-h-full size-full max-w-345 xl:mx-auto">
         <div style={{ marginBottom: "1rem", position: "relative" }}></div>
         <main className="p-6 space-y-6">
           {/* <Breadcrumb /> */}
-          <h3 className="text-2xl font-semibold mb-2">Hi Aisha,</h3>
+          <h1 className="text-2xl font-semibold mb-2">Hi Aisha,</h1>
           <p className="text-base text-muted mb-5">
             Together, we saved ~3.2 hours today 🙌. A few cases remain where
             your expertise is required.
@@ -475,6 +480,9 @@ export default function DashboardPage() {
           </div>
         </AlertModal>
       </div>
+        </main>
+        </div>
+      
     </DashboardLayout>
   );
 }
