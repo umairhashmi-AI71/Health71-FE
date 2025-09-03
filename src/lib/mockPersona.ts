@@ -281,7 +281,7 @@ export const patientPersona: PatientPersona[] = [
       ],
     },
     denialManagement: {
-      status: "paused", // Current status of the denial management process
+      status: "waiting", // Current status of the denial management process
       steps: [
         { id: "1", label: "Denial Code Analyzed", status: "pending" },
         { id: "2", label: "Suggested Edits", status: "pending" },
@@ -290,7 +290,7 @@ export const patientPersona: PatientPersona[] = [
       ],
     },
     postPayment: {
-      status: "paused", // Current status of the post-payment process
+      status: "waiting", // Current status of the post-payment process
       steps: [
         { id: "1", label: "Payment Retrieved", status: "pending" },
         { id: "2", label: "Payment Matched", status: "pending" },
@@ -419,7 +419,7 @@ export const patientPersona: PatientPersona[] = [
       ],
     },
     denialManagement: {
-      status: "paused", // Current status of the denial management process
+      status: "waiting", // Current status of the denial management process
       steps: [
         { id: "1", label: "Denial Code Analyzed", status: "pending" },
         { id: "2", label: "Suggested Edits", status: "pending" },
@@ -428,7 +428,7 @@ export const patientPersona: PatientPersona[] = [
       ],
     },
     postPayment: {
-      status: "paused", // Current status of the post-payment process
+      status: "waiting", // Current status of the post-payment process
       steps: [
         { id: "1", label: "Payment Retrieved", status: "pending" },
         { id: "2", label: "Payment Matched", status: "pending" },
@@ -558,7 +558,7 @@ export const patientPersona: PatientPersona[] = [
       ],
     },
     denialManagement: {
-      status: "paused", // Current status of the denial management process
+      status: "waiting", // Current status of the denial management process
       steps: [
         { id: "1", label: "Denial Code Analyzed", status: "pending" },
         { id: "2", label: "Suggested Edits", status: "pending" },
@@ -567,7 +567,7 @@ export const patientPersona: PatientPersona[] = [
       ],
     },
     postPayment: {
-      status: "paused", // Current status of the post-payment process
+      status: "waiting", // Current status of the post-payment process
       steps: [
         { id: "1", label: "Payment Retrieved", status: "pending" },
         { id: "2", label: "Payment Matched", status: "pending" },
@@ -697,7 +697,7 @@ export const patientPersona: PatientPersona[] = [
       ],
     },
     denialManagement: {
-      status: "paused", // Current status of the denial management process
+      status: "waiting", // Current status of the denial management process
       steps: [
         { id: "1", label: "Denial Code Analyzed", status: "pending" },
         { id: "2", label: "Suggested Edits", status: "pending" },
@@ -706,7 +706,7 @@ export const patientPersona: PatientPersona[] = [
       ],
     },
     postPayment: {
-      status: "paused", // Current status of the post-payment process
+      status: "waiting", // Current status of the post-payment process
       steps: [
         { id: "1", label: "Payment Retrieved", status: "pending" },
         { id: "2", label: "Payment Matched", status: "pending" },
@@ -836,7 +836,7 @@ export const patientPersona: PatientPersona[] = [
       ],
     },
     denialManagement: {
-      status: "paused", // Current status of the denial management process
+      status: "waiting", // Current status of the denial management process
       steps: [
         { id: "1", label: "Denial Code Analyzed", status: "pending" },
         { id: "2", label: "Suggested Edits", status: "pending" },
@@ -845,7 +845,7 @@ export const patientPersona: PatientPersona[] = [
       ],
     },
     postPayment: {
-      status: "paused", // Current status of the post-payment process
+      status: "waiting", // Current status of the post-payment process
       steps: [
         { id: "1", label: "Payment Retrieved", status: "pending" },
         { id: "2", label: "Payment Matched", status: "pending" },
@@ -975,7 +975,7 @@ export const patientPersona: PatientPersona[] = [
       ],
     },
     denialManagement: {
-      status: "paused", // Current status of the denial management process
+      status: "waiting", // Current status of the denial management process
       steps: [
         { id: "1", label: "Denial Code Analyzed", status: "pending" },
         { id: "2", label: "Suggested Edits", status: "pending" },
@@ -984,7 +984,7 @@ export const patientPersona: PatientPersona[] = [
       ],
     },
     postPayment: {
-      status: "paused", // Current status of the post-payment process
+      status: "waiting", // Current status of the post-payment process
       steps: [
         { id: "1", label: "Payment Retrieved", status: "pending" },
         { id: "2", label: "Payment Matched", status: "pending" },
@@ -1114,7 +1114,7 @@ export const patientPersona: PatientPersona[] = [
       ],
     },
     denialManagement: {
-      status: "paused", // Current status of the denial management process
+      status: "waiting", // Current status of the denial management process
       steps: [
         { id: "1", label: "Denial Code Analyzed", status: "pending" },
         { id: "2", label: "Suggested Edits", status: "pending" },
@@ -1123,7 +1123,7 @@ export const patientPersona: PatientPersona[] = [
       ],
     },
     postPayment: {
-      status: "paused", // Current status of the post-payment process
+      status: "waiting", // Current status of the post-payment process
       steps: [
         { id: "1", label: "Payment Retrieved", status: "pending" },
         { id: "2", label: "Payment Matched", status: "pending" },
@@ -1253,7 +1253,7 @@ export const patientPersona: PatientPersona[] = [
       ],
     },
     denialManagement: {
-      status: "paused", // Current status of the denial management process
+      status: "waiting", // Current status of the denial management process
       steps: [
         { id: "1", label: "Denial Code Analyzed", status: "pending" },
         { id: "2", label: "Suggested Edits", status: "pending" },
@@ -1262,7 +1262,7 @@ export const patientPersona: PatientPersona[] = [
       ],
     },
     postPayment: {
-      status: "paused", // Current status of the post-payment process
+      status: "waiting", // Current status of the post-payment process
       steps: [
         { id: "1", label: "Payment Retrieved", status: "pending" },
         { id: "2", label: "Payment Matched", status: "pending" },
@@ -1392,7 +1392,7 @@ export const patientPersona: PatientPersona[] = [
       ],
     },
     denialManagement: {
-      status: "paused", // Current status of the denial management process
+      status: "waiting", // Current status of the denial management process
       steps: [
         { id: "1", label: "Denial Code Analyzed", status: "pending" },
         { id: "2", label: "Suggested Edits", status: "pending" },
@@ -1401,7 +1401,7 @@ export const patientPersona: PatientPersona[] = [
       ],
     },
     postPayment: {
-      status: "paused", // Current status of the post-payment process
+      status: "waiting", // Current status of the post-payment process
       steps: [
         { id: "1", label: "Payment Retrieved", status: "pending" },
         { id: "2", label: "Payment Matched", status: "pending" },
@@ -1531,7 +1531,7 @@ export const patientPersona: PatientPersona[] = [
       ],
     },
     denialManagement: {
-      status: "paused", // Current status of the denial management process
+      status: "waiting", // Current status of the denial management process
       steps: [
         { id: "1", label: "Denial Code Analyzed", status: "pending" },
         { id: "2", label: "Suggested Edits", status: "pending" },
@@ -1540,7 +1540,7 @@ export const patientPersona: PatientPersona[] = [
       ],
     },
     postPayment: {
-      status: "paused", // Current status of the post-payment process
+      status: "waiting", // Current status of the post-payment process
       steps: [
         { id: "1", label: "Payment Retrieved", status: "pending" },
         { id: "2", label: "Payment Matched", status: "pending" },
@@ -1670,7 +1670,7 @@ export const patientPersona: PatientPersona[] = [
       ],
     },
     denialManagement: {
-      status: "paused", // Current status of the denial management process
+      status: "waiting", // Current status of the denial management process
       steps: [
         { id: "1", label: "Denial Code Analyzed", status: "pending" },
         { id: "2", label: "Suggested Edits", status: "pending" },
@@ -1679,7 +1679,7 @@ export const patientPersona: PatientPersona[] = [
       ],
     },
     postPayment: {
-      status: "paused", // Current status of the post-payment process
+      status: "waiting", // Current status of the post-payment process
       steps: [
         { id: "1", label: "Payment Retrieved", status: "pending" },
         { id: "2", label: "Payment Matched", status: "pending" },
@@ -1809,7 +1809,7 @@ export const patientPersona: PatientPersona[] = [
       ],
     },
     denialManagement: {
-      status: "paused", // Current status of the denial management process
+      status: "waiting", // Current status of the denial management process
       steps: [
         { id: "1", label: "Denial Code Analyzed", status: "pending" },
         { id: "2", label: "Suggested Edits", status: "pending" },
@@ -1818,7 +1818,7 @@ export const patientPersona: PatientPersona[] = [
       ],
     },
     postPayment: {
-      status: "paused", // Current status of the post-payment process
+      status: "waiting", // Current status of the post-payment process
       steps: [
         { id: "1", label: "Payment Retrieved", status: "pending" },
         { id: "2", label: "Payment Matched", status: "pending" },
@@ -1948,7 +1948,7 @@ export const patientPersona: PatientPersona[] = [
       ],
     },
     denialManagement: {
-      status: "paused", // Current status of the denial management process
+      status: "waiting", // Current status of the denial management process
       steps: [
         { id: "1", label: "Denial Code Analyzed", status: "pending" },
         { id: "2", label: "Suggested Edits", status: "pending" },
@@ -1957,7 +1957,7 @@ export const patientPersona: PatientPersona[] = [
       ],
     },
     postPayment: {
-      status: "paused", // Current status of the post-payment process
+      status: "waiting", // Current status of the post-payment process
       steps: [
         { id: "1", label: "Payment Retrieved", status: "pending" },
         { id: "2", label: "Payment Matched", status: "pending" },
@@ -2087,7 +2087,7 @@ export const patientPersona: PatientPersona[] = [
       ],
     },
     denialManagement: {
-      status: "paused", // Current status of the denial management process
+      status: "waiting", // Current status of the denial management process
       steps: [
         { id: "1", label: "Denial Code Analyzed", status: "pending" },
         { id: "2", label: "Suggested Edits", status: "pending" },
@@ -2096,7 +2096,7 @@ export const patientPersona: PatientPersona[] = [
       ],
     },
     postPayment: {
-      status: "paused", // Current status of the post-payment process
+      status: "waiting", // Current status of the post-payment process
       steps: [
         { id: "1", label: "Payment Retrieved", status: "pending" },
         { id: "2", label: "Payment Matched", status: "pending" },
@@ -2226,7 +2226,7 @@ export const patientPersona: PatientPersona[] = [
       ],
     },
     denialManagement: {
-      status: "paused", // Current status of the denial management process
+      status: "waiting", // Current status of the denial management process
       steps: [
         { id: "1", label: "Denial Code Analyzed", status: "pending" },
         { id: "2", label: "Suggested Edits", status: "pending" },
@@ -2235,7 +2235,7 @@ export const patientPersona: PatientPersona[] = [
       ],
     },
     postPayment: {
-      status: "paused", // Current status of the post-payment process
+      status: "waiting", // Current status of the post-payment process
       steps: [
         { id: "1", label: "Payment Retrieved", status: "pending" },
         { id: "2", label: "Payment Matched", status: "pending" },
@@ -2365,7 +2365,7 @@ export const patientPersona: PatientPersona[] = [
       ],
     },
     denialManagement: {
-      status: "paused", // Current status of the denial management process
+      status: "waiting", // Current status of the denial management process
       steps: [
         { id: "1", label: "Denial Code Analyzed", status: "pending" },
         { id: "2", label: "Suggested Edits", status: "pending" },
@@ -2374,7 +2374,7 @@ export const patientPersona: PatientPersona[] = [
       ],
     },
     postPayment: {
-      status: "paused", // Current status of the post-payment process
+      status: "waiting", // Current status of the post-payment process
       steps: [
         { id: "1", label: "Payment Retrieved", status: "pending" },
         { id: "2", label: "Payment Matched", status: "pending" },
@@ -2504,7 +2504,7 @@ export const patientPersona: PatientPersona[] = [
       ],
     },
     denialManagement: {
-      status: "paused", // Current status of the denial management process
+      status: "waiting", // Current status of the denial management process
       steps: [
         { id: "1", label: "Denial Code Analyzed", status: "pending" },
         { id: "2", label: "Suggested Edits", status: "pending" },
@@ -2513,7 +2513,7 @@ export const patientPersona: PatientPersona[] = [
       ],
     },
     postPayment: {
-      status: "paused", // Current status of the post-payment process
+      status: "waiting", // Current status of the post-payment process
       steps: [
         { id: "1", label: "Payment Retrieved", status: "pending" },
         { id: "2", label: "Payment Matched", status: "pending" },
@@ -2643,7 +2643,7 @@ export const patientPersona: PatientPersona[] = [
       ],
     },
     denialManagement: {
-      status: "paused", // Current status of the denial management process
+      status: "waiting", // Current status of the denial management process
       steps: [
         { id: "1", label: "Denial Code Analyzed", status: "pending" },
         { id: "2", label: "Suggested Edits", status: "pending" },
@@ -2652,7 +2652,7 @@ export const patientPersona: PatientPersona[] = [
       ],
     },
     postPayment: {
-      status: "paused", // Current status of the post-payment process
+      status: "waiting", // Current status of the post-payment process
       steps: [
         { id: "1", label: "Payment Retrieved", status: "pending" },
         { id: "2", label: "Payment Matched", status: "pending" },
@@ -2782,7 +2782,7 @@ export const patientPersona: PatientPersona[] = [
       ],
     },
     denialManagement: {
-      status: "paused", // Current status of the denial management process
+      status: "waiting", // Current status of the denial management process
       steps: [
         { id: "1", label: "Denial Code Analyzed", status: "pending" },
         { id: "2", label: "Suggested Edits", status: "pending" },
@@ -2791,7 +2791,7 @@ export const patientPersona: PatientPersona[] = [
       ],
     },
     postPayment: {
-      status: "paused", // Current status of the post-payment process
+      status: "waiting", // Current status of the post-payment process
       steps: [
         { id: "1", label: "Payment Retrieved", status: "pending" },
         { id: "2", label: "Payment Matched", status: "pending" },
@@ -2921,7 +2921,7 @@ export const patientPersona: PatientPersona[] = [
       ],
     },
     denialManagement: {
-      status: "paused", // Current status of the denial management process
+      status: "waiting", // Current status of the denial management process
       steps: [
         { id: "1", label: "Denial Code Analyzed", status: "pending" },
         { id: "2", label: "Suggested Edits", status: "pending" },
@@ -2930,7 +2930,7 @@ export const patientPersona: PatientPersona[] = [
       ],
     },
     postPayment: {
-      status: "paused", // Current status of the post-payment process
+      status: "waiting", // Current status of the post-payment process
       steps: [
         { id: "1", label: "Payment Retrieved", status: "pending" },
         { id: "2", label: "Payment Matched", status: "pending" },
@@ -3003,7 +3003,7 @@ export const patientPersona: PatientPersona[] = [
     "agentDetails": {
       "agentIssue": "Payne",
       "agentSuggestion": "Overpayment detected AED 1,200 vs 1,000 billed",
-      "coT": "Over-remit posted; agent paused to avoid duplicate refund cycle."
+      "coT": "Over-remit posted; agent waiting to avoid duplicate refund cycle."
     },
     "profile": {
       "name": "Paul",
@@ -3060,7 +3060,7 @@ export const patientPersona: PatientPersona[] = [
       ],
     },
     denialManagement: {
-      status: "paused", // Current status of the denial management process
+      status: "waiting", // Current status of the denial management process
       steps: [
         { id: "1", label: "Denial Code Analyzed", status: "pending" },
         { id: "2", label: "Suggested Edits", status: "pending" },
@@ -3069,7 +3069,7 @@ export const patientPersona: PatientPersona[] = [
       ],
     },
     postPayment: {
-      status: "paused", // Current status of the post-payment process
+      status: "waiting", // Current status of the post-payment process
       steps: [
         { id: "1", label: "Payment Retrieved", status: "pending" },
         { id: "2", label: "Payment Matched", status: "pending" },
@@ -3199,7 +3199,7 @@ export const patientPersona: PatientPersona[] = [
       ],
     },
     denialManagement: {
-      status: "paused", // Current status of the denial management process
+      status: "waiting", // Current status of the denial management process
       steps: [
         { id: "1", label: "Denial Code Analyzed", status: "pending" },
         { id: "2", label: "Suggested Edits", status: "pending" },
@@ -3208,7 +3208,7 @@ export const patientPersona: PatientPersona[] = [
       ],
     },
     postPayment: {
-      status: "paused", // Current status of the post-payment process
+      status: "waiting", // Current status of the post-payment process
       steps: [
         { id: "1", label: "Payment Retrieved", status: "pending" },
         { id: "2", label: "Payment Matched", status: "pending" },
@@ -3338,7 +3338,7 @@ export const patientPersona: PatientPersona[] = [
       ],
     },
     denialManagement: {
-      status: "paused", // Current status of the denial management process
+      status: "waiting", // Current status of the denial management process
       steps: [
         { id: "1", label: "Denial Code Analyzed", status: "pending" },
         { id: "2", label: "Suggested Edits", status: "pending" },
@@ -3347,7 +3347,7 @@ export const patientPersona: PatientPersona[] = [
       ],
     },
     postPayment: {
-      status: "paused", // Current status of the post-payment process
+      status: "waiting", // Current status of the post-payment process
       steps: [
         { id: "1", label: "Payment Retrieved", status: "pending" },
         { id: "2", label: "Payment Matched", status: "pending" },
@@ -3477,7 +3477,7 @@ export const patientPersona: PatientPersona[] = [
       ],
     },
     denialManagement: {
-      status: "paused", // Current status of the denial management process
+      status: "waiting", // Current status of the denial management process
       steps: [
         { id: "1", label: "Denial Code Analyzed", status: "pending" },
         { id: "2", label: "Suggested Edits", status: "pending" },
@@ -3486,7 +3486,7 @@ export const patientPersona: PatientPersona[] = [
       ],
     },
     postPayment: {
-      status: "paused", // Current status of the post-payment process
+      status: "waiting", // Current status of the post-payment process
       steps: [
         { id: "1", label: "Payment Retrieved", status: "pending" },
         { id: "2", label: "Payment Matched", status: "pending" },
@@ -3616,7 +3616,7 @@ export const patientPersona: PatientPersona[] = [
       ],
     },
     denialManagement: {
-      status: "paused", // Current status of the denial management process
+      status: "waiting", // Current status of the denial management process
       steps: [
         { id: "1", label: "Denial Code Analyzed", status: "pending" },
         { id: "2", label: "Suggested Edits", status: "pending" },
@@ -3625,7 +3625,7 @@ export const patientPersona: PatientPersona[] = [
       ],
     },
     postPayment: {
-      status: "paused", // Current status of the post-payment process
+      status: "waiting", // Current status of the post-payment process
       steps: [
         { id: "1", label: "Payment Retrieved", status: "pending" },
         { id: "2", label: "Payment Matched", status: "pending" },
@@ -3755,7 +3755,7 @@ export const patientPersona: PatientPersona[] = [
       ],
     },
     denialManagement: {
-      status: "paused", // Current status of the denial management process
+      status: "waiting", // Current status of the denial management process
       steps: [
         { id: "1", label: "Denial Code Analyzed", status: "pending" },
         { id: "2", label: "Suggested Edits", status: "pending" },
@@ -3764,7 +3764,7 @@ export const patientPersona: PatientPersona[] = [
       ],
     },
     postPayment: {
-      status: "paused", // Current status of the post-payment process
+      status: "waiting", // Current status of the post-payment process
       steps: [
         { id: "1", label: "Payment Retrieved", status: "pending" },
         { id: "2", label: "Payment Matched", status: "pending" },
@@ -3894,7 +3894,7 @@ export const patientPersona: PatientPersona[] = [
       ],
     },
     denialManagement: {
-      status: "paused", // Current status of the denial management process
+      status: "waiting", // Current status of the denial management process
       steps: [
         { id: "1", label: "Denial Code Analyzed", status: "pending" },
         { id: "2", label: "Suggested Edits", status: "pending" },
@@ -3903,7 +3903,7 @@ export const patientPersona: PatientPersona[] = [
       ],
     },
     postPayment: {
-      status: "paused", // Current status of the post-payment process
+      status: "waiting", // Current status of the post-payment process
       steps: [
         { id: "1", label: "Payment Retrieved", status: "pending" },
         { id: "2", label: "Payment Matched", status: "pending" },
@@ -4033,7 +4033,7 @@ export const patientPersona: PatientPersona[] = [
       ],
     },
     denialManagement: {
-      status: "paused", // Current status of the denial management process
+      status: "waiting", // Current status of the denial management process
       steps: [
         { id: "1", label: "Denial Code Analyzed", status: "pending" },
         { id: "2", label: "Suggested Edits", status: "pending" },
@@ -4042,7 +4042,7 @@ export const patientPersona: PatientPersona[] = [
       ],
     },
     postPayment: {
-      status: "paused", // Current status of the post-payment process
+      status: "waiting", // Current status of the post-payment process
       steps: [
         { id: "1", label: "Payment Retrieved", status: "pending" },
         { id: "2", label: "Payment Matched", status: "pending" },
@@ -4172,7 +4172,7 @@ export const patientPersona: PatientPersona[] = [
       ],
     },
     denialManagement: {
-      status: "paused", // Current status of the denial management process
+      status: "waiting", // Current status of the denial management process
       steps: [
         { id: "1", label: "Denial Code Analyzed", status: "pending" },
         { id: "2", label: "Suggested Edits", status: "pending" },
@@ -4181,7 +4181,7 @@ export const patientPersona: PatientPersona[] = [
       ],
     },
     postPayment: {
-      status: "paused", // Current status of the post-payment process
+      status: "waiting", // Current status of the post-payment process
       steps: [
         { id: "1", label: "Payment Retrieved", status: "pending" },
         { id: "2", label: "Payment Matched", status: "pending" },
@@ -4311,7 +4311,7 @@ export const patientPersona: PatientPersona[] = [
       ],
     },
     denialManagement: {
-      status: "paused", // Current status of the denial management process
+      status: "waiting", // Current status of the denial management process
       steps: [
         { id: "1", label: "Denial Code Analyzed", status: "pending" },
         { id: "2", label: "Suggested Edits", status: "pending" },
@@ -4320,7 +4320,7 @@ export const patientPersona: PatientPersona[] = [
       ],
     },
     postPayment: {
-      status: "paused", // Current status of the post-payment process
+      status: "waiting", // Current status of the post-payment process
       steps: [
         { id: "1", label: "Payment Retrieved", status: "pending" },
         { id: "2", label: "Payment Matched", status: "pending" },
@@ -4450,7 +4450,7 @@ export const patientPersona: PatientPersona[] = [
       ],
     },
     denialManagement: {
-      status: "paused", // Current status of the denial management process
+      status: "waiting", // Current status of the denial management process
       steps: [
         { id: "1", label: "Denial Code Analyzed", status: "pending" },
         { id: "2", label: "Suggested Edits", status: "pending" },
@@ -4459,7 +4459,7 @@ export const patientPersona: PatientPersona[] = [
       ],
     },
     postPayment: {
-      status: "paused", // Current status of the post-payment process
+      status: "waiting", // Current status of the post-payment process
       steps: [
         { id: "1", label: "Payment Retrieved", status: "pending" },
         { id: "2", label: "Payment Matched", status: "pending" },
