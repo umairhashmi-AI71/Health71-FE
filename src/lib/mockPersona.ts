@@ -3505,6 +3505,1150 @@ export const patientPersona: PatientPersona[] = [
       },
     ]
   },
+  {
+    "id": "650237",
+    "isSubmitted": false,
+                 profileCreatedDate: new Date('9/3/2025 9:30:00').toISOString(),
+
+    "agentDetails": {
+      "agentIssue": "Coda",
+      "agentSuggestion": "ICD-10: R07.9 (Chest pain, unspecified)",
+      "coT": "SOAP note: “intermittent retrosternal pressure, ?angina” → ambiguous between R07.9 vs I20.x; low confidence."
+    },
+    "profile": {
+      "name": "David",
+      surname: "Chen",
+      "age": 40,
+      "emiratesId": "748-1985-2233445-4",
+      "sex": "Female",
+      "dateOfBirth": "1985-07-21",
+      "nationality": "UAE",
+      "language": "Arabic",
+      "phoneNumber": "97155467830",
+      "email": "Sara.nuaimi@gmail.com",
+      profilePhoto: "/avatar.png"
+    },
+    eligibilityCheck: {
+      status: "covered",
+      insuranDetials: {
+        insuranceProvider: 'Daman-AUH-001',
+        imageUrl: "/insurance-image.png",
+        policyNumber: "42122566"
+      },
+      details: [
+        { label: "Network", value: "Yes" },
+        { label: "Coverage", value: "100%" },
+      ],
+    },
+    medicalCoding: {
+      status: "inprogress", // Medical coding status
+      details: [
+        { label: "Encounter Date", value: "2025-08-30" },
+        { label: "Encounter Type", value: "Outpatient" },
+        { label: "Physician", value: "Dr. Al Shamsi" },
+        { label: "Department", value: "Orthopaedics" },
+      ],
+    },
+    priorAuthorization: {
+      status: "approved", // Prior authorization status
+      details: [
+        { label: "Encounter ID", value: "ENC-2025-0789" },
+        { label: "CPT Code", value: "29880" },
+        { label: "ICD Code", value: "M23.2" },
+        { label: "Physician", value: "Dr. Al Shamsi" },
+        { label: "Prior Auth ID", value: "PA-556677" },
+        { label: "Drug Codes", value: "NDC-0002" },
+      ],
+    },
+    claimSubmission: {
+      status: "waiting", // Current status of the claim submission process
+      steps: [
+        { id: "1", label: "Compliance Check & Adjustment", status: "pending" },
+        { id: "2", label: "XML File Generated", status: "pending" },
+        { id: "3", label: "Claim Posted", status: "pending" },
+        { id: "4", label: "Claim ID Received & Updated", status: "pending" },
+      ],
+    },
+    denialManagement: {
+      status: "paused", // Current status of the denial management process
+      steps: [
+        { id: "1", label: "Denial Code Analyzed", status: "pending" },
+        { id: "2", label: "Suggested Edits", status: "pending" },
+        { id: "3", label: "Appeal Generated", status: "pending" },
+        { id: "4", label: "Appeal Submitted", status: "pending" },
+      ],
+    },
+    postPayment: {
+      status: "paused", // Current status of the post-payment process
+      steps: [
+        { id: "1", label: "Payment Retrieved", status: "pending" },
+        { id: "2", label: "Payment Matched", status: "pending" },
+        { id: "3", label: "Adjustments Applied", status: "pending" },
+        { id: "4", label: "Ledger Updated", status: "pending" },
+      ],
+    },
+    attachments: [
+      {
+        fileName: "SOB.pdf",
+        fileSize: "200 KB",
+        ecgImageUrl: "/ecg-report.png",
+      },
+      {
+        fileName: "Exclusion.pdf",
+        fileSize: "150 KB",
+        ecgImageUrl: "/ecg-report.png",
+      },
+      {
+        fileName: "Scan.pdf",
+        fileSize: "180 KB",
+        ecgImageUrl: "/ecg-report.png",
+      },
+      {
+        fileName: "ECG.pdf",
+        fileSize: "220 KB",
+        ecgImageUrl: "/ecg-report.png",
+      },
+      {
+        fileName: "Fibro_Scan.pdf",
+        fileSize: "210 KB",
+        ecgImageUrl: "/ecg-report.png",
+      },
+    ],
+    markdown,
+    icdCodes: [
+      {
+        id: "1",
+        code: "M25.562",
+        confidence: 100,
+        isApproved: false,
+        desc: "Pain in left knee",
+      },
+      {
+        id: "2",
+        code: "M17.12",
+        confidence: 10,
+        isApproved: false,
+        desc: "Unilateral primary osteoarthritis affecting the left knee",
+      },
+    ],
+    cptCode: [
+      {
+        id: "1",
+        code: "99203",
+        confidence: 50,
+        isApproved: false,
+        desc: "New patient office visit, 30-44 minutes",
+      },
+      {
+        id: "2",
+        code: "73562",
+        confidence: 50,
+        isApproved: false,
+        desc: "Diagnostic Radiology Procedures of the Lower Extremities",
+      },
+    ]
+  },
+  {
+    "id": "718904",
+    "isSubmitted": false,
+                 profileCreatedDate: new Date('9/3/2025 10:03:45').toISOString(),
+
+    "agentDetails": {
+      "agentIssue": "Coda",
+      "agentSuggestion": "ICD-10: M54.5 (Low back pain)",
+      "coT": "SOAP note says “lumbar pain after lifting box” → insufficient specificity (acute vs chronic)."
+    },
+    "profile": {
+      "name": "James",
+      surname: "Peterson",
+      "age": 64,
+      "emiratesId": "748-1985-2233445-4",
+      "sex": "Female",
+      "dateOfBirth": "1985-07-21",
+      "nationality": "UAE",
+      "language": "Arabic",
+      "phoneNumber": "97155467830",
+      "email": "Sara.nuaimi@gmail.com",
+      profilePhoto: "/avatar.png"
+    },
+    eligibilityCheck: {
+      status: "covered",
+      insuranDetials: {
+        insuranceProvider: 'Daman-AUH-001',
+        imageUrl: "/insurance-image.png",
+        policyNumber: "42122566"
+      },
+      details: [
+        { label: "Network", value: "Yes" },
+        { label: "Coverage", value: "100%" },
+      ],
+    },
+    medicalCoding: {
+      status: "inprogress", // Medical coding status
+      details: [
+        { label: "Encounter Date", value: "2025-08-30" },
+        { label: "Encounter Type", value: "Outpatient" },
+        { label: "Physician", value: "Dr. Al Shamsi" },
+        { label: "Department", value: "Orthopaedics" },
+      ],
+    },
+    priorAuthorization: {
+      status: "approved", // Prior authorization status
+      details: [
+        { label: "Encounter ID", value: "ENC-2025-0789" },
+        { label: "CPT Code", value: "29880" },
+        { label: "ICD Code", value: "M23.2" },
+        { label: "Physician", value: "Dr. Al Shamsi" },
+        { label: "Prior Auth ID", value: "PA-556677" },
+        { label: "Drug Codes", value: "NDC-0002" },
+      ],
+    },
+    claimSubmission: {
+      status: "waiting", // Current status of the claim submission process
+      steps: [
+        { id: "1", label: "Compliance Check & Adjustment", status: "pending" },
+        { id: "2", label: "XML File Generated", status: "pending" },
+        { id: "3", label: "Claim Posted", status: "pending" },
+        { id: "4", label: "Claim ID Received & Updated", status: "pending" },
+      ],
+    },
+    denialManagement: {
+      status: "paused", // Current status of the denial management process
+      steps: [
+        { id: "1", label: "Denial Code Analyzed", status: "pending" },
+        { id: "2", label: "Suggested Edits", status: "pending" },
+        { id: "3", label: "Appeal Generated", status: "pending" },
+        { id: "4", label: "Appeal Submitted", status: "pending" },
+      ],
+    },
+    postPayment: {
+      status: "paused", // Current status of the post-payment process
+      steps: [
+        { id: "1", label: "Payment Retrieved", status: "pending" },
+        { id: "2", label: "Payment Matched", status: "pending" },
+        { id: "3", label: "Adjustments Applied", status: "pending" },
+        { id: "4", label: "Ledger Updated", status: "pending" },
+      ],
+    },
+    attachments: [
+      {
+        fileName: "SOB.pdf",
+        fileSize: "200 KB",
+        ecgImageUrl: "/ecg-report.png",
+      },
+      {
+        fileName: "Exclusion.pdf",
+        fileSize: "150 KB",
+        ecgImageUrl: "/ecg-report.png",
+      },
+      {
+        fileName: "Scan.pdf",
+        fileSize: "180 KB",
+        ecgImageUrl: "/ecg-report.png",
+      },
+      {
+        fileName: "ECG.pdf",
+        fileSize: "220 KB",
+        ecgImageUrl: "/ecg-report.png",
+      },
+      {
+        fileName: "Fibro_Scan.pdf",
+        fileSize: "210 KB",
+        ecgImageUrl: "/ecg-report.png",
+      },
+    ],
+    markdown,
+    icdCodes: [
+      {
+        id: "1",
+        code: "M25.562",
+        confidence: 100,
+        isApproved: false,
+        desc: "Pain in left knee",
+      },
+      {
+        id: "2",
+        code: "M17.12",
+        confidence: 10,
+        isApproved: false,
+        desc: "Unilateral primary osteoarthritis affecting the left knee",
+      },
+    ],
+    cptCode: [
+      {
+        id: "1",
+        code: "99203",
+        confidence: 50,
+        isApproved: false,
+        desc: "New patient office visit, 30-44 minutes",
+      },
+      {
+        id: "2",
+        code: "73562",
+        confidence: 50,
+        isApproved: false,
+        desc: "Diagnostic Radiology Procedures of the Lower Extremities",
+      },
+    ]
+  },
+  {
+    "id": "203589",
+    "isSubmitted": false,
+                 profileCreatedDate: new Date('9/3/2025 10:37:30').toISOString(),
+
+    "agentDetails": {
+      "agentIssue": "Autho",
+      "agentSuggestion": "Payer flagged PA duplication request",
+      "coT": "PA already approved but duplicate triggered; agent blocked."
+    },
+    "profile": {
+      "name": "Noor ",
+      surname: "Al Hadi",
+      "age": 47,
+      "emiratesId": "748-1985-2233445-4",
+      "sex": "Female",
+      "dateOfBirth": "1985-07-21",
+      "nationality": "UAE",
+      "language": "Arabic",
+      "phoneNumber": "97155467830",
+      "email": "Sara.nuaimi@gmail.com",
+      profilePhoto: "/avatar.png"
+    },
+    eligibilityCheck: {
+      status: "covered",
+      insuranDetials: {
+        insuranceProvider: 'Daman-AUH-001',
+        imageUrl: "/insurance-image.png",
+        policyNumber: "42122566"
+      },
+      details: [
+        { label: "Network", value: "Yes" },
+        { label: "Coverage", value: "100%" },
+      ],
+    },
+    medicalCoding: {
+      status: "inprogress", // Medical coding status
+      details: [
+        { label: "Encounter Date", value: "2025-08-30" },
+        { label: "Encounter Type", value: "Outpatient" },
+        { label: "Physician", value: "Dr. Al Shamsi" },
+        { label: "Department", value: "Orthopaedics" },
+      ],
+    },
+    priorAuthorization: {
+      status: "approved", // Prior authorization status
+      details: [
+        { label: "Encounter ID", value: "ENC-2025-0789" },
+        { label: "CPT Code", value: "29880" },
+        { label: "ICD Code", value: "M23.2" },
+        { label: "Physician", value: "Dr. Al Shamsi" },
+        { label: "Prior Auth ID", value: "PA-556677" },
+        { label: "Drug Codes", value: "NDC-0002" },
+      ],
+    },
+    claimSubmission: {
+      status: "waiting", // Current status of the claim submission process
+      steps: [
+        { id: "1", label: "Compliance Check & Adjustment", status: "pending" },
+        { id: "2", label: "XML File Generated", status: "pending" },
+        { id: "3", label: "Claim Posted", status: "pending" },
+        { id: "4", label: "Claim ID Received & Updated", status: "pending" },
+      ],
+    },
+    denialManagement: {
+      status: "paused", // Current status of the denial management process
+      steps: [
+        { id: "1", label: "Denial Code Analyzed", status: "pending" },
+        { id: "2", label: "Suggested Edits", status: "pending" },
+        { id: "3", label: "Appeal Generated", status: "pending" },
+        { id: "4", label: "Appeal Submitted", status: "pending" },
+      ],
+    },
+    postPayment: {
+      status: "paused", // Current status of the post-payment process
+      steps: [
+        { id: "1", label: "Payment Retrieved", status: "pending" },
+        { id: "2", label: "Payment Matched", status: "pending" },
+        { id: "3", label: "Adjustments Applied", status: "pending" },
+        { id: "4", label: "Ledger Updated", status: "pending" },
+      ],
+    },
+    attachments: [
+      {
+        fileName: "SOB.pdf",
+        fileSize: "200 KB",
+        ecgImageUrl: "/ecg-report.png",
+      },
+      {
+        fileName: "Exclusion.pdf",
+        fileSize: "150 KB",
+        ecgImageUrl: "/ecg-report.png",
+      },
+      {
+        fileName: "Scan.pdf",
+        fileSize: "180 KB",
+        ecgImageUrl: "/ecg-report.png",
+      },
+      {
+        fileName: "ECG.pdf",
+        fileSize: "220 KB",
+        ecgImageUrl: "/ecg-report.png",
+      },
+      {
+        fileName: "Fibro_Scan.pdf",
+        fileSize: "210 KB",
+        ecgImageUrl: "/ecg-report.png",
+      },
+    ],
+    markdown,
+    icdCodes: [
+      {
+        id: "1",
+        code: "M25.562",
+        confidence: 100,
+        isApproved: false,
+        desc: "Pain in left knee",
+      },
+      {
+        id: "2",
+        code: "M17.12",
+        confidence: 10,
+        isApproved: false,
+        desc: "Unilateral primary osteoarthritis affecting the left knee",
+      },
+    ],
+    cptCode: [
+      {
+        id: "1",
+        code: "99203",
+        confidence: 50,
+        isApproved: false,
+        desc: "New patient office visit, 30-44 minutes",
+      },
+      {
+        id: "2",
+        code: "73562",
+        confidence: 50,
+        isApproved: false,
+        desc: "Diagnostic Radiology Procedures of the Lower Extremities",
+      },
+    ]
+  },
+  {
+    "id": "567491",
+    "isSubmitted": false,
+                 profileCreatedDate: new Date('9/3/2025 11:11:15').toISOString(),
+
+    "agentDetails": {
+      "agentIssue": "Coda",
+      "agentSuggestion": "ICD-10: R51.9 (Headache, unspecified)",
+      "coT": "SOAP note: “episodic headache, ?migraine” → unclear → flagged for clarification."
+    },
+    "profile": {
+      "name": "Richard",
+      surname: "Collins",
+      "age": 54,
+      "emiratesId": "748-1985-2233445-4",
+      "sex": "Female",
+      "dateOfBirth": "1985-07-21",
+      "nationality": "UAE",
+      "language": "Arabic",
+      "phoneNumber": "97155467830",
+      "email": "Sara.nuaimi@gmail.com",
+      profilePhoto: "/avatar.png"
+    },
+    eligibilityCheck: {
+      status: "covered",
+      insuranDetials: {
+        insuranceProvider: 'Daman-AUH-001',
+        imageUrl: "/insurance-image.png",
+        policyNumber: "42122566"
+      },
+      details: [
+        { label: "Network", value: "Yes" },
+        { label: "Coverage", value: "100%" },
+      ],
+    },
+    medicalCoding: {
+      status: "inprogress", // Medical coding status
+      details: [
+        { label: "Encounter Date", value: "2025-08-30" },
+        { label: "Encounter Type", value: "Outpatient" },
+        { label: "Physician", value: "Dr. Al Shamsi" },
+        { label: "Department", value: "Orthopaedics" },
+      ],
+    },
+    priorAuthorization: {
+      status: "approved", // Prior authorization status
+      details: [
+        { label: "Encounter ID", value: "ENC-2025-0789" },
+        { label: "CPT Code", value: "29880" },
+        { label: "ICD Code", value: "M23.2" },
+        { label: "Physician", value: "Dr. Al Shamsi" },
+        { label: "Prior Auth ID", value: "PA-556677" },
+        { label: "Drug Codes", value: "NDC-0002" },
+      ],
+    },
+    claimSubmission: {
+      status: "waiting", // Current status of the claim submission process
+      steps: [
+        { id: "1", label: "Compliance Check & Adjustment", status: "pending" },
+        { id: "2", label: "XML File Generated", status: "pending" },
+        { id: "3", label: "Claim Posted", status: "pending" },
+        { id: "4", label: "Claim ID Received & Updated", status: "pending" },
+      ],
+    },
+    denialManagement: {
+      status: "paused", // Current status of the denial management process
+      steps: [
+        { id: "1", label: "Denial Code Analyzed", status: "pending" },
+        { id: "2", label: "Suggested Edits", status: "pending" },
+        { id: "3", label: "Appeal Generated", status: "pending" },
+        { id: "4", label: "Appeal Submitted", status: "pending" },
+      ],
+    },
+    postPayment: {
+      status: "paused", // Current status of the post-payment process
+      steps: [
+        { id: "1", label: "Payment Retrieved", status: "pending" },
+        { id: "2", label: "Payment Matched", status: "pending" },
+        { id: "3", label: "Adjustments Applied", status: "pending" },
+        { id: "4", label: "Ledger Updated", status: "pending" },
+      ],
+    },
+    attachments: [
+      {
+        fileName: "SOB.pdf",
+        fileSize: "200 KB",
+        ecgImageUrl: "/ecg-report.png",
+      },
+      {
+        fileName: "Exclusion.pdf",
+        fileSize: "150 KB",
+        ecgImageUrl: "/ecg-report.png",
+      },
+      {
+        fileName: "Scan.pdf",
+        fileSize: "180 KB",
+        ecgImageUrl: "/ecg-report.png",
+      },
+      {
+        fileName: "ECG.pdf",
+        fileSize: "220 KB",
+        ecgImageUrl: "/ecg-report.png",
+      },
+      {
+        fileName: "Fibro_Scan.pdf",
+        fileSize: "210 KB",
+        ecgImageUrl: "/ecg-report.png",
+      },
+    ],
+    markdown,
+    icdCodes: [
+      {
+        id: "1",
+        code: "M25.562",
+        confidence: 100,
+        isApproved: false,
+        desc: "Pain in left knee",
+      },
+      {
+        id: "2",
+        code: "M17.12",
+        confidence: 10,
+        isApproved: false,
+        desc: "Unilateral primary osteoarthritis affecting the left knee",
+      },
+    ],
+    cptCode: [
+      {
+        id: "1",
+        code: "99203",
+        confidence: 50,
+        isApproved: false,
+        desc: "New patient office visit, 30-44 minutes",
+      },
+      {
+        id: "2",
+        code: "73562",
+        confidence: 50,
+        isApproved: false,
+        desc: "Diagnostic Radiology Procedures of the Lower Extremities",
+      },
+    ]
+  },
+  {
+    "id": "891034",
+    "isSubmitted": false,
+                 profileCreatedDate: new Date('9/3/2025 11:45:00').toISOString(),
+
+    "agentDetails": {
+      "agentIssue": "Clara",
+      "agentSuggestion": "Missing attending provider signature",
+      "coT": "Claim built without digital signature field populated; compliance check blocked."
+    },
+    "profile": {
+      "name": "Amina",
+      surname: "Farouk",
+      "age": 41,
+      "emiratesId": "748-1985-2233445-4",
+      "sex": "Female",
+      "dateOfBirth": "1985-07-21",
+      "nationality": "UAE",
+      "language": "Arabic",
+      "phoneNumber": "97155467830",
+      "email": "Sara.nuaimi@gmail.com",
+      profilePhoto: "/avatar.png"
+    },
+    eligibilityCheck: {
+      status: "covered",
+      insuranDetials: {
+        insuranceProvider: 'Daman-AUH-001',
+        imageUrl: "/insurance-image.png",
+        policyNumber: "42122566"
+      },
+      details: [
+        { label: "Network", value: "Yes" },
+        { label: "Coverage", value: "100%" },
+      ],
+    },
+    medicalCoding: {
+      status: "inprogress", // Medical coding status
+      details: [
+        { label: "Encounter Date", value: "2025-08-30" },
+        { label: "Encounter Type", value: "Outpatient" },
+        { label: "Physician", value: "Dr. Al Shamsi" },
+        { label: "Department", value: "Orthopaedics" },
+      ],
+    },
+    priorAuthorization: {
+      status: "approved", // Prior authorization status
+      details: [
+        { label: "Encounter ID", value: "ENC-2025-0789" },
+        { label: "CPT Code", value: "29880" },
+        { label: "ICD Code", value: "M23.2" },
+        { label: "Physician", value: "Dr. Al Shamsi" },
+        { label: "Prior Auth ID", value: "PA-556677" },
+        { label: "Drug Codes", value: "NDC-0002" },
+      ],
+    },
+    claimSubmission: {
+      status: "waiting", // Current status of the claim submission process
+      steps: [
+        { id: "1", label: "Compliance Check & Adjustment", status: "pending" },
+        { id: "2", label: "XML File Generated", status: "pending" },
+        { id: "3", label: "Claim Posted", status: "pending" },
+        { id: "4", label: "Claim ID Received & Updated", status: "pending" },
+      ],
+    },
+    denialManagement: {
+      status: "paused", // Current status of the denial management process
+      steps: [
+        { id: "1", label: "Denial Code Analyzed", status: "pending" },
+        { id: "2", label: "Suggested Edits", status: "pending" },
+        { id: "3", label: "Appeal Generated", status: "pending" },
+        { id: "4", label: "Appeal Submitted", status: "pending" },
+      ],
+    },
+    postPayment: {
+      status: "paused", // Current status of the post-payment process
+      steps: [
+        { id: "1", label: "Payment Retrieved", status: "pending" },
+        { id: "2", label: "Payment Matched", status: "pending" },
+        { id: "3", label: "Adjustments Applied", status: "pending" },
+        { id: "4", label: "Ledger Updated", status: "pending" },
+      ],
+    },
+    attachments: [
+      {
+        fileName: "SOB.pdf",
+        fileSize: "200 KB",
+        ecgImageUrl: "/ecg-report.png",
+      },
+      {
+        fileName: "Exclusion.pdf",
+        fileSize: "150 KB",
+        ecgImageUrl: "/ecg-report.png",
+      },
+      {
+        fileName: "Scan.pdf",
+        fileSize: "180 KB",
+        ecgImageUrl: "/ecg-report.png",
+      },
+      {
+        fileName: "ECG.pdf",
+        fileSize: "220 KB",
+        ecgImageUrl: "/ecg-report.png",
+      },
+      {
+        fileName: "Fibro_Scan.pdf",
+        fileSize: "210 KB",
+        ecgImageUrl: "/ecg-report.png",
+      },
+    ],
+    markdown,
+    icdCodes: [
+      {
+        id: "1",
+        code: "M25.562",
+        confidence: 100,
+        isApproved: false,
+        desc: "Pain in left knee",
+      },
+      {
+        id: "2",
+        code: "M17.12",
+        confidence: 10,
+        isApproved: false,
+        desc: "Unilateral primary osteoarthritis affecting the left knee",
+      },
+    ],
+    cptCode: [
+      {
+        id: "1",
+        code: "99203",
+        confidence: 50,
+        isApproved: false,
+        desc: "New patient office visit, 30-44 minutes",
+      },
+      {
+        id: "2",
+        code: "73562",
+        confidence: 50,
+        isApproved: false,
+        desc: "Diagnostic Radiology Procedures of the Lower Extremities",
+      },
+    ]
+  },
+  {
+    "id": "342657",
+    "isSubmitted": false,
+                 profileCreatedDate: new Date('9/3/2025 12:18:45').toISOString(),
+
+    "agentDetails": {
+      "agentIssue": "Payne",
+      "agentSuggestion": "EFT posted but payer remark code missing",
+      "coT": "Funds matched, but no adjustment codes in remit → requires manual reconciliation."
+    },
+    "profile": {
+      "name": "Peter",
+      surname: "Novak",
+      "age": 58,
+      "emiratesId": "748-1985-2233445-4",
+      "sex": "Female",
+      "dateOfBirth": "1985-07-21",
+      "nationality": "UAE",
+      "language": "Arabic",
+      "phoneNumber": "97155467830",
+      "email": "Sara.nuaimi@gmail.com",
+      profilePhoto: "/avatar.png"
+    },
+    eligibilityCheck: {
+      status: "covered",
+      insuranDetials: {
+        insuranceProvider: 'Daman-AUH-001',
+        imageUrl: "/insurance-image.png",
+        policyNumber: "42122566"
+      },
+      details: [
+        { label: "Network", value: "Yes" },
+        { label: "Coverage", value: "100%" },
+      ],
+    },
+    medicalCoding: {
+      status: "inprogress", // Medical coding status
+      details: [
+        { label: "Encounter Date", value: "2025-08-30" },
+        { label: "Encounter Type", value: "Outpatient" },
+        { label: "Physician", value: "Dr. Al Shamsi" },
+        { label: "Department", value: "Orthopaedics" },
+      ],
+    },
+    priorAuthorization: {
+      status: "approved", // Prior authorization status
+      details: [
+        { label: "Encounter ID", value: "ENC-2025-0789" },
+        { label: "CPT Code", value: "29880" },
+        { label: "ICD Code", value: "M23.2" },
+        { label: "Physician", value: "Dr. Al Shamsi" },
+        { label: "Prior Auth ID", value: "PA-556677" },
+        { label: "Drug Codes", value: "NDC-0002" },
+      ],
+    },
+    claimSubmission: {
+      status: "waiting", // Current status of the claim submission process
+      steps: [
+        { id: "1", label: "Compliance Check & Adjustment", status: "pending" },
+        { id: "2", label: "XML File Generated", status: "pending" },
+        { id: "3", label: "Claim Posted", status: "pending" },
+        { id: "4", label: "Claim ID Received & Updated", status: "pending" },
+      ],
+    },
+    denialManagement: {
+      status: "paused", // Current status of the denial management process
+      steps: [
+        { id: "1", label: "Denial Code Analyzed", status: "pending" },
+        { id: "2", label: "Suggested Edits", status: "pending" },
+        { id: "3", label: "Appeal Generated", status: "pending" },
+        { id: "4", label: "Appeal Submitted", status: "pending" },
+      ],
+    },
+    postPayment: {
+      status: "paused", // Current status of the post-payment process
+      steps: [
+        { id: "1", label: "Payment Retrieved", status: "pending" },
+        { id: "2", label: "Payment Matched", status: "pending" },
+        { id: "3", label: "Adjustments Applied", status: "pending" },
+        { id: "4", label: "Ledger Updated", status: "pending" },
+      ],
+    },
+    attachments: [
+      {
+        fileName: "SOB.pdf",
+        fileSize: "200 KB",
+        ecgImageUrl: "/ecg-report.png",
+      },
+      {
+        fileName: "Exclusion.pdf",
+        fileSize: "150 KB",
+        ecgImageUrl: "/ecg-report.png",
+      },
+      {
+        fileName: "Scan.pdf",
+        fileSize: "180 KB",
+        ecgImageUrl: "/ecg-report.png",
+      },
+      {
+        fileName: "ECG.pdf",
+        fileSize: "220 KB",
+        ecgImageUrl: "/ecg-report.png",
+      },
+      {
+        fileName: "Fibro_Scan.pdf",
+        fileSize: "210 KB",
+        ecgImageUrl: "/ecg-report.png",
+      },
+    ],
+    markdown,
+    icdCodes: [
+      {
+        id: "1",
+        code: "M25.562",
+        confidence: 100,
+        isApproved: false,
+        desc: "Pain in left knee",
+      },
+      {
+        id: "2",
+        code: "M17.12",
+        confidence: 10,
+        isApproved: false,
+        desc: "Unilateral primary osteoarthritis affecting the left knee",
+      },
+    ],
+    cptCode: [
+      {
+        id: "1",
+        code: "99203",
+        confidence: 50,
+        isApproved: false,
+        desc: "New patient office visit, 30-44 minutes",
+      },
+      {
+        id: "2",
+        code: "73562",
+        confidence: 50,
+        isApproved: false,
+        desc: "Diagnostic Radiology Procedures of the Lower Extremities",
+      },
+    ]
+  },
+  {
+    "id": "970218",
+    "isSubmitted": false,
+                 profileCreatedDate: new Date('9/3/2025 12:52:30').toISOString(),
+
+    "agentDetails": {
+      "agentIssue": "Coda",
+      "agentSuggestion": "ICD-10: J20.9 (Acute bronchitis, unspecified)",
+      "coT": "SOAP: “productive cough, no x-ray done” → not clear if pneumonia → flagged precautionary."
+    },
+    "profile": {
+      "name": "Clara",
+      surname: "Jensen",
+      "age": 35,
+      "emiratesId": "748-1985-2233445-4",
+      "sex": "Female",
+      "dateOfBirth": "1985-07-21",
+      "nationality": "UAE",
+      "language": "Arabic",
+      "phoneNumber": "97155467830",
+      "email": "Sara.nuaimi@gmail.com",
+      profilePhoto: "/avatar.png"
+    },
+    eligibilityCheck: {
+      status: "covered",
+      insuranDetials: {
+        insuranceProvider: 'Daman-AUH-001',
+        imageUrl: "/insurance-image.png",
+        policyNumber: "42122566"
+      },
+      details: [
+        { label: "Network", value: "Yes" },
+        { label: "Coverage", value: "100%" },
+      ],
+    },
+    medicalCoding: {
+      status: "inprogress", // Medical coding status
+      details: [
+        { label: "Encounter Date", value: "2025-08-30" },
+        { label: "Encounter Type", value: "Outpatient" },
+        { label: "Physician", value: "Dr. Al Shamsi" },
+        { label: "Department", value: "Orthopaedics" },
+      ],
+    },
+    priorAuthorization: {
+      status: "approved", // Prior authorization status
+      details: [
+        { label: "Encounter ID", value: "ENC-2025-0789" },
+        { label: "CPT Code", value: "29880" },
+        { label: "ICD Code", value: "M23.2" },
+        { label: "Physician", value: "Dr. Al Shamsi" },
+        { label: "Prior Auth ID", value: "PA-556677" },
+        { label: "Drug Codes", value: "NDC-0002" },
+      ],
+    },
+    claimSubmission: {
+      status: "waiting", // Current status of the claim submission process
+      steps: [
+        { id: "1", label: "Compliance Check & Adjustment", status: "pending" },
+        { id: "2", label: "XML File Generated", status: "pending" },
+        { id: "3", label: "Claim Posted", status: "pending" },
+        { id: "4", label: "Claim ID Received & Updated", status: "pending" },
+      ],
+    },
+    denialManagement: {
+      status: "paused", // Current status of the denial management process
+      steps: [
+        { id: "1", label: "Denial Code Analyzed", status: "pending" },
+        { id: "2", label: "Suggested Edits", status: "pending" },
+        { id: "3", label: "Appeal Generated", status: "pending" },
+        { id: "4", label: "Appeal Submitted", status: "pending" },
+      ],
+    },
+    postPayment: {
+      status: "paused", // Current status of the post-payment process
+      steps: [
+        { id: "1", label: "Payment Retrieved", status: "pending" },
+        { id: "2", label: "Payment Matched", status: "pending" },
+        { id: "3", label: "Adjustments Applied", status: "pending" },
+        { id: "4", label: "Ledger Updated", status: "pending" },
+      ],
+    },
+    attachments: [
+      {
+        fileName: "SOB.pdf",
+        fileSize: "200 KB",
+        ecgImageUrl: "/ecg-report.png",
+      },
+      {
+        fileName: "Exclusion.pdf",
+        fileSize: "150 KB",
+        ecgImageUrl: "/ecg-report.png",
+      },
+      {
+        fileName: "Scan.pdf",
+        fileSize: "180 KB",
+        ecgImageUrl: "/ecg-report.png",
+      },
+      {
+        fileName: "ECG.pdf",
+        fileSize: "220 KB",
+        ecgImageUrl: "/ecg-report.png",
+      },
+      {
+        fileName: "Fibro_Scan.pdf",
+        fileSize: "210 KB",
+        ecgImageUrl: "/ecg-report.png",
+      },
+    ],
+    markdown,
+    icdCodes: [
+      {
+        id: "1",
+        code: "M25.562",
+        confidence: 100,
+        isApproved: false,
+        desc: "Pain in left knee",
+      },
+      {
+        id: "2",
+        code: "M17.12",
+        confidence: 10,
+        isApproved: false,
+        desc: "Unilateral primary osteoarthritis affecting the left knee",
+      },
+    ],
+    cptCode: [
+      {
+        id: "1",
+        code: "99203",
+        confidence: 50,
+        isApproved: false,
+        desc: "New patient office visit, 30-44 minutes",
+      },
+      {
+        id: "2",
+        code: "73562",
+        confidence: 50,
+        isApproved: false,
+        desc: "Diagnostic Radiology Procedures of the Lower Extremities",
+      },
+    ]
+  },
+  {
+    "id": "583920",
+    "isSubmitted": false,
+                 profileCreatedDate: new Date('9/3/2025 13:26:15').toISOString(),
+
+    "agentDetails": {
+      "agentIssue": "Dee",
+      "agentSuggestion": "Payer denial: duplicate lab test billed",
+      "coT": "Two labs billed within 24h; agent cannot auto-resolve → flagged for review."
+    },
+    "profile": {
+      "name": "Hana",
+      surname: "Shafiq",
+      "age": 29,
+      "emiratesId": "748-1985-2233445-4",
+      "sex": "Female",
+      "dateOfBirth": "1985-07-21",
+      "nationality": "UAE",
+      "language": "Arabic",
+      "phoneNumber": "97155467830",
+      "email": "Sara.nuaimi@gmail.com",
+      profilePhoto: "/avatar.png"
+    },
+    eligibilityCheck: {
+      status: "covered",
+      insuranDetials: {
+        insuranceProvider: 'Daman-AUH-001',
+        imageUrl: "/insurance-image.png",
+        policyNumber: "42122566"
+      },
+      details: [
+        { label: "Network", value: "Yes" },
+        { label: "Coverage", value: "100%" },
+      ],
+    },
+    medicalCoding: {
+      status: "inprogress", // Medical coding status
+      details: [
+        { label: "Encounter Date", value: "2025-08-30" },
+        { label: "Encounter Type", value: "Outpatient" },
+        { label: "Physician", value: "Dr. Al Shamsi" },
+        { label: "Department", value: "Orthopaedics" },
+      ],
+    },
+    priorAuthorization: {
+      status: "approved", // Prior authorization status
+      details: [
+        { label: "Encounter ID", value: "ENC-2025-0789" },
+        { label: "CPT Code", value: "29880" },
+        { label: "ICD Code", value: "M23.2" },
+        { label: "Physician", value: "Dr. Al Shamsi" },
+        { label: "Prior Auth ID", value: "PA-556677" },
+        { label: "Drug Codes", value: "NDC-0002" },
+      ],
+    },
+    claimSubmission: {
+      status: "waiting", // Current status of the claim submission process
+      steps: [
+        { id: "1", label: "Compliance Check & Adjustment", status: "pending" },
+        { id: "2", label: "XML File Generated", status: "pending" },
+        { id: "3", label: "Claim Posted", status: "pending" },
+        { id: "4", label: "Claim ID Received & Updated", status: "pending" },
+      ],
+    },
+    denialManagement: {
+      status: "paused", // Current status of the denial management process
+      steps: [
+        { id: "1", label: "Denial Code Analyzed", status: "pending" },
+        { id: "2", label: "Suggested Edits", status: "pending" },
+        { id: "3", label: "Appeal Generated", status: "pending" },
+        { id: "4", label: "Appeal Submitted", status: "pending" },
+      ],
+    },
+    postPayment: {
+      status: "paused", // Current status of the post-payment process
+      steps: [
+        { id: "1", label: "Payment Retrieved", status: "pending" },
+        { id: "2", label: "Payment Matched", status: "pending" },
+        { id: "3", label: "Adjustments Applied", status: "pending" },
+        { id: "4", label: "Ledger Updated", status: "pending" },
+      ],
+    },
+    attachments: [
+      {
+        fileName: "SOB.pdf",
+        fileSize: "200 KB",
+        ecgImageUrl: "/ecg-report.png",
+      },
+      {
+        fileName: "Exclusion.pdf",
+        fileSize: "150 KB",
+        ecgImageUrl: "/ecg-report.png",
+      },
+      {
+        fileName: "Scan.pdf",
+        fileSize: "180 KB",
+        ecgImageUrl: "/ecg-report.png",
+      },
+      {
+        fileName: "ECG.pdf",
+        fileSize: "220 KB",
+        ecgImageUrl: "/ecg-report.png",
+      },
+      {
+        fileName: "Fibro_Scan.pdf",
+        fileSize: "210 KB",
+        ecgImageUrl: "/ecg-report.png",
+      },
+    ],
+    markdown,
+    icdCodes: [
+      {
+        id: "1",
+        code: "M25.562",
+        confidence: 100,
+        isApproved: false,
+        desc: "Pain in left knee",
+      },
+      {
+        id: "2",
+        code: "M17.12",
+        confidence: 10,
+        isApproved: false,
+        desc: "Unilateral primary osteoarthritis affecting the left knee",
+      },
+    ],
+    cptCode: [
+      {
+        id: "1",
+        code: "99203",
+        confidence: 50,
+        isApproved: false,
+        desc: "New patient office visit, 30-44 minutes",
+      },
+      {
+        id: "2",
+        code: "73562",
+        confidence: 50,
+        isApproved: false,
+        desc: "Diagnostic Radiology Procedures of the Lower Extremities",
+      },
+    ]
+  },
 ];
  
 

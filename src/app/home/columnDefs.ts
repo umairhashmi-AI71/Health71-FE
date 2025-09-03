@@ -90,6 +90,8 @@ export const patientColumnDef: ColDef[] = [
     field: "agentSuggestion",
     sortable: true,
     width: 300,
+    wrapText: true,
+    autoHeight: true,
 
     //   filter: 'agTextColumnFilter',
     //    cellRenderer: truncatedCellRenderer
