@@ -19,7 +19,7 @@ import { formatDate } from "@/lib/dateformate";
 const RedirectPage = () => {
   const router = useRouter();
 
-  let list = useSelector((state: RootState) => state.patientlist);
+  const list = useSelector((state: RootState) => state.patientlist);
   const [patients, setPatients] = useState<PatientTableRow[]>(
     list
       .filter((i) => i.isSubmitted === false)
@@ -47,7 +47,7 @@ const RedirectPage = () => {
 
   // Filter and sort patients
   const filteredAndSortedPatients = useMemo(() => {
-    let filtered = patients.filter((patient) => {
+    const filtered = patients.filter((patient) => {
       const matchesSearch =
         patient.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
         patient.id.includes(searchTerm);
