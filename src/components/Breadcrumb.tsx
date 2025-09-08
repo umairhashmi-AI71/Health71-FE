@@ -22,7 +22,7 @@ export default function Breadcrumb() {
   ];
 
   segments.forEach((seg, idx) => {
-    let href = "/" + segments.slice(0, idx + 1).join("/");
+    const href = "/" + segments.slice(0, idx + 1).join("/");
     const label = breadcrumbMap[seg] || seg;
     const isLast = idx === segments.length - 1;
  
