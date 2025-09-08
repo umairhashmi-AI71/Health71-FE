@@ -19,6 +19,8 @@
   --base-destructive: #CB3914;
   --sidebar-background: #E8E2DB;
   --base-spark: #EAF481;
+  --font-mackinac-book: "Mackinac-Book", sans-serif;
+
 }
 
 @theme inline {
@@ -76,6 +78,9 @@ body {
 
 .bg-green {
   background-color: var(--base-green);
+}
+.border-green {
+  border-color: var(--base-green);
 }
 
 .bg-warm-gray {
@@ -285,34 +290,6 @@ body {
   background: none!important;
  }
 
-/* Remove selected (clicked) row background */
-.ag-theme-alpine .ag-row.ag-row-selected {
-  background-color: #CAE8E4 !important;
-  outline: none !important;
-}
-
-
-/* Checked checkbox */
-.ag-theme-alpine .ag-checkbox-input-wrapper.ag-checked .ag-checkbox-input {
-  background-color: #10b981 !important; /* green */
-  border-color: #10b981 !important;
-}
-
-/* Unchecked checkbox */
-.ag-theme-alpine .ag-checkbox-input-wrapper .ag-checkbox-input {
-  border: 2px solid #6b7280 !important; /* gray */
-  background-color: white !important;
-}
-
-
-/* Optional: remove focus outline or border */
-.ag-theme-alpine .ag-row:focus,
-.ag-theme-alpine .ag-row.ag-row-focus {
-  outline: none !important;
-  border: none !important;
-}
-
-
 .login-bg {
   background: url('/login-bg.png') no-repeat left top;
   background-size: cover;
@@ -387,10 +364,46 @@ body {
 .ag-theme-alpine {
   --ag-accent-color: #212D45; /* default blue */
 }
-.table-hover {
-  background: rgba(175, 216, 212, 0.20);
+
+.patient-list.selected {
+   background-color: #CAE8E4 !important;
 }
- 
+.patient-list {
+   
+
+} 
+
+
+
+/* Remove selected (clicked) row background */
+.ag-theme-alpine .ag-row.ag-row-selected {
+  background-color: #CAE8E4 !important;
+  outline: none !important;
+}
+
+
+/* Checked checkbox */
+.ag-theme-alpine .ag-checkbox-input-wrapper.ag-checked .ag-checkbox-input {
+  background-color: #10b981 !important; /* green */
+  border-color: #10b981 !important;
+}
+
+/* Unchecked checkbox */
+.ag-theme-alpine .ag-checkbox-input-wrapper .ag-checkbox-input {
+  border: 2px solid #6b7280 !important; /* gray */
+  background-color: white !important;
+}
+
+
+/* Optional: remove focus outline or border */
+.ag-theme-alpine .ag-row:focus,
+.ag-theme-alpine .ag-row.ag-row-focus {
+  outline: none !important;
+  border: none !important;
+}
+
+
+
 
 .ag-theme-alpine .ag-row-hover {
   background: rgba(175, 216, 212, 0.20)  !important; /* your custom hover color */
@@ -403,3 +416,48 @@ body {
 }
  
 
+.welcome-bg {
+  background-color: #CAE8E4;
+  box-shadow: 8px 8px 48px 8px rgba(0, 0, 0, 0.08);
+}
+
+
+.mackinac {
+  font-family: var(--font-mackinac-book);
+}
+
+.border-patient {
+  border-color:   rgba(115, 110, 104, 0.30);
+}
+
+.eli-border {
+  border-color: var(--deep-ocean);
+}
+
+.coda-border {
+  border-color: var(--base-green);
+  color:  var(--base-green);
+
+}
+.dee-border {
+  
+  border-color: var(--muted-foreground);
+  color:  var(--muted-foreground);
+}
+
+.clara-border {
+  color: #8F482C;
+    border-color: #8F482C;
+
+}
+
+.autho-border {
+  
+  color: var(--pixel-bloom);
+    border-color: var(--pixel-bloom);
+}
+
+.payne-border {
+  color: #F6B704;
+  border-color: #F6B704;
+}

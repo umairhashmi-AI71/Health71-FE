@@ -12,6 +12,7 @@ import {
   BellDot,
   LogOutIcon,
   LayoutDashboard,
+  Users,
 } from "lucide-react";
 import AlertModal from "./AlertModal";
 import ChatWidget from "./ChatWidget";
@@ -62,12 +63,12 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
 
   const sidebarItems = [
     { icon: Home, label: "Home", href: "/home" },
-    { icon: Search, label: "Search", href: "/search" },
     {
-      icon: User2,
+      icon: Users,
       label: "Patient Registery",
       href: "/patient",
     },
+    { icon: Search, label: "Search", href: "/search" },
     { icon: ClipboardCheck, label: "Tasks", href: "/tasks" },
     { icon: LayoutDashboard, label: "Dashboard", href: "/dashboard" },
     { icon: BellDot, label: "Notification", href: "/notification" },
@@ -173,8 +174,7 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
                   {/* Logout */}
                 </button>
               );
-            if (item.label !== "Patient Registery")
-            return (
+             return (
               <Link
                 key={item.label}
                 href={item.href}

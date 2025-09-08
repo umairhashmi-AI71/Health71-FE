@@ -14,13 +14,16 @@ export default function AgentCard({
   const defaultIcons = [ClipboardCheck, Flag, Zap];
 
   return (
-    <div className={`rounded-xl p-3 w-full sm:w-[208px] h-[286px] ${title.toLocaleLowerCase()}-bg ${background} shadow-md`}>
-      <div className="flex justify-center align-top mb-4 h-[66px ]">
-        <img src={image} alt={title} className="w-16 h-16 rounded-full object-cover mt-0" />
+    <div className={`rounded-xl p-4 w-full   ${title.toLocaleLowerCase()}-bg ${background} shadow-md`}>
+      <div className="flex gap-4">
+        <img src={image} alt={title} className="w-[66px] h-[66px] rounded-full object-cover mt-0" />
+        <div>
+          <h2 className="text-lg font-semibold line-height-7 ">{title}</h2>
+      <p className="text-sm line-height-5">{role}</p>
+      <p className="text-sm line-height-5">I saved <span className={`${title.toLocaleLowerCase()}-highlight`}>{savedHours} hours</span> today.</p>
+        </div>
       </div>
-      <h2 className="text-lg font-semibold line-height-7 ">{title}</h2>
-      <p className="text-sm font-medium py-2 line-height-5">{role}</p>
-      <p className="text-sm font-medium  line-height-5">I saved <span className={`${title.toLocaleLowerCase()}-highlight`}>{savedHours} hours</span> today.</p>
+      
 
       <div className="mt-4 space-y-2">
         {feature.map((item, index) => {

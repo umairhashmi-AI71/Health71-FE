@@ -127,8 +127,11 @@ export interface PatientPersona {
 export interface PatientTableRow {
   id: string;
   name: string;
+  surname: string;
   age: number;
   agentIssue: string;
   agentSuggestion: string;
   cot: string;
+  lastUpdated: string;
+  selected: boolean
 }

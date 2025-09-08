@@ -25,8 +25,7 @@ export default function Breadcrumb() {
     let href = "/" + segments.slice(0, idx + 1).join("/");
     const label = breadcrumbMap[seg] || seg;
     const isLast = idx === segments.length - 1;
-         href = label === "Patient Registery" ? "/home" : href;
-
+ 
     items.push(
       <span key={href} className="flex items-center">
         <ChevronRight className="w-5 h-5 text-muted mx-2" />
