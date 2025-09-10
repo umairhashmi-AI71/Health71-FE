@@ -1,5 +1,7 @@
 "use client";
 import { useCallback, useEffect, useMemo, useState } from "react";
+import Link from "next/link";
+
 import { useRouter } from "next/navigation";
 import { DashboardLayout } from "@/components/dashboard-layout";
 import {
@@ -22,7 +24,7 @@ const RedirectPage = () => {
   const list = useSelector((state: RootState) => state.patientlist);
   const [patients, setPatients] = useState<PatientTableRow[]>(
     list
-      .filter((i) => i.isSubmitted === false)
+      // .filter((i) => i.isSubmitted === false)
       .map((i) => ({
         id: i.id,
         surname: i.profile.surname,
@@ -472,9 +474,9 @@ const RedirectPage = () => {
                       </td>
                       <td className="px-4 py-3 whitespace-nowrap text-sm ">
                         <span
-                          className={`border rounded-2xl py-1 px-3 ${patient.agentIssue.toLowerCase()}-border`}
+                          className={`border bg-white rounded-2xl py-1 px-3 ${patient.agentIssue.toLowerCase()}-border`}
                         >
-                          {" "}
+                          
                           {patient.agentIssue}
                         </span>
                       </td>
@@ -487,14 +489,17 @@ const RedirectPage = () => {
                       </td>
                       <td className="px-4 py-3  text-sm ">{formatDate(patient.lastUpdated)}</td>
                       <td className="px-4 py-3 whitespace-nowrap text-sm ">
-                        <button
+                        {/* <button
                           className="cursor-pointer"
                           onClick={() => {
                             route.push(`/patient/${patient.id}`);
                           }}
                         >
+                        </button> */}
+
+                        <Link href={`/patient/${patient.id}`}>
                           <Search className="h-4 w-4" />
-                        </button>
+</Link>
                       </td>
                     </tr>
                   );

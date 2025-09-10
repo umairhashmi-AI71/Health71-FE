@@ -41,7 +41,7 @@ const SOAPNote: React.FC<SOAPNoteProps> = ({ tabs, defaultActiveTab, height = ''
   {tabs.map((tab, index) => {
     let content;
     if (typeof tab.data === "string") {
-      content = <Markdown rehypePlugins={[rehypeRaw]}>{tab.data}</Markdown>;
+      content = <div className="relative markbg"> <Markdown rehypePlugins={[rehypeRaw]}>{tab.data}</Markdown></div>
     } else if (typeof tab.data === "function") {
       content = React.createElement(tab.data);
     } else {

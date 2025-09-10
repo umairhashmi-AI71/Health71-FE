@@ -1,7 +1,9 @@
-import React, { JSX } from "react";
+import React, { JSX, useState } from "react";
 import { Check } from "lucide-react";
 import {
+  ClaimAttempts,
   ClaimStep,
+  DenialAttempts,
   InsuranDetials,
   MedicalCodingDetail,
   StatusType,
@@ -28,33 +30,44 @@ interface StatusConfig {
 interface HealthcareCardProps {
   title: string;
   status: StatusType;
-  mode: ModeType;
-  gridData?: MedicalCodingDetail[];
-  processSteps?: ClaimStep[];
-  isInsuranceInfoCard?: boolean;
+  data: ClaimAttempts[] | DenialAttempts[];
   className?: string;
   titleGap?: string;
-  processGap?: string;
-  insuranceDetails?: InsuranDetials;
+  type: "denial" | "claim" | "payment";
 }
 
-const HealthcareCard: React.FC<HealthcareCardProps> = ({
+const CycleCard: React.FC<HealthcareCardProps> = ({
   title,
   status,
-  mode,
-  gridData = {},
-  processSteps = [],
-  isInsuranceInfoCard = false,
+  data = [],
   className = "",
-  titleGap = "mb-6",
-  processGap = "h-3.5",
-  insuranceDetails,
+  titleGap = "mb-3",
+  type,
 }) => {
+  const claimAttempts = {
+    date: "Date",
+    claimAmount: "Claim Amount",
+    claimId: "Claim ID",
+    rejectionCode: "Rejection Code",
+  };
+
+  const denialAttemps = {
+    claimId: "Claim ID",
+    denialId: "Denial ID",
+    amount: "Denial Amount",
+    denialCode: "Denial Code",
+  };
+
   const getStatusConfig = (status: StatusType): StatusConfig => {
     switch (status) {
       case "approved":
         return {
           text: "Approved",
+          className: "bg-primary-foreground text-green",
+        };
+      case "submitted":
+        return {
+          text: "Submitted",
           className: "bg-primary-foreground text-green",
         };
       case "covered":
@@ -103,7 +116,7 @@ const HealthcareCard: React.FC<HealthcareCardProps> = ({
   };
 
   const statusConfig = getStatusConfig(status);
-   const getStepIcon = (stepStatus: StatusType ): JSX.Element => {
+  const getStepIcon = (stepStatus: StatusType): JSX.Element => {
     switch (stepStatus) {
       case "completed":
       case "approved":
@@ -117,7 +130,7 @@ const HealthcareCard: React.FC<HealthcareCardProps> = ({
           <div className="w-6.5 h-6.5 rounded-full border-2 border-alpha opacity-20" />
         );
       case "pending":
-      case 'paused':
+      case "paused":
         return (
           <div className="w-6.5 h-6.5 rounded-full border-2 border-alpha opacity-20" />
         );
@@ -146,11 +159,16 @@ const HealthcareCard: React.FC<HealthcareCardProps> = ({
     }
   };
 
+  const [page, setPage] = useState(data.length - 1);
+
+  const totalPages = Math.ceil(data.length);
+  const currentItems = data[page];
   return (
     <div
       className={`max-w-sm bg-basecard border border-base rounded-2xl drop-shadow-sm p-4 ${className}`}
     >
       {/* Header */}
+
       <div className={`flex items-center justify-between ${titleGap}`}>
         <h2 className="text-lg font-semibold">{title}</h2>
         <div
@@ -159,51 +177,46 @@ const HealthcareCard: React.FC<HealthcareCardProps> = ({
           <span>{statusConfig.text}</span>
         </div>
       </div>
-
-      {/* if insurance eligiblity card*/}
-
-      {isInsuranceInfoCard && (
-        <div className="flex items-center space-x-3 mb-3">
-          <img
-            src={insuranceDetails?.imageUrl}
-            alt="Insurance Logo"
-            className="max-w-15.5 max-h-15.5 mr-3.5"
-          />
-          <div>
-            <h3 className="text-lg font-semibold mb-1">
-              {insuranceDetails?.insuranceProvider}
-            </h3>
-            <p className="text-sm font-medium">
-              {insuranceDetails?.policyNumber}
-            </p>
+      <div className="space-y-3.5">
+        <p className=" font-medium text-base text-green">
+          Cycle Number {page + 1}
+        </p>
+        <div className="space-y-3.5">
+          <div className="flex justify-between grid grid-cols-2 gap-4">
+            {Object.keys(currentItems).map((key, idx) => {
+              const claimType = key as keyof typeof claimAttempts;
+              const denialType = key as keyof typeof denialAttemps;
+              return (
+                <div key={idx} className="min-w-[48%]">
+                  <h3 className="text-base text-foreground">
+                    {type == "claim"
+                      ? claimAttempts[claimType]
+                      : denialAttemps[denialType]}
+                  </h3>
+                  <p className="text-base font-semibold">
+                    {(currentItems as Record<string, any>)[key]}
+                  </p>
+                </div>
+              );
+            })}
           </div>
-        </div>
-      )}
-
-      {/* Content */}
-      {mode === "grid" && (
-        <div className="space-y-4">
-          {Object.entries(gridData).reduce<JSX.Element[]>(
-            (acc, [key, value], index, array) => {
-              if (index % 2 === 0) {
-               const nextEntry = array[index + 1] as [string, MedicalCodingDetail] | undefined;
-console.log(nextEntry)
-
+          {/* {currentItems &&
+            currentItems.reduce<JSX.Element[]>((acc, row, i, array) => {
+              if (i % 2 === 0) {
+                const nextEntry = array[i + 1];
                 acc.push(
-                  <div key={index} className="flex justify-between">
+                  <div key={i} className="flex justify-between gap-4">
                     <div className="min-w-[48%]">
-                      <h3 className="text-base block text-foreground">
-                        {value.label}
-                      </h3>
-                      <p className="text-base font-semibold">{value.value}</p>
+                      <h3 className="text-base text-foreground">{row.label}</h3>
+                      <p className="text-base font-semibold">{row.value}</p>
                     </div>
                     {nextEntry && (
                       <div className="min-w-[48%]">
-                        <h3 className="text-base block text-foreground">
-                          {nextEntry[1].label}
+                        <h3 className="text-base text-foreground">
+                          {nextEntry.label}
                         </h3>
                         <p className="text-base font-semibold">
-                          {nextEntry[1].value}
+                          {nextEntry.value}
                         </p>
                       </div>
                     )}
@@ -211,32 +224,21 @@ console.log(nextEntry)
                 );
               }
               return acc;
-            },
-            []
-          )}
+            }, [])} */}
         </div>
-      )}
+      </div>
 
-      {mode === "process" && (
-        <div className="">
-          {processSteps.map((step, index) => (
-            <div key={step.id} className="flex   space-x-3 ">
-              <div className="flex flex-col items-center">
-                {getStepIcon(step.status)}
-                {index < processSteps.length - 1 && (
-                  <div className={`w-0.5 ${processGap} bg-gray-200`} />
-                )}
-              </div>
-              <div className="flex-1">
-                <p
-                  className={`text-base  text-sm font-medium ${getStepTextColor(
-                    step.status
-                  )} pt-1`}
-                >
-                  {step.label}
-                </p>
-              </div>
-            </div>
+      {/* Pagination Dots */}
+      {totalPages > 1 && (
+        <div className="flex justify-center mt-2 gap-2">
+          {Array.from({ length: totalPages }).map((_, i) => (
+            <button
+              key={i}
+              onClick={() => setPage(i)}
+              className={`h-2 w-2 rounded-full ${
+                page === i ? "bg-teal-600" : "bg-gray-300"
+              }`}
+            />
           ))}
         </div>
       )}
@@ -244,4 +246,4 @@ console.log(nextEntry)
   );
 };
 
-export default HealthcareCard;
+export default CycleCard;

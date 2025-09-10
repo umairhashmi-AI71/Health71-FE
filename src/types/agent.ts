@@ -11,6 +11,7 @@ export interface Feature {
 export interface Agent {
     image: string; // URL or path to the agent's image
   title: string;
+  desc: string;
   role: string;
   savedHours: string;
   background?: string;

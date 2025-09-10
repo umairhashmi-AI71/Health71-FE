@@ -81,8 +81,8 @@ Sara Al Naoumi, a 40-year-old female, presents with left knee pain persisting fo
 export const patientPersona: PatientPersona[] = [
   {
     id: "101300",
-    isSubmitted: false,
-    profileCreatedDate: new Date('9/2/2025 20:00:00').toISOString(),
+    isSubmitted: true,
+    profileCreatedDate: new Date("9/2/2025 20:00:00").toISOString(),
     agentDetails: {
       agentIssue: "Coda",
       agentSuggestion: "Verify coding: M25.562 (Pain in left knee)	",
@@ -99,14 +99,14 @@ export const patientPersona: PatientPersona[] = [
       language: "Arabic",
       phoneNumber: "97155467830",
       email: "Sara.nuaimi@gmail.com",
-      profilePhoto: "/avatar.png"
+      profilePhoto: "/avatar.png",
     },
     eligibilityCheck: {
       status: "covered",
       insuranDetials: {
-        insuranceProvider: 'Daman-AUH-001',
+        insuranceProvider: "Daman-AUH-001",
         imageUrl: "/insurance-image.png",
-        policyNumber: "42122566"
+        policyNumber: "42122566",
       },
       details: [
         { label: "Network", value: "Yes" },
@@ -114,10 +114,17 @@ export const patientPersona: PatientPersona[] = [
       ],
     },
     medicalCoding: {
-      status: "inprogress", // Medical coding status
+      status: "done", // Medical coding status
       details: [
-        { label: "Encounter Date", value: "2025-08-30" },
-        { label: "Encounter Type", value: "Outpatient" },
+        // { label: "Encounter Date", value: "2025-08-30" },
+        // { label: "Encounter Type", value: "Outpatient" },
+        // { label: "Physician", value: "Dr. Al Shamsi" },
+        // { label: "Department", value: "Orthopaedics" },
+        { label: "Encounter Type", value: "Out patient" },
+        { label: "ICD Code", value: "99213" },
+        { label: "CPT Code", value: "99213" },
+        { label: "Drug Code", value: "12345" },
+        { label: "Encounter Date", value: "2024-07-21" },
         { label: "Physician", value: "Dr. Al Shamsi" },
         { label: "Department", value: "Orthopaedics" },
       ],
@@ -134,22 +141,34 @@ export const patientPersona: PatientPersona[] = [
       ],
     },
     claimSubmission: {
-      status: "waiting", // Current status of the claim submission process
+      status: "inprogress", // Current status of the claim submission process
       steps: [
         { id: "1", label: "Compliance Check & Adjustment", status: "pending" },
         { id: "2", label: "XML File Generated", status: "pending" },
         { id: "3", label: "Claim Posted", status: "pending" },
         { id: "4", label: "Claim ID Received & Updated", status: "pending" },
       ],
+      claimAttempts: [
+        {date: '2025-10-20', claimAmount: 836, claimId: 1014891283, rejectionCode: 'F14'  },
+        {date: '2025-10-20', claimAmount: 836, claimId: 1014891283, rejectionCode: 'F14'  },
+        {date: '2025-10-20', claimAmount: 836, claimId: 1014891283, rejectionCode: 'F14'  },
+        
+      ],
     },
     denialManagement: {
-      status: "waiting", // Current status of the denial management process
+      status: "done", // Current status of the denial management process
       steps: [
         { id: "1", label: "Denial Code Analyzed", status: "pending" },
         { id: "2", label: "Suggested Edits", status: "pending" },
         { id: "3", label: "Appeal Generated", status: "pending" },
         { id: "4", label: "Appeal Submitted", status: "pending" },
       ],
+      denialAttempts: [
+        {claimId: 1014891283, denialId: 2002931, amount: 836, denialCode: '12345'},
+        {claimId: 1014891283, denialId: 2002931, amount: 836, denialCode: '12345'},
+        {claimId: 1014891283, denialId: 2002931, amount: 836, denialCode: '12345'},
+      ],
+      escalation: true,
     },
     postPayment: {
       status: "waiting", // Current status of the post-payment process
@@ -214,37 +233,37 @@ export const patientPersona: PatientPersona[] = [
         isApproved: false,
         desc: "Diagnostic Radiology Procedures of the Lower Extremities",
       },
-    ]
+    ],
   },
   {
     id: "483920",
     isSubmitted: false,
-        profileCreatedDate: new Date('9/2/2025 20:33:45').toISOString(),
+    profileCreatedDate: new Date("9/2/2025 20:33:45").toISOString(),
 
     agentDetails: {
-      "agentIssue": "Autho",
-      "agentSuggestion": "Attach clinical notes for MRI PA",
-      "coT": "Diagnostic report mentioned in SOAP but not attached; agent cannot confirm if payer’s criteria for MRI are met."
+      agentIssue: "Autho",
+      agentSuggestion: "Attach clinical notes for MRI PA",
+      coT: "Diagnostic report mentioned in SOAP but not attached; agent cannot confirm if payer’s criteria for MRI are met.",
     },
     profile: {
-      "name": "Fatima",
+      name: "Fatima",
       surname: "Rahman",
-      "age": 34,
-      "emiratesId": "748-1985-2233445-4",
-      "sex": "Female",
-      "dateOfBirth": "1985-07-21",
-      "nationality": "UAE",
-      "language": "Arabic",
-      "phoneNumber": "97155467830",
-      "email": "Sara.nuaimi@gmail.com",
-      profilePhoto: "/avatar.png"
+      age: 34,
+      emiratesId: "748-1985-2233445-4",
+      sex: "Female",
+      dateOfBirth: "1985-07-21",
+      nationality: "UAE",
+      language: "Arabic",
+      phoneNumber: "97155467830",
+      email: "Sara.nuaimi@gmail.com",
+      profilePhoto: "/avatar.png",
     },
     eligibilityCheck: {
       status: "covered",
       insuranDetials: {
-        insuranceProvider: 'Daman-AUH-001',
+        insuranceProvider: "Daman-AUH-001",
         imageUrl: "/insurance-image.png",
-        policyNumber: "42122566"
+        policyNumber: "42122566",
       },
       details: [
         { label: "Network", value: "Yes" },
@@ -319,9 +338,8 @@ export const patientPersona: PatientPersona[] = [
         fileSize: "220 KB",
         ecgImageUrl: "/ecg-report.png",
       },
-    
     ],
-  markdown,
+    markdown,
     icdCodes: [
       {
         id: "1",
@@ -353,36 +371,36 @@ export const patientPersona: PatientPersona[] = [
         isApproved: false,
         desc: "Diagnostic Radiology Procedures of the Lower Extremities",
       },
-    ]
+    ],
   },
-   {
-    "id": "762145",
-    "isSubmitted": false,
-     profileCreatedDate: new Date('9/2/2025 21:07:30').toISOString(),
-    "agentDetails": {
-      "agentIssue": "Autho",
-      "agentSuggestion": "Resubmit PA for CT scan (denied once)",
-      "coT": "Denial code shows “insufficient medical necessity” → agent requests escalation with radiology justification."
+  {
+    id: "762145",
+    isSubmitted: false,
+    profileCreatedDate: new Date("9/2/2025 21:07:30").toISOString(),
+    agentDetails: {
+      agentIssue: "Autho",
+      agentSuggestion: "Resubmit PA for CT scan (denied once)",
+      coT: "Denial code shows “insufficient medical necessity” → agent requests escalation with radiology justification.",
     },
-    "profile": {
-      "name": "Layla",
-      surname:"Mansour",
-      "age": 55,
-      "emiratesId": "748-1985-2233445-4",
-      "sex": "Female",
-      "dateOfBirth": "1985-07-21",
-      "nationality": "UAE",
-      "language": "Arabic",
-      "phoneNumber": "97155467830",
-      "email": "Sara.nuaimi@gmail.com",
-      profilePhoto: "/avatar.png"
+    profile: {
+      name: "Layla",
+      surname: "Mansour",
+      age: 55,
+      emiratesId: "748-1985-2233445-4",
+      sex: "Female",
+      dateOfBirth: "1985-07-21",
+      nationality: "UAE",
+      language: "Arabic",
+      phoneNumber: "97155467830",
+      email: "Sara.nuaimi@gmail.com",
+      profilePhoto: "/avatar.png",
     },
     eligibilityCheck: {
       status: "covered",
       insuranDetials: {
-        insuranceProvider: 'Daman-AUH-001',
+        insuranceProvider: "Daman-AUH-001",
         imageUrl: "/insurance-image.png",
-        policyNumber: "42122566"
+        policyNumber: "42122566",
       },
       details: [
         { label: "Network", value: "Yes" },
@@ -457,7 +475,6 @@ export const patientPersona: PatientPersona[] = [
         fileSize: "220 KB",
         ecgImageUrl: "/ecg-report.png",
       },
-    
     ],
     markdown,
     icdCodes: [
@@ -491,37 +508,37 @@ export const patientPersona: PatientPersona[] = [
         isApproved: false,
         desc: "Diagnostic Radiology Procedures of the Lower Extremities",
       },
-    ]
+    ],
   },
-   {
-    "id": "198307",
-    "isSubmitted": false,
-         profileCreatedDate: new Date('9/2/2025 21:41:15').toISOString(),
+  {
+    id: "198307",
+    isSubmitted: false,
+    profileCreatedDate: new Date("9/2/2025 21:41:15").toISOString(),
 
-    "agentDetails": {
-      "agentIssue": "Autho",
-      "agentSuggestion": "PA required for inpatient stay extension",
-      "coT": "Payer requires re-auth after 5 days; agent drafted but physician must confirm ongoing medical necessity."
+    agentDetails: {
+      agentIssue: "Autho",
+      agentSuggestion: "PA required for inpatient stay extension",
+      coT: "Payer requires re-auth after 5 days; agent drafted but physician must confirm ongoing medical necessity.",
     },
-    "profile": {
-      "name": "Huda",
+    profile: {
+      name: "Huda",
       surname: "Mansoor",
-      "age": 36,
-      "emiratesId": "748-1985-2233445-4",
-      "sex": "Female",
-      "dateOfBirth": "1985-07-21",
-      "nationality": "UAE",
-      "language": "Arabic",
-      "phoneNumber": "97155467830",
-      "email": "Sara.nuaimi@gmail.com",
-      profilePhoto: "/avatar.png"
+      age: 36,
+      emiratesId: "748-1985-2233445-4",
+      sex: "Female",
+      dateOfBirth: "1985-07-21",
+      nationality: "UAE",
+      language: "Arabic",
+      phoneNumber: "97155467830",
+      email: "Sara.nuaimi@gmail.com",
+      profilePhoto: "/avatar.png",
     },
     eligibilityCheck: {
       status: "covered",
       insuranDetials: {
-        insuranceProvider: 'Daman-AUH-001',
+        insuranceProvider: "Daman-AUH-001",
         imageUrl: "/insurance-image.png",
-        policyNumber: "42122566"
+        policyNumber: "42122566",
       },
       details: [
         { label: "Network", value: "Yes" },
@@ -579,8 +596,8 @@ export const patientPersona: PatientPersona[] = [
       {
         fileName: "SOB.pdf",
         fileSize: "200 KB",
-        ecgImageUrl: "/sob.pdf"
-        },
+        ecgImageUrl: "/sob.pdf",
+      },
       {
         fileName: "Exclusion.pdf",
         fileSize: "150 KB",
@@ -596,7 +613,6 @@ export const patientPersona: PatientPersona[] = [
         fileSize: "220 KB",
         ecgImageUrl: "/ecg-report.png",
       },
-    
     ],
     markdown,
     icdCodes: [
@@ -630,37 +646,37 @@ export const patientPersona: PatientPersona[] = [
         isApproved: false,
         desc: "Diagnostic Radiology Procedures of the Lower Extremities",
       },
-    ]
+    ],
   },
-   {
-    "id": "530412",
-    "isSubmitted": false,
-             profileCreatedDate: new Date('9/2/2025 22:15:00').toISOString(),
+  {
+    id: "530412",
+    isSubmitted: false,
+    profileCreatedDate: new Date("9/2/2025 22:15:00").toISOString(),
 
-    "agentDetails": {
-      "agentIssue": "Dee",
-      "agentSuggestion": "Draft appeal: “not medically necessary”",
-      "coT": "Denial code 50; flagged for physician medical justification + supporting guidelines."
+    agentDetails: {
+      agentIssue: "Dee",
+      agentSuggestion: "Draft appeal: “not medically necessary”",
+      coT: "Denial code 50; flagged for physician medical justification + supporting guidelines.",
     },
-    "profile": {
-      "name": "Olivier",
+    profile: {
+      name: "Olivier",
       surname: "Dubois",
-      "age": 44,
-      "emiratesId": "748-1985-2233445-4",
-      "sex": "Female",
-      "dateOfBirth": "1985-07-21",
-      "nationality": "UAE",
-      "language": "Arabic",
-      "phoneNumber": "97155467830",
-      "email": "Sara.nuaimi@gmail.com",
-      profilePhoto: "/avatar.png"
+      age: 44,
+      emiratesId: "748-1985-2233445-4",
+      sex: "Female",
+      dateOfBirth: "1985-07-21",
+      nationality: "UAE",
+      language: "Arabic",
+      phoneNumber: "97155467830",
+      email: "Sara.nuaimi@gmail.com",
+      profilePhoto: "/avatar.png",
     },
     eligibilityCheck: {
       status: "covered",
       insuranDetials: {
-        insuranceProvider: 'Daman-AUH-001',
+        insuranceProvider: "Daman-AUH-001",
         imageUrl: "/insurance-image.png",
-        policyNumber: "42122566"
+        policyNumber: "42122566",
       },
       details: [
         { label: "Network", value: "Yes" },
@@ -735,7 +751,6 @@ export const patientPersona: PatientPersona[] = [
         fileSize: "220 KB",
         ecgImageUrl: "/ecg-report.png",
       },
-    
     ],
     markdown,
     icdCodes: [
@@ -769,37 +784,37 @@ export const patientPersona: PatientPersona[] = [
         isApproved: false,
         desc: "Diagnostic Radiology Procedures of the Lower Extremities",
       },
-    ]
+    ],
   },
-   {
-    "id": "824691",
-    "isSubmitted": false,
-                 profileCreatedDate: new Date('9/2/2025 22:48:45').toISOString(),
+  {
+    id: "824691",
+    isSubmitted: false,
+    profileCreatedDate: new Date("9/2/2025 22:48:45").toISOString(),
 
-    "agentDetails": {
-      "agentIssue": "Dee",
-      "agentSuggestion": "Denial reason: experimental procedure",
-      "coT": "Payer denial flagged as investigational; requires physician statement + clinical literature."
+    agentDetails: {
+      agentIssue: "Dee",
+      agentSuggestion: "Denial reason: experimental procedure",
+      coT: "Payer denial flagged as investigational; requires physician statement + clinical literature.",
     },
-    "profile": {
-      "name": "Mariam ",
+    profile: {
+      name: "Mariam ",
       surname: "Yusuf",
-      "age": 37,
-      "emiratesId": "748-1985-2233445-4",
-      "sex": "Female",
-      "dateOfBirth": "1985-07-21",
-      "nationality": "UAE",
-      "language": "Arabic",
-      "phoneNumber": "97155467830",
-      "email": "Sara.nuaimi@gmail.com",
-      profilePhoto: "/avatar.png"
+      age: 37,
+      emiratesId: "748-1985-2233445-4",
+      sex: "Female",
+      dateOfBirth: "1985-07-21",
+      nationality: "UAE",
+      language: "Arabic",
+      phoneNumber: "97155467830",
+      email: "Sara.nuaimi@gmail.com",
+      profilePhoto: "/avatar.png",
     },
     eligibilityCheck: {
       status: "covered",
       insuranDetials: {
-        insuranceProvider: 'Daman-AUH-001',
+        insuranceProvider: "Daman-AUH-001",
         imageUrl: "/insurance-image.png",
-        policyNumber: "42122566"
+        policyNumber: "42122566",
       },
       details: [
         { label: "Network", value: "Yes" },
@@ -874,7 +889,6 @@ export const patientPersona: PatientPersona[] = [
         fileSize: "220 KB",
         ecgImageUrl: "/ecg-report.png",
       },
-    
     ],
     markdown,
     icdCodes: [
@@ -908,37 +922,38 @@ export const patientPersona: PatientPersona[] = [
         isApproved: false,
         desc: "Diagnostic Radiology Procedures of the Lower Extremities",
       },
-    ]
+    ],
   },
   {
-    "id": "315478",
-    "isSubmitted": false,
-                 profileCreatedDate: new Date('9/2/2025 23:22:30').toISOString(),
+    id: "315478",
+    isSubmitted: false,
+    profileCreatedDate: new Date("9/2/2025 23:22:30").toISOString(),
 
-    "agentDetails": {
-      "agentIssue": "Coda",
-      "agentSuggestion": "ICD-10: C34.9 (Malignant neoplasm of lung, unspecified)",
-      "coT": "SOAP: “suspicious lung lesion” without biopsy confirmation → risk of premature cancer coding."
+    agentDetails: {
+      agentIssue: "Coda",
+      agentSuggestion:
+        "ICD-10: C34.9 (Malignant neoplasm of lung, unspecified)",
+      coT: "SOAP: “suspicious lung lesion” without biopsy confirmation → risk of premature cancer coding.",
     },
-    "profile": {
-      "name": "Fatemeh ",
+    profile: {
+      name: "Fatemeh ",
       surname: "Esfandiari",
-      "age": 61,
-      "emiratesId": "748-1985-2233445-4",
-      "sex": "Female",
-      "dateOfBirth": "1985-07-21",
-      "nationality": "UAE",
-      "language": "Arabic",
-      "phoneNumber": "97155467830",
-      "email": "Sara.nuaimi@gmail.com",
-      profilePhoto: "/avatar.png"
+      age: 61,
+      emiratesId: "748-1985-2233445-4",
+      sex: "Female",
+      dateOfBirth: "1985-07-21",
+      nationality: "UAE",
+      language: "Arabic",
+      phoneNumber: "97155467830",
+      email: "Sara.nuaimi@gmail.com",
+      profilePhoto: "/avatar.png",
     },
     eligibilityCheck: {
       status: "covered",
       insuranDetials: {
-        insuranceProvider: 'Daman-AUH-001',
+        insuranceProvider: "Daman-AUH-001",
         imageUrl: "/insurance-image.png",
-        policyNumber: "42122566"
+        policyNumber: "42122566",
       },
       details: [
         { label: "Network", value: "Yes" },
@@ -1013,7 +1028,6 @@ export const patientPersona: PatientPersona[] = [
         fileSize: "220 KB",
         ecgImageUrl: "/ecg-report.png",
       },
-    
     ],
     markdown,
     icdCodes: [
@@ -1047,37 +1061,37 @@ export const patientPersona: PatientPersona[] = [
         isApproved: false,
         desc: "Diagnostic Radiology Procedures of the Lower Extremities",
       },
-    ]
+    ],
   },
   {
-    "id": "907263",
-    "isSubmitted": false,
-                 profileCreatedDate: new Date('9/2/2025 23:56:15').toISOString(),
+    id: "907263",
+    isSubmitted: false,
+    profileCreatedDate: new Date("9/2/2025 23:56:15").toISOString(),
 
-    "agentDetails": {
-      "agentIssue": "Payne",
-      "agentSuggestion": "ERA mismatch AED 450 vs 500 billed",
-      "coT": "Underpayment 10% below contract; payer adjustment reason code unclear → finance validation needed."
+    agentDetails: {
+      agentIssue: "Payne",
+      agentSuggestion: "ERA mismatch AED 450 vs 500 billed",
+      coT: "Underpayment 10% below contract; payer adjustment reason code unclear → finance validation needed.",
     },
-    "profile": {
-      "name": "John",
+    profile: {
+      name: "John",
       surname: "Williams",
-      "age": 60,
-      "emiratesId": "748-1985-2233445-4",
-      "sex": "Female",
-      "dateOfBirth": "1985-07-21",
-      "nationality": "UAE",
-      "language": "Arabic",
-      "phoneNumber": "97155467830",
-      "email": "Sara.nuaimi@gmail.com",
-      profilePhoto: "/avatar.png"
+      age: 60,
+      emiratesId: "748-1985-2233445-4",
+      sex: "Female",
+      dateOfBirth: "1985-07-21",
+      nationality: "UAE",
+      language: "Arabic",
+      phoneNumber: "97155467830",
+      email: "Sara.nuaimi@gmail.com",
+      profilePhoto: "/avatar.png",
     },
     eligibilityCheck: {
       status: "covered",
       insuranDetials: {
-        insuranceProvider: 'Daman-AUH-001',
+        insuranceProvider: "Daman-AUH-001",
         imageUrl: "/insurance-image.png",
-        policyNumber: "42122566"
+        policyNumber: "42122566",
       },
       details: [
         { label: "Network", value: "Yes" },
@@ -1152,7 +1166,6 @@ export const patientPersona: PatientPersona[] = [
         fileSize: "220 KB",
         ecgImageUrl: "/ecg-report.png",
       },
-    
     ],
     markdown,
     icdCodes: [
@@ -1186,37 +1199,37 @@ export const patientPersona: PatientPersona[] = [
         isApproved: false,
         desc: "Diagnostic Radiology Procedures of the Lower Extremities",
       },
-    ]
+    ],
   },
   {
-    "id": "451809",
-    "isSubmitted": false,
-                 profileCreatedDate: new Date('9/3/2025 0:30:00').toISOString(),
+    id: "451809",
+    isSubmitted: false,
+    profileCreatedDate: new Date("9/3/2025 0:30:00").toISOString(),
 
-    "agentDetails": {
-      "agentIssue": "Payne",
-      "agentSuggestion": "Partial payment received AED 700/1,200",
-      "coT": "Payer explanation of benefits shows patient deductible applied incorrectly."
+    agentDetails: {
+      agentIssue: "Payne",
+      agentSuggestion: "Partial payment received AED 700/1,200",
+      coT: "Payer explanation of benefits shows patient deductible applied incorrectly.",
     },
-    "profile": {
-      "name": "Sophie",
+    profile: {
+      name: "Sophie",
       surname: "Martin",
-      "age": 31,
-      "emiratesId": "748-1985-2233445-4",
-      "sex": "Female",
-      "dateOfBirth": "1985-07-21",
-      "nationality": "UAE",
-      "language": "Arabic",
-      "phoneNumber": "97155467830",
-      "email": "Sara.nuaimi@gmail.com",
-      profilePhoto: "/avatar.png"
+      age: 31,
+      emiratesId: "748-1985-2233445-4",
+      sex: "Female",
+      dateOfBirth: "1985-07-21",
+      nationality: "UAE",
+      language: "Arabic",
+      phoneNumber: "97155467830",
+      email: "Sara.nuaimi@gmail.com",
+      profilePhoto: "/avatar.png",
     },
     eligibilityCheck: {
       status: "covered",
       insuranDetials: {
-        insuranceProvider: 'Daman-AUH-001',
+        insuranceProvider: "Daman-AUH-001",
         imageUrl: "/insurance-image.png",
-        policyNumber: "42122566"
+        policyNumber: "42122566",
       },
       details: [
         { label: "Network", value: "Yes" },
@@ -1291,7 +1304,6 @@ export const patientPersona: PatientPersona[] = [
         fileSize: "220 KB",
         ecgImageUrl: "/ecg-report.png",
       },
-    
     ],
     markdown,
     icdCodes: [
@@ -1325,37 +1337,37 @@ export const patientPersona: PatientPersona[] = [
         isApproved: false,
         desc: "Diagnostic Radiology Procedures of the Lower Extremities",
       },
-    ]
+    ],
   },
-   {
-    "id": "672354",
-    "isSubmitted": false,
-                 profileCreatedDate: new Date('9/3/2025 1:03:45').toISOString(),
+  {
+    id: "672354",
+    isSubmitted: false,
+    profileCreatedDate: new Date("9/3/2025 1:03:45").toISOString(),
 
-    "agentDetails": {
-      "agentIssue": "Autho",
-      "agentSuggestion": "Missing authorization for infusion J1745",
-      "coT": "Agent mapped drug code but payer benefit plan excludes biologic → requires override."
+    agentDetails: {
+      agentIssue: "Autho",
+      agentSuggestion: "Missing authorization for infusion J1745",
+      coT: "Agent mapped drug code but payer benefit plan excludes biologic → requires override.",
     },
-    "profile": {
-      "name": "Leila",
+    profile: {
+      name: "Leila",
       surname: "Haddad",
-      "age": 28,
-      "emiratesId": "748-1985-2233445-4",
-      "sex": "Female",
-      "dateOfBirth": "1985-07-21",
-      "nationality": "UAE",
-      "language": "Arabic",
-      "phoneNumber": "97155467830",
-      "email": "Sara.nuaimi@gmail.com",
-      profilePhoto: "/avatar.png"
+      age: 28,
+      emiratesId: "748-1985-2233445-4",
+      sex: "Female",
+      dateOfBirth: "1985-07-21",
+      nationality: "UAE",
+      language: "Arabic",
+      phoneNumber: "97155467830",
+      email: "Sara.nuaimi@gmail.com",
+      profilePhoto: "/avatar.png",
     },
     eligibilityCheck: {
       status: "covered",
       insuranDetials: {
-        insuranceProvider: 'Daman-AUH-001',
+        insuranceProvider: "Daman-AUH-001",
         imageUrl: "/insurance-image.png",
-        policyNumber: "42122566"
+        policyNumber: "42122566",
       },
       details: [
         { label: "Network", value: "Yes" },
@@ -1430,7 +1442,6 @@ export const patientPersona: PatientPersona[] = [
         fileSize: "220 KB",
         ecgImageUrl: "/ecg-report.png",
       },
-    
     ],
     markdown,
     icdCodes: [
@@ -1464,37 +1475,37 @@ export const patientPersona: PatientPersona[] = [
         isApproved: false,
         desc: "Diagnostic Radiology Procedures of the Lower Extremities",
       },
-    ]
+    ],
   },
-   {
-    "id": "284931",
-    "isSubmitted": false,
-                 profileCreatedDate: new Date('9/3/2025 1:37:30').toISOString(),
+  {
+    id: "284931",
+    isSubmitted: false,
+    profileCreatedDate: new Date("9/3/2025 1:37:30").toISOString(),
 
-    "agentDetails": {
-      "agentIssue": "Clara",
-      "agentSuggestion": "Duplicate claim batch detected",
-      "coT": "Two encounters submitted with identical DOS; payer likely to reject for duplication."
+    agentDetails: {
+      agentIssue: "Clara",
+      agentSuggestion: "Duplicate claim batch detected",
+      coT: "Two encounters submitted with identical DOS; payer likely to reject for duplication.",
     },
-    "profile": {
-      "name": "Marcus",
+    profile: {
+      name: "Marcus",
       surname: "Green",
-      "age": 57,
-      "emiratesId": "748-1985-2233445-4",
-      "sex": "Female",
-      "dateOfBirth": "1985-07-21",
-      "nationality": "UAE",
-      "language": "Arabic",
-      "phoneNumber": "97155467830",
-      "email": "Sara.nuaimi@gmail.com",
-      profilePhoto: "/avatar.png"
+      age: 57,
+      emiratesId: "748-1985-2233445-4",
+      sex: "Female",
+      dateOfBirth: "1985-07-21",
+      nationality: "UAE",
+      language: "Arabic",
+      phoneNumber: "97155467830",
+      email: "Sara.nuaimi@gmail.com",
+      profilePhoto: "/avatar.png",
     },
     eligibilityCheck: {
       status: "covered",
       insuranDetials: {
-        insuranceProvider: 'Daman-AUH-001',
+        insuranceProvider: "Daman-AUH-001",
         imageUrl: "/insurance-image.png",
-        policyNumber: "42122566"
+        policyNumber: "42122566",
       },
       details: [
         { label: "Network", value: "Yes" },
@@ -1569,7 +1580,6 @@ export const patientPersona: PatientPersona[] = [
         fileSize: "220 KB",
         ecgImageUrl: "/ecg-report.png",
       },
-    
     ],
     markdown,
     icdCodes: [
@@ -1603,37 +1613,37 @@ export const patientPersona: PatientPersona[] = [
         isApproved: false,
         desc: "Diagnostic Radiology Procedures of the Lower Extremities",
       },
-    ]
+    ],
   },
   {
-    "id": "905127",
-    "isSubmitted": false,
-                 profileCreatedDate: new Date('9/3/2025 2:11:15').toISOString(),
+    id: "905127",
+    isSubmitted: false,
+    profileCreatedDate: new Date("9/3/2025 2:11:15").toISOString(),
 
-    "agentDetails": {
-      "agentIssue": "Clara",
-      "agentSuggestion": "XML rejected → missing prior auth ID",
-      "coT": "System populated wrong PA reference number (from earlier encounter) → mismatch flagged."
+    agentDetails: {
+      agentIssue: "Clara",
+      agentSuggestion: "XML rejected → missing prior auth ID",
+      coT: "System populated wrong PA reference number (from earlier encounter) → mismatch flagged.",
     },
-    "profile": {
-      "name": "Ali",
+    profile: {
+      name: "Ali",
       surname: "Hassan",
-      "age": 50,
-      "emiratesId": "748-1985-2233445-4",
-      "sex": "Female",
-      "dateOfBirth": "1985-07-21",
-      "nationality": "UAE",
-      "language": "Arabic",
-      "phoneNumber": "97155467830",
-      "email": "Sara.nuaimi@gmail.com",
-      profilePhoto: "/avatar.png"
+      age: 50,
+      emiratesId: "748-1985-2233445-4",
+      sex: "Female",
+      dateOfBirth: "1985-07-21",
+      nationality: "UAE",
+      language: "Arabic",
+      phoneNumber: "97155467830",
+      email: "Sara.nuaimi@gmail.com",
+      profilePhoto: "/avatar.png",
     },
     eligibilityCheck: {
       status: "covered",
       insuranDetials: {
-        insuranceProvider: 'Daman-AUH-001',
+        insuranceProvider: "Daman-AUH-001",
         imageUrl: "/insurance-image.png",
-        policyNumber: "42122566"
+        policyNumber: "42122566",
       },
       details: [
         { label: "Network", value: "Yes" },
@@ -1708,7 +1718,6 @@ export const patientPersona: PatientPersona[] = [
         fileSize: "220 KB",
         ecgImageUrl: "/ecg-report.png",
       },
-    
     ],
     markdown,
     icdCodes: [
@@ -1742,37 +1751,37 @@ export const patientPersona: PatientPersona[] = [
         isApproved: false,
         desc: "Diagnostic Radiology Procedures of the Lower Extremities",
       },
-    ]
-  }, 
+    ],
+  },
   {
-    "id": "316842",
-    "isSubmitted": false,
-                 profileCreatedDate: new Date('9/3/2025 2:45:00').toISOString(),
+    id: "316842",
+    isSubmitted: false,
+    profileCreatedDate: new Date("9/3/2025 2:45:00").toISOString(),
 
-    "agentDetails": {
-      "agentIssue": "Clara",
-      "agentSuggestion": "Claim rejected → invalid date of service",
-      "coT": "Date auto-pulled from discharge summary instead of encounter start; schema validator failed."
+    agentDetails: {
+      agentIssue: "Clara",
+      agentSuggestion: "Claim rejected → invalid date of service",
+      coT: "Date auto-pulled from discharge summary instead of encounter start; schema validator failed.",
     },
-    "profile": {
-      "name": "Maria",
+    profile: {
+      name: "Maria",
       surname: "Lopez",
-      "age": 39,
-      "emiratesId": "748-1985-2233445-4",
-      "sex": "Female",
-      "dateOfBirth": "1985-07-21",
-      "nationality": "UAE",
-      "language": "Arabic",
-      "phoneNumber": "97155467830",
-      "email": "Sara.nuaimi@gmail.com",
-      profilePhoto: "/avatar.png"
+      age: 39,
+      emiratesId: "748-1985-2233445-4",
+      sex: "Female",
+      dateOfBirth: "1985-07-21",
+      nationality: "UAE",
+      language: "Arabic",
+      phoneNumber: "97155467830",
+      email: "Sara.nuaimi@gmail.com",
+      profilePhoto: "/avatar.png",
     },
     eligibilityCheck: {
       status: "covered",
       insuranDetials: {
-        insuranceProvider: 'Daman-AUH-001',
+        insuranceProvider: "Daman-AUH-001",
         imageUrl: "/insurance-image.png",
-        policyNumber: "42122566"
+        policyNumber: "42122566",
       },
       details: [
         { label: "Network", value: "Yes" },
@@ -1847,7 +1856,6 @@ export const patientPersona: PatientPersona[] = [
         fileSize: "220 KB",
         ecgImageUrl: "/ecg-report.png",
       },
-    
     ],
     markdown,
     icdCodes: [
@@ -1881,37 +1889,37 @@ export const patientPersona: PatientPersona[] = [
         isApproved: false,
         desc: "Diagnostic Radiology Procedures of the Lower Extremities",
       },
-    ]
+    ],
   },
   {
-    "id": "748509",
-    "isSubmitted": false,
-                 profileCreatedDate: new Date('9/3/2025 3:18:45').toISOString(),
+    id: "748509",
+    isSubmitted: false,
+    profileCreatedDate: new Date("9/3/2025 3:18:45").toISOString(),
 
-    "agentDetails": {
-      "agentIssue": "Clara",
-      "agentSuggestion": "Resubmit claim batch with corrected provider ID",
-      "coT": "Provider NPI differs between header and service line → flagged inconsistency."
+    agentDetails: {
+      agentIssue: "Clara",
+      agentSuggestion: "Resubmit claim batch with corrected provider ID",
+      coT: "Provider NPI differs between header and service line → flagged inconsistency.",
     },
-    "profile": {
-      "name": "Jamal",
+    profile: {
+      name: "Jamal",
       surname: "Hassan",
-      "age": 51,
-      "emiratesId": "748-1985-2233445-4",
-      "sex": "Female",
-      "dateOfBirth": "1985-07-21",
-      "nationality": "UAE",
-      "language": "Arabic",
-      "phoneNumber": "97155467830",
-      "email": "Sara.nuaimi@gmail.com",
-      profilePhoto: "/avatar.png"
+      age: 51,
+      emiratesId: "748-1985-2233445-4",
+      sex: "Female",
+      dateOfBirth: "1985-07-21",
+      nationality: "UAE",
+      language: "Arabic",
+      phoneNumber: "97155467830",
+      email: "Sara.nuaimi@gmail.com",
+      profilePhoto: "/avatar.png",
     },
     eligibilityCheck: {
       status: "covered",
       insuranDetials: {
-        insuranceProvider: 'Daman-AUH-001',
+        insuranceProvider: "Daman-AUH-001",
         imageUrl: "/insurance-image.png",
-        policyNumber: "42122566"
+        policyNumber: "42122566",
       },
       details: [
         { label: "Network", value: "Yes" },
@@ -1986,7 +1994,6 @@ export const patientPersona: PatientPersona[] = [
         fileSize: "220 KB",
         ecgImageUrl: "/ecg-report.png",
       },
-    
     ],
     markdown,
     icdCodes: [
@@ -2020,37 +2027,37 @@ export const patientPersona: PatientPersona[] = [
         isApproved: false,
         desc: "Diagnostic Radiology Procedures of the Lower Extremities",
       },
-    ]
+    ],
   },
-   {
-    "id": "293608",
-    "isSubmitted": false,
-                 profileCreatedDate: new Date('9/3/2025 3:52:30').toISOString(),
+  {
+    id: "293608",
+    isSubmitted: false,
+    profileCreatedDate: new Date("9/3/2025 3:52:30").toISOString(),
 
-    "agentDetails": {
-      "agentIssue": "Dee",
-      "agentSuggestion": "Draft appeal: missing modifier CPT 93010",
-      "coT": "Payer denied ECG professional component; appeal drafted to add modifier -26."
+    agentDetails: {
+      agentIssue: "Dee",
+      agentSuggestion: "Draft appeal: missing modifier CPT 93010",
+      coT: "Payer denied ECG professional component; appeal drafted to add modifier -26.",
     },
-    "profile": {
-      "name": "John",
+    profile: {
+      name: "John",
       surname: "Smith",
-      "age": 52,
-      "emiratesId": "748-1985-2233445-4",
-      "sex": "Female",
-      "dateOfBirth": "1985-07-21",
-      "nationality": "UAE",
-      "language": "Arabic",
-      "phoneNumber": "97155467830",
-      "email": "Sara.nuaimi@gmail.com",
-      profilePhoto: "/avatar.png"
+      age: 52,
+      emiratesId: "748-1985-2233445-4",
+      sex: "Female",
+      dateOfBirth: "1985-07-21",
+      nationality: "UAE",
+      language: "Arabic",
+      phoneNumber: "97155467830",
+      email: "Sara.nuaimi@gmail.com",
+      profilePhoto: "/avatar.png",
     },
     eligibilityCheck: {
       status: "covered",
       insuranDetials: {
-        insuranceProvider: 'Daman-AUH-001',
+        insuranceProvider: "Daman-AUH-001",
         imageUrl: "/insurance-image.png",
-        policyNumber: "42122566"
+        policyNumber: "42122566",
       },
       details: [
         { label: "Network", value: "Yes" },
@@ -2125,7 +2132,6 @@ export const patientPersona: PatientPersona[] = [
         fileSize: "220 KB",
         ecgImageUrl: "/ecg-report.png",
       },
-    
     ],
     markdown,
     icdCodes: [
@@ -2159,37 +2165,37 @@ export const patientPersona: PatientPersona[] = [
         isApproved: false,
         desc: "Diagnostic Radiology Procedures of the Lower Extremities",
       },
-    ]
+    ],
   },
   {
-    "id": "857134",
-    "isSubmitted": false,
-                 profileCreatedDate: new Date('9/3/2025 4:26:15').toISOString(),
+    id: "857134",
+    isSubmitted: false,
+    profileCreatedDate: new Date("9/3/2025 4:26:15").toISOString(),
 
-    "agentDetails": {
-      "agentIssue": "Payne",
-      "agentSuggestion": "Matched remit but offset applied",
-      "coT": "Offset applied to unrelated claim batch; flagged for manual allocation."
+    agentDetails: {
+      agentIssue: "Payne",
+      agentSuggestion: "Matched remit but offset applied",
+      coT: "Offset applied to unrelated claim batch; flagged for manual allocation.",
     },
-    "profile": {
-      "name": "Karim",
+    profile: {
+      name: "Karim",
       surname: "Osman",
-      "age": 49,
-      "emiratesId": "748-1985-2233445-4",
-      "sex": "Female",
-      "dateOfBirth": "1985-07-21",
-      "nationality": "UAE",
-      "language": "Arabic",
-      "phoneNumber": "97155467830",
-      "email": "Sara.nuaimi@gmail.com",
-      profilePhoto: "/avatar.png"
+      age: 49,
+      emiratesId: "748-1985-2233445-4",
+      sex: "Female",
+      dateOfBirth: "1985-07-21",
+      nationality: "UAE",
+      language: "Arabic",
+      phoneNumber: "97155467830",
+      email: "Sara.nuaimi@gmail.com",
+      profilePhoto: "/avatar.png",
     },
     eligibilityCheck: {
       status: "covered",
       insuranDetials: {
-        insuranceProvider: 'Daman-AUH-001',
+        insuranceProvider: "Daman-AUH-001",
         imageUrl: "/insurance-image.png",
-        policyNumber: "42122566"
+        policyNumber: "42122566",
       },
       details: [
         { label: "Network", value: "Yes" },
@@ -2264,7 +2270,6 @@ export const patientPersona: PatientPersona[] = [
         fileSize: "220 KB",
         ecgImageUrl: "/ecg-report.png",
       },
-    
     ],
     markdown,
     icdCodes: [
@@ -2298,37 +2303,37 @@ export const patientPersona: PatientPersona[] = [
         isApproved: false,
         desc: "Diagnostic Radiology Procedures of the Lower Extremities",
       },
-    ]
+    ],
   },
-    {
-    "id": "409672",
-    "isSubmitted": false,
-                 profileCreatedDate: new Date('9/3/2025 5:00:00').toISOString(),
+  {
+    id: "409672",
+    isSubmitted: false,
+    profileCreatedDate: new Date("9/3/2025 5:00:00").toISOString(),
 
-    "agentDetails": {
-      "agentIssue": "Dee",
-      "agentSuggestion": "Auto-resolved denial: late filing → corrected",
-      "coT": "Waiver rule applied because payer accepted 30-day grace period; auto-refiled."
+    agentDetails: {
+      agentIssue: "Dee",
+      agentSuggestion: "Auto-resolved denial: late filing → corrected",
+      coT: "Waiver rule applied because payer accepted 30-day grace period; auto-refiled.",
     },
-    "profile": {
-      "name": "Ahmad",
+    profile: {
+      name: "Ahmad",
       surname: "Saleh",
-      "age": 47,
-      "emiratesId": "748-1985-2233445-4",
-      "sex": "Female",
-      "dateOfBirth": "1985-07-21",
-      "nationality": "UAE",
-      "language": "Arabic",
-      "phoneNumber": "97155467830",
-      "email": "Sara.nuaimi@gmail.com",
-      profilePhoto: "/avatar.png"
+      age: 47,
+      emiratesId: "748-1985-2233445-4",
+      sex: "Female",
+      dateOfBirth: "1985-07-21",
+      nationality: "UAE",
+      language: "Arabic",
+      phoneNumber: "97155467830",
+      email: "Sara.nuaimi@gmail.com",
+      profilePhoto: "/avatar.png",
     },
     eligibilityCheck: {
       status: "covered",
       insuranDetials: {
-        insuranceProvider: 'Daman-AUH-001',
+        insuranceProvider: "Daman-AUH-001",
         imageUrl: "/insurance-image.png",
-        policyNumber: "42122566"
+        policyNumber: "42122566",
       },
       details: [
         { label: "Network", value: "Yes" },
@@ -2403,7 +2408,6 @@ export const patientPersona: PatientPersona[] = [
         fileSize: "220 KB",
         ecgImageUrl: "/ecg-report.png",
       },
-    
     ],
     markdown,
     icdCodes: [
@@ -2437,37 +2441,37 @@ export const patientPersona: PatientPersona[] = [
         isApproved: false,
         desc: "Diagnostic Radiology Procedures of the Lower Extremities",
       },
-    ]
+    ],
   },
-   {
-    "id": "621395",
-    "isSubmitted": false,
-                 profileCreatedDate: new Date('9/3/2025 5:33:45').toISOString(),
+  {
+    id: "621395",
+    isSubmitted: false,
+    profileCreatedDate: new Date("9/3/2025 5:33:45").toISOString(),
 
-    "agentDetails": {
-      "agentIssue": "Coda",
-      "agentSuggestion": "ICD-10: K52.9 (Noninfective gastroenteritis)",
-      "coT": "Note says “chronic diarrhea, unclear etiology” → could be functional vs inflammatory → flagged."
+    agentDetails: {
+      agentIssue: "Coda",
+      agentSuggestion: "ICD-10: K52.9 (Noninfective gastroenteritis)",
+      coT: "Note says “chronic diarrhea, unclear etiology” → could be functional vs inflammatory → flagged.",
     },
-    "profile": {
-      "name": "Yasmine",
+    profile: {
+      name: "Yasmine",
       surname: "Al Farsi",
-      "age": 42,
-      "emiratesId": "748-1985-2233445-4",
-      "sex": "Female",
-      "dateOfBirth": "1985-07-21",
-      "nationality": "UAE",
-      "language": "Arabic",
-      "phoneNumber": "97155467830",
-      "email": "Sara.nuaimi@gmail.com",
-      profilePhoto: "/avatar.png"
+      age: 42,
+      emiratesId: "748-1985-2233445-4",
+      sex: "Female",
+      dateOfBirth: "1985-07-21",
+      nationality: "UAE",
+      language: "Arabic",
+      phoneNumber: "97155467830",
+      email: "Sara.nuaimi@gmail.com",
+      profilePhoto: "/avatar.png",
     },
     eligibilityCheck: {
       status: "covered",
       insuranDetials: {
-        insuranceProvider: 'Daman-AUH-001',
+        insuranceProvider: "Daman-AUH-001",
         imageUrl: "/insurance-image.png",
-        policyNumber: "42122566"
+        policyNumber: "42122566",
       },
       details: [
         { label: "Network", value: "Yes" },
@@ -2542,7 +2546,6 @@ export const patientPersona: PatientPersona[] = [
         fileSize: "220 KB",
         ecgImageUrl: "/ecg-report.png",
       },
-    
     ],
     markdown,
     icdCodes: [
@@ -2576,37 +2579,37 @@ export const patientPersona: PatientPersona[] = [
         isApproved: false,
         desc: "Diagnostic Radiology Procedures of the Lower Extremities",
       },
-    ]
+    ],
   },
   {
-    "id": "784210",
-    "isSubmitted": false,
-                 profileCreatedDate: new Date('9/3/2025 6:07:30').toISOString(),
+    id: "784210",
+    isSubmitted: false,
+    profileCreatedDate: new Date("9/3/2025 6:07:30").toISOString(),
 
-    "agentDetails": {
-      "agentIssue": "Clara",
-      "agentSuggestion": "Claim batch flagged: inconsistent revenue codes",
-      "coT": "Service line had revenue code not aligned with CPT group; schema flagged risk."
+    agentDetails: {
+      agentIssue: "Clara",
+      agentSuggestion: "Claim batch flagged: inconsistent revenue codes",
+      coT: "Service line had revenue code not aligned with CPT group; schema flagged risk.",
     },
-    "profile": {
-      "name": "Imran",
+    profile: {
+      name: "Imran",
       surname: "Bashir",
-      "age": 63,
-      "emiratesId": "748-1985-2233445-4",
-      "sex": "Female",
-      "dateOfBirth": "1985-07-21",
-      "nationality": "UAE",
-      "language": "Arabic",
-      "phoneNumber": "97155467830",
-      "email": "Sara.nuaimi@gmail.com",
-      profilePhoto: "/avatar.png"
+      age: 63,
+      emiratesId: "748-1985-2233445-4",
+      sex: "Female",
+      dateOfBirth: "1985-07-21",
+      nationality: "UAE",
+      language: "Arabic",
+      phoneNumber: "97155467830",
+      email: "Sara.nuaimi@gmail.com",
+      profilePhoto: "/avatar.png",
     },
     eligibilityCheck: {
       status: "covered",
       insuranDetials: {
-        insuranceProvider: 'Daman-AUH-001',
+        insuranceProvider: "Daman-AUH-001",
         imageUrl: "/insurance-image.png",
-        policyNumber: "42122566"
+        policyNumber: "42122566",
       },
       details: [
         { label: "Network", value: "Yes" },
@@ -2681,7 +2684,6 @@ export const patientPersona: PatientPersona[] = [
         fileSize: "220 KB",
         ecgImageUrl: "/ecg-report.png",
       },
-    
     ],
     markdown,
     icdCodes: [
@@ -2715,37 +2717,37 @@ export const patientPersona: PatientPersona[] = [
         isApproved: false,
         desc: "Diagnostic Radiology Procedures of the Lower Extremities",
       },
-    ]
+    ],
   },
   {
-    "id": "359682",
-    "isSubmitted": false,
-                 profileCreatedDate: new Date('9/3/2025 6:41:15').toISOString(),
+    id: "359682",
+    isSubmitted: false,
+    profileCreatedDate: new Date("9/3/2025 6:41:15").toISOString(),
 
-    "agentDetails": {
-      "agentIssue": "Coda",
-      "agentSuggestion": "ICD-10: E66.9 (Obesity, unspecified)",
-      "coT": "SOAP note: “BMI 32, mild hypertension” → borderline case; payer may deny if BMI <35."
+    agentDetails: {
+      agentIssue: "Coda",
+      agentSuggestion: "ICD-10: E66.9 (Obesity, unspecified)",
+      coT: "SOAP note: “BMI 32, mild hypertension” → borderline case; payer may deny if BMI <35.",
     },
-    "profile": {
-      "name": "Samira",
+    profile: {
+      name: "Samira",
       surname: "Khan",
-      "age": 38,
-      "emiratesId": "748-1985-2233445-4",
-      "sex": "Female",
-      "dateOfBirth": "1985-07-21",
-      "nationality": "UAE",
-      "language": "Arabic",
-      "phoneNumber": "97155467830",
-      "email": "Sara.nuaimi@gmail.com",
-      profilePhoto: "/avatar.png"
+      age: 38,
+      emiratesId: "748-1985-2233445-4",
+      sex: "Female",
+      dateOfBirth: "1985-07-21",
+      nationality: "UAE",
+      language: "Arabic",
+      phoneNumber: "97155467830",
+      email: "Sara.nuaimi@gmail.com",
+      profilePhoto: "/avatar.png",
     },
     eligibilityCheck: {
       status: "covered",
       insuranDetials: {
-        insuranceProvider: 'Daman-AUH-001',
+        insuranceProvider: "Daman-AUH-001",
         imageUrl: "/insurance-image.png",
-        policyNumber: "42122566"
+        policyNumber: "42122566",
       },
       details: [
         { label: "Network", value: "Yes" },
@@ -2820,7 +2822,6 @@ export const patientPersona: PatientPersona[] = [
         fileSize: "220 KB",
         ecgImageUrl: "/ecg-report.png",
       },
-    
     ],
     markdown,
     icdCodes: [
@@ -2854,37 +2855,37 @@ export const patientPersona: PatientPersona[] = [
         isApproved: false,
         desc: "Diagnostic Radiology Procedures of the Lower Extremities",
       },
-    ]
+    ],
   },
   {
-    "id": "928401",
-    "isSubmitted": false,
-                 profileCreatedDate: new Date('9/3/2025 7:15:00').toISOString(),
+    id: "928401",
+    isSubmitted: false,
+    profileCreatedDate: new Date("9/3/2025 7:15:00").toISOString(),
 
-    "agentDetails": {
-      "agentIssue": "Dee",
-      "agentSuggestion": "Appeal drafted: coverage terminated mid-stay",
-      "coT": "Inpatient claim denied after coverage ended; requires payer escalation."
+    agentDetails: {
+      agentIssue: "Dee",
+      agentSuggestion: "Appeal drafted: coverage terminated mid-stay",
+      coT: "Inpatient claim denied after coverage ended; requires payer escalation.",
     },
-    "profile": {
-      "name": "Daniel",
+    profile: {
+      name: "Daniel",
       surname: "Ruiz",
-      "age": 59,
-      "emiratesId": "748-1985-2233445-4",
-      "sex": "Female",
-      "dateOfBirth": "1985-07-21",
-      "nationality": "UAE",
-      "language": "Arabic",
-      "phoneNumber": "97155467830",
-      "email": "Sara.nuaimi@gmail.com",
-      profilePhoto: "/avatar.png"
+      age: 59,
+      emiratesId: "748-1985-2233445-4",
+      sex: "Female",
+      dateOfBirth: "1985-07-21",
+      nationality: "UAE",
+      language: "Arabic",
+      phoneNumber: "97155467830",
+      email: "Sara.nuaimi@gmail.com",
+      profilePhoto: "/avatar.png",
     },
     eligibilityCheck: {
       status: "covered",
       insuranDetials: {
-        insuranceProvider: 'Daman-AUH-001',
+        insuranceProvider: "Daman-AUH-001",
         imageUrl: "/insurance-image.png",
-        policyNumber: "42122566"
+        policyNumber: "42122566",
       },
       details: [
         { label: "Network", value: "Yes" },
@@ -2959,7 +2960,6 @@ export const patientPersona: PatientPersona[] = [
         fileSize: "220 KB",
         ecgImageUrl: "/ecg-report.png",
       },
-    
     ],
     markdown,
     icdCodes: [
@@ -2993,37 +2993,37 @@ export const patientPersona: PatientPersona[] = [
         isApproved: false,
         desc: "Diagnostic Radiology Procedures of the Lower Extremities",
       },
-    ]
+    ],
   },
   {
-    "id": "174563",
-    "isSubmitted": false,
-                 profileCreatedDate: new Date('9/3/2025 7:48:45').toISOString(),
+    id: "174563",
+    isSubmitted: false,
+    profileCreatedDate: new Date("9/3/2025 7:48:45").toISOString(),
 
-    "agentDetails": {
-      "agentIssue": "Payne",
-      "agentSuggestion": "Overpayment detected AED 1,200 vs 1,000 billed",
-      "coT": "Over-remit posted; agent waiting to avoid duplicate refund cycle."
+    agentDetails: {
+      agentIssue: "Payne",
+      agentSuggestion: "Overpayment detected AED 1,200 vs 1,000 billed",
+      coT: "Over-remit posted; agent waiting to avoid duplicate refund cycle.",
     },
-    "profile": {
-      "name": "Paul",
+    profile: {
+      name: "Paul",
       surname: "Andersen",
-      "age": 45,
-      "emiratesId": "748-1985-2233445-4",
-      "sex": "Female",
-      "dateOfBirth": "1985-07-21",
-      "nationality": "UAE",
-      "language": "Arabic",
-      "phoneNumber": "97155467830",
-      "email": "Sara.nuaimi@gmail.com",
-      profilePhoto: "/avatar.png"
+      age: 45,
+      emiratesId: "748-1985-2233445-4",
+      sex: "Female",
+      dateOfBirth: "1985-07-21",
+      nationality: "UAE",
+      language: "Arabic",
+      phoneNumber: "97155467830",
+      email: "Sara.nuaimi@gmail.com",
+      profilePhoto: "/avatar.png",
     },
     eligibilityCheck: {
       status: "covered",
       insuranDetials: {
-        insuranceProvider: 'Daman-AUH-001',
+        insuranceProvider: "Daman-AUH-001",
         imageUrl: "/insurance-image.png",
-        policyNumber: "42122566"
+        policyNumber: "42122566",
       },
       details: [
         { label: "Network", value: "Yes" },
@@ -3098,7 +3098,6 @@ export const patientPersona: PatientPersona[] = [
         fileSize: "220 KB",
         ecgImageUrl: "/ecg-report.png",
       },
-    
     ],
     markdown,
     icdCodes: [
@@ -3132,37 +3131,37 @@ export const patientPersona: PatientPersona[] = [
         isApproved: false,
         desc: "Diagnostic Radiology Procedures of the Lower Extremities",
       },
-    ]
+    ],
   },
   {
-    "id": "836092",
-    "isSubmitted": false,
-                 profileCreatedDate: new Date('9/3/2025 8:22:30').toISOString(),
+    id: "836092",
+    isSubmitted: false,
+    profileCreatedDate: new Date("9/3/2025 8:22:30").toISOString(),
 
-    "agentDetails": {
-      "agentIssue": "Autho",
-      "agentSuggestion": "Resubmit PA for physical therapy",
-      "coT": "Payer limit exceeded (10 sessions); requires medical director override."
+    agentDetails: {
+      agentIssue: "Autho",
+      agentSuggestion: "Resubmit PA for physical therapy",
+      coT: "Payer limit exceeded (10 sessions); requires medical director override.",
     },
-    "profile": {
-      "name": "Laila",
+    profile: {
+      name: "Laila",
       surname: "Karim",
-      "age": 33,
-      "emiratesId": "748-1985-2233445-4",
-      "sex": "Female",
-      "dateOfBirth": "1985-07-21",
-      "nationality": "UAE",
-      "language": "Arabic",
-      "phoneNumber": "97155467830",
-      "email": "Sara.nuaimi@gmail.com",
-      profilePhoto: "/avatar.png"
+      age: 33,
+      emiratesId: "748-1985-2233445-4",
+      sex: "Female",
+      dateOfBirth: "1985-07-21",
+      nationality: "UAE",
+      language: "Arabic",
+      phoneNumber: "97155467830",
+      email: "Sara.nuaimi@gmail.com",
+      profilePhoto: "/avatar.png",
     },
     eligibilityCheck: {
       status: "covered",
       insuranDetials: {
-        insuranceProvider: 'Daman-AUH-001',
+        insuranceProvider: "Daman-AUH-001",
         imageUrl: "/insurance-image.png",
-        policyNumber: "42122566"
+        policyNumber: "42122566",
       },
       details: [
         { label: "Network", value: "Yes" },
@@ -3237,7 +3236,6 @@ export const patientPersona: PatientPersona[] = [
         fileSize: "220 KB",
         ecgImageUrl: "/ecg-report.png",
       },
-    
     ],
     markdown,
     icdCodes: [
@@ -3271,37 +3269,37 @@ export const patientPersona: PatientPersona[] = [
         isApproved: false,
         desc: "Diagnostic Radiology Procedures of the Lower Extremities",
       },
-    ]
+    ],
   },
   {
-    "id": "492781",
-    "isSubmitted": false,
-                 profileCreatedDate: new Date('9/3/2025 8:56:15').toISOString(),
+    id: "492781",
+    isSubmitted: false,
+    profileCreatedDate: new Date("9/3/2025 8:56:15").toISOString(),
 
-    "agentDetails": {
-      "agentIssue": "Autho",
-      "agentSuggestion": "Submit PA for CPT 99213 (outpatient follow-up)",
-      "coT": "CPT mapped to follow-up, but payer unexpectedly requires PA for low-acuity outpatient codes → flagged as unusual."
+    agentDetails: {
+      agentIssue: "Autho",
+      agentSuggestion: "Submit PA for CPT 99213 (outpatient follow-up)",
+      coT: "CPT mapped to follow-up, but payer unexpectedly requires PA for low-acuity outpatient codes → flagged as unusual.",
     },
-    "profile": {
-      "name": "Omar",
+    profile: {
+      name: "Omar",
       surname: "Khaled",
-      "age": 62,
-      "emiratesId": "748-1985-2233445-4",
-      "sex": "Female",
-      "dateOfBirth": "1985-07-21",
-      "nationality": "UAE",
-      "language": "Arabic",
-      "phoneNumber": "97155467830",
-      "email": "Sara.nuaimi@gmail.com",
-      profilePhoto: "/avatar.png"
+      age: 62,
+      emiratesId: "748-1985-2233445-4",
+      sex: "Female",
+      dateOfBirth: "1985-07-21",
+      nationality: "UAE",
+      language: "Arabic",
+      phoneNumber: "97155467830",
+      email: "Sara.nuaimi@gmail.com",
+      profilePhoto: "/avatar.png",
     },
     eligibilityCheck: {
       status: "covered",
       insuranDetials: {
-        insuranceProvider: 'Daman-AUH-001',
+        insuranceProvider: "Daman-AUH-001",
         imageUrl: "/insurance-image.png",
-        policyNumber: "42122566"
+        policyNumber: "42122566",
       },
       details: [
         { label: "Network", value: "Yes" },
@@ -3376,7 +3374,6 @@ export const patientPersona: PatientPersona[] = [
         fileSize: "220 KB",
         ecgImageUrl: "/ecg-report.png",
       },
-    
     ],
     markdown,
     icdCodes: [
@@ -3410,37 +3407,37 @@ export const patientPersona: PatientPersona[] = [
         isApproved: false,
         desc: "Diagnostic Radiology Procedures of the Lower Extremities",
       },
-    ]
+    ],
   },
   {
-    "id": "650237",
-    "isSubmitted": false,
-                 profileCreatedDate: new Date('9/3/2025 9:30:00').toISOString(),
+    id: "650237",
+    isSubmitted: false,
+    profileCreatedDate: new Date("9/3/2025 9:30:00").toISOString(),
 
-    "agentDetails": {
-      "agentIssue": "Coda",
-      "agentSuggestion": "ICD-10: R07.9 (Chest pain, unspecified)",
-      "coT": "SOAP note: “intermittent retrosternal pressure, ?angina” → ambiguous between R07.9 vs I20.x; low confidence."
+    agentDetails: {
+      agentIssue: "Coda",
+      agentSuggestion: "ICD-10: R07.9 (Chest pain, unspecified)",
+      coT: "SOAP note: “intermittent retrosternal pressure, ?angina” → ambiguous between R07.9 vs I20.x; low confidence.",
     },
-    "profile": {
-      "name": "David",
+    profile: {
+      name: "David",
       surname: "Chen",
-      "age": 40,
-      "emiratesId": "748-1985-2233445-4",
-      "sex": "Female",
-      "dateOfBirth": "1985-07-21",
-      "nationality": "UAE",
-      "language": "Arabic",
-      "phoneNumber": "97155467830",
-      "email": "Sara.nuaimi@gmail.com",
-      profilePhoto: "/avatar.png"
+      age: 40,
+      emiratesId: "748-1985-2233445-4",
+      sex: "Female",
+      dateOfBirth: "1985-07-21",
+      nationality: "UAE",
+      language: "Arabic",
+      phoneNumber: "97155467830",
+      email: "Sara.nuaimi@gmail.com",
+      profilePhoto: "/avatar.png",
     },
     eligibilityCheck: {
       status: "covered",
       insuranDetials: {
-        insuranceProvider: 'Daman-AUH-001',
+        insuranceProvider: "Daman-AUH-001",
         imageUrl: "/insurance-image.png",
-        policyNumber: "42122566"
+        policyNumber: "42122566",
       },
       details: [
         { label: "Network", value: "Yes" },
@@ -3515,7 +3512,6 @@ export const patientPersona: PatientPersona[] = [
         fileSize: "220 KB",
         ecgImageUrl: "/ecg-report.png",
       },
-    
     ],
     markdown,
     icdCodes: [
@@ -3549,37 +3545,37 @@ export const patientPersona: PatientPersona[] = [
         isApproved: false,
         desc: "Diagnostic Radiology Procedures of the Lower Extremities",
       },
-    ]
+    ],
   },
   {
-    "id": "718904",
-    "isSubmitted": false,
-                 profileCreatedDate: new Date('9/3/2025 10:03:45').toISOString(),
+    id: "718904",
+    isSubmitted: false,
+    profileCreatedDate: new Date("9/3/2025 10:03:45").toISOString(),
 
-    "agentDetails": {
-      "agentIssue": "Coda",
-      "agentSuggestion": "ICD-10: M54.5 (Low back pain)",
-      "coT": "SOAP note says “lumbar pain after lifting box” → insufficient specificity (acute vs chronic)."
+    agentDetails: {
+      agentIssue: "Coda",
+      agentSuggestion: "ICD-10: M54.5 (Low back pain)",
+      coT: "SOAP note says “lumbar pain after lifting box” → insufficient specificity (acute vs chronic).",
     },
-    "profile": {
-      "name": "James",
+    profile: {
+      name: "James",
       surname: "Peterson",
-      "age": 64,
-      "emiratesId": "748-1985-2233445-4",
-      "sex": "Female",
-      "dateOfBirth": "1985-07-21",
-      "nationality": "UAE",
-      "language": "Arabic",
-      "phoneNumber": "97155467830",
-      "email": "Sara.nuaimi@gmail.com",
-      profilePhoto: "/avatar.png"
+      age: 64,
+      emiratesId: "748-1985-2233445-4",
+      sex: "Female",
+      dateOfBirth: "1985-07-21",
+      nationality: "UAE",
+      language: "Arabic",
+      phoneNumber: "97155467830",
+      email: "Sara.nuaimi@gmail.com",
+      profilePhoto: "/avatar.png",
     },
     eligibilityCheck: {
       status: "covered",
       insuranDetials: {
-        insuranceProvider: 'Daman-AUH-001',
+        insuranceProvider: "Daman-AUH-001",
         imageUrl: "/insurance-image.png",
-        policyNumber: "42122566"
+        policyNumber: "42122566",
       },
       details: [
         { label: "Network", value: "Yes" },
@@ -3654,7 +3650,6 @@ export const patientPersona: PatientPersona[] = [
         fileSize: "220 KB",
         ecgImageUrl: "/ecg-report.png",
       },
-    
     ],
     markdown,
     icdCodes: [
@@ -3688,37 +3683,37 @@ export const patientPersona: PatientPersona[] = [
         isApproved: false,
         desc: "Diagnostic Radiology Procedures of the Lower Extremities",
       },
-    ]
+    ],
   },
   {
-    "id": "203589",
-    "isSubmitted": false,
-                 profileCreatedDate: new Date('9/3/2025 10:37:30').toISOString(),
+    id: "203589",
+    isSubmitted: false,
+    profileCreatedDate: new Date("9/3/2025 10:37:30").toISOString(),
 
-    "agentDetails": {
-      "agentIssue": "Autho",
-      "agentSuggestion": "Payer flagged PA duplication request",
-      "coT": "PA already approved but duplicate triggered; agent blocked."
+    agentDetails: {
+      agentIssue: "Autho",
+      agentSuggestion: "Payer flagged PA duplication request",
+      coT: "PA already approved but duplicate triggered; agent blocked.",
     },
-    "profile": {
-      "name": "Noor ",
+    profile: {
+      name: "Noor ",
       surname: "Al Hadi",
-      "age": 47,
-      "emiratesId": "748-1985-2233445-4",
-      "sex": "Female",
-      "dateOfBirth": "1985-07-21",
-      "nationality": "UAE",
-      "language": "Arabic",
-      "phoneNumber": "97155467830",
-      "email": "Sara.nuaimi@gmail.com",
-      profilePhoto: "/avatar.png"
+      age: 47,
+      emiratesId: "748-1985-2233445-4",
+      sex: "Female",
+      dateOfBirth: "1985-07-21",
+      nationality: "UAE",
+      language: "Arabic",
+      phoneNumber: "97155467830",
+      email: "Sara.nuaimi@gmail.com",
+      profilePhoto: "/avatar.png",
     },
     eligibilityCheck: {
       status: "covered",
       insuranDetials: {
-        insuranceProvider: 'Daman-AUH-001',
+        insuranceProvider: "Daman-AUH-001",
         imageUrl: "/insurance-image.png",
-        policyNumber: "42122566"
+        policyNumber: "42122566",
       },
       details: [
         { label: "Network", value: "Yes" },
@@ -3793,7 +3788,6 @@ export const patientPersona: PatientPersona[] = [
         fileSize: "220 KB",
         ecgImageUrl: "/ecg-report.png",
       },
-    
     ],
     markdown,
     icdCodes: [
@@ -3827,37 +3821,37 @@ export const patientPersona: PatientPersona[] = [
         isApproved: false,
         desc: "Diagnostic Radiology Procedures of the Lower Extremities",
       },
-    ]
+    ],
   },
   {
-    "id": "567491",
-    "isSubmitted": false,
-                 profileCreatedDate: new Date('9/3/2025 11:11:15').toISOString(),
+    id: "567491",
+    isSubmitted: false,
+    profileCreatedDate: new Date("9/3/2025 11:11:15").toISOString(),
 
-    "agentDetails": {
-      "agentIssue": "Coda",
-      "agentSuggestion": "ICD-10: R51.9 (Headache, unspecified)",
-      "coT": "SOAP note: “episodic headache, ?migraine” → unclear → flagged for clarification."
+    agentDetails: {
+      agentIssue: "Coda",
+      agentSuggestion: "ICD-10: R51.9 (Headache, unspecified)",
+      coT: "SOAP note: “episodic headache, ?migraine” → unclear → flagged for clarification.",
     },
-    "profile": {
-      "name": "Richard",
+    profile: {
+      name: "Richard",
       surname: "Collins",
-      "age": 54,
-      "emiratesId": "748-1985-2233445-4",
-      "sex": "Female",
-      "dateOfBirth": "1985-07-21",
-      "nationality": "UAE",
-      "language": "Arabic",
-      "phoneNumber": "97155467830",
-      "email": "Sara.nuaimi@gmail.com",
-      profilePhoto: "/avatar.png"
+      age: 54,
+      emiratesId: "748-1985-2233445-4",
+      sex: "Female",
+      dateOfBirth: "1985-07-21",
+      nationality: "UAE",
+      language: "Arabic",
+      phoneNumber: "97155467830",
+      email: "Sara.nuaimi@gmail.com",
+      profilePhoto: "/avatar.png",
     },
     eligibilityCheck: {
       status: "covered",
       insuranDetials: {
-        insuranceProvider: 'Daman-AUH-001',
+        insuranceProvider: "Daman-AUH-001",
         imageUrl: "/insurance-image.png",
-        policyNumber: "42122566"
+        policyNumber: "42122566",
       },
       details: [
         { label: "Network", value: "Yes" },
@@ -3932,7 +3926,6 @@ export const patientPersona: PatientPersona[] = [
         fileSize: "220 KB",
         ecgImageUrl: "/ecg-report.png",
       },
-    
     ],
     markdown,
     icdCodes: [
@@ -3966,37 +3959,37 @@ export const patientPersona: PatientPersona[] = [
         isApproved: false,
         desc: "Diagnostic Radiology Procedures of the Lower Extremities",
       },
-    ]
+    ],
   },
   {
-    "id": "891034",
-    "isSubmitted": false,
-                 profileCreatedDate: new Date('9/3/2025 11:45:00').toISOString(),
+    id: "891034",
+    isSubmitted: false,
+    profileCreatedDate: new Date("9/3/2025 11:45:00").toISOString(),
 
-    "agentDetails": {
-      "agentIssue": "Clara",
-      "agentSuggestion": "Missing attending provider signature",
-      "coT": "Claim built without digital signature field populated; compliance check blocked."
+    agentDetails: {
+      agentIssue: "Clara",
+      agentSuggestion: "Missing attending provider signature",
+      coT: "Claim built without digital signature field populated; compliance check blocked.",
     },
-    "profile": {
-      "name": "Amina",
+    profile: {
+      name: "Amina",
       surname: "Farouk",
-      "age": 41,
-      "emiratesId": "748-1985-2233445-4",
-      "sex": "Female",
-      "dateOfBirth": "1985-07-21",
-      "nationality": "UAE",
-      "language": "Arabic",
-      "phoneNumber": "97155467830",
-      "email": "Sara.nuaimi@gmail.com",
-      profilePhoto: "/avatar.png"
+      age: 41,
+      emiratesId: "748-1985-2233445-4",
+      sex: "Female",
+      dateOfBirth: "1985-07-21",
+      nationality: "UAE",
+      language: "Arabic",
+      phoneNumber: "97155467830",
+      email: "Sara.nuaimi@gmail.com",
+      profilePhoto: "/avatar.png",
     },
     eligibilityCheck: {
       status: "covered",
       insuranDetials: {
-        insuranceProvider: 'Daman-AUH-001',
+        insuranceProvider: "Daman-AUH-001",
         imageUrl: "/insurance-image.png",
-        policyNumber: "42122566"
+        policyNumber: "42122566",
       },
       details: [
         { label: "Network", value: "Yes" },
@@ -4071,7 +4064,6 @@ export const patientPersona: PatientPersona[] = [
         fileSize: "220 KB",
         ecgImageUrl: "/ecg-report.png",
       },
-    
     ],
     markdown,
     icdCodes: [
@@ -4105,37 +4097,37 @@ export const patientPersona: PatientPersona[] = [
         isApproved: false,
         desc: "Diagnostic Radiology Procedures of the Lower Extremities",
       },
-    ]
+    ],
   },
   {
-    "id": "342657",
-    "isSubmitted": false,
-                 profileCreatedDate: new Date('9/3/2025 12:18:45').toISOString(),
+    id: "342657",
+    isSubmitted: false,
+    profileCreatedDate: new Date("9/3/2025 12:18:45").toISOString(),
 
-    "agentDetails": {
-      "agentIssue": "Payne",
-      "agentSuggestion": "EFT posted but payer remark code missing",
-      "coT": "Funds matched, but no adjustment codes in remit → requires manual reconciliation."
+    agentDetails: {
+      agentIssue: "Payne",
+      agentSuggestion: "EFT posted but payer remark code missing",
+      coT: "Funds matched, but no adjustment codes in remit → requires manual reconciliation.",
     },
-    "profile": {
-      "name": "Peter",
+    profile: {
+      name: "Peter",
       surname: "Novak",
-      "age": 58,
-      "emiratesId": "748-1985-2233445-4",
-      "sex": "Female",
-      "dateOfBirth": "1985-07-21",
-      "nationality": "UAE",
-      "language": "Arabic",
-      "phoneNumber": "97155467830",
-      "email": "Sara.nuaimi@gmail.com",
-      profilePhoto: "/avatar.png"
+      age: 58,
+      emiratesId: "748-1985-2233445-4",
+      sex: "Female",
+      dateOfBirth: "1985-07-21",
+      nationality: "UAE",
+      language: "Arabic",
+      phoneNumber: "97155467830",
+      email: "Sara.nuaimi@gmail.com",
+      profilePhoto: "/avatar.png",
     },
     eligibilityCheck: {
       status: "covered",
       insuranDetials: {
-        insuranceProvider: 'Daman-AUH-001',
+        insuranceProvider: "Daman-AUH-001",
         imageUrl: "/insurance-image.png",
-        policyNumber: "42122566"
+        policyNumber: "42122566",
       },
       details: [
         { label: "Network", value: "Yes" },
@@ -4210,7 +4202,6 @@ export const patientPersona: PatientPersona[] = [
         fileSize: "220 KB",
         ecgImageUrl: "/ecg-report.png",
       },
-    
     ],
     markdown,
     icdCodes: [
@@ -4244,37 +4235,37 @@ export const patientPersona: PatientPersona[] = [
         isApproved: false,
         desc: "Diagnostic Radiology Procedures of the Lower Extremities",
       },
-    ]
+    ],
   },
   {
-    "id": "970218",
-    "isSubmitted": false,
-                 profileCreatedDate: new Date('9/3/2025 12:52:30').toISOString(),
+    id: "970218",
+    isSubmitted: false,
+    profileCreatedDate: new Date("9/3/2025 12:52:30").toISOString(),
 
-    "agentDetails": {
-      "agentIssue": "Coda",
-      "agentSuggestion": "ICD-10: J20.9 (Acute bronchitis, unspecified)",
-      "coT": "SOAP: “productive cough, no x-ray done” → not clear if pneumonia → flagged precautionary."
+    agentDetails: {
+      agentIssue: "Coda",
+      agentSuggestion: "ICD-10: J20.9 (Acute bronchitis, unspecified)",
+      coT: "SOAP: “productive cough, no x-ray done” → not clear if pneumonia → flagged precautionary.",
     },
-    "profile": {
-      "name": "Clara",
+    profile: {
+      name: "Clara",
       surname: "Jensen",
-      "age": 35,
-      "emiratesId": "748-1985-2233445-4",
-      "sex": "Female",
-      "dateOfBirth": "1985-07-21",
-      "nationality": "UAE",
-      "language": "Arabic",
-      "phoneNumber": "97155467830",
-      "email": "Sara.nuaimi@gmail.com",
-      profilePhoto: "/avatar.png"
+      age: 35,
+      emiratesId: "748-1985-2233445-4",
+      sex: "Female",
+      dateOfBirth: "1985-07-21",
+      nationality: "UAE",
+      language: "Arabic",
+      phoneNumber: "97155467830",
+      email: "Sara.nuaimi@gmail.com",
+      profilePhoto: "/avatar.png",
     },
     eligibilityCheck: {
       status: "covered",
       insuranDetials: {
-        insuranceProvider: 'Daman-AUH-001',
+        insuranceProvider: "Daman-AUH-001",
         imageUrl: "/insurance-image.png",
-        policyNumber: "42122566"
+        policyNumber: "42122566",
       },
       details: [
         { label: "Network", value: "Yes" },
@@ -4349,7 +4340,6 @@ export const patientPersona: PatientPersona[] = [
         fileSize: "220 KB",
         ecgImageUrl: "/ecg-report.png",
       },
-    
     ],
     markdown,
     icdCodes: [
@@ -4383,37 +4373,37 @@ export const patientPersona: PatientPersona[] = [
         isApproved: false,
         desc: "Diagnostic Radiology Procedures of the Lower Extremities",
       },
-    ]
+    ],
   },
   {
-    "id": "583920",
-    "isSubmitted": false,
-                 profileCreatedDate: new Date('9/3/2025 13:26:15').toISOString(),
+    id: "583920",
+    isSubmitted: false,
+    profileCreatedDate: new Date("9/3/2025 13:26:15").toISOString(),
 
-    "agentDetails": {
-      "agentIssue": "Dee",
-      "agentSuggestion": "Payer denial: duplicate lab test billed",
-      "coT": "Two labs billed within 24h; agent cannot auto-resolve → flagged for review."
+    agentDetails: {
+      agentIssue: "Dee",
+      agentSuggestion: "Payer denial: duplicate lab test billed",
+      coT: "Two labs billed within 24h; agent cannot auto-resolve → flagged for review.",
     },
-    "profile": {
-      "name": "Hana",
+    profile: {
+      name: "Hana",
       surname: "Shafiq",
-      "age": 29,
-      "emiratesId": "748-1985-2233445-4",
-      "sex": "Female",
-      "dateOfBirth": "1985-07-21",
-      "nationality": "UAE",
-      "language": "Arabic",
-      "phoneNumber": "97155467830",
-      "email": "Sara.nuaimi@gmail.com",
-      profilePhoto: "/avatar.png"
+      age: 29,
+      emiratesId: "748-1985-2233445-4",
+      sex: "Female",
+      dateOfBirth: "1985-07-21",
+      nationality: "UAE",
+      language: "Arabic",
+      phoneNumber: "97155467830",
+      email: "Sara.nuaimi@gmail.com",
+      profilePhoto: "/avatar.png",
     },
     eligibilityCheck: {
       status: "covered",
       insuranDetials: {
-        insuranceProvider: 'Daman-AUH-001',
+        insuranceProvider: "Daman-AUH-001",
         imageUrl: "/insurance-image.png",
-        policyNumber: "42122566"
+        policyNumber: "42122566",
       },
       details: [
         { label: "Network", value: "Yes" },
@@ -4488,7 +4478,6 @@ export const patientPersona: PatientPersona[] = [
         fileSize: "220 KB",
         ecgImageUrl: "/ecg-report.png",
       },
-    
     ],
     markdown,
     icdCodes: [
@@ -4522,8 +4511,6 @@ export const patientPersona: PatientPersona[] = [
         isApproved: false,
         desc: "Diagnostic Radiology Procedures of the Lower Extremities",
       },
-    ]
+    ],
   },
 ];
- 
-

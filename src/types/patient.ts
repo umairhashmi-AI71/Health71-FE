@@ -1,12 +1,9 @@
 import { ProcessStep } from "@/components/HealthcareCard";
 import { int } from "zod";
 
- 
 export interface PatientListProps {
   initialPatients?: PatientPersona[];
 }
-
-
 
 // Define types for each part of the user persona
 export interface PatientProfile {
@@ -21,31 +18,39 @@ export interface PatientProfile {
   email: string;
   age: number;
   profilePhoto: string;
-  
 }
- 
 
 export interface MedicalCodingDetail {
   label: string;
-  value:  string | number;
+  value: string | number;
 }
 
-export type StatusType = 'approved' | 'inprogress' | 'pending' | 'rejected' | 'covered' | 'paused' | "completed" | "current" | "waiting" ;
-
+export type StatusType =
+  | "approved"
+  | "inprogress"
+  | "pending"
+  | "rejected"
+  | "covered"
+  | "paused"
+  | "completed"
+  | "current"
+  | "done"
+  | "submitted"
+  | "waiting";
 
 interface MedicalCoding {
-  status: StatusType
-  details: MedicalCodingDetail[];  // Array of label-value pairs
+  status: StatusType;
+  details: MedicalCodingDetail[]; // Array of label-value pairs
 }
 
 interface PriorAuthorizationDetail {
   label: string;
   value: string;
 }
- 
+
 interface PriorAuthorization {
-  status: StatusType;  // Status of prior authorization
-  details: PriorAuthorizationDetail[];  // Array of label-value pairs
+  status: StatusType; // Status of prior authorization
+  details: PriorAuthorizationDetail[]; // Array of label-value pairs
 }
 
 export interface ClaimStep {
@@ -54,22 +59,44 @@ export interface ClaimStep {
   status: StatusType;
 }
 
-type processStepStatusType = 'completed' | 'current' | 'pending' | 'paused' | 'waiting';
+type processStepStatusType =
+  | "completed"
+  | "current"
+  | "pending"
+  | "paused"
+  | "inprogress"
+  | "done"
+  | "waiting";
 
-
+export interface ClaimAttempts {
+  date: string;
+  claimAmount: number;
+  claimId: number;
+  rejectionCode: string;
+}
 interface ClaimSubmission {
-  status: processStepStatusType
-  steps: ClaimStep[];  // Array of steps for claim submission
+  status: processStepStatusType;
+  steps: ClaimStep[]; // Array of steps for claim submission
+  claimAttempts?: ClaimAttempts[];
+}
+
+export interface DenialAttempts {
+  claimId: number;
+  denialId: number;
+  amount: number;
+  denialCode: string;
 }
 
 interface DenialManagement {
-  status: processStepStatusType
-  steps: ClaimStep[];  // Array of steps for denial management
+  status: processStepStatusType;
+  steps: ClaimStep[]; // Array of steps for denial management
+  denialAttempts?: DenialAttempts[];
+  escalation?:boolean
 }
 
 interface PostPayment {
-  status: processStepStatusType
-  steps: ClaimStep[];  // Array of steps for post-payment process
+  status: processStepStatusType;
+  steps: ClaimStep[]; // Array of steps for post-payment process
 }
 
 export interface Attachment {
@@ -87,20 +114,21 @@ export interface ICDCode {
 }
 
 export interface InsuranDetials {
-   insuranceProvider: string,
-        imageUrl: string,
-        policyNumber: string,
+  insuranceProvider: string;
+  imageUrl: string;
+  policyNumber: string;
 }
 export interface EligibilityCheck {
-  status: StatusType,
-  insuranDetials: InsuranDetials,
-  details: MedicalCodingDetail[]
+  status: StatusType;
+  insuranDetials: InsuranDetials;
+  details: MedicalCodingDetail[];
 }
 
 // Main User Persona Interface that integrates all the sections
 export interface PatientPersona {
   id: string;
   profileCreatedDate: string;
+
   isSubmitted: boolean;
   agentDetails?: {
     agentIssue: string;
@@ -117,12 +145,11 @@ export interface PatientPersona {
   attachments?: Attachment[];
   markdown?: string; // Markdown content for the patient notes
   icdCodes?: ICDCode[];
-  cptCode?:ICDCode[];
-  claimStepStatus?:ProcessStep[]
-  postPaymentStatus?:ProcessStep[]
-  dentalManagementStatus?:ProcessStep[]
+  cptCode?: ICDCode[];
+  claimStepStatus?: ProcessStep[];
+  postPaymentStatus?: ProcessStep[];
+  dentalManagementStatus?: ProcessStep[];
 }
-
 
 export interface PatientTableRow {
   id: string;
@@ -133,5 +160,5 @@ export interface PatientTableRow {
   agentSuggestion: string;
   cot: string;
   lastUpdated: string;
-  selected: boolean
+  selected: boolean;
 }

@@ -20,7 +20,9 @@
   --sidebar-background: #E8E2DB;
   --base-spark: #EAF481;
   --font-mackinac-book: "Mackinac-Book", sans-serif;
-
+  --nesessity: #D5E8B0;
+  --agent-3: #D9C9E8;
+  --agent-5: #C2DBF0;
 }
 
 @theme inline {
@@ -99,9 +101,6 @@ body {
   color: var(--primary-foreground);
 }
 
-.bg-base-agent-10 {
-  background-color: var(--base-agent-10);
-}
 
 .bg-basecard {
   background-color: var(--base-card);
@@ -152,6 +151,7 @@ body {
 .bg-base-destructive {
   background-color: var(--base-destructive);
 }
+
 
 .bg-sidebar {
   background-color: var(--sidebar-background);
@@ -406,7 +406,7 @@ body {
 
 
 .ag-theme-alpine .ag-row-hover {
-  background: rgba(175, 216, 212, 0.20)  !important; /* your custom hover color */
+  background: rgba(232, 226, 219, 0.1) !important; /* your custom hover color */
   cursor: pointer; /* optional */
 }
 
@@ -460,4 +460,51 @@ body {
 .payne-border {
   color: #F6B704;
   border-color: #F6B704;
+}
+
+
+.bg-base-agent-10 {
+  background-color: var(--base-agent-10);
+}
+
+.bg-necessity {
+  background-color: var(--nesessity);
+}
+
+.bg-agent-3 {
+  background-color: var(--agent-3);
+}
+
+
+.technical-border {
+  border: 1px solid var(--base-destructive);
+}
+
+.autoresubmittion-border {
+  border: 1px solid var(--agent-5)
+}
+
+.bg-agent-5 {
+  background-color: var(--agent-5);
+}
+.codesuggestion-border, .writeoff-border, .medicalnecessity-border {
+  border: 1px solid #AFD8D4;
+}
+
+ .paymentmatch-border {
+  border: 1px solid #283754;
+}
+.markbg {
+  padding-bottom: 100px;
+}
+.markbg::after{
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.00) 0%, #FFF 100%);
+content: "";
+ position: fixed;
+ width: 100%;
+ height: 115px;
+ bottom: 0;
+ left: 0;
+ border-radius: 0 0 16px 16px;
+
 }
