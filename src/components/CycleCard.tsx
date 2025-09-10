@@ -163,6 +163,13 @@ const CycleCard: React.FC<HealthcareCardProps> = ({
 
   const totalPages = Math.ceil(data.length);
   const currentItems = data[page];
+
+
+  type CurrentItems = {
+  [K in keyof typeof claimAttempts | keyof typeof denialAttemps]: number; // or whatever type the values are
+};
+
+
   return (
     <div
       className={`max-w-sm bg-basecard border border-base rounded-2xl drop-shadow-sm p-4 ${className}`}
@@ -194,7 +201,7 @@ const CycleCard: React.FC<HealthcareCardProps> = ({
                       : denialAttemps[denialType]}
                   </h3>
                   <p className="text-base font-semibold">
-                    {(currentItems as Record<string, any>)[key]}
+                   {currentItems[key as keyof typeof currentItems] }
                   </p>
                 </div>
               );
