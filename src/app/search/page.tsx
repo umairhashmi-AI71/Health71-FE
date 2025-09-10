@@ -1,5 +1,6 @@
 "use client";
 
+import AlertModal from "@/components/AlertModal";
 import { DashboardLayout } from "@/components/dashboard-layout";
 import { RootState } from "@/store";
 import { PatientPersona } from "@/types/patient";
@@ -23,6 +24,7 @@ export default function SearchPatient() {
   const [tab, setTab] = useState<"identifier" | "details">("identifier");
   const patientList = useSelector((state: RootState) => state.patientlist);
   const [results, setResults] = useState<PatientPersona[]>([]);
+  const [modal, setModal] = useState("");
   const route = useRouter();
 
   const {
@@ -44,25 +46,29 @@ export default function SearchPatient() {
       (p) =>
         p.id === data.identifier || p.profile.emiratesId === data.identifier
     );
-    if (patient) {
+    if (patient.length) {
       route.push(`/patient/${patient[0].id}`);
+    } else {
+      setModal("open");
     }
   };
 
   const onSubmitDetails = (data: DetailsForm) => {
-   const patient: PatientPersona[] = patientList.filter(
-        (p) =>
-          (data.surname
-            ? p.profile.surname.toLowerCase() === data.surname.toLowerCase()
-            : true) &&
-          (data.firstName
-            ? p.profile.name.toLowerCase() === data.firstName.toLowerCase()
-            : true) &&
-          (data.dob ? p.profile.dateOfBirth === data.dob : true)
-      )
+    const patient: PatientPersona[] = patientList.filter(
+      (p) =>
+        (data.surname
+          ? p.profile.surname.toLowerCase() === data.surname.toLowerCase()
+          : true) &&
+        (data.firstName
+          ? p.profile.name.toLowerCase() === data.firstName.toLowerCase()
+          : true) &&
+        (data.dob ? p.profile.dateOfBirth === data.dob : true)
+    );
 
-   if (patient) {
+    if (patient.length) {
       route.push(`/patient/${patient[0].id}`);
+    } else {
+      setModal("open");
     }
   };
 
@@ -86,8 +92,8 @@ export default function SearchPatient() {
                 <h1 className="text-3xl font-semibold my-3">Search Patient</h1>
                 <p className="text-gray-500 text-sm max-w-[270px] m-auto">
                   {tab === "identifier"
-                    ? "Search with a unique identifier (Emirate ID/MRN)."
-                    : "Search with surname, first name, and date of birth."}
+                    ? "Let’s get started. Enter the patient’s Emirate ID or MRN below to continue."
+                    : "Let’s get started. Please fill in the details below to find the patient."}
                 </p>
               </div>
 
@@ -247,6 +253,37 @@ export default function SearchPatient() {
           </div>
         </main>
       </div>
+
+      <AlertModal
+        open={modal === "open"}
+        onClose={() => {
+          resetIdentifier();
+          resetDetails();
+          setModal("");
+        }}
+      >
+        <div>
+          <div className="font-semibold text-lg mb-2 text-base-primary">
+            Save
+          </div>
+          <div className="text-muted mb-6">
+            Are you sure you want to save your changes? This will update your
+            record permanently.
+          </div>
+          <div className="flex justify-end gap-4">
+            <button
+              className="rounded-xl px-5 py-2 text-white bg-green"
+              onClick={() => {
+                resetIdentifier();
+                resetDetails();
+                setModal("");
+              }}
+            >
+              Ok
+            </button>
+          </div>
+        </div>
+      </AlertModal>
     </DashboardLayout>
   );
 }
