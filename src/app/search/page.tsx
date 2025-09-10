@@ -264,11 +264,10 @@ export default function SearchPatient() {
       >
         <div>
           <div className="font-semibold text-lg mb-2 text-base-primary">
-            Save
+            Patient Not Found
           </div>
           <div className="text-muted mb-6">
-            Are you sure you want to save your changes? This will update your
-            record permanently.
+           We couldn’t find a patient matching the details you entered. Please check the information and try again.
           </div>
           <div className="flex justify-end gap-4">
             <button
