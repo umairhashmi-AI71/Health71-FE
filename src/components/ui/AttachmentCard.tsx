@@ -12,6 +12,7 @@ const AttachmentCard: React.FC<AttachmentCardProps> = ({
   fileName,
   fileSize,
   ecgImageUrl,
+
 }) => {
   const [open, setOpen] = useState(false);
   const [fileType, setFileType] = useState<string>();
@@ -20,7 +21,7 @@ const  getFileExtension = (path: string): string => {
 }
   return (
     <>
-      <div className="bg-white border border-sidebar rounded-xl p-4 flex items-start gap-4 max-w-xs">
+      <div className="bg-white border border-sidebar rounded-xl p-4 flex items-start gap-4 ">
         <FileText className="w-6 h-6  mt-1" />
         <div>
           <div className="font-semibold ">{fileName}</div>
