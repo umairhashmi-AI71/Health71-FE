@@ -75,4 +75,6 @@ const SOAPNote = forwardRef<SOAPNoteRef, SOAPNoteProps>(
   );
   });
 
+  SOAPNote.displayName = "SOAPNote";
+
 export default SOAPNote;
