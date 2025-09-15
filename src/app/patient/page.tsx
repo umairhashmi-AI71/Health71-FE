@@ -567,11 +567,9 @@ const RedirectPage = () => {
                 patients
                   .filter((row) => row.selected)
                   .forEach((row) => {
-                    console.log(' multi')
                     dispatch(markPatientSubmitted(row.id));
                   });
                 if (singleSelect) {
-                                      console.log(' single')
 
                   dispatch(markPatientSubmitted(singleSelect));
                 }

@@ -228,4 +228,8 @@ const ICDCodes = forwardRef<HTMLDivElement, ICDCodesProps>(
     );
   });
 
+
+  ICDCodes.displayName = "ICDCodes";
+
+  
 export default ICDCodes; 

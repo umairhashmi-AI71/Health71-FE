@@ -99,7 +99,6 @@ export default function MedicalCodingCard({
                     const nextEntry = array[index + 1] as
                       | [string, MedicalCodingDetail]
                       | undefined;
-                    console.log(nextEntry);
 
                     acc.push(
                       <div key={index} className="flex justify-between">

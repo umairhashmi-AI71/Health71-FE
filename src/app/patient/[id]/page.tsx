@@ -275,7 +275,6 @@ export default function DashboardPage() {
     for (let i = 0; i < contactSteps.length; i++) {
       // Wait for 1 second
       await new Promise((resolve) => setTimeout(resolve, 1000));
-      console.log("df");
       // Update the status of the current step to "complete"
       setContactSteps((prevSteps) =>
         prevSteps.map((step, index) =>
@@ -350,7 +349,7 @@ export default function DashboardPage() {
                           }
                         ];
 
-                        for (let codeType of codeTypes) {
+                        for (const codeType of codeTypes) {
                           const hasError = codeType.data.some(code => code.isApproved === false);
                           if (hasError) {
                             markdownRef.current?.scrollIntoView({

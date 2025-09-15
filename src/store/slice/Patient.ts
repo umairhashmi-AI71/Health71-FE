@@ -85,7 +85,6 @@ export const patientSlice = createSlice({
       const { patientId, icdId, type } = action.payload;
       const patient = state.find((p) => p.id === patientId);
       if (patient) {
-        console.log(type);
         switch (type) {
           case "icd":
             patient.icdCodes = patient.icdCodes.filter((i) => i.id !== icdId);

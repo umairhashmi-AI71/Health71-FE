@@ -121,7 +121,6 @@ const PostPaymentCard: React.FC<PostPaymentCardProps> = ({
     difference: "Difference"
   };
   const getKeyValue = (key: string, value: string | number) => {
-          console.log('key', key)
 
     switch (key) {
       case "difference":
