@@ -8,6 +8,12 @@ export type Type = {
   className?: string;
   Icon: LucideIcon;
   children: ReactNode;
+  appealDetails: {
+    error: boolean
+    isAccepted: boolean
+  }
+  acceptHandeler: () => void
+  
   
 };
 
@@ -16,12 +22,14 @@ const AppealLetter: React.FC<Type> = ({
   title,
   className = "",
   Icon,
-  children
+  children,
+  appealDetails,
+  acceptHandeler
 }) => {
  
   return (
     <div>
-    <div className="mx-auto bg-white border border-base rounded-lg drop-shadow-sm ">
+    <div className={`mx-auto bg-white border rounded-lg drop-shadow-sm ${appealDetails.error ? 'border-[#CB3914]' : ' border-base'}`}>
       {/* Header with Tabs */}
 
       <div className="border-b px-3 py-3 h-10 border-base items-center justify-between bg-base-muted rounded-lg  flex gap-x-1">
@@ -44,7 +52,10 @@ const AppealLetter: React.FC<Type> = ({
         </div>
       </div>
     </div>
-      <div className="flex justify-end gap-4 py-4">
+    {appealDetails.error &&<div className="text-[#CB3914] text-right mt-2">
+                            Please review and accept the Appeals Letter to continue.
+                          </div>}
+   {! appealDetails.isAccepted &&   <div className="flex justify-end gap-4 py-4">
                   <button
                     className="border border-base rounded-xl px-5 py-2 text-base-primary bg-white cursor-pointer"
                     onClick={() => {}}
@@ -53,10 +64,10 @@ const AppealLetter: React.FC<Type> = ({
                   </button>
                   <button
                     className="rounded-xl  border border-base px-5 py-2 text-base-primary bg-white cursor-pointer"
-                    onClick={() => {}}
+                    onClick={acceptHandeler}
                   >
                     Accept
-                  </button></div>
+                  </button></div>}
     </div>
   );
 };

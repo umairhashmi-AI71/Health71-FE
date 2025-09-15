@@ -15,28 +15,34 @@ import {
 } from "lucide-react";
 import { PatientTableRow } from "@/types/patient";
 import { RootState } from "@/store";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { formatDate } from "@/lib/dateformate";
+import AlertModal from "@/components/AlertModal";
+import { markPatientSubmitted } from "@/store/slice/Patient";
 
 const RedirectPage = () => {
   const router = useRouter();
 
   const list = useSelector((state: RootState) => state.patientlist);
-  const [patients, setPatients] = useState<PatientTableRow[]>(
-    list
-      // .filter((i) => i.isSubmitted === false)
-      .map((i) => ({
-        id: i.id,
-        surname: i.profile.surname,
-        name: i.profile.name,
-        age: i.profile.age,
-        agentIssue: i.agentDetails?.agentIssue || "",
-        agentSuggestion: i.agentDetails?.agentSuggestion || "",
-        cot: i.agentDetails?.coT || "",
-        lastUpdated: new Date(i.profileCreatedDate).toISOString(),
-        selected: false,
-      }))
-  );
+  const [patients, setPatients] = useState<PatientTableRow[]>([]);
+
+  useEffect(() => {
+    setPatients(
+      list
+        .filter((i) => i.isSubmitted === false)
+        .map((i) => ({
+          id: i.id,
+          surname: i.profile.surname,
+          name: i.profile.name,
+          age: i.profile.age,
+          agentIssue: i.agentDetails?.agentIssue || "",
+          agentSuggestion: i.agentDetails?.agentSuggestion || "",
+          cot: i.agentDetails?.coT || "",
+          lastUpdated: new Date(i.profileCreatedDate).toISOString(),
+          selected: false,
+        }))
+    );
+  }, [list]);
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedSuggestions, setSelectedSuggestions] = useState<string[]>([]);
   const [sortBy, setSortBy] = useState("latest");
@@ -167,7 +173,10 @@ const RedirectPage = () => {
   const allSelected = patients.length > 0 && selectedCount === patients.length;
   const someSelected = selectedCount > 0 && selectedCount < patients.length;
   const [showSortMenu, setShowSortMenu] = useState(false);
+  const [singleSelect, setSingleSelect] = useState("");
+  const [modal, setModal] = useState("");
   const route = useRouter();
+  const dispatch = useDispatch();
   return (
     <DashboardLayout>
       <div
@@ -440,8 +449,6 @@ const RedirectPage = () => {
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
                 {filteredAndSortedPatients.map((patient) => {
-                 
-
                   return (
                     <tr
                       key={patient.id}
@@ -476,7 +483,6 @@ const RedirectPage = () => {
                         <span
                           className={`border bg-white rounded-2xl py-1 px-3 ${patient.agentIssue.toLowerCase()}-border`}
                         >
-                          
                           {patient.agentIssue}
                         </span>
                       </td>
@@ -487,19 +493,26 @@ const RedirectPage = () => {
                       <td className="px-4 py-3 text-sm  max-w-sm">
                         {patient.cot}
                       </td>
-                      <td className="px-4 py-3  text-sm ">{formatDate(patient.lastUpdated)}</td>
+                      <td className="px-4 py-3  text-sm ">
+                        {formatDate(patient.lastUpdated)}
+                      </td>
                       <td className="px-4 py-3 whitespace-nowrap text-sm ">
-                        {/* <button
-                          className="cursor-pointer"
-                          onClick={() => {
-                            route.push(`/patient/${patient.id}`);
-                          }}
-                        >
-                        </button> */}
-
-                        <Link href={`/patient/${patient.id}`}>
-                          <Search className="h-4 w-4" />
-</Link>
+                        <div className="flex justify-between items-center w-15">
+                          <Link href={`/patient/${patient.id}`}>
+                            <Search className="h-4 w-4" strokeWidth={1.5} />
+                          </Link>
+                          <button
+                            className={`cursor-pointer ${patient.selected ? 'opacity-0':''}`}
+                            disabled={patient.selected}
+                            onClick={() => {
+                              setSingleSelect(patient.id);
+                              setModal("accept");
+                              // dispatch(markPatientSubmitted(row.id));
+                            }}
+                          >
+                            <Check className="h-4 w-4" strokeWidth={1.5} />
+                          </button>
+                        </div>
                       </td>
                     </tr>
                   );
@@ -516,16 +529,61 @@ const RedirectPage = () => {
             )}
           </div>
 
-          {/* Submit button */}
-          {selectedCount > 0 && (
-            <div className="flex justify-end mt-6">
-              <button className="bg-teal-600 text-white px-6 py-2 rounded-lg hover:bg-teal-700 focus:ring-2 focus:ring-teal-500 focus:ring-offset-2">
-                Submit ({selectedCount})
-              </button>
-            </div>
-          )}
+          <div className="flex justify-end mb-10">
+            <button
+              className={` text-white px-6 py-2 rounded-lg  ${
+                selectedCount > 0 ? "bg-green" : "bg-[#F5F2EF]"
+              }`}
+              onClick={() => setModal("accept")}
+              disabled={selectedCount > 0 ? false : true}
+            >
+              Accept
+            </button>
+          </div>
         </main>
       </div>
+      <AlertModal open={modal === "accept"} onClose={() => setModal("")}>
+        <div>
+          <div className="font-semibold text-lg mb-2 text-base-primary">
+            Accept Confirmation
+          </div>
+          <div className="text-muted mb-6">
+            Are you sure you want to accept this patient? This action cannot be
+            undone.
+          </div>
+          <div className="flex justify-end gap-4">
+            <button
+              className="border rounded-xl px-5 py-2 text-base-primary bg-white"
+              onClick={() => {
+                setModal("");
+                setSingleSelect("");
+              }}
+            >
+              No
+            </button>
+            <button
+              className="rounded-xl px-5 py-2 text-white bg-green"
+              onClick={() => {
+                patients
+                  .filter((row) => row.selected)
+                  .forEach((row) => {
+                    console.log(' multi')
+                    dispatch(markPatientSubmitted(row.id));
+                  });
+                if (singleSelect) {
+                                      console.log(' single')
+
+                  dispatch(markPatientSubmitted(singleSelect));
+                }
+                setSingleSelect("");
+                setModal("");
+              }}
+            >
+              Yes
+            </button>
+          </div>
+        </div>
+      </AlertModal>
     </DashboardLayout>
   );
 };

@@ -1,7 +1,24 @@
-import MoreMenu from "@/components/MoreMenu";
-import { ColDef } from "ag-grid-community";
+import AlertModal from "@/components/AlertModal";
+import { changeWriteoffStatus } from "@/store/slice/Writeoff";
+import { ColDef, ICellRendererParams } from "ag-grid-community";
+import { Check, Send, SquarePen } from "lucide-react";
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+
+
+
+export const writeofcolumnDef: ColDef[] = [
+  {
+    headerName: "",
+    field: "select",
+    // checkboxSelection: true,
+    headerCheckboxSelection: true,
+     checkboxSelection: true,
+    width: 50,
+    pinned: "left",
  
-export const mriColDef: ColDef[] = [
+    // cellRenderer: CustomCheckbox,
+  },
   {
     headerName: "Service",
     field: "service",
@@ -32,7 +49,7 @@ export const mriColDef: ColDef[] = [
     //   params.value === "Denied"
     //     ? "text-sm font-medium text-red-600"
     //     : "text-sm text-green-600",
-        autoHeight: true,
+    autoHeight: true,
   },
   {
     headerName: "Denial Code",
@@ -44,72 +61,11 @@ export const mriColDef: ColDef[] = [
   {
     headerName: "Rejection Reason",
     field: "rejectionReason",
-    flex:1.5,
+    flex: 1.5,
     wrapText: true,
     autoHeight: true,
   },
-  {
-    headerName: "Suggested Resolution Options",
-    field: "resolutionOptions",
-    flex:1.5,
-     wrapText: true,
-    autoHeight: true,
-    cellClass: "ag-cell-wrap text-sm text-gray-800 leading-normal flex items-center",
-  },
-  {
-    headerName: "",
-    field: "actions",
-    width: 60,
-    cellRenderer: () => {
-      return <MoreMenu />;
-    },
-    // suppressMenu: true,
-    sortable: false,
-    filter: false,
-    cellClass: "flex items-center flex justify-center items-center",
-  },
 ];
-
-
-export const mriData = [
-  {
-    service: "MRI – Left Knee",
-    cptCode: "73721",
-    amount: 586,
-    status: "Denied",
-    denialCode: "12345",
-    rejectionReason: "Insufficient documentation for necessity",
-    resolutionOptions: "Recode to xxx confidence of accepting 80%",
-  },
-  {
-    service: "MRI – Left Knee",
-    cptCode: "73721",
-    amount: 586,
-    status: "Denied",
-    denialCode: "12345",
-    rejectionReason: "Insufficient documentation for necessity",
-    resolutionOptions: "Recode to xxx confidence of accepting 80%",
-  },
-  {
-    service: "MRI – Left Knee",
-    cptCode: "73721",
-    amount: 586,
-    status: "Denied",
-    denialCode: "12345",
-    rejectionReason: "Insufficient documentation for necessity",
-    resolutionOptions: "Recode to xxx confidence of accepting 80%",
-  },
-  {
-    service: "MRI – Left Knee",
-    cptCode: "73721",
-    amount: 586,
-    status: "Denied",
-    denialCode: "12345",
-    rejectionReason: "Insufficient documentation for necessity",
-    resolutionOptions: "Recode to xxx confidence of accepting 80%",
-  },
-];
-
 
 export const appealLetterMarkDown = `**Date:** September 4, 2025  
 
@@ -158,4 +114,4 @@ Sincerely,
 **Maria Lopez**  
 Billing & Claims Officer  
 CityCare Hospital  
-`
+`;

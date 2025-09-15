@@ -1,23 +1,17 @@
 import React, { JSX } from "react";
 import { Check } from "lucide-react";
 import {
-  ClaimStep,
   InsuranDetials,
   MedicalCodingDetail,
+  ProcessSteps,
   StatusType,
 } from "@/types/patient";
+import { getStatusConfig } from "@/lib/utils";
+import ProcessMapping from "./ui/ProcessMapping";
 
-// Type definitions for better type safety
-type ModeType = "grid" | "process";
 
 interface GridData {
   [key: string]: string | number;
-}
-
-export interface ProcessStep {
-  id: string;
-  label: string;
-  status: StatusType;
 }
 
 interface StatusConfig {
@@ -28,9 +22,8 @@ interface StatusConfig {
 interface HealthcareCardProps {
   title: string;
   status: StatusType;
-  mode: ModeType;
-  gridData?: MedicalCodingDetail[];
-  processSteps?: ClaimStep[];
+  gridData: MedicalCodingDetail[];
+  processSteps: ProcessSteps[];
   isInsuranceInfoCard?: boolean;
   className?: string;
   titleGap?: string;
@@ -41,111 +34,19 @@ interface HealthcareCardProps {
 const HealthcareCard: React.FC<HealthcareCardProps> = ({
   title,
   status,
-  mode,
   gridData = {},
-  processSteps = [],
+  processSteps,
   isInsuranceInfoCard = false,
   className = "",
   titleGap = "mb-6",
   processGap = "h-3.5",
   insuranceDetails,
 }) => {
-  const getStatusConfig = (status: StatusType): StatusConfig => {
-    switch (status) {
-      case "approved":
-        return {
-          text: "Approved",
-          className: "bg-primary-foreground text-green",
-        };
-      case "covered":
-        return {
-          text: "Covered",
-          className: "bg-primary-foreground text-green",
-        };
-      case "done":
-        return {
-          text: "Done",
-          className: "bg-primary-foreground text-green",
-        };
-      case "inprogress":
-        return {
-          text: "In Process",
-          className: "bg-base-agent-10 text-pixel-bloom",
-        };
-      case "pending":
-        return {
-          text: "Pending",
-          className: "bg-warm-gray text-white",
-        };
-      case "paused":
-        return {
-          text: "Paused",
-          className: "bg-warm-gray text-white",
-        };
-      case "waiting":
-        return {
-          text: "Waiting",
-          className: "bg-warm-gray text-white",
-        };
-      case "rejected":
-        return {
-          text: "Rejected",
-          className: "bg-base-agent-10 text-pixel-bloom",
-        };
-      default:
-        // TypeScript will catch if we add new status types without handling them
-        const exhaustiveCheck = status;
-        return {
-          text: status,
-          className: "bg-warm-gray text-white",
-        };
-    }
-  };
-
   const statusConfig = getStatusConfig(status);
-   const getStepIcon = (stepStatus: StatusType ): JSX.Element => {
-    switch (stepStatus) {
-      case "completed":
-      case "approved":
-        return (
-          <div className="w-6.5 h-6.5 rounded-full border-2 border-alpha flex items-center justify-center opacity-20">
-            <Check className="w-4.5 h-4.5 text-base " />
-          </div>
-        );
-      case "current":
-        return (
-          <div className="w-6.5 h-6.5 rounded-full border-2 border-alpha opacity-20" />
-        );
-      case "pending":
-      case 'paused':
-        return (
-          <div className="w-6.5 h-6.5 rounded-full border-2 border-alpha opacity-20" />
-        );
 
-      default:
-        // Exhaustive check for TypeScript
-        const exhaustiveCheck = stepStatus;
-        return (
-          <div className="w-6.5 h-6.5 rounded-full border-2 border-alpha opacity-20" />
-        );
-    }
-  };
-
-  const getStepTextColor = (stepStatus: StatusType): string => {
-    switch (stepStatus) {
-      case "completed":
-        return "text-alpha opacity-30";
-      case "current":
-        return "text-alpha opacity-30";
-      case "pending":
-        return "text-alpha opacity-30";
-      default:
-        // Exhaustive check for TypeScript
-        const exhaustiveCheck = stepStatus;
-        return "text-alpha opacity-30";
-    }
-  };
-
+  const isProcessFinish = processSteps.every(
+    (step) => step.status === "completed"
+  );
   return (
     <div
       className={`max-w-sm bg-basecard border border-base rounded-2xl drop-shadow-sm p-4 ${className}`}
@@ -162,7 +63,7 @@ const HealthcareCard: React.FC<HealthcareCardProps> = ({
 
       {/* if insurance eligiblity card*/}
 
-      {isInsuranceInfoCard && (
+      {isInsuranceInfoCard && isProcessFinish && (
         <div className="flex items-center space-x-3 mb-3">
           <img
             src={insuranceDetails?.imageUrl}
@@ -181,13 +82,14 @@ const HealthcareCard: React.FC<HealthcareCardProps> = ({
       )}
 
       {/* Content */}
-      {mode === "grid" && (
-        <div className="space-y-4">
+      {isProcessFinish && (
+        <div className="space-y-3.5">
           {Object.entries(gridData).reduce<JSX.Element[]>(
             (acc, [key, value], index, array) => {
               if (index % 2 === 0) {
-               const nextEntry = array[index + 1] as [string, MedicalCodingDetail] | undefined;
-console.log(nextEntry)
+                const nextEntry = array[index + 1] as
+                  | [string, MedicalCodingDetail]
+                  | undefined;
 
                 acc.push(
                   <div key={index} className="flex justify-between">
@@ -195,14 +97,14 @@ console.log(nextEntry)
                       <h3 className="text-base block text-foreground">
                         {value.label}
                       </h3>
-                      <p className="text-base font-semibold">{value.value}</p>
+                      <p className={`text-base font-semibold ${(status == 'denied' && (value.label == 'Prior Auth ID' || value.label == 'CPT Code')) ? 'text-base-destructive' : ''}`}>{value.value}</p>
                     </div>
                     {nextEntry && (
                       <div className="min-w-[48%]">
                         <h3 className="text-base block text-foreground">
                           {nextEntry[1].label}
                         </h3>
-                        <p className="text-base font-semibold">
+                        <p className={`text-base font-semibold ${(status == 'denied' && (nextEntry[1].label == 'CPT Code' || nextEntry[1].label == 'Prior Auth ID')) ? 'text-base-destructive' : ''}`}>
                           {nextEntry[1].value}
                         </p>
                       </div>
@@ -217,28 +119,8 @@ console.log(nextEntry)
         </div>
       )}
 
-      {mode === "process" && (
-        <div className="">
-          {processSteps.map((step, index) => (
-            <div key={step.id} className="flex   space-x-3 ">
-              <div className="flex flex-col items-center">
-                {getStepIcon(step.status)}
-                {index < processSteps.length - 1 && (
-                  <div className={`w-0.5 ${processGap} bg-gray-200`} />
-                )}
-              </div>
-              <div className="flex-1">
-                <p
-                  className={`text-base  text-sm font-medium ${getStepTextColor(
-                    step.status
-                  )} pt-1`}
-                >
-                  {step.label}
-                </p>
-              </div>
-            </div>
-          ))}
-        </div>
+      {!isProcessFinish && (
+        <ProcessMapping processGap={processGap} processSteps={processSteps} />
       )}
     </div>
   );

@@ -11,7 +11,7 @@ interface Props {
 
 const ClaimSubmissionComponent = ({
     userId,
-    cancelHandel
+    cancelHandel,
 
 }: Props) => {
   const [isSubmited, setIsSubmited] = useState(false);

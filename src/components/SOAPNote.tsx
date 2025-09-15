@@ -1,4 +1,4 @@
-import React, { JSX, useState } from "react";
+import React, { forwardRef, JSX, useImperativeHandle, useState } from "react";
 import { LucideIcon } from "lucide-react";
 import Markdown from 'react-markdown'
 import rehypeRaw from 'rehype-raw'
@@ -16,10 +16,24 @@ interface SOAPNoteProps {
   height?: string;
 }
 
-const SOAPNote: React.FC<SOAPNoteProps> = ({ tabs, defaultActiveTab, height = '' }) => {
+export interface SOAPNoteRef {
+  setActiveTab: (tabId: string) => void;
+  getActiveTab: () => string | undefined;
+}
+
+const SOAPNote = forwardRef<SOAPNoteRef, SOAPNoteProps>(
+  ({ tabs, defaultActiveTab, height = "" }, ref) => {
   const [activeTab, setActiveTab] = useState(defaultActiveTab);
+
+    // Expose methods to parent
+    useImperativeHandle(ref, () => ({
+      setActiveTab: (tabId: string) => {
+        setActiveTab(tabId);
+      },
+      getActiveTab: () => activeTab,
+    }));
   return (
-    <div className="mx-auto bg-white border border-base rounded-lg drop-shadow-sm ">
+    <div className="mx-auto bg-white border border-base rounded-lg drop-shadow-sm " >
       {/* Header with Tabs */}
 
       <div className="border-b px-1 py-1 h-10 border-base bg-base-muted rounded-lg  flex gap-x-4">
@@ -59,6 +73,6 @@ const SOAPNote: React.FC<SOAPNoteProps> = ({ tabs, defaultActiveTab, height = ''
 </div>
     </div>
   );
-};
+  });
 
 export default SOAPNote;

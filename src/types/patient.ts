@@ -1,5 +1,5 @@
-import { ProcessStep } from "@/components/HealthcareCard";
 import { int } from "zod";
+import { ErrorType } from "./error";
 
 export interface PatientListProps {
   initialPatients?: PatientPersona[];
@@ -36,24 +36,37 @@ export type StatusType =
   | "current"
   | "done"
   | "submitted"
+  | "received"
+  | "notinvoked"
+  | "denied"
   | "waiting";
 
-interface MedicalCoding {
+export interface MedicalCoding {
   status: StatusType;
   details: MedicalCodingDetail[]; // Array of label-value pairs
+  steps: ProcessSteps[]
+  isError: boolean;
+  errorDetails? :{
+    errorType: ErrorType,
+  }
 }
 
-interface PriorAuthorizationDetail {
+export interface PriorAuthorizationDetail {
   label: string;
   value: string;
 }
 
-interface PriorAuthorization {
+export interface PriorAuthorization {
   status: StatusType; // Status of prior authorization
   details: PriorAuthorizationDetail[]; // Array of label-value pairs
+  steps: ProcessSteps[]
+  isError: boolean;
+  errorDetails? :{
+    errorType: ErrorType,
+  }
 }
 
-export interface ClaimStep {
+export interface ProcessSteps {
   id: string;
   label: string;
   status: StatusType;
@@ -66,6 +79,9 @@ type processStepStatusType =
   | "paused"
   | "inprogress"
   | "done"
+  | "received"
+  | "notinvoked"
+  | "submitted"
   | "waiting";
 
 export interface ClaimAttempts {
@@ -74,10 +90,14 @@ export interface ClaimAttempts {
   claimId: number;
   rejectionCode: string;
 }
-interface ClaimSubmission {
+export interface ClaimSubmission {
   status: processStepStatusType;
-  steps: ClaimStep[]; // Array of steps for claim submission
+  steps: ProcessSteps[]; // Array of steps for claim submission
   claimAttempts?: ClaimAttempts[];
+  isError: boolean;
+  errorDetails? :{
+    errorType: ErrorType,
+  }
 }
 
 export interface DenialAttempts {
@@ -87,16 +107,31 @@ export interface DenialAttempts {
   denialCode: string;
 }
 
-interface DenialManagement {
+export interface DenialManagement {
   status: processStepStatusType;
-  steps: ClaimStep[]; // Array of steps for denial management
+  steps: ProcessSteps[]; // Array of steps for denial management
   denialAttempts?: DenialAttempts[];
-  escalation?:boolean
+  isError: boolean;
+  errorDetails? :{
+    errorType: ErrorType,
+  }
 }
 
-interface PostPayment {
-  status: processStepStatusType;
-  steps: ClaimStep[]; // Array of steps for post-payment process
+export interface PaymentDetails {
+  date: string;
+  paymentFile: number;
+  claimId: string;
+  ar?: number;
+  difference?:number;
+}
+export interface PostPayment {
+  status: StatusType;
+  steps: ProcessSteps[]; // Array of steps for post-payment process
+  details?: PaymentDetails
+  isError: boolean;
+  errorDetails? :{
+    errorType: ErrorType,
+  }
 }
 
 export interface Attachment {
@@ -111,6 +146,8 @@ export interface ICDCode {
   confidence?: number;
   isApproved?: boolean;
   desc?: string;
+  suggestion?: string
+  suggestionCode?:string
 }
 
 export interface InsuranDetials {
@@ -122,6 +159,11 @@ export interface EligibilityCheck {
   status: StatusType;
   insuranDetials: InsuranDetials;
   details: MedicalCodingDetail[];
+  steps: ProcessSteps[]
+  isError: boolean;
+  errorDetails? :{
+    errorType: ErrorType,
+  }
 }
 
 // Main User Persona Interface that integrates all the sections
@@ -144,11 +186,11 @@ export interface PatientPersona {
   postPayment: PostPayment;
   attachments?: Attachment[];
   markdown?: string; // Markdown content for the patient notes
-  icdCodes?: ICDCode[];
-  cptCode?: ICDCode[];
-  claimStepStatus?: ProcessStep[];
-  postPaymentStatus?: ProcessStep[];
-  dentalManagementStatus?: ProcessStep[];
+  icdCodes: ICDCode[];
+  cptCode: ICDCode[];
+  ProcessStepsStatus?: ProcessSteps[];
+  postPaymentStatus?: ProcessSteps[];
+  dentalManagementStatus?: ProcessSteps[];
 }
 
 export interface PatientTableRow {

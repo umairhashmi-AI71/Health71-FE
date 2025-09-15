@@ -1,25 +1,23 @@
+import { checkHealthWorkflowErrors, errorConfig } from "@/lib/utils";
+import { ErrorType } from "@/types/error";
 import { Check, Info, NotebookPen, TriangleAlert, X } from "lucide-react";
 
-type ErrorType =
-  | "technical"
-  | "autoresubmittion"
-  | "codesuggestion"
-  | "writeoff"
-  | "paymentmatch"
-  | "medicalnecessity";
-interface ErrorCardProps {
+
+interface InfoCardProps {
   type: ErrorType;
-  title: string;
-  errorDescription: string;
+  // title: string;
+  // errorDescription: string;
   style?: string;
 }
 
-const ErrorCard: React.FC<ErrorCardProps> = ({
+const InfoCard: React.FC<InfoCardProps> = ({
   type,
-  title,
-  errorDescription,
+  // title,
+  // errorDescription,
   style = "",
 }) => {
+
+  
   const getIcon = (type: ErrorType) => {
     switch (type) {
       case "technical":
@@ -30,8 +28,14 @@ const ErrorCard: React.FC<ErrorCardProps> = ({
         return <Info className="w-10 h-10 bg-agent-5 rounded-lg p-2"  strokeWidth={1.5}/>;
       case "codesuggestion":
       case "medicalnecessity":
-
+      case "unmatchpayment":
       case "writeoff":
+      case "noteligible":
+        case "panotrequire":
+        case "paapproved":
+        case "panotapproved":
+        case "paappeal":
+       case "pandingapproval":
         return (
           <NotebookPen className="w-10 h-10 bg-[#EFF7F6]  rounded-lg p-2"  strokeWidth={1.5} />
         );
@@ -43,15 +47,15 @@ const ErrorCard: React.FC<ErrorCardProps> = ({
   };
   return (
     <div className={`flex gap-9 items-center mb-6  justify-between ${style}`}>
-      <p className="text-2xl mackinac min-w-[330px] ">{title}</p>
+      <p className="text-2xl mackinac min-w-[330px] ">{errorConfig[type].title}</p>
 
       <div
         className={`px-3.5 py-5 flex gap-3 rounded-xl items-center shadow grow max-w-[969px] ${type}-border`}
       >
         <div>{getIcon(type)}</div>
-        <p>{errorDescription}</p>
+        <p>{errorConfig[type].desc}</p>
       </div>
-      {type === 'writeoff' && (<div className="flex gap-2">
+      {/* {type === 'writeoff' && (<div className="flex gap-2">
 
         <button
               onClick={() => {}}
@@ -66,9 +70,9 @@ const ErrorCard: React.FC<ErrorCardProps> = ({
             >
               <Check className="w-5 h-5 text-green "  strokeWidth={1.5} />
             </button>
-      </div>)}
+      </div>)} */}
     </div>
   );
 };
 
-export default ErrorCard;
+export default InfoCard;

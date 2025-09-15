@@ -1,10 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit'
 import patientReducer from './slice/Patient';
+import writeReducer from './slice/Writeoff';
 
 
 export const store = configureStore({
   reducer: {
     patientlist: patientReducer,
+    writeoffList: writeReducer
   },
 })
 

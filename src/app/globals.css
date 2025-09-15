@@ -1,5 +1,5 @@
 @import "tailwindcss";
-  
+
 :root {
   --background: #FFFFFF;
   --foreground: #171717;
@@ -81,6 +81,7 @@ body {
 .bg-green {
   background-color: var(--base-green);
 }
+
 .border-green {
   border-color: var(--base-green);
 }
@@ -169,23 +170,27 @@ body {
   background-color: var(--base-spark);
 }
 
-.markdown-section  {
+.markdown-section {
   font-size: 14px;
 }
 
-.markdown-heading  {
-      margin-bottom: 10px;
-    display: block;
-    font-size: 16px;
+.markdown-heading {
+  margin-bottom: 10px;
+  display: block;
+  font-size: 16px;
 }
-.markdown-section h2,h3,h4 {
+
+.markdown-section h2,
+.markdown-section h3,
+.markdown-section h4 {
   margin-bottom: 0;
   font-size: 14px;
-  
-} 
+
+}
+
 .markdown-section ul {
   margin: 0 !important;
-  background-color: red;
+  /* background-color: red; */
 }
 
 .bg-ecg {
@@ -280,15 +285,15 @@ body {
 }
 
 
- 
+
 
 /* Remove hover background */
 .ag-row-hover,
 .ag-row-focus,
 .ag-row-hover,
 .ag-row-focus {
-  background: none!important;
- }
+  background: none !important;
+}
 
 .login-bg {
   background: url('/login-bg.png') no-repeat left top;
@@ -362,16 +367,15 @@ body {
 }
 
 .ag-theme-alpine {
-  --ag-accent-color: #212D45; /* default blue */
+  --ag-accent-color: #212D45;
+  /* default blue */
 }
 
 .patient-list.selected {
-   background-color: #CAE8E4 !important;
+  background-color: #CAE8E4 !important;
 }
-.patient-list {
-   
 
-} 
+.patient-list {}
 
 
 
@@ -384,13 +388,15 @@ body {
 
 /* Checked checkbox */
 .ag-theme-alpine .ag-checkbox-input-wrapper.ag-checked .ag-checkbox-input {
-  background-color: #10b981 !important; /* green */
+  background-color: #10b981 !important;
+  /* green */
   border-color: #10b981 !important;
 }
 
 /* Unchecked checkbox */
 .ag-theme-alpine .ag-checkbox-input-wrapper .ag-checkbox-input {
-  border: 2px solid #6b7280 !important; /* gray */
+  border: 2px solid #6b7280 !important;
+  /* gray */
   background-color: white !important;
 }
 
@@ -406,15 +412,17 @@ body {
 
 
 .ag-theme-alpine .ag-row-hover {
-  background: rgba(232, 226, 219, 0.1) !important; /* your custom hover color */
-  cursor: pointer; /* optional */
+  background: rgba(232, 226, 219, 0.1) !important;
+  /* your custom hover color */
+  cursor: pointer;
+  /* optional */
 }
 
 /* Remove header background */
 .ag-theme-alpine .ag-header {
   background-color: transparent !important;
 }
- 
+
 
 .welcome-bg {
   background-color: #CAE8E4;
@@ -427,7 +435,7 @@ body {
 }
 
 .border-patient {
-  border-color:   rgba(115, 110, 104, 0.30);
+  border-color: rgba(115, 110, 104, 0.30);
 }
 
 .eli-border {
@@ -436,25 +444,26 @@ body {
 
 .coda-border {
   border-color: var(--base-green);
-  color:  var(--base-green);
+  color: var(--base-green);
 
 }
+
 .dee-border {
-  
+
   border-color: var(--muted-foreground);
-  color:  var(--muted-foreground);
+  color: var(--muted-foreground);
 }
 
 .clara-border {
   color: #8F482C;
-    border-color: #8F482C;
+  border-color: #8F482C;
 
 }
 
 .autho-border {
-  
+
   color: var(--pixel-bloom);
-    border-color: var(--pixel-bloom);
+  border-color: var(--pixel-bloom);
 }
 
 .payne-border {
@@ -487,24 +496,42 @@ body {
 .bg-agent-5 {
   background-color: var(--agent-5);
 }
-.codesuggestion-border, .writeoff-border, .medicalnecessity-border {
+
+.codesuggestion-border,
+.writeoff-border,
+.medicalnecessity-border,
+.unmatchpayment-border,
+.noteligible-border,
+.panotrequire-border,
+ .paapproved-border,
+ .panotapproved-border,
+ .paappeal-border,
+ .pandingapproval-border,
+.outofnetwork-border {
   border: 1px solid #AFD8D4;
 }
 
- .paymentmatch-border {
+.paymentmatch-border {
   border: 1px solid #283754;
 }
+
 .markbg {
   padding-bottom: 100px;
 }
-.markbg::after{
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.00) 0%, #FFF 100%);
-content: "";
- position: fixed;
- width: 100%;
- height: 115px;
- bottom: 0;
- left: 0;
- border-radius: 0 0 16px 16px;
 
+.markbg::after {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.00) 0%, #FFF 100%);
+  content: "";
+  position: fixed;
+  width: 100%;
+  height: 115px;
+  bottom: 0;
+  left: 0;
+  border-radius: 0 0 16px 16px;
+
+}
+
+.ag-center-cols-container,
+.ag-center-cols-viewport {
+  min-height: auto !important;
 }

@@ -1,0 +1,196 @@
+import { writeofcolumnDef } from "@/app/patient/coldef/callDef";
+import { WriteofcolumnType } from "@/lib/utils";
+import { RootState } from "@/store";
+import {
+  AllCommunityModule,
+  ICellRendererParams,
+  ModuleRegistry,
+  SelectionChangedEvent,
+} from "ag-grid-community";
+import { AgGridReact } from "ag-grid-react";
+import { useCallback, useMemo, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import AlertModal from "./AlertModal";
+import { changeWriteoffStatus } from "@/store/slice/Writeoff";
+import { Check, Send, SquarePen } from "lucide-react";
+
+ModuleRegistry.registerModules([AllCommunityModule]);
+
+export const WriteoffTable: React.FC = () => {
+  const defaultColDef = useMemo(
+    () => ({
+      resizable: false,
+      sortable: false,
+      filter: false,
+    }),
+    []
+  );
+
+  const writeList: WriteofcolumnType[] = useSelector(
+    (state: RootState) => state.writeoffList
+  );
+
+  const [selectedRows, setSelectedRows] = useState<WriteofcolumnType[]>([]);
+
+  // Handle selection change
+  const onSelectionChanged = useCallback((event: SelectionChangedEvent) => {
+    const selectedNodes = event.api.getSelectedNodes();
+    const selectedData = selectedNodes.map((node) => node.data);
+    setSelectedRows(selectedData);
+  }, []);
+
+  const [modal, setModal] = useState("");
+  const dispatch = useDispatch();
+  return (
+    <div className="ag-theme-alpine mb-5">
+      <AgGridReact
+        // theme={themeQuartz}
+        rowData={writeList}
+        columnDefs={[
+          ...writeofcolumnDef,
+          {
+            headerName: "",
+            field: "actions",
+            width: 280,
+            cellRenderer: (params: ICellRendererParams) => {
+              const { status, id } = params.data as {
+                status: string;
+                id: number;
+              };
+              return (
+                <div className="flex gap-2 items-center">
+                  {status.toLocaleLowerCase() != "accepted" &&
+                    status.toLocaleLowerCase() != "denied    →   accepted" && (
+                      <>
+                        <button
+                          className="cursor-pointer  border-base bg-white items-center rounded-xl border p-4 py-2 flex gap-2"
+                          onClick={() => {
+                            setModal("escalate");
+                          }}
+                        >
+                          <Send className="w-4 h-4" strokeWidth={1.5} />{" "}
+                          Escalate
+                        </button>
+                        <button
+                          className="cursor-pointer rounded-xl items-center bg-[#AFD8D4] p-4 py-2 flex gap-2"
+                          onClick={() => {
+                            setModal("accept");
+                          }}
+                        >
+                          <Check className="w-4 h-4" strokeWidth={2} /> Accept
+                        </button>
+                      </>
+                    )}
+                  {status.toLocaleLowerCase() == "denied    →   accepted" && (
+                    <button
+                      className="cursor-pointer"
+                      onClick={() =>
+                        dispatch(changeWriteoffStatus({ id, status: "denied" }))
+                      }
+                    >
+                      <SquarePen className="w-4 h-4" strokeWidth={1.5} />
+                    </button>
+                  )}
+                </div>
+              );
+            },
+            // suppressMenu: true,
+            sortable: false,
+            filter: false,
+            cellClass: "flex items-center flex justify-center items-center",
+          },
+        ]}
+        defaultColDef={defaultColDef}
+        animateRows={false}
+        pagination={false}
+        rowSelection="multiple"
+        // paginationPageSize={10}
+        onSelectionChanged={onSelectionChanged}
+        enableCellTextSelection={true}
+        className="text-sm"
+        domLayout="autoHeight"
+        rowHeight={60}
+      />
+
+      <div className="flex justify-end my-10">
+        <button
+          className={` text-white px-6 py-2 rounded-lg  ${
+            selectedRows.length > 0 ? "bg-green" : "bg-[#F5F2EF]"
+          }`}
+          onClick={() => setModal("accept")}
+          disabled={selectedRows.length > 0 ? false : true}
+        >
+          Accept
+        </button>
+      </div>
+
+      <AlertModal open={modal === "accept"} onClose={() => setModal("")}>
+        <div>
+          <div className="font-semibold text-lg mb-2 text-base-primary">
+            Accept Confirmation
+          </div>
+          <div className="text-muted mb-6">
+            Are you sure you want to accept this patient? This action cannot be
+            undone.
+          </div>
+          <div className="flex justify-end gap-4">
+            <button
+              className="border rounded-xl px-5 py-2 text-base-primary bg-white"
+              onClick={() => setModal("")}
+            >
+              No
+            </button>
+            <button
+              className="rounded-xl px-5 py-2 text-white bg-green"
+              onClick={() => {
+                if (selectedRows.length) {
+                  selectedRows?.forEach((data) => {
+                    dispatch(
+                      changeWriteoffStatus({
+                        id: data.id,
+                        status: "Denied    →   Accepted",
+                      })
+                    );
+                  });
+                }
+
+                setModal("");
+              }}
+            >
+              Yes
+            </button>
+          </div>
+        </div>
+      </AlertModal>
+
+      <AlertModal open={modal === "escalate"} onClose={() => setModal("")}>
+        <div>
+          <div className="font-semibold text-lg mb-2 text-base-primary">
+            Escalate
+          </div>
+          <div className="text-muted mb-6">
+            Write-off accepted and notification sent to payer. No further action
+            is required.
+          </div>
+          {selectedRows.length}
+          <div className="flex justify-end gap-4">
+            <button
+              className="border rounded-xl px-5 py-2 text-base-primary bg-white"
+              onClick={() => setModal("")}
+            >
+              Cancel
+            </button>
+            <button
+              className="rounded-xl px-5 py-2 text-white bg-green"
+              onClick={() => {
+                setModal("");
+              }}
+            >
+              Continue
+            </button>
+          </div>
+        </div>
+      </AlertModal>
+    </div>
+  );
+};

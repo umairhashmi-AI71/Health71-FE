@@ -81,7 +81,7 @@ Sara Al Naoumi, a 40-year-old female, presents with left knee pain persisting fo
 export const patientPersona: PatientPersona[] = [
   {
     id: "101300",
-    isSubmitted: true,
+    isSubmitted: false,
     profileCreatedDate: new Date("9/2/2025 20:00:00").toISOString(),
     agentDetails: {
       agentIssue: "Coda",
@@ -112,9 +112,41 @@ export const patientPersona: PatientPersona[] = [
         { label: "Network", value: "Yes" },
         { label: "Coverage", value: "100%" },
       ],
+      steps: [
+        { id: "1", label: "Extract Patient & Payer Data", status: "completed" },
+        { id: "2", label: "Validate Coverage", status: "completed" },
+        { id: "3", label: "Update & Flag Issues", status: "completed" },
+      ],
+      isError: false,
+      errorDetails : {
+        errorType : "writeoff"
+      }
+      //outofnetwork | noteligible
+    },
+    priorAuthorization: {
+      status: "denied", // Prior authorization status
+      details: [
+        { label: "Encounter ID", value: "ENC-2025-0789" },
+        { label: "CPT Code", value: "29880" },
+        { label: "ICD Code", value: "M23.2" },
+        { label: "Physician", value: "Dr. Al Shamsi" },
+        { label: "Prior Auth ID", value: "PA-556677" },
+        { label: "Drug Codes", value: "NDC-0002" },
+      ],
+      steps: [
+        { id: "1", label: "Extract & Prepare & (Code)", status: "completed" },
+        { id: "2", label: "Submit Request", status: "completed" },
+        { id: "3", label: "Prior Authorization Posted", status: "completed" },
+        { id: "4", label: "Response Retrieved", status: "completed" },
+      ],
+      isError: false,
+      errorDetails : {
+        errorType : "pandingapproval"
+      }
+      //panotrequire | paapproved | panotapproved | paappeal | pandingapproval
     },
     medicalCoding: {
-      status: "done", // Medical coding status
+      status: "waiting", // Medical coding status
       details: [
         // { label: "Encounter Date", value: "2025-08-30" },
         // { label: "Encounter Type", value: "Outpatient" },
@@ -128,20 +160,16 @@ export const patientPersona: PatientPersona[] = [
         { label: "Physician", value: "Dr. Al Shamsi" },
         { label: "Department", value: "Orthopaedics" },
       ],
-    },
-    priorAuthorization: {
-      status: "approved", // Prior authorization status
-      details: [
-        { label: "Encounter ID", value: "ENC-2025-0789" },
-        { label: "CPT Code", value: "29880" },
-        { label: "ICD Code", value: "M23.2" },
-        { label: "Physician", value: "Dr. Al Shamsi" },
-        { label: "Prior Auth ID", value: "PA-556677" },
-        { label: "Drug Codes", value: "NDC-0002" },
+      steps: [
+        { id: "1", label: "Extract & Suggest Code", status: "pending" },
+        { id: "2", label: "Validate & Check Compliance", status: "pending" },
+        { id: "3", label: "Claim Posted", status: "pending" },
+        { id: "4", label: "Human Review & Approval", status: "pending" },
       ],
+       isError: false,
     },
     claimSubmission: {
-      status: "inprogress", // Current status of the claim submission process
+      status: "waiting", // Current status of the claim submission process
       steps: [
         { id: "1", label: "Compliance Check & Adjustment", status: "pending" },
         { id: "2", label: "XML File Generated", status: "pending" },
@@ -149,14 +177,32 @@ export const patientPersona: PatientPersona[] = [
         { id: "4", label: "Claim ID Received & Updated", status: "pending" },
       ],
       claimAttempts: [
-        {date: '2025-10-20', claimAmount: 836, claimId: 1014891283, rejectionCode: 'F14'  },
-        {date: '2025-10-20', claimAmount: 836, claimId: 1014891283, rejectionCode: 'F14'  },
-        {date: '2025-10-20', claimAmount: 836, claimId: 1014891283, rejectionCode: 'F14'  },
-        
+        {
+          date: "2025-10-20",
+          claimAmount: 836,
+          claimId: 1014891283,
+          rejectionCode: "F14",
+        },
+        {
+          date: "2025-10-20",
+          claimAmount: 836,
+          claimId: 1014891283,
+          rejectionCode: "F14",
+        },
+        {
+          date: "2025-10-20",
+          claimAmount: 836,
+          claimId: 1014891283,
+          rejectionCode: "F14",
+        },
       ],
+      isError: true,
+      errorDetails: {
+        errorType: 'codesuggestion',
+      }
     },
     denialManagement: {
-      status: "done", // Current status of the denial management process
+      status: "waiting", // Current status of the denial management process
       steps: [
         { id: "1", label: "Denial Code Analyzed", status: "pending" },
         { id: "2", label: "Suggested Edits", status: "pending" },
@@ -164,11 +210,26 @@ export const patientPersona: PatientPersona[] = [
         { id: "4", label: "Appeal Submitted", status: "pending" },
       ],
       denialAttempts: [
-        {claimId: 1014891283, denialId: 2002931, amount: 836, denialCode: '12345'},
-        {claimId: 1014891283, denialId: 2002931, amount: 836, denialCode: '12345'},
-        {claimId: 1014891283, denialId: 2002931, amount: 836, denialCode: '12345'},
+        {
+          claimId: 1014891283,
+          denialId: 2002931,
+          amount: 836,
+          denialCode: "12345",
+        },
+        {
+          claimId: 1014891283,
+          denialId: 2002931,
+          amount: 836,
+          denialCode: "12345",
+        },
+        {
+          claimId: 1014891283,
+          denialId: 2002931,
+          amount: 836,
+          denialCode: "12345",
+        },
       ],
-      escalation: true,
+      isError: false,
     },
     postPayment: {
       status: "waiting", // Current status of the post-payment process
@@ -178,6 +239,16 @@ export const patientPersona: PatientPersona[] = [
         { id: "3", label: "Adjustments Applied", status: "pending" },
         { id: "4", label: "Ledger Updated", status: "pending" },
       ],
+      details: {
+        date: "2025-09-11",
+        paymentFile: 836,
+        claimId: "1014891283",
+        difference: -136,
+      },
+       isError: false,
+       errorDetails: {
+        errorType: "costtopatient"
+       }
     },
     attachments: [
       {
@@ -209,6 +280,7 @@ export const patientPersona: PatientPersona[] = [
         confidence: 100,
         isApproved: false,
         desc: "Pain in left knee",
+       
       },
       {
         id: "2",
@@ -225,6 +297,8 @@ export const patientPersona: PatientPersona[] = [
         confidence: 50,
         isApproved: false,
         desc: "New patient office visit, 30-44 minutes",
+         suggestionCode : ' 99213',
+        suggestion : 'Changed from 99203 (new patient visit) to 99213 (established patient follow-up) because the patient is already established and the encounter required a lower level of medical decision making.'
       },
       {
         id: "2",
@@ -269,15 +343,12 @@ export const patientPersona: PatientPersona[] = [
         { label: "Network", value: "Yes" },
         { label: "Coverage", value: "100%" },
       ],
-    },
-    medicalCoding: {
-      status: "inprogress", // Medical coding status
-      details: [
-        { label: "Encounter Date", value: "2025-08-30" },
-        { label: "Encounter Type", value: "Outpatient" },
-        { label: "Physician", value: "Dr. Al Shamsi" },
-        { label: "Department", value: "Orthopaedics" },
+      steps: [
+        { id: "1", label: "Extract Patient & Payer Data", status: "completed" },
+        { id: "2", label: "Validate Coverage", status: "completed" },
+        { id: "3", label: "Update & Flag Issues", status: "completed" },
       ],
+      isError: false
     },
     priorAuthorization: {
       status: "approved", // Prior authorization status
@@ -289,33 +360,116 @@ export const patientPersona: PatientPersona[] = [
         { label: "Prior Auth ID", value: "PA-556677" },
         { label: "Drug Codes", value: "NDC-0002" },
       ],
-    },
-    claimSubmission: {
-      status: "waiting", // Current status of the claim submission process
       steps: [
-        { id: "1", label: "Compliance Check & Adjustment", status: "pending" },
-        { id: "2", label: "XML File Generated", status: "pending" },
-        { id: "3", label: "Claim Posted", status: "pending" },
-        { id: "4", label: "Claim ID Received & Updated", status: "pending" },
+        { id: "1", label: "Extract & Prepare & (Code)", status: "completed" },
+        { id: "2", label: "Submit Request", status: "completed" },
+        { id: "3", label: "Prior Authorization Posted", status: "completed" },
+        { id: "4", label: "Response Retrieved", status: "completed" },
       ],
+      isError: false
+    },
+    medicalCoding: {
+      status: "done", // Medical coding status
+      details: [
+        // { label: "Encounter Date", value: "2025-08-30" },
+        // { label: "Encounter Type", value: "Outpatient" },
+        // { label: "Physician", value: "Dr. Al Shamsi" },
+        // { label: "Department", value: "Orthopaedics" },
+        { label: "Encounter Type", value: "Out patient" },
+        { label: "ICD Code", value: "99213" },
+        { label: "CPT Code", value: "99213" },
+        { label: "Drug Code", value: "12345" },
+        { label: "Encounter Date", value: "2024-07-21" },
+        { label: "Physician", value: "Dr. Al Shamsi" },
+        { label: "Department", value: "Orthopaedics" },
+      ],
+      steps: [
+        { id: "1", label: "Extract & Suggest Code", status: "completed" },
+        { id: "2", label: "Validate & Check Compliance", status: "completed" },
+        { id: "3", label: "Claim Posted", status: "completed" },
+        { id: "4", label: "Human Review & Approval", status: "completed" },
+      ],
+      isError: false
+    },
+    
+    claimSubmission: {
+      status: "done", // Current status of the claim submission process
+      steps: [
+        { id: "1", label: "Compliance Check & Adjustment", status: "completed" },
+        { id: "2", label: "XML File Generated", status: "completed" },
+        { id: "3", label: "Claim Posted", status: "completed" },
+        { id: "4", label: "Claim ID Received & Updated", status: "completed" },
+      ],
+      claimAttempts: [
+        {
+          date: "2025-10-20",
+          claimAmount: 836,
+          claimId: 1014891283,
+          rejectionCode: "F14",
+        },
+        {
+          date: "2025-10-20",
+          claimAmount: 836,
+          claimId: 1014891283,
+          rejectionCode: "F14",
+        },
+        {
+          date: "2025-10-20",
+          claimAmount: 836,
+          claimId: 1014891283,
+          rejectionCode: "F14",
+        },
+      ],
+      isError: false,
+      errorDetails: {
+        errorType: 'paymentmatch',
+      }
     },
     denialManagement: {
-      status: "waiting", // Current status of the denial management process
+      status: "notinvoked", // Current status of the denial management process
       steps: [
         { id: "1", label: "Denial Code Analyzed", status: "pending" },
         { id: "2", label: "Suggested Edits", status: "pending" },
         { id: "3", label: "Appeal Generated", status: "pending" },
         { id: "4", label: "Appeal Submitted", status: "pending" },
       ],
+      denialAttempts: [
+        {
+          claimId: 1014891283,
+          denialId: 2002931,
+          amount: 836,
+          denialCode: "12345",
+        },
+        {
+          claimId: 1014891283,
+          denialId: 2002931,
+          amount: 836,
+          denialCode: "12345",
+        },
+        {
+          claimId: 1014891283,
+          denialId: 2002931,
+          amount: 836,
+          denialCode: "12345",
+        },
+      ],
+      isError: false
     },
     postPayment: {
-      status: "waiting", // Current status of the post-payment process
+      status: "received", // Current status of the post-payment process
       steps: [
-        { id: "1", label: "Payment Retrieved", status: "pending" },
-        { id: "2", label: "Payment Matched", status: "pending" },
-        { id: "3", label: "Adjustments Applied", status: "pending" },
-        { id: "4", label: "Ledger Updated", status: "pending" },
+        { id: "1", label: "Payment Retrieved", status: "completed" },
+        { id: "2", label: "Payment Matched", status: "completed" },
+        { id: "3", label: "Adjustments Applied", status: "completed" },
+        { id: "4", label: "Ledger Updated", status: "completed" },
       ],
+      details: {
+        date: "2025-09-11",
+        paymentFile: 836,
+        claimId: "1014891283",
+        ar: 836,
+      },
+      isError: false
     },
     attachments: [
       {
@@ -395,7 +549,7 @@ export const patientPersona: PatientPersona[] = [
       email: "Sara.nuaimi@gmail.com",
       profilePhoto: "/avatar.png",
     },
-    eligibilityCheck: {
+     eligibilityCheck: {
       status: "covered",
       insuranDetials: {
         insuranceProvider: "Daman-AUH-001",
@@ -406,15 +560,12 @@ export const patientPersona: PatientPersona[] = [
         { label: "Network", value: "Yes" },
         { label: "Coverage", value: "100%" },
       ],
-    },
-    medicalCoding: {
-      status: "inprogress", // Medical coding status
-      details: [
-        { label: "Encounter Date", value: "2025-08-30" },
-        { label: "Encounter Type", value: "Outpatient" },
-        { label: "Physician", value: "Dr. Al Shamsi" },
-        { label: "Department", value: "Orthopaedics" },
+      steps: [
+        { id: "1", label: "Extract Patient & Payer Data", status: "completed" },
+        { id: "2", label: "Validate Coverage", status: "completed" },
+        { id: "3", label: "Update & Flag Issues", status: "completed" },
       ],
+      isError: false
     },
     priorAuthorization: {
       status: "approved", // Prior authorization status
@@ -426,33 +577,115 @@ export const patientPersona: PatientPersona[] = [
         { label: "Prior Auth ID", value: "PA-556677" },
         { label: "Drug Codes", value: "NDC-0002" },
       ],
+      steps: [
+        { id: "1", label: "Extract & Prepare & (Code)", status: "completed" },
+        { id: "2", label: "Submit Request", status: "completed" },
+        { id: "3", label: "Prior Authorization Posted", status: "completed" },
+        { id: "4", label: "Response Retrieved", status: "completed" },
+      ],
+      isError: false
+    },
+    medicalCoding: {
+      status: "done", // Medical coding status
+      details: [
+        // { label: "Encounter Date", value: "2025-08-30" },
+        // { label: "Encounter Type", value: "Outpatient" },
+        // { label: "Physician", value: "Dr. Al Shamsi" },
+        // { label: "Department", value: "Orthopaedics" },
+        { label: "Encounter Type", value: "Out patient" },
+        { label: "ICD Code", value: "99213" },
+        { label: "CPT Code", value: "99213" },
+        { label: "Drug Code", value: "12345" },
+        { label: "Encounter Date", value: "2024-07-21" },
+        { label: "Physician", value: "Dr. Al Shamsi" },
+        { label: "Department", value: "Orthopaedics" },
+      ],
+      steps: [
+        { id: "1", label: "Extract & Suggest Code", status: "completed" },
+        { id: "2", label: "Validate & Check Compliance", status: "completed" },
+        { id: "3", label: "Claim Posted", status: "completed" },
+        { id: "4", label: "Human Review & Approval", status: "completed" },
+      ],
+      isError: false
     },
     claimSubmission: {
-      status: "waiting", // Current status of the claim submission process
+      status: "done", // Current status of the claim submission process
       steps: [
-        { id: "1", label: "Compliance Check & Adjustment", status: "pending" },
-        { id: "2", label: "XML File Generated", status: "pending" },
-        { id: "3", label: "Claim Posted", status: "pending" },
-        { id: "4", label: "Claim ID Received & Updated", status: "pending" },
+        { id: "1", label: "Compliance Check & Adjustment", status: "completed" },
+        { id: "2", label: "XML File Generated", status: "completed" },
+        { id: "3", label: "Claim Posted", status: "completed" },
+        { id: "4", label: "Claim ID Received & Updated", status: "completed" },
       ],
+      claimAttempts: [
+        {
+          date: "2025-10-20",
+          claimAmount: 836,
+          claimId: 1014891283,
+          rejectionCode: "F14",
+        },
+        {
+          date: "2025-10-20",
+          claimAmount: 836,
+          claimId: 1014891283,
+          rejectionCode: "F14",
+        },
+        {
+          date: "2025-10-20",
+          claimAmount: 836,
+          claimId: 1014891283,
+          rejectionCode: "F14",
+        },
+      ],
+      isError: true,
+      errorDetails: {
+        errorType: 'unmatchpayment',
+      }
     },
     denialManagement: {
-      status: "waiting", // Current status of the denial management process
+      status: "submitted", // Current status of the denial management process
       steps: [
-        { id: "1", label: "Denial Code Analyzed", status: "pending" },
-        { id: "2", label: "Suggested Edits", status: "pending" },
-        { id: "3", label: "Appeal Generated", status: "pending" },
-        { id: "4", label: "Appeal Submitted", status: "pending" },
+        { id: "1", label: "Denial Code Analyzed", status: "completed" },
+        { id: "2", label: "Suggested Edits", status: "completed" },
+        { id: "3", label: "Appeal Generated", status: "completed" },
+        { id: "4", label: "Appeal Submitted", status: "completed" },
       ],
+      denialAttempts: [
+        {
+          claimId: 1014891283,
+          denialId: 2002931,
+          amount: 836,
+          denialCode: "12345",
+        },
+        {
+          claimId: 1014891283,
+          denialId: 2002931,
+          amount: 836,
+          denialCode: "12345",
+        },
+        {
+          claimId: 1014891283,
+          denialId: 2002931,
+          amount: 836,
+          denialCode: "12345",
+        },
+      ],
+      isError: false,
     },
     postPayment: {
-      status: "waiting", // Current status of the post-payment process
+      status: "inprogress", // Current status of the post-payment process
       steps: [
-        { id: "1", label: "Payment Retrieved", status: "pending" },
-        { id: "2", label: "Payment Matched", status: "pending" },
-        { id: "3", label: "Adjustments Applied", status: "pending" },
+        { id: "1", label: "Payment Retrieved", status: "completed" },
+        { id: "2", label: "Payment Matched", status: "completed" },
+        { id: "3", label: "Adjustments Applied", status: "completed" },
         { id: "4", label: "Ledger Updated", status: "pending" },
       ],
+      details: {
+        date: "2025-09-11",
+        paymentFile: 836,
+        claimId: "1014891283",
+        difference: -136,
+      },
+      isError: false
     },
     attachments: [
       {
@@ -544,15 +777,12 @@ export const patientPersona: PatientPersona[] = [
         { label: "Network", value: "Yes" },
         { label: "Coverage", value: "100%" },
       ],
-    },
-    medicalCoding: {
-      status: "inprogress", // Medical coding status
-      details: [
-        { label: "Encounter Date", value: "2025-08-30" },
-        { label: "Encounter Type", value: "Outpatient" },
-        { label: "Physician", value: "Dr. Al Shamsi" },
-        { label: "Department", value: "Orthopaedics" },
+      steps: [
+        { id: "1", label: "Extract Patient & Payer Data", status: "completed" },
+        { id: "2", label: "Validate Coverage", status: "completed" },
+        { id: "3", label: "Update & Flag Issues", status: "completed" },
       ],
+      isError: false
     },
     priorAuthorization: {
       status: "approved", // Prior authorization status
@@ -564,33 +794,116 @@ export const patientPersona: PatientPersona[] = [
         { label: "Prior Auth ID", value: "PA-556677" },
         { label: "Drug Codes", value: "NDC-0002" },
       ],
+      steps: [
+        { id: "1", label: "Extract & Prepare & (Code)", status: "completed" },
+        { id: "2", label: "Submit Request", status: "completed" },
+        { id: "3", label: "Prior Authorization Posted", status: "completed" },
+        { id: "4", label: "Response Retrieved", status: "completed" },
+      ],
+      isError: false
+    },
+    medicalCoding: {
+      status: "done", // Medical coding status
+      details: [
+        // { label: "Encounter Date", value: "2025-08-30" },
+        // { label: "Encounter Type", value: "Outpatient" },
+        // { label: "Physician", value: "Dr. Al Shamsi" },
+        // { label: "Department", value: "Orthopaedics" },
+        { label: "Encounter Type", value: "Out patient" },
+        { label: "ICD Code", value: "99213" },
+        { label: "CPT Code", value: "99213" },
+        { label: "Drug Code", value: "12345" },
+        { label: "Encounter Date", value: "2024-07-21" },
+        { label: "Physician", value: "Dr. Al Shamsi" },
+        { label: "Department", value: "Orthopaedics" },
+      ],
+      steps: [
+        { id: "1", label: "Extract & Suggest Code", status: "completed" },
+        { id: "2", label: "Validate & Check Compliance", status: "completed" },
+        { id: "3", label: "Claim Posted", status: "completed" },
+        { id: "4", label: "Human Review & Approval", status: "completed" },
+      ],
+      isError: false
     },
     claimSubmission: {
-      status: "waiting", // Current status of the claim submission process
+      status: "done", // Current status of the claim submission process
       steps: [
-        { id: "1", label: "Compliance Check & Adjustment", status: "pending" },
-        { id: "2", label: "XML File Generated", status: "pending" },
-        { id: "3", label: "Claim Posted", status: "pending" },
-        { id: "4", label: "Claim ID Received & Updated", status: "pending" },
+        { id: "1", label: "Compliance Check & Adjustment", status: "completed" },
+        { id: "2", label: "XML File Generated", status: "completed" },
+        { id: "3", label: "Claim Posted", status: "completed" },
+        { id: "4", label: "Claim ID Received & Updated", status: "completed" },
       ],
+      claimAttempts: [
+        {
+          date: "2025-10-20",
+          claimAmount: 836,
+          claimId: 1014891283,
+          rejectionCode: "F14",
+        },
+        {
+          date: "2025-10-20",
+          claimAmount: 836,
+          claimId: 1014891283,
+          rejectionCode: "F14",
+        },
+        {
+          date: "2025-10-20",
+          claimAmount: 836,
+          claimId: 1014891283,
+          rejectionCode: "F14",
+        },
+      ],
+      isError: false,
+      errorDetails: {
+        errorType: 'unmatchpayment',
+      }
     },
     denialManagement: {
-      status: "waiting", // Current status of the denial management process
+      status: "submitted", // Current status of the denial management process
       steps: [
-        { id: "1", label: "Denial Code Analyzed", status: "pending" },
-        { id: "2", label: "Suggested Edits", status: "pending" },
-        { id: "3", label: "Appeal Generated", status: "pending" },
-        { id: "4", label: "Appeal Submitted", status: "pending" },
+        { id: "1", label: "Denial Code Analyzed", status: "completed" },
+        { id: "2", label: "Suggested Edits", status: "completed" },
+        { id: "3", label: "Appeal Generated", status: "completed" },
+        { id: "4", label: "Appeal Submitted", status: "completed" },
       ],
+      denialAttempts: [
+        {
+          claimId: 1014891283,
+          denialId: 2002931,
+          amount: 836,
+          denialCode: "12345",
+        },
+        {
+          claimId: 1014891283,
+          denialId: 2002931,
+          amount: 836,
+          denialCode: "12345",
+        },
+        {
+          claimId: 1014891283,
+          denialId: 2002931,
+          amount: 836,
+          denialCode: "12345",
+        },
+      ],
+      isError: false,
     },
     postPayment: {
-      status: "waiting", // Current status of the post-payment process
+      status: "inprogress", // Current status of the post-payment process
       steps: [
-        { id: "1", label: "Payment Retrieved", status: "pending" },
-        { id: "2", label: "Payment Matched", status: "pending" },
-        { id: "3", label: "Adjustments Applied", status: "pending" },
-        { id: "4", label: "Ledger Updated", status: "pending" },
+        { id: "1", label: "Payment Retrieved", status: "completed" },
+        { id: "2", label: "Payment Matched", status: "completed" },
+        { id: "3", label: "Adjustments Applied", status: "completed" },
+        { id: "4", label: "Ledger Updated", status: "completed" },
       ],
+      details: {
+        date: "2025-09-11",
+        paymentFile: 836,
+        claimId: "1014891283",
+        difference: -100,
+      },
+      isError: false,
+      // underpayment | overpayment | partialpayment | costtopatient
     },
     attachments: [
       {
@@ -672,7 +985,7 @@ export const patientPersona: PatientPersona[] = [
       profilePhoto: "/avatar.png",
     },
     eligibilityCheck: {
-      status: "covered",
+      status: "waiting",
       insuranDetials: {
         insuranceProvider: "Daman-AUH-001",
         imageUrl: "/insurance-image.png",
@@ -682,18 +995,38 @@ export const patientPersona: PatientPersona[] = [
         { label: "Network", value: "Yes" },
         { label: "Coverage", value: "100%" },
       ],
+      steps: [
+        { id: "1", label: "Extract Patient & Payer Data", status: "pending" },
+        { id: "2", label: "Validate Coverage", status: "pending" },
+        { id: "3", label: "Update & Flag Issues", status: "pending" },
+      ],
+      isError: false
     },
     medicalCoding: {
-      status: "inprogress", // Medical coding status
+      status: "waiting", // Medical coding status
       details: [
-        { label: "Encounter Date", value: "2025-08-30" },
-        { label: "Encounter Type", value: "Outpatient" },
+        // { label: "Encounter Date", value: "2025-08-30" },
+        // { label: "Encounter Type", value: "Outpatient" },
+        // { label: "Physician", value: "Dr. Al Shamsi" },
+        // { label: "Department", value: "Orthopaedics" },
+        { label: "Encounter Type", value: "Out patient" },
+        { label: "ICD Code", value: "99213" },
+        { label: "CPT Code", value: "99213" },
+        { label: "Drug Code", value: "12345" },
+        { label: "Encounter Date", value: "2024-07-21" },
         { label: "Physician", value: "Dr. Al Shamsi" },
         { label: "Department", value: "Orthopaedics" },
       ],
+      steps: [
+        { id: "1", label: "Extract & Suggest Code", status: "pending" },
+        { id: "2", label: "Validate & Check Compliance", status: "pending" },
+        { id: "3", label: "Claim Posted", status: "pending" },
+        { id: "4", label: "Human Review & Approval", status: "pending" },
+      ],
+      isError: false
     },
     priorAuthorization: {
-      status: "approved", // Prior authorization status
+      status: "waiting", // Prior authorization status
       details: [
         { label: "Encounter ID", value: "ENC-2025-0789" },
         { label: "CPT Code", value: "29880" },
@@ -702,6 +1035,13 @@ export const patientPersona: PatientPersona[] = [
         { label: "Prior Auth ID", value: "PA-556677" },
         { label: "Drug Codes", value: "NDC-0002" },
       ],
+      steps: [
+        { id: "1", label: "Extract & Prepare & (Code)", status: "pending" },
+        { id: "2", label: "Submit Request", status: "pending" },
+        { id: "3", label: "Prior Authorization Posted", status: "pending" },
+        { id: "4", label: "Response Retrieved", status: "pending" },
+      ],
+      isError: false
     },
     claimSubmission: {
       status: "waiting", // Current status of the claim submission process
@@ -711,6 +1051,27 @@ export const patientPersona: PatientPersona[] = [
         { id: "3", label: "Claim Posted", status: "pending" },
         { id: "4", label: "Claim ID Received & Updated", status: "pending" },
       ],
+      claimAttempts: [
+        {
+          date: "2025-10-20",
+          claimAmount: 836,
+          claimId: 1014891283,
+          rejectionCode: "F14",
+        },
+        {
+          date: "2025-10-20",
+          claimAmount: 836,
+          claimId: 1014891283,
+          rejectionCode: "F14",
+        },
+        {
+          date: "2025-10-20",
+          claimAmount: 836,
+          claimId: 1014891283,
+          rejectionCode: "F14",
+        },
+      ],
+      isError: false
     },
     denialManagement: {
       status: "waiting", // Current status of the denial management process
@@ -720,6 +1081,27 @@ export const patientPersona: PatientPersona[] = [
         { id: "3", label: "Appeal Generated", status: "pending" },
         { id: "4", label: "Appeal Submitted", status: "pending" },
       ],
+      denialAttempts: [
+        {
+          claimId: 1014891283,
+          denialId: 2002931,
+          amount: 836,
+          denialCode: "12345",
+        },
+        {
+          claimId: 1014891283,
+          denialId: 2002931,
+          amount: 836,
+          denialCode: "12345",
+        },
+        {
+          claimId: 1014891283,
+          denialId: 2002931,
+          amount: 836,
+          denialCode: "12345",
+        },
+      ],
+      isError: false
     },
     postPayment: {
       status: "waiting", // Current status of the post-payment process
@@ -729,6 +1111,13 @@ export const patientPersona: PatientPersona[] = [
         { id: "3", label: "Adjustments Applied", status: "pending" },
         { id: "4", label: "Ledger Updated", status: "pending" },
       ],
+      details: {
+        date: "2025-09-11",
+        paymentFile: 836,
+        claimId: "1014891283",
+        difference: -136,
+      },
+      isError: false
     },
     attachments: [
       {
@@ -810,7 +1199,7 @@ export const patientPersona: PatientPersona[] = [
       profilePhoto: "/avatar.png",
     },
     eligibilityCheck: {
-      status: "covered",
+      status: "waiting",
       insuranDetials: {
         insuranceProvider: "Daman-AUH-001",
         imageUrl: "/insurance-image.png",
@@ -820,18 +1209,38 @@ export const patientPersona: PatientPersona[] = [
         { label: "Network", value: "Yes" },
         { label: "Coverage", value: "100%" },
       ],
+      steps: [
+        { id: "1", label: "Extract Patient & Payer Data", status: "pending" },
+        { id: "2", label: "Validate Coverage", status: "pending" },
+        { id: "3", label: "Update & Flag Issues", status: "pending" },
+      ],
+      isError: false
     },
     medicalCoding: {
-      status: "inprogress", // Medical coding status
+      status: "waiting", // Medical coding status
       details: [
-        { label: "Encounter Date", value: "2025-08-30" },
-        { label: "Encounter Type", value: "Outpatient" },
+        // { label: "Encounter Date", value: "2025-08-30" },
+        // { label: "Encounter Type", value: "Outpatient" },
+        // { label: "Physician", value: "Dr. Al Shamsi" },
+        // { label: "Department", value: "Orthopaedics" },
+        { label: "Encounter Type", value: "Out patient" },
+        { label: "ICD Code", value: "99213" },
+        { label: "CPT Code", value: "99213" },
+        { label: "Drug Code", value: "12345" },
+        { label: "Encounter Date", value: "2024-07-21" },
         { label: "Physician", value: "Dr. Al Shamsi" },
         { label: "Department", value: "Orthopaedics" },
       ],
+      steps: [
+        { id: "1", label: "Extract & Suggest Code", status: "pending" },
+        { id: "2", label: "Validate & Check Compliance", status: "pending" },
+        { id: "3", label: "Claim Posted", status: "pending" },
+        { id: "4", label: "Human Review & Approval", status: "pending" },
+      ],
+      isError: false
     },
     priorAuthorization: {
-      status: "approved", // Prior authorization status
+      status: "waiting", // Prior authorization status
       details: [
         { label: "Encounter ID", value: "ENC-2025-0789" },
         { label: "CPT Code", value: "29880" },
@@ -840,6 +1249,13 @@ export const patientPersona: PatientPersona[] = [
         { label: "Prior Auth ID", value: "PA-556677" },
         { label: "Drug Codes", value: "NDC-0002" },
       ],
+      steps: [
+        { id: "1", label: "Extract & Prepare & (Code)", status: "pending" },
+        { id: "2", label: "Submit Request", status: "pending" },
+        { id: "3", label: "Prior Authorization Posted", status: "pending" },
+        { id: "4", label: "Response Retrieved", status: "pending" },
+      ],
+      isError: false
     },
     claimSubmission: {
       status: "waiting", // Current status of the claim submission process
@@ -849,6 +1265,27 @@ export const patientPersona: PatientPersona[] = [
         { id: "3", label: "Claim Posted", status: "pending" },
         { id: "4", label: "Claim ID Received & Updated", status: "pending" },
       ],
+      claimAttempts: [
+        {
+          date: "2025-10-20",
+          claimAmount: 836,
+          claimId: 1014891283,
+          rejectionCode: "F14",
+        },
+        {
+          date: "2025-10-20",
+          claimAmount: 836,
+          claimId: 1014891283,
+          rejectionCode: "F14",
+        },
+        {
+          date: "2025-10-20",
+          claimAmount: 836,
+          claimId: 1014891283,
+          rejectionCode: "F14",
+        },
+      ],
+      isError: false
     },
     denialManagement: {
       status: "waiting", // Current status of the denial management process
@@ -858,6 +1295,27 @@ export const patientPersona: PatientPersona[] = [
         { id: "3", label: "Appeal Generated", status: "pending" },
         { id: "4", label: "Appeal Submitted", status: "pending" },
       ],
+      denialAttempts: [
+        {
+          claimId: 1014891283,
+          denialId: 2002931,
+          amount: 836,
+          denialCode: "12345",
+        },
+        {
+          claimId: 1014891283,
+          denialId: 2002931,
+          amount: 836,
+          denialCode: "12345",
+        },
+        {
+          claimId: 1014891283,
+          denialId: 2002931,
+          amount: 836,
+          denialCode: "12345",
+        },
+      ],
+      isError: false
     },
     postPayment: {
       status: "waiting", // Current status of the post-payment process
@@ -867,6 +1325,13 @@ export const patientPersona: PatientPersona[] = [
         { id: "3", label: "Adjustments Applied", status: "pending" },
         { id: "4", label: "Ledger Updated", status: "pending" },
       ],
+      details: {
+        date: "2025-09-11",
+        paymentFile: 836,
+        claimId: "1014891283",
+        difference: -136,
+      },
+      isError: false
     },
     attachments: [
       {
@@ -949,7 +1414,7 @@ export const patientPersona: PatientPersona[] = [
       profilePhoto: "/avatar.png",
     },
     eligibilityCheck: {
-      status: "covered",
+      status: "waiting",
       insuranDetials: {
         insuranceProvider: "Daman-AUH-001",
         imageUrl: "/insurance-image.png",
@@ -959,18 +1424,38 @@ export const patientPersona: PatientPersona[] = [
         { label: "Network", value: "Yes" },
         { label: "Coverage", value: "100%" },
       ],
+      steps: [
+        { id: "1", label: "Extract Patient & Payer Data", status: "pending" },
+        { id: "2", label: "Validate Coverage", status: "pending" },
+        { id: "3", label: "Update & Flag Issues", status: "pending" },
+      ],
+      isError: false
     },
     medicalCoding: {
-      status: "inprogress", // Medical coding status
+      status: "waiting", // Medical coding status
       details: [
-        { label: "Encounter Date", value: "2025-08-30" },
-        { label: "Encounter Type", value: "Outpatient" },
+        // { label: "Encounter Date", value: "2025-08-30" },
+        // { label: "Encounter Type", value: "Outpatient" },
+        // { label: "Physician", value: "Dr. Al Shamsi" },
+        // { label: "Department", value: "Orthopaedics" },
+        { label: "Encounter Type", value: "Out patient" },
+        { label: "ICD Code", value: "99213" },
+        { label: "CPT Code", value: "99213" },
+        { label: "Drug Code", value: "12345" },
+        { label: "Encounter Date", value: "2024-07-21" },
         { label: "Physician", value: "Dr. Al Shamsi" },
         { label: "Department", value: "Orthopaedics" },
       ],
+      steps: [
+        { id: "1", label: "Extract & Suggest Code", status: "pending" },
+        { id: "2", label: "Validate & Check Compliance", status: "pending" },
+        { id: "3", label: "Claim Posted", status: "pending" },
+        { id: "4", label: "Human Review & Approval", status: "pending" },
+      ],
+      isError: false
     },
     priorAuthorization: {
-      status: "approved", // Prior authorization status
+      status: "waiting", // Prior authorization status
       details: [
         { label: "Encounter ID", value: "ENC-2025-0789" },
         { label: "CPT Code", value: "29880" },
@@ -979,6 +1464,13 @@ export const patientPersona: PatientPersona[] = [
         { label: "Prior Auth ID", value: "PA-556677" },
         { label: "Drug Codes", value: "NDC-0002" },
       ],
+      steps: [
+        { id: "1", label: "Extract & Prepare & (Code)", status: "pending" },
+        { id: "2", label: "Submit Request", status: "pending" },
+        { id: "3", label: "Prior Authorization Posted", status: "pending" },
+        { id: "4", label: "Response Retrieved", status: "pending" },
+      ],
+      isError: false
     },
     claimSubmission: {
       status: "waiting", // Current status of the claim submission process
@@ -988,6 +1480,27 @@ export const patientPersona: PatientPersona[] = [
         { id: "3", label: "Claim Posted", status: "pending" },
         { id: "4", label: "Claim ID Received & Updated", status: "pending" },
       ],
+      claimAttempts: [
+        {
+          date: "2025-10-20",
+          claimAmount: 836,
+          claimId: 1014891283,
+          rejectionCode: "F14",
+        },
+        {
+          date: "2025-10-20",
+          claimAmount: 836,
+          claimId: 1014891283,
+          rejectionCode: "F14",
+        },
+        {
+          date: "2025-10-20",
+          claimAmount: 836,
+          claimId: 1014891283,
+          rejectionCode: "F14",
+        },
+      ],
+      isError: false
     },
     denialManagement: {
       status: "waiting", // Current status of the denial management process
@@ -997,6 +1510,27 @@ export const patientPersona: PatientPersona[] = [
         { id: "3", label: "Appeal Generated", status: "pending" },
         { id: "4", label: "Appeal Submitted", status: "pending" },
       ],
+      denialAttempts: [
+        {
+          claimId: 1014891283,
+          denialId: 2002931,
+          amount: 836,
+          denialCode: "12345",
+        },
+        {
+          claimId: 1014891283,
+          denialId: 2002931,
+          amount: 836,
+          denialCode: "12345",
+        },
+        {
+          claimId: 1014891283,
+          denialId: 2002931,
+          amount: 836,
+          denialCode: "12345",
+        },
+      ],
+      isError: false
     },
     postPayment: {
       status: "waiting", // Current status of the post-payment process
@@ -1006,6 +1540,13 @@ export const patientPersona: PatientPersona[] = [
         { id: "3", label: "Adjustments Applied", status: "pending" },
         { id: "4", label: "Ledger Updated", status: "pending" },
       ],
+      details: {
+        date: "2025-09-11",
+        paymentFile: 836,
+        claimId: "1014891283",
+        difference: -136,
+      },
+      isError: false
     },
     attachments: [
       {
@@ -1087,7 +1628,7 @@ export const patientPersona: PatientPersona[] = [
       profilePhoto: "/avatar.png",
     },
     eligibilityCheck: {
-      status: "covered",
+      status: "waiting",
       insuranDetials: {
         insuranceProvider: "Daman-AUH-001",
         imageUrl: "/insurance-image.png",
@@ -1097,18 +1638,38 @@ export const patientPersona: PatientPersona[] = [
         { label: "Network", value: "Yes" },
         { label: "Coverage", value: "100%" },
       ],
+      steps: [
+        { id: "1", label: "Extract Patient & Payer Data", status: "pending" },
+        { id: "2", label: "Validate Coverage", status: "pending" },
+        { id: "3", label: "Update & Flag Issues", status: "pending" },
+      ],
+      isError: false
     },
     medicalCoding: {
-      status: "inprogress", // Medical coding status
+      status: "waiting", // Medical coding status
       details: [
-        { label: "Encounter Date", value: "2025-08-30" },
-        { label: "Encounter Type", value: "Outpatient" },
+        // { label: "Encounter Date", value: "2025-08-30" },
+        // { label: "Encounter Type", value: "Outpatient" },
+        // { label: "Physician", value: "Dr. Al Shamsi" },
+        // { label: "Department", value: "Orthopaedics" },
+        { label: "Encounter Type", value: "Out patient" },
+        { label: "ICD Code", value: "99213" },
+        { label: "CPT Code", value: "99213" },
+        { label: "Drug Code", value: "12345" },
+        { label: "Encounter Date", value: "2024-07-21" },
         { label: "Physician", value: "Dr. Al Shamsi" },
         { label: "Department", value: "Orthopaedics" },
       ],
+      steps: [
+        { id: "1", label: "Extract & Suggest Code", status: "pending" },
+        { id: "2", label: "Validate & Check Compliance", status: "pending" },
+        { id: "3", label: "Claim Posted", status: "pending" },
+        { id: "4", label: "Human Review & Approval", status: "pending" },
+      ],
+      isError: false
     },
     priorAuthorization: {
-      status: "approved", // Prior authorization status
+      status: "waiting", // Prior authorization status
       details: [
         { label: "Encounter ID", value: "ENC-2025-0789" },
         { label: "CPT Code", value: "29880" },
@@ -1117,6 +1678,13 @@ export const patientPersona: PatientPersona[] = [
         { label: "Prior Auth ID", value: "PA-556677" },
         { label: "Drug Codes", value: "NDC-0002" },
       ],
+      steps: [
+        { id: "1", label: "Extract & Prepare & (Code)", status: "pending" },
+        { id: "2", label: "Submit Request", status: "pending" },
+        { id: "3", label: "Prior Authorization Posted", status: "pending" },
+        { id: "4", label: "Response Retrieved", status: "pending" },
+      ],
+      isError: false
     },
     claimSubmission: {
       status: "waiting", // Current status of the claim submission process
@@ -1126,6 +1694,27 @@ export const patientPersona: PatientPersona[] = [
         { id: "3", label: "Claim Posted", status: "pending" },
         { id: "4", label: "Claim ID Received & Updated", status: "pending" },
       ],
+      claimAttempts: [
+        {
+          date: "2025-10-20",
+          claimAmount: 836,
+          claimId: 1014891283,
+          rejectionCode: "F14",
+        },
+        {
+          date: "2025-10-20",
+          claimAmount: 836,
+          claimId: 1014891283,
+          rejectionCode: "F14",
+        },
+        {
+          date: "2025-10-20",
+          claimAmount: 836,
+          claimId: 1014891283,
+          rejectionCode: "F14",
+        },
+      ],
+      isError: false
     },
     denialManagement: {
       status: "waiting", // Current status of the denial management process
@@ -1135,6 +1724,27 @@ export const patientPersona: PatientPersona[] = [
         { id: "3", label: "Appeal Generated", status: "pending" },
         { id: "4", label: "Appeal Submitted", status: "pending" },
       ],
+      denialAttempts: [
+        {
+          claimId: 1014891283,
+          denialId: 2002931,
+          amount: 836,
+          denialCode: "12345",
+        },
+        {
+          claimId: 1014891283,
+          denialId: 2002931,
+          amount: 836,
+          denialCode: "12345",
+        },
+        {
+          claimId: 1014891283,
+          denialId: 2002931,
+          amount: 836,
+          denialCode: "12345",
+        },
+      ],
+      isError: false
     },
     postPayment: {
       status: "waiting", // Current status of the post-payment process
@@ -1144,6 +1754,13 @@ export const patientPersona: PatientPersona[] = [
         { id: "3", label: "Adjustments Applied", status: "pending" },
         { id: "4", label: "Ledger Updated", status: "pending" },
       ],
+      details: {
+        date: "2025-09-11",
+        paymentFile: 836,
+        claimId: "1014891283",
+        difference: -136,
+      },
+      isError: false
     },
     attachments: [
       {
@@ -1225,7 +1842,7 @@ export const patientPersona: PatientPersona[] = [
       profilePhoto: "/avatar.png",
     },
     eligibilityCheck: {
-      status: "covered",
+      status: "waiting",
       insuranDetials: {
         insuranceProvider: "Daman-AUH-001",
         imageUrl: "/insurance-image.png",
@@ -1235,18 +1852,38 @@ export const patientPersona: PatientPersona[] = [
         { label: "Network", value: "Yes" },
         { label: "Coverage", value: "100%" },
       ],
+      steps: [
+        { id: "1", label: "Extract Patient & Payer Data", status: "pending" },
+        { id: "2", label: "Validate Coverage", status: "pending" },
+        { id: "3", label: "Update & Flag Issues", status: "pending" },
+      ],
+      isError: false
     },
     medicalCoding: {
-      status: "inprogress", // Medical coding status
+      status: "waiting", // Medical coding status
       details: [
-        { label: "Encounter Date", value: "2025-08-30" },
-        { label: "Encounter Type", value: "Outpatient" },
+        // { label: "Encounter Date", value: "2025-08-30" },
+        // { label: "Encounter Type", value: "Outpatient" },
+        // { label: "Physician", value: "Dr. Al Shamsi" },
+        // { label: "Department", value: "Orthopaedics" },
+        { label: "Encounter Type", value: "Out patient" },
+        { label: "ICD Code", value: "99213" },
+        { label: "CPT Code", value: "99213" },
+        { label: "Drug Code", value: "12345" },
+        { label: "Encounter Date", value: "2024-07-21" },
         { label: "Physician", value: "Dr. Al Shamsi" },
         { label: "Department", value: "Orthopaedics" },
       ],
+      steps: [
+        { id: "1", label: "Extract & Suggest Code", status: "pending" },
+        { id: "2", label: "Validate & Check Compliance", status: "pending" },
+        { id: "3", label: "Claim Posted", status: "pending" },
+        { id: "4", label: "Human Review & Approval", status: "pending" },
+      ],
+      isError: false
     },
     priorAuthorization: {
-      status: "approved", // Prior authorization status
+      status: "waiting", // Prior authorization status
       details: [
         { label: "Encounter ID", value: "ENC-2025-0789" },
         { label: "CPT Code", value: "29880" },
@@ -1255,6 +1892,13 @@ export const patientPersona: PatientPersona[] = [
         { label: "Prior Auth ID", value: "PA-556677" },
         { label: "Drug Codes", value: "NDC-0002" },
       ],
+      steps: [
+        { id: "1", label: "Extract & Prepare & (Code)", status: "pending" },
+        { id: "2", label: "Submit Request", status: "pending" },
+        { id: "3", label: "Prior Authorization Posted", status: "pending" },
+        { id: "4", label: "Response Retrieved", status: "pending" },
+      ],
+      isError: false
     },
     claimSubmission: {
       status: "waiting", // Current status of the claim submission process
@@ -1264,6 +1908,27 @@ export const patientPersona: PatientPersona[] = [
         { id: "3", label: "Claim Posted", status: "pending" },
         { id: "4", label: "Claim ID Received & Updated", status: "pending" },
       ],
+      claimAttempts: [
+        {
+          date: "2025-10-20",
+          claimAmount: 836,
+          claimId: 1014891283,
+          rejectionCode: "F14",
+        },
+        {
+          date: "2025-10-20",
+          claimAmount: 836,
+          claimId: 1014891283,
+          rejectionCode: "F14",
+        },
+        {
+          date: "2025-10-20",
+          claimAmount: 836,
+          claimId: 1014891283,
+          rejectionCode: "F14",
+        },
+      ],
+      isError: false
     },
     denialManagement: {
       status: "waiting", // Current status of the denial management process
@@ -1273,6 +1938,27 @@ export const patientPersona: PatientPersona[] = [
         { id: "3", label: "Appeal Generated", status: "pending" },
         { id: "4", label: "Appeal Submitted", status: "pending" },
       ],
+      denialAttempts: [
+        {
+          claimId: 1014891283,
+          denialId: 2002931,
+          amount: 836,
+          denialCode: "12345",
+        },
+        {
+          claimId: 1014891283,
+          denialId: 2002931,
+          amount: 836,
+          denialCode: "12345",
+        },
+        {
+          claimId: 1014891283,
+          denialId: 2002931,
+          amount: 836,
+          denialCode: "12345",
+        },
+      ],
+      isError: false
     },
     postPayment: {
       status: "waiting", // Current status of the post-payment process
@@ -1282,6 +1968,13 @@ export const patientPersona: PatientPersona[] = [
         { id: "3", label: "Adjustments Applied", status: "pending" },
         { id: "4", label: "Ledger Updated", status: "pending" },
       ],
+      details: {
+        date: "2025-09-11",
+        paymentFile: 836,
+        claimId: "1014891283",
+        difference: -136,
+      },
+      isError: false
     },
     attachments: [
       {
@@ -1363,7 +2056,7 @@ export const patientPersona: PatientPersona[] = [
       profilePhoto: "/avatar.png",
     },
     eligibilityCheck: {
-      status: "covered",
+      status: "waiting",
       insuranDetials: {
         insuranceProvider: "Daman-AUH-001",
         imageUrl: "/insurance-image.png",
@@ -1373,18 +2066,38 @@ export const patientPersona: PatientPersona[] = [
         { label: "Network", value: "Yes" },
         { label: "Coverage", value: "100%" },
       ],
+      steps: [
+        { id: "1", label: "Extract Patient & Payer Data", status: "pending" },
+        { id: "2", label: "Validate Coverage", status: "pending" },
+        { id: "3", label: "Update & Flag Issues", status: "pending" },
+      ],
+      isError: false
     },
     medicalCoding: {
-      status: "inprogress", // Medical coding status
+      status: "waiting", // Medical coding status
       details: [
-        { label: "Encounter Date", value: "2025-08-30" },
-        { label: "Encounter Type", value: "Outpatient" },
+        // { label: "Encounter Date", value: "2025-08-30" },
+        // { label: "Encounter Type", value: "Outpatient" },
+        // { label: "Physician", value: "Dr. Al Shamsi" },
+        // { label: "Department", value: "Orthopaedics" },
+        { label: "Encounter Type", value: "Out patient" },
+        { label: "ICD Code", value: "99213" },
+        { label: "CPT Code", value: "99213" },
+        { label: "Drug Code", value: "12345" },
+        { label: "Encounter Date", value: "2024-07-21" },
         { label: "Physician", value: "Dr. Al Shamsi" },
         { label: "Department", value: "Orthopaedics" },
       ],
+      steps: [
+        { id: "1", label: "Extract & Suggest Code", status: "pending" },
+        { id: "2", label: "Validate & Check Compliance", status: "pending" },
+        { id: "3", label: "Claim Posted", status: "pending" },
+        { id: "4", label: "Human Review & Approval", status: "pending" },
+      ],
+      isError: false
     },
     priorAuthorization: {
-      status: "approved", // Prior authorization status
+      status: "waiting", // Prior authorization status
       details: [
         { label: "Encounter ID", value: "ENC-2025-0789" },
         { label: "CPT Code", value: "29880" },
@@ -1393,6 +2106,13 @@ export const patientPersona: PatientPersona[] = [
         { label: "Prior Auth ID", value: "PA-556677" },
         { label: "Drug Codes", value: "NDC-0002" },
       ],
+      steps: [
+        { id: "1", label: "Extract & Prepare & (Code)", status: "pending" },
+        { id: "2", label: "Submit Request", status: "pending" },
+        { id: "3", label: "Prior Authorization Posted", status: "pending" },
+        { id: "4", label: "Response Retrieved", status: "pending" },
+      ],
+      isError: false
     },
     claimSubmission: {
       status: "waiting", // Current status of the claim submission process
@@ -1402,6 +2122,27 @@ export const patientPersona: PatientPersona[] = [
         { id: "3", label: "Claim Posted", status: "pending" },
         { id: "4", label: "Claim ID Received & Updated", status: "pending" },
       ],
+      claimAttempts: [
+        {
+          date: "2025-10-20",
+          claimAmount: 836,
+          claimId: 1014891283,
+          rejectionCode: "F14",
+        },
+        {
+          date: "2025-10-20",
+          claimAmount: 836,
+          claimId: 1014891283,
+          rejectionCode: "F14",
+        },
+        {
+          date: "2025-10-20",
+          claimAmount: 836,
+          claimId: 1014891283,
+          rejectionCode: "F14",
+        },
+      ],
+      isError: false
     },
     denialManagement: {
       status: "waiting", // Current status of the denial management process
@@ -1411,6 +2152,27 @@ export const patientPersona: PatientPersona[] = [
         { id: "3", label: "Appeal Generated", status: "pending" },
         { id: "4", label: "Appeal Submitted", status: "pending" },
       ],
+      denialAttempts: [
+        {
+          claimId: 1014891283,
+          denialId: 2002931,
+          amount: 836,
+          denialCode: "12345",
+        },
+        {
+          claimId: 1014891283,
+          denialId: 2002931,
+          amount: 836,
+          denialCode: "12345",
+        },
+        {
+          claimId: 1014891283,
+          denialId: 2002931,
+          amount: 836,
+          denialCode: "12345",
+        },
+      ],
+      isError: false
     },
     postPayment: {
       status: "waiting", // Current status of the post-payment process
@@ -1420,6 +2182,13 @@ export const patientPersona: PatientPersona[] = [
         { id: "3", label: "Adjustments Applied", status: "pending" },
         { id: "4", label: "Ledger Updated", status: "pending" },
       ],
+      details: {
+        date: "2025-09-11",
+        paymentFile: 836,
+        claimId: "1014891283",
+        difference: -136,
+      },
+      isError: false
     },
     attachments: [
       {
@@ -1501,7 +2270,7 @@ export const patientPersona: PatientPersona[] = [
       profilePhoto: "/avatar.png",
     },
     eligibilityCheck: {
-      status: "covered",
+      status: "waiting",
       insuranDetials: {
         insuranceProvider: "Daman-AUH-001",
         imageUrl: "/insurance-image.png",
@@ -1511,18 +2280,38 @@ export const patientPersona: PatientPersona[] = [
         { label: "Network", value: "Yes" },
         { label: "Coverage", value: "100%" },
       ],
+      steps: [
+        { id: "1", label: "Extract Patient & Payer Data", status: "pending" },
+        { id: "2", label: "Validate Coverage", status: "pending" },
+        { id: "3", label: "Update & Flag Issues", status: "pending" },
+      ],
+      isError: false
     },
     medicalCoding: {
-      status: "inprogress", // Medical coding status
+      status: "waiting", // Medical coding status
       details: [
-        { label: "Encounter Date", value: "2025-08-30" },
-        { label: "Encounter Type", value: "Outpatient" },
+        // { label: "Encounter Date", value: "2025-08-30" },
+        // { label: "Encounter Type", value: "Outpatient" },
+        // { label: "Physician", value: "Dr. Al Shamsi" },
+        // { label: "Department", value: "Orthopaedics" },
+        { label: "Encounter Type", value: "Out patient" },
+        { label: "ICD Code", value: "99213" },
+        { label: "CPT Code", value: "99213" },
+        { label: "Drug Code", value: "12345" },
+        { label: "Encounter Date", value: "2024-07-21" },
         { label: "Physician", value: "Dr. Al Shamsi" },
         { label: "Department", value: "Orthopaedics" },
       ],
+      steps: [
+        { id: "1", label: "Extract & Suggest Code", status: "pending" },
+        { id: "2", label: "Validate & Check Compliance", status: "pending" },
+        { id: "3", label: "Claim Posted", status: "pending" },
+        { id: "4", label: "Human Review & Approval", status: "pending" },
+      ],
+      isError: false
     },
     priorAuthorization: {
-      status: "approved", // Prior authorization status
+      status: "waiting", // Prior authorization status
       details: [
         { label: "Encounter ID", value: "ENC-2025-0789" },
         { label: "CPT Code", value: "29880" },
@@ -1531,6 +2320,13 @@ export const patientPersona: PatientPersona[] = [
         { label: "Prior Auth ID", value: "PA-556677" },
         { label: "Drug Codes", value: "NDC-0002" },
       ],
+      steps: [
+        { id: "1", label: "Extract & Prepare & (Code)", status: "pending" },
+        { id: "2", label: "Submit Request", status: "pending" },
+        { id: "3", label: "Prior Authorization Posted", status: "pending" },
+        { id: "4", label: "Response Retrieved", status: "pending" },
+      ],
+      isError: false
     },
     claimSubmission: {
       status: "waiting", // Current status of the claim submission process
@@ -1540,6 +2336,27 @@ export const patientPersona: PatientPersona[] = [
         { id: "3", label: "Claim Posted", status: "pending" },
         { id: "4", label: "Claim ID Received & Updated", status: "pending" },
       ],
+      claimAttempts: [
+        {
+          date: "2025-10-20",
+          claimAmount: 836,
+          claimId: 1014891283,
+          rejectionCode: "F14",
+        },
+        {
+          date: "2025-10-20",
+          claimAmount: 836,
+          claimId: 1014891283,
+          rejectionCode: "F14",
+        },
+        {
+          date: "2025-10-20",
+          claimAmount: 836,
+          claimId: 1014891283,
+          rejectionCode: "F14",
+        },
+      ],
+      isError: false
     },
     denialManagement: {
       status: "waiting", // Current status of the denial management process
@@ -1549,6 +2366,27 @@ export const patientPersona: PatientPersona[] = [
         { id: "3", label: "Appeal Generated", status: "pending" },
         { id: "4", label: "Appeal Submitted", status: "pending" },
       ],
+      denialAttempts: [
+        {
+          claimId: 1014891283,
+          denialId: 2002931,
+          amount: 836,
+          denialCode: "12345",
+        },
+        {
+          claimId: 1014891283,
+          denialId: 2002931,
+          amount: 836,
+          denialCode: "12345",
+        },
+        {
+          claimId: 1014891283,
+          denialId: 2002931,
+          amount: 836,
+          denialCode: "12345",
+        },
+      ],
+      isError: false
     },
     postPayment: {
       status: "waiting", // Current status of the post-payment process
@@ -1558,6 +2396,13 @@ export const patientPersona: PatientPersona[] = [
         { id: "3", label: "Adjustments Applied", status: "pending" },
         { id: "4", label: "Ledger Updated", status: "pending" },
       ],
+      details: {
+        date: "2025-09-11",
+        paymentFile: 836,
+        claimId: "1014891283",
+        difference: -136,
+      },
+      isError: false
     },
     attachments: [
       {
@@ -1639,7 +2484,7 @@ export const patientPersona: PatientPersona[] = [
       profilePhoto: "/avatar.png",
     },
     eligibilityCheck: {
-      status: "covered",
+      status: "waiting",
       insuranDetials: {
         insuranceProvider: "Daman-AUH-001",
         imageUrl: "/insurance-image.png",
@@ -1649,18 +2494,38 @@ export const patientPersona: PatientPersona[] = [
         { label: "Network", value: "Yes" },
         { label: "Coverage", value: "100%" },
       ],
+      steps: [
+        { id: "1", label: "Extract Patient & Payer Data", status: "pending" },
+        { id: "2", label: "Validate Coverage", status: "pending" },
+        { id: "3", label: "Update & Flag Issues", status: "pending" },
+      ],
+      isError: false
     },
     medicalCoding: {
-      status: "inprogress", // Medical coding status
+      status: "waiting", // Medical coding status
       details: [
-        { label: "Encounter Date", value: "2025-08-30" },
-        { label: "Encounter Type", value: "Outpatient" },
+        // { label: "Encounter Date", value: "2025-08-30" },
+        // { label: "Encounter Type", value: "Outpatient" },
+        // { label: "Physician", value: "Dr. Al Shamsi" },
+        // { label: "Department", value: "Orthopaedics" },
+        { label: "Encounter Type", value: "Out patient" },
+        { label: "ICD Code", value: "99213" },
+        { label: "CPT Code", value: "99213" },
+        { label: "Drug Code", value: "12345" },
+        { label: "Encounter Date", value: "2024-07-21" },
         { label: "Physician", value: "Dr. Al Shamsi" },
         { label: "Department", value: "Orthopaedics" },
       ],
+      steps: [
+        { id: "1", label: "Extract & Suggest Code", status: "pending" },
+        { id: "2", label: "Validate & Check Compliance", status: "pending" },
+        { id: "3", label: "Claim Posted", status: "pending" },
+        { id: "4", label: "Human Review & Approval", status: "pending" },
+      ],
+      isError: false
     },
     priorAuthorization: {
-      status: "approved", // Prior authorization status
+      status: "waiting", // Prior authorization status
       details: [
         { label: "Encounter ID", value: "ENC-2025-0789" },
         { label: "CPT Code", value: "29880" },
@@ -1669,6 +2534,13 @@ export const patientPersona: PatientPersona[] = [
         { label: "Prior Auth ID", value: "PA-556677" },
         { label: "Drug Codes", value: "NDC-0002" },
       ],
+      steps: [
+        { id: "1", label: "Extract & Prepare & (Code)", status: "pending" },
+        { id: "2", label: "Submit Request", status: "pending" },
+        { id: "3", label: "Prior Authorization Posted", status: "pending" },
+        { id: "4", label: "Response Retrieved", status: "pending" },
+      ],
+      isError: false
     },
     claimSubmission: {
       status: "waiting", // Current status of the claim submission process
@@ -1678,6 +2550,27 @@ export const patientPersona: PatientPersona[] = [
         { id: "3", label: "Claim Posted", status: "pending" },
         { id: "4", label: "Claim ID Received & Updated", status: "pending" },
       ],
+      claimAttempts: [
+        {
+          date: "2025-10-20",
+          claimAmount: 836,
+          claimId: 1014891283,
+          rejectionCode: "F14",
+        },
+        {
+          date: "2025-10-20",
+          claimAmount: 836,
+          claimId: 1014891283,
+          rejectionCode: "F14",
+        },
+        {
+          date: "2025-10-20",
+          claimAmount: 836,
+          claimId: 1014891283,
+          rejectionCode: "F14",
+        },
+      ],
+      isError: false
     },
     denialManagement: {
       status: "waiting", // Current status of the denial management process
@@ -1687,6 +2580,27 @@ export const patientPersona: PatientPersona[] = [
         { id: "3", label: "Appeal Generated", status: "pending" },
         { id: "4", label: "Appeal Submitted", status: "pending" },
       ],
+      denialAttempts: [
+        {
+          claimId: 1014891283,
+          denialId: 2002931,
+          amount: 836,
+          denialCode: "12345",
+        },
+        {
+          claimId: 1014891283,
+          denialId: 2002931,
+          amount: 836,
+          denialCode: "12345",
+        },
+        {
+          claimId: 1014891283,
+          denialId: 2002931,
+          amount: 836,
+          denialCode: "12345",
+        },
+      ],
+      isError: false
     },
     postPayment: {
       status: "waiting", // Current status of the post-payment process
@@ -1696,6 +2610,13 @@ export const patientPersona: PatientPersona[] = [
         { id: "3", label: "Adjustments Applied", status: "pending" },
         { id: "4", label: "Ledger Updated", status: "pending" },
       ],
+      details: {
+        date: "2025-09-11",
+        paymentFile: 836,
+        claimId: "1014891283",
+        difference: -136,
+      },
+      isError: false
     },
     attachments: [
       {
@@ -1777,7 +2698,7 @@ export const patientPersona: PatientPersona[] = [
       profilePhoto: "/avatar.png",
     },
     eligibilityCheck: {
-      status: "covered",
+      status: "waiting",
       insuranDetials: {
         insuranceProvider: "Daman-AUH-001",
         imageUrl: "/insurance-image.png",
@@ -1787,18 +2708,38 @@ export const patientPersona: PatientPersona[] = [
         { label: "Network", value: "Yes" },
         { label: "Coverage", value: "100%" },
       ],
+      steps: [
+        { id: "1", label: "Extract Patient & Payer Data", status: "pending" },
+        { id: "2", label: "Validate Coverage", status: "pending" },
+        { id: "3", label: "Update & Flag Issues", status: "pending" },
+      ],
+      isError: false
     },
     medicalCoding: {
-      status: "inprogress", // Medical coding status
+      status: "waiting", // Medical coding status
       details: [
-        { label: "Encounter Date", value: "2025-08-30" },
-        { label: "Encounter Type", value: "Outpatient" },
+        // { label: "Encounter Date", value: "2025-08-30" },
+        // { label: "Encounter Type", value: "Outpatient" },
+        // { label: "Physician", value: "Dr. Al Shamsi" },
+        // { label: "Department", value: "Orthopaedics" },
+        { label: "Encounter Type", value: "Out patient" },
+        { label: "ICD Code", value: "99213" },
+        { label: "CPT Code", value: "99213" },
+        { label: "Drug Code", value: "12345" },
+        { label: "Encounter Date", value: "2024-07-21" },
         { label: "Physician", value: "Dr. Al Shamsi" },
         { label: "Department", value: "Orthopaedics" },
       ],
+      steps: [
+        { id: "1", label: "Extract & Suggest Code", status: "pending" },
+        { id: "2", label: "Validate & Check Compliance", status: "pending" },
+        { id: "3", label: "Claim Posted", status: "pending" },
+        { id: "4", label: "Human Review & Approval", status: "pending" },
+      ],
+      isError: false
     },
     priorAuthorization: {
-      status: "approved", // Prior authorization status
+      status: "waiting", // Prior authorization status
       details: [
         { label: "Encounter ID", value: "ENC-2025-0789" },
         { label: "CPT Code", value: "29880" },
@@ -1807,6 +2748,13 @@ export const patientPersona: PatientPersona[] = [
         { label: "Prior Auth ID", value: "PA-556677" },
         { label: "Drug Codes", value: "NDC-0002" },
       ],
+      steps: [
+        { id: "1", label: "Extract & Prepare & (Code)", status: "pending" },
+        { id: "2", label: "Submit Request", status: "pending" },
+        { id: "3", label: "Prior Authorization Posted", status: "pending" },
+        { id: "4", label: "Response Retrieved", status: "pending" },
+      ],
+      isError: false
     },
     claimSubmission: {
       status: "waiting", // Current status of the claim submission process
@@ -1816,6 +2764,27 @@ export const patientPersona: PatientPersona[] = [
         { id: "3", label: "Claim Posted", status: "pending" },
         { id: "4", label: "Claim ID Received & Updated", status: "pending" },
       ],
+      claimAttempts: [
+        {
+          date: "2025-10-20",
+          claimAmount: 836,
+          claimId: 1014891283,
+          rejectionCode: "F14",
+        },
+        {
+          date: "2025-10-20",
+          claimAmount: 836,
+          claimId: 1014891283,
+          rejectionCode: "F14",
+        },
+        {
+          date: "2025-10-20",
+          claimAmount: 836,
+          claimId: 1014891283,
+          rejectionCode: "F14",
+        },
+      ],
+      isError: false
     },
     denialManagement: {
       status: "waiting", // Current status of the denial management process
@@ -1825,6 +2794,27 @@ export const patientPersona: PatientPersona[] = [
         { id: "3", label: "Appeal Generated", status: "pending" },
         { id: "4", label: "Appeal Submitted", status: "pending" },
       ],
+      denialAttempts: [
+        {
+          claimId: 1014891283,
+          denialId: 2002931,
+          amount: 836,
+          denialCode: "12345",
+        },
+        {
+          claimId: 1014891283,
+          denialId: 2002931,
+          amount: 836,
+          denialCode: "12345",
+        },
+        {
+          claimId: 1014891283,
+          denialId: 2002931,
+          amount: 836,
+          denialCode: "12345",
+        },
+      ],
+      isError: false
     },
     postPayment: {
       status: "waiting", // Current status of the post-payment process
@@ -1834,6 +2824,13 @@ export const patientPersona: PatientPersona[] = [
         { id: "3", label: "Adjustments Applied", status: "pending" },
         { id: "4", label: "Ledger Updated", status: "pending" },
       ],
+      details: {
+        date: "2025-09-11",
+        paymentFile: 836,
+        claimId: "1014891283",
+        difference: -136,
+      },
+      isError: false
     },
     attachments: [
       {
@@ -1915,7 +2912,7 @@ export const patientPersona: PatientPersona[] = [
       profilePhoto: "/avatar.png",
     },
     eligibilityCheck: {
-      status: "covered",
+      status: "waiting",
       insuranDetials: {
         insuranceProvider: "Daman-AUH-001",
         imageUrl: "/insurance-image.png",
@@ -1925,18 +2922,38 @@ export const patientPersona: PatientPersona[] = [
         { label: "Network", value: "Yes" },
         { label: "Coverage", value: "100%" },
       ],
+      steps: [
+        { id: "1", label: "Extract Patient & Payer Data", status: "pending" },
+        { id: "2", label: "Validate Coverage", status: "pending" },
+        { id: "3", label: "Update & Flag Issues", status: "pending" },
+      ],
+      isError: false
     },
     medicalCoding: {
-      status: "inprogress", // Medical coding status
+      status: "waiting", // Medical coding status
       details: [
-        { label: "Encounter Date", value: "2025-08-30" },
-        { label: "Encounter Type", value: "Outpatient" },
+        // { label: "Encounter Date", value: "2025-08-30" },
+        // { label: "Encounter Type", value: "Outpatient" },
+        // { label: "Physician", value: "Dr. Al Shamsi" },
+        // { label: "Department", value: "Orthopaedics" },
+        { label: "Encounter Type", value: "Out patient" },
+        { label: "ICD Code", value: "99213" },
+        { label: "CPT Code", value: "99213" },
+        { label: "Drug Code", value: "12345" },
+        { label: "Encounter Date", value: "2024-07-21" },
         { label: "Physician", value: "Dr. Al Shamsi" },
         { label: "Department", value: "Orthopaedics" },
       ],
+      steps: [
+        { id: "1", label: "Extract & Suggest Code", status: "pending" },
+        { id: "2", label: "Validate & Check Compliance", status: "pending" },
+        { id: "3", label: "Claim Posted", status: "pending" },
+        { id: "4", label: "Human Review & Approval", status: "pending" },
+      ],
+      isError: false
     },
     priorAuthorization: {
-      status: "approved", // Prior authorization status
+      status: "waiting", // Prior authorization status
       details: [
         { label: "Encounter ID", value: "ENC-2025-0789" },
         { label: "CPT Code", value: "29880" },
@@ -1945,6 +2962,13 @@ export const patientPersona: PatientPersona[] = [
         { label: "Prior Auth ID", value: "PA-556677" },
         { label: "Drug Codes", value: "NDC-0002" },
       ],
+      steps: [
+        { id: "1", label: "Extract & Prepare & (Code)", status: "pending" },
+        { id: "2", label: "Submit Request", status: "pending" },
+        { id: "3", label: "Prior Authorization Posted", status: "pending" },
+        { id: "4", label: "Response Retrieved", status: "pending" },
+      ],
+      isError: false
     },
     claimSubmission: {
       status: "waiting", // Current status of the claim submission process
@@ -1954,6 +2978,27 @@ export const patientPersona: PatientPersona[] = [
         { id: "3", label: "Claim Posted", status: "pending" },
         { id: "4", label: "Claim ID Received & Updated", status: "pending" },
       ],
+      claimAttempts: [
+        {
+          date: "2025-10-20",
+          claimAmount: 836,
+          claimId: 1014891283,
+          rejectionCode: "F14",
+        },
+        {
+          date: "2025-10-20",
+          claimAmount: 836,
+          claimId: 1014891283,
+          rejectionCode: "F14",
+        },
+        {
+          date: "2025-10-20",
+          claimAmount: 836,
+          claimId: 1014891283,
+          rejectionCode: "F14",
+        },
+      ],
+      isError: false
     },
     denialManagement: {
       status: "waiting", // Current status of the denial management process
@@ -1963,6 +3008,27 @@ export const patientPersona: PatientPersona[] = [
         { id: "3", label: "Appeal Generated", status: "pending" },
         { id: "4", label: "Appeal Submitted", status: "pending" },
       ],
+      denialAttempts: [
+        {
+          claimId: 1014891283,
+          denialId: 2002931,
+          amount: 836,
+          denialCode: "12345",
+        },
+        {
+          claimId: 1014891283,
+          denialId: 2002931,
+          amount: 836,
+          denialCode: "12345",
+        },
+        {
+          claimId: 1014891283,
+          denialId: 2002931,
+          amount: 836,
+          denialCode: "12345",
+        },
+      ],
+      isError: false
     },
     postPayment: {
       status: "waiting", // Current status of the post-payment process
@@ -1972,6 +3038,13 @@ export const patientPersona: PatientPersona[] = [
         { id: "3", label: "Adjustments Applied", status: "pending" },
         { id: "4", label: "Ledger Updated", status: "pending" },
       ],
+      details: {
+        date: "2025-09-11",
+        paymentFile: 836,
+        claimId: "1014891283",
+        difference: -136,
+      },
+      isError: false
     },
     attachments: [
       {
@@ -2053,7 +3126,7 @@ export const patientPersona: PatientPersona[] = [
       profilePhoto: "/avatar.png",
     },
     eligibilityCheck: {
-      status: "covered",
+      status: "waiting",
       insuranDetials: {
         insuranceProvider: "Daman-AUH-001",
         imageUrl: "/insurance-image.png",
@@ -2063,18 +3136,38 @@ export const patientPersona: PatientPersona[] = [
         { label: "Network", value: "Yes" },
         { label: "Coverage", value: "100%" },
       ],
+      steps: [
+        { id: "1", label: "Extract Patient & Payer Data", status: "pending" },
+        { id: "2", label: "Validate Coverage", status: "pending" },
+        { id: "3", label: "Update & Flag Issues", status: "pending" },
+      ],
+      isError: false
     },
     medicalCoding: {
-      status: "inprogress", // Medical coding status
+      status: "waiting", // Medical coding status
       details: [
-        { label: "Encounter Date", value: "2025-08-30" },
-        { label: "Encounter Type", value: "Outpatient" },
+        // { label: "Encounter Date", value: "2025-08-30" },
+        // { label: "Encounter Type", value: "Outpatient" },
+        // { label: "Physician", value: "Dr. Al Shamsi" },
+        // { label: "Department", value: "Orthopaedics" },
+        { label: "Encounter Type", value: "Out patient" },
+        { label: "ICD Code", value: "99213" },
+        { label: "CPT Code", value: "99213" },
+        { label: "Drug Code", value: "12345" },
+        { label: "Encounter Date", value: "2024-07-21" },
         { label: "Physician", value: "Dr. Al Shamsi" },
         { label: "Department", value: "Orthopaedics" },
       ],
+      steps: [
+        { id: "1", label: "Extract & Suggest Code", status: "pending" },
+        { id: "2", label: "Validate & Check Compliance", status: "pending" },
+        { id: "3", label: "Claim Posted", status: "pending" },
+        { id: "4", label: "Human Review & Approval", status: "pending" },
+      ],
+      isError: false
     },
     priorAuthorization: {
-      status: "approved", // Prior authorization status
+      status: "waiting", // Prior authorization status
       details: [
         { label: "Encounter ID", value: "ENC-2025-0789" },
         { label: "CPT Code", value: "29880" },
@@ -2083,6 +3176,13 @@ export const patientPersona: PatientPersona[] = [
         { label: "Prior Auth ID", value: "PA-556677" },
         { label: "Drug Codes", value: "NDC-0002" },
       ],
+      steps: [
+        { id: "1", label: "Extract & Prepare & (Code)", status: "pending" },
+        { id: "2", label: "Submit Request", status: "pending" },
+        { id: "3", label: "Prior Authorization Posted", status: "pending" },
+        { id: "4", label: "Response Retrieved", status: "pending" },
+      ],
+      isError: false
     },
     claimSubmission: {
       status: "waiting", // Current status of the claim submission process
@@ -2092,6 +3192,27 @@ export const patientPersona: PatientPersona[] = [
         { id: "3", label: "Claim Posted", status: "pending" },
         { id: "4", label: "Claim ID Received & Updated", status: "pending" },
       ],
+      claimAttempts: [
+        {
+          date: "2025-10-20",
+          claimAmount: 836,
+          claimId: 1014891283,
+          rejectionCode: "F14",
+        },
+        {
+          date: "2025-10-20",
+          claimAmount: 836,
+          claimId: 1014891283,
+          rejectionCode: "F14",
+        },
+        {
+          date: "2025-10-20",
+          claimAmount: 836,
+          claimId: 1014891283,
+          rejectionCode: "F14",
+        },
+      ],
+      isError: false
     },
     denialManagement: {
       status: "waiting", // Current status of the denial management process
@@ -2101,6 +3222,27 @@ export const patientPersona: PatientPersona[] = [
         { id: "3", label: "Appeal Generated", status: "pending" },
         { id: "4", label: "Appeal Submitted", status: "pending" },
       ],
+      denialAttempts: [
+        {
+          claimId: 1014891283,
+          denialId: 2002931,
+          amount: 836,
+          denialCode: "12345",
+        },
+        {
+          claimId: 1014891283,
+          denialId: 2002931,
+          amount: 836,
+          denialCode: "12345",
+        },
+        {
+          claimId: 1014891283,
+          denialId: 2002931,
+          amount: 836,
+          denialCode: "12345",
+        },
+      ],
+      isError: false
     },
     postPayment: {
       status: "waiting", // Current status of the post-payment process
@@ -2110,6 +3252,13 @@ export const patientPersona: PatientPersona[] = [
         { id: "3", label: "Adjustments Applied", status: "pending" },
         { id: "4", label: "Ledger Updated", status: "pending" },
       ],
+      details: {
+        date: "2025-09-11",
+        paymentFile: 836,
+        claimId: "1014891283",
+        difference: -136,
+      },
+      isError: false
     },
     attachments: [
       {
@@ -2191,7 +3340,7 @@ export const patientPersona: PatientPersona[] = [
       profilePhoto: "/avatar.png",
     },
     eligibilityCheck: {
-      status: "covered",
+      status: "waiting",
       insuranDetials: {
         insuranceProvider: "Daman-AUH-001",
         imageUrl: "/insurance-image.png",
@@ -2201,18 +3350,38 @@ export const patientPersona: PatientPersona[] = [
         { label: "Network", value: "Yes" },
         { label: "Coverage", value: "100%" },
       ],
+      steps: [
+        { id: "1", label: "Extract Patient & Payer Data", status: "pending" },
+        { id: "2", label: "Validate Coverage", status: "pending" },
+        { id: "3", label: "Update & Flag Issues", status: "pending" },
+      ],
+      isError: false
     },
     medicalCoding: {
-      status: "inprogress", // Medical coding status
+      status: "waiting", // Medical coding status
       details: [
-        { label: "Encounter Date", value: "2025-08-30" },
-        { label: "Encounter Type", value: "Outpatient" },
+        // { label: "Encounter Date", value: "2025-08-30" },
+        // { label: "Encounter Type", value: "Outpatient" },
+        // { label: "Physician", value: "Dr. Al Shamsi" },
+        // { label: "Department", value: "Orthopaedics" },
+        { label: "Encounter Type", value: "Out patient" },
+        { label: "ICD Code", value: "99213" },
+        { label: "CPT Code", value: "99213" },
+        { label: "Drug Code", value: "12345" },
+        { label: "Encounter Date", value: "2024-07-21" },
         { label: "Physician", value: "Dr. Al Shamsi" },
         { label: "Department", value: "Orthopaedics" },
       ],
+      steps: [
+        { id: "1", label: "Extract & Suggest Code", status: "pending" },
+        { id: "2", label: "Validate & Check Compliance", status: "pending" },
+        { id: "3", label: "Claim Posted", status: "pending" },
+        { id: "4", label: "Human Review & Approval", status: "pending" },
+      ],
+      isError: false
     },
     priorAuthorization: {
-      status: "approved", // Prior authorization status
+      status: "waiting", // Prior authorization status
       details: [
         { label: "Encounter ID", value: "ENC-2025-0789" },
         { label: "CPT Code", value: "29880" },
@@ -2221,6 +3390,13 @@ export const patientPersona: PatientPersona[] = [
         { label: "Prior Auth ID", value: "PA-556677" },
         { label: "Drug Codes", value: "NDC-0002" },
       ],
+      steps: [
+        { id: "1", label: "Extract & Prepare & (Code)", status: "pending" },
+        { id: "2", label: "Submit Request", status: "pending" },
+        { id: "3", label: "Prior Authorization Posted", status: "pending" },
+        { id: "4", label: "Response Retrieved", status: "pending" },
+      ],
+      isError: false
     },
     claimSubmission: {
       status: "waiting", // Current status of the claim submission process
@@ -2230,6 +3406,27 @@ export const patientPersona: PatientPersona[] = [
         { id: "3", label: "Claim Posted", status: "pending" },
         { id: "4", label: "Claim ID Received & Updated", status: "pending" },
       ],
+      claimAttempts: [
+        {
+          date: "2025-10-20",
+          claimAmount: 836,
+          claimId: 1014891283,
+          rejectionCode: "F14",
+        },
+        {
+          date: "2025-10-20",
+          claimAmount: 836,
+          claimId: 1014891283,
+          rejectionCode: "F14",
+        },
+        {
+          date: "2025-10-20",
+          claimAmount: 836,
+          claimId: 1014891283,
+          rejectionCode: "F14",
+        },
+      ],
+      isError: false
     },
     denialManagement: {
       status: "waiting", // Current status of the denial management process
@@ -2239,6 +3436,27 @@ export const patientPersona: PatientPersona[] = [
         { id: "3", label: "Appeal Generated", status: "pending" },
         { id: "4", label: "Appeal Submitted", status: "pending" },
       ],
+      denialAttempts: [
+        {
+          claimId: 1014891283,
+          denialId: 2002931,
+          amount: 836,
+          denialCode: "12345",
+        },
+        {
+          claimId: 1014891283,
+          denialId: 2002931,
+          amount: 836,
+          denialCode: "12345",
+        },
+        {
+          claimId: 1014891283,
+          denialId: 2002931,
+          amount: 836,
+          denialCode: "12345",
+        },
+      ],
+      isError: false
     },
     postPayment: {
       status: "waiting", // Current status of the post-payment process
@@ -2248,6 +3466,13 @@ export const patientPersona: PatientPersona[] = [
         { id: "3", label: "Adjustments Applied", status: "pending" },
         { id: "4", label: "Ledger Updated", status: "pending" },
       ],
+      details: {
+        date: "2025-09-11",
+        paymentFile: 836,
+        claimId: "1014891283",
+        difference: -136,
+      },
+      isError: false
     },
     attachments: [
       {
@@ -2329,7 +3554,7 @@ export const patientPersona: PatientPersona[] = [
       profilePhoto: "/avatar.png",
     },
     eligibilityCheck: {
-      status: "covered",
+      status: "waiting",
       insuranDetials: {
         insuranceProvider: "Daman-AUH-001",
         imageUrl: "/insurance-image.png",
@@ -2339,18 +3564,38 @@ export const patientPersona: PatientPersona[] = [
         { label: "Network", value: "Yes" },
         { label: "Coverage", value: "100%" },
       ],
+      steps: [
+        { id: "1", label: "Extract Patient & Payer Data", status: "pending" },
+        { id: "2", label: "Validate Coverage", status: "pending" },
+        { id: "3", label: "Update & Flag Issues", status: "pending" },
+      ],
+      isError: false
     },
     medicalCoding: {
-      status: "inprogress", // Medical coding status
+      status: "waiting", // Medical coding status
       details: [
-        { label: "Encounter Date", value: "2025-08-30" },
-        { label: "Encounter Type", value: "Outpatient" },
+        // { label: "Encounter Date", value: "2025-08-30" },
+        // { label: "Encounter Type", value: "Outpatient" },
+        // { label: "Physician", value: "Dr. Al Shamsi" },
+        // { label: "Department", value: "Orthopaedics" },
+        { label: "Encounter Type", value: "Out patient" },
+        { label: "ICD Code", value: "99213" },
+        { label: "CPT Code", value: "99213" },
+        { label: "Drug Code", value: "12345" },
+        { label: "Encounter Date", value: "2024-07-21" },
         { label: "Physician", value: "Dr. Al Shamsi" },
         { label: "Department", value: "Orthopaedics" },
       ],
+      steps: [
+        { id: "1", label: "Extract & Suggest Code", status: "pending" },
+        { id: "2", label: "Validate & Check Compliance", status: "pending" },
+        { id: "3", label: "Claim Posted", status: "pending" },
+        { id: "4", label: "Human Review & Approval", status: "pending" },
+      ],
+      isError: false
     },
     priorAuthorization: {
-      status: "approved", // Prior authorization status
+      status: "waiting", // Prior authorization status
       details: [
         { label: "Encounter ID", value: "ENC-2025-0789" },
         { label: "CPT Code", value: "29880" },
@@ -2359,6 +3604,13 @@ export const patientPersona: PatientPersona[] = [
         { label: "Prior Auth ID", value: "PA-556677" },
         { label: "Drug Codes", value: "NDC-0002" },
       ],
+      steps: [
+        { id: "1", label: "Extract & Prepare & (Code)", status: "pending" },
+        { id: "2", label: "Submit Request", status: "pending" },
+        { id: "3", label: "Prior Authorization Posted", status: "pending" },
+        { id: "4", label: "Response Retrieved", status: "pending" },
+      ],
+      isError: false
     },
     claimSubmission: {
       status: "waiting", // Current status of the claim submission process
@@ -2368,6 +3620,27 @@ export const patientPersona: PatientPersona[] = [
         { id: "3", label: "Claim Posted", status: "pending" },
         { id: "4", label: "Claim ID Received & Updated", status: "pending" },
       ],
+      claimAttempts: [
+        {
+          date: "2025-10-20",
+          claimAmount: 836,
+          claimId: 1014891283,
+          rejectionCode: "F14",
+        },
+        {
+          date: "2025-10-20",
+          claimAmount: 836,
+          claimId: 1014891283,
+          rejectionCode: "F14",
+        },
+        {
+          date: "2025-10-20",
+          claimAmount: 836,
+          claimId: 1014891283,
+          rejectionCode: "F14",
+        },
+      ],
+      isError: false
     },
     denialManagement: {
       status: "waiting", // Current status of the denial management process
@@ -2377,6 +3650,27 @@ export const patientPersona: PatientPersona[] = [
         { id: "3", label: "Appeal Generated", status: "pending" },
         { id: "4", label: "Appeal Submitted", status: "pending" },
       ],
+      denialAttempts: [
+        {
+          claimId: 1014891283,
+          denialId: 2002931,
+          amount: 836,
+          denialCode: "12345",
+        },
+        {
+          claimId: 1014891283,
+          denialId: 2002931,
+          amount: 836,
+          denialCode: "12345",
+        },
+        {
+          claimId: 1014891283,
+          denialId: 2002931,
+          amount: 836,
+          denialCode: "12345",
+        },
+      ],
+      isError: false
     },
     postPayment: {
       status: "waiting", // Current status of the post-payment process
@@ -2386,6 +3680,13 @@ export const patientPersona: PatientPersona[] = [
         { id: "3", label: "Adjustments Applied", status: "pending" },
         { id: "4", label: "Ledger Updated", status: "pending" },
       ],
+      details: {
+        date: "2025-09-11",
+        paymentFile: 836,
+        claimId: "1014891283",
+        difference: -136,
+      },
+      isError: false
     },
     attachments: [
       {
@@ -2467,7 +3768,7 @@ export const patientPersona: PatientPersona[] = [
       profilePhoto: "/avatar.png",
     },
     eligibilityCheck: {
-      status: "covered",
+      status: "waiting",
       insuranDetials: {
         insuranceProvider: "Daman-AUH-001",
         imageUrl: "/insurance-image.png",
@@ -2477,18 +3778,38 @@ export const patientPersona: PatientPersona[] = [
         { label: "Network", value: "Yes" },
         { label: "Coverage", value: "100%" },
       ],
+      steps: [
+        { id: "1", label: "Extract Patient & Payer Data", status: "pending" },
+        { id: "2", label: "Validate Coverage", status: "pending" },
+        { id: "3", label: "Update & Flag Issues", status: "pending" },
+      ],
+      isError: false
     },
     medicalCoding: {
-      status: "inprogress", // Medical coding status
+      status: "waiting", // Medical coding status
       details: [
-        { label: "Encounter Date", value: "2025-08-30" },
-        { label: "Encounter Type", value: "Outpatient" },
+        // { label: "Encounter Date", value: "2025-08-30" },
+        // { label: "Encounter Type", value: "Outpatient" },
+        // { label: "Physician", value: "Dr. Al Shamsi" },
+        // { label: "Department", value: "Orthopaedics" },
+        { label: "Encounter Type", value: "Out patient" },
+        { label: "ICD Code", value: "99213" },
+        { label: "CPT Code", value: "99213" },
+        { label: "Drug Code", value: "12345" },
+        { label: "Encounter Date", value: "2024-07-21" },
         { label: "Physician", value: "Dr. Al Shamsi" },
         { label: "Department", value: "Orthopaedics" },
       ],
+      steps: [
+        { id: "1", label: "Extract & Suggest Code", status: "pending" },
+        { id: "2", label: "Validate & Check Compliance", status: "pending" },
+        { id: "3", label: "Claim Posted", status: "pending" },
+        { id: "4", label: "Human Review & Approval", status: "pending" },
+      ],
+      isError: false
     },
     priorAuthorization: {
-      status: "approved", // Prior authorization status
+      status: "waiting", // Prior authorization status
       details: [
         { label: "Encounter ID", value: "ENC-2025-0789" },
         { label: "CPT Code", value: "29880" },
@@ -2497,6 +3818,13 @@ export const patientPersona: PatientPersona[] = [
         { label: "Prior Auth ID", value: "PA-556677" },
         { label: "Drug Codes", value: "NDC-0002" },
       ],
+      steps: [
+        { id: "1", label: "Extract & Prepare & (Code)", status: "pending" },
+        { id: "2", label: "Submit Request", status: "pending" },
+        { id: "3", label: "Prior Authorization Posted", status: "pending" },
+        { id: "4", label: "Response Retrieved", status: "pending" },
+      ],
+      isError: false
     },
     claimSubmission: {
       status: "waiting", // Current status of the claim submission process
@@ -2506,6 +3834,27 @@ export const patientPersona: PatientPersona[] = [
         { id: "3", label: "Claim Posted", status: "pending" },
         { id: "4", label: "Claim ID Received & Updated", status: "pending" },
       ],
+      claimAttempts: [
+        {
+          date: "2025-10-20",
+          claimAmount: 836,
+          claimId: 1014891283,
+          rejectionCode: "F14",
+        },
+        {
+          date: "2025-10-20",
+          claimAmount: 836,
+          claimId: 1014891283,
+          rejectionCode: "F14",
+        },
+        {
+          date: "2025-10-20",
+          claimAmount: 836,
+          claimId: 1014891283,
+          rejectionCode: "F14",
+        },
+      ],
+      isError: false
     },
     denialManagement: {
       status: "waiting", // Current status of the denial management process
@@ -2515,6 +3864,27 @@ export const patientPersona: PatientPersona[] = [
         { id: "3", label: "Appeal Generated", status: "pending" },
         { id: "4", label: "Appeal Submitted", status: "pending" },
       ],
+      denialAttempts: [
+        {
+          claimId: 1014891283,
+          denialId: 2002931,
+          amount: 836,
+          denialCode: "12345",
+        },
+        {
+          claimId: 1014891283,
+          denialId: 2002931,
+          amount: 836,
+          denialCode: "12345",
+        },
+        {
+          claimId: 1014891283,
+          denialId: 2002931,
+          amount: 836,
+          denialCode: "12345",
+        },
+      ],
+      isError: false
     },
     postPayment: {
       status: "waiting", // Current status of the post-payment process
@@ -2524,6 +3894,13 @@ export const patientPersona: PatientPersona[] = [
         { id: "3", label: "Adjustments Applied", status: "pending" },
         { id: "4", label: "Ledger Updated", status: "pending" },
       ],
+      details: {
+        date: "2025-09-11",
+        paymentFile: 836,
+        claimId: "1014891283",
+        difference: -136,
+      },
+      isError: false
     },
     attachments: [
       {
@@ -2605,7 +3982,7 @@ export const patientPersona: PatientPersona[] = [
       profilePhoto: "/avatar.png",
     },
     eligibilityCheck: {
-      status: "covered",
+      status: "waiting",
       insuranDetials: {
         insuranceProvider: "Daman-AUH-001",
         imageUrl: "/insurance-image.png",
@@ -2615,18 +3992,38 @@ export const patientPersona: PatientPersona[] = [
         { label: "Network", value: "Yes" },
         { label: "Coverage", value: "100%" },
       ],
+      steps: [
+        { id: "1", label: "Extract Patient & Payer Data", status: "pending" },
+        { id: "2", label: "Validate Coverage", status: "pending" },
+        { id: "3", label: "Update & Flag Issues", status: "pending" },
+      ],
+      isError: false
     },
     medicalCoding: {
-      status: "inprogress", // Medical coding status
+      status: "waiting", // Medical coding status
       details: [
-        { label: "Encounter Date", value: "2025-08-30" },
-        { label: "Encounter Type", value: "Outpatient" },
+        // { label: "Encounter Date", value: "2025-08-30" },
+        // { label: "Encounter Type", value: "Outpatient" },
+        // { label: "Physician", value: "Dr. Al Shamsi" },
+        // { label: "Department", value: "Orthopaedics" },
+        { label: "Encounter Type", value: "Out patient" },
+        { label: "ICD Code", value: "99213" },
+        { label: "CPT Code", value: "99213" },
+        { label: "Drug Code", value: "12345" },
+        { label: "Encounter Date", value: "2024-07-21" },
         { label: "Physician", value: "Dr. Al Shamsi" },
         { label: "Department", value: "Orthopaedics" },
       ],
+      steps: [
+        { id: "1", label: "Extract & Suggest Code", status: "pending" },
+        { id: "2", label: "Validate & Check Compliance", status: "pending" },
+        { id: "3", label: "Claim Posted", status: "pending" },
+        { id: "4", label: "Human Review & Approval", status: "pending" },
+      ],
+      isError: false
     },
     priorAuthorization: {
-      status: "approved", // Prior authorization status
+      status: "waiting", // Prior authorization status
       details: [
         { label: "Encounter ID", value: "ENC-2025-0789" },
         { label: "CPT Code", value: "29880" },
@@ -2635,6 +4032,13 @@ export const patientPersona: PatientPersona[] = [
         { label: "Prior Auth ID", value: "PA-556677" },
         { label: "Drug Codes", value: "NDC-0002" },
       ],
+      steps: [
+        { id: "1", label: "Extract & Prepare & (Code)", status: "pending" },
+        { id: "2", label: "Submit Request", status: "pending" },
+        { id: "3", label: "Prior Authorization Posted", status: "pending" },
+        { id: "4", label: "Response Retrieved", status: "pending" },
+      ],
+      isError: false
     },
     claimSubmission: {
       status: "waiting", // Current status of the claim submission process
@@ -2644,6 +4048,27 @@ export const patientPersona: PatientPersona[] = [
         { id: "3", label: "Claim Posted", status: "pending" },
         { id: "4", label: "Claim ID Received & Updated", status: "pending" },
       ],
+      claimAttempts: [
+        {
+          date: "2025-10-20",
+          claimAmount: 836,
+          claimId: 1014891283,
+          rejectionCode: "F14",
+        },
+        {
+          date: "2025-10-20",
+          claimAmount: 836,
+          claimId: 1014891283,
+          rejectionCode: "F14",
+        },
+        {
+          date: "2025-10-20",
+          claimAmount: 836,
+          claimId: 1014891283,
+          rejectionCode: "F14",
+        },
+      ],
+      isError: false
     },
     denialManagement: {
       status: "waiting", // Current status of the denial management process
@@ -2653,6 +4078,27 @@ export const patientPersona: PatientPersona[] = [
         { id: "3", label: "Appeal Generated", status: "pending" },
         { id: "4", label: "Appeal Submitted", status: "pending" },
       ],
+      denialAttempts: [
+        {
+          claimId: 1014891283,
+          denialId: 2002931,
+          amount: 836,
+          denialCode: "12345",
+        },
+        {
+          claimId: 1014891283,
+          denialId: 2002931,
+          amount: 836,
+          denialCode: "12345",
+        },
+        {
+          claimId: 1014891283,
+          denialId: 2002931,
+          amount: 836,
+          denialCode: "12345",
+        },
+      ],
+      isError: false
     },
     postPayment: {
       status: "waiting", // Current status of the post-payment process
@@ -2662,6 +4108,13 @@ export const patientPersona: PatientPersona[] = [
         { id: "3", label: "Adjustments Applied", status: "pending" },
         { id: "4", label: "Ledger Updated", status: "pending" },
       ],
+      details: {
+        date: "2025-09-11",
+        paymentFile: 836,
+        claimId: "1014891283",
+        difference: -136,
+      },
+      isError: false
     },
     attachments: [
       {
@@ -2743,7 +4196,7 @@ export const patientPersona: PatientPersona[] = [
       profilePhoto: "/avatar.png",
     },
     eligibilityCheck: {
-      status: "covered",
+      status: "waiting",
       insuranDetials: {
         insuranceProvider: "Daman-AUH-001",
         imageUrl: "/insurance-image.png",
@@ -2753,18 +4206,38 @@ export const patientPersona: PatientPersona[] = [
         { label: "Network", value: "Yes" },
         { label: "Coverage", value: "100%" },
       ],
+      steps: [
+        { id: "1", label: "Extract Patient & Payer Data", status: "pending" },
+        { id: "2", label: "Validate Coverage", status: "pending" },
+        { id: "3", label: "Update & Flag Issues", status: "pending" },
+      ],
+      isError: false
     },
     medicalCoding: {
-      status: "inprogress", // Medical coding status
+      status: "waiting", // Medical coding status
       details: [
-        { label: "Encounter Date", value: "2025-08-30" },
-        { label: "Encounter Type", value: "Outpatient" },
+        // { label: "Encounter Date", value: "2025-08-30" },
+        // { label: "Encounter Type", value: "Outpatient" },
+        // { label: "Physician", value: "Dr. Al Shamsi" },
+        // { label: "Department", value: "Orthopaedics" },
+        { label: "Encounter Type", value: "Out patient" },
+        { label: "ICD Code", value: "99213" },
+        { label: "CPT Code", value: "99213" },
+        { label: "Drug Code", value: "12345" },
+        { label: "Encounter Date", value: "2024-07-21" },
         { label: "Physician", value: "Dr. Al Shamsi" },
         { label: "Department", value: "Orthopaedics" },
       ],
+      steps: [
+        { id: "1", label: "Extract & Suggest Code", status: "pending" },
+        { id: "2", label: "Validate & Check Compliance", status: "pending" },
+        { id: "3", label: "Claim Posted", status: "pending" },
+        { id: "4", label: "Human Review & Approval", status: "pending" },
+      ],
+      isError: false
     },
     priorAuthorization: {
-      status: "approved", // Prior authorization status
+      status: "waiting", // Prior authorization status
       details: [
         { label: "Encounter ID", value: "ENC-2025-0789" },
         { label: "CPT Code", value: "29880" },
@@ -2773,6 +4246,13 @@ export const patientPersona: PatientPersona[] = [
         { label: "Prior Auth ID", value: "PA-556677" },
         { label: "Drug Codes", value: "NDC-0002" },
       ],
+      steps: [
+        { id: "1", label: "Extract & Prepare & (Code)", status: "pending" },
+        { id: "2", label: "Submit Request", status: "pending" },
+        { id: "3", label: "Prior Authorization Posted", status: "pending" },
+        { id: "4", label: "Response Retrieved", status: "pending" },
+      ],
+      isError: false
     },
     claimSubmission: {
       status: "waiting", // Current status of the claim submission process
@@ -2782,6 +4262,27 @@ export const patientPersona: PatientPersona[] = [
         { id: "3", label: "Claim Posted", status: "pending" },
         { id: "4", label: "Claim ID Received & Updated", status: "pending" },
       ],
+      claimAttempts: [
+        {
+          date: "2025-10-20",
+          claimAmount: 836,
+          claimId: 1014891283,
+          rejectionCode: "F14",
+        },
+        {
+          date: "2025-10-20",
+          claimAmount: 836,
+          claimId: 1014891283,
+          rejectionCode: "F14",
+        },
+        {
+          date: "2025-10-20",
+          claimAmount: 836,
+          claimId: 1014891283,
+          rejectionCode: "F14",
+        },
+      ],
+      isError: false
     },
     denialManagement: {
       status: "waiting", // Current status of the denial management process
@@ -2791,6 +4292,27 @@ export const patientPersona: PatientPersona[] = [
         { id: "3", label: "Appeal Generated", status: "pending" },
         { id: "4", label: "Appeal Submitted", status: "pending" },
       ],
+      denialAttempts: [
+        {
+          claimId: 1014891283,
+          denialId: 2002931,
+          amount: 836,
+          denialCode: "12345",
+        },
+        {
+          claimId: 1014891283,
+          denialId: 2002931,
+          amount: 836,
+          denialCode: "12345",
+        },
+        {
+          claimId: 1014891283,
+          denialId: 2002931,
+          amount: 836,
+          denialCode: "12345",
+        },
+      ],
+      isError: false
     },
     postPayment: {
       status: "waiting", // Current status of the post-payment process
@@ -2800,6 +4322,13 @@ export const patientPersona: PatientPersona[] = [
         { id: "3", label: "Adjustments Applied", status: "pending" },
         { id: "4", label: "Ledger Updated", status: "pending" },
       ],
+      details: {
+        date: "2025-09-11",
+        paymentFile: 836,
+        claimId: "1014891283",
+        difference: -136,
+      },
+      isError: false
     },
     attachments: [
       {
@@ -2881,7 +4410,7 @@ export const patientPersona: PatientPersona[] = [
       profilePhoto: "/avatar.png",
     },
     eligibilityCheck: {
-      status: "covered",
+      status: "waiting",
       insuranDetials: {
         insuranceProvider: "Daman-AUH-001",
         imageUrl: "/insurance-image.png",
@@ -2891,18 +4420,38 @@ export const patientPersona: PatientPersona[] = [
         { label: "Network", value: "Yes" },
         { label: "Coverage", value: "100%" },
       ],
+      steps: [
+        { id: "1", label: "Extract Patient & Payer Data", status: "pending" },
+        { id: "2", label: "Validate Coverage", status: "pending" },
+        { id: "3", label: "Update & Flag Issues", status: "pending" },
+      ],
+      isError: false
     },
     medicalCoding: {
-      status: "inprogress", // Medical coding status
+      status: "waiting", // Medical coding status
       details: [
-        { label: "Encounter Date", value: "2025-08-30" },
-        { label: "Encounter Type", value: "Outpatient" },
+        // { label: "Encounter Date", value: "2025-08-30" },
+        // { label: "Encounter Type", value: "Outpatient" },
+        // { label: "Physician", value: "Dr. Al Shamsi" },
+        // { label: "Department", value: "Orthopaedics" },
+        { label: "Encounter Type", value: "Out patient" },
+        { label: "ICD Code", value: "99213" },
+        { label: "CPT Code", value: "99213" },
+        { label: "Drug Code", value: "12345" },
+        { label: "Encounter Date", value: "2024-07-21" },
         { label: "Physician", value: "Dr. Al Shamsi" },
         { label: "Department", value: "Orthopaedics" },
       ],
+      steps: [
+        { id: "1", label: "Extract & Suggest Code", status: "pending" },
+        { id: "2", label: "Validate & Check Compliance", status: "pending" },
+        { id: "3", label: "Claim Posted", status: "pending" },
+        { id: "4", label: "Human Review & Approval", status: "pending" },
+      ],
+      isError: false
     },
     priorAuthorization: {
-      status: "approved", // Prior authorization status
+      status: "waiting", // Prior authorization status
       details: [
         { label: "Encounter ID", value: "ENC-2025-0789" },
         { label: "CPT Code", value: "29880" },
@@ -2911,6 +4460,13 @@ export const patientPersona: PatientPersona[] = [
         { label: "Prior Auth ID", value: "PA-556677" },
         { label: "Drug Codes", value: "NDC-0002" },
       ],
+      steps: [
+        { id: "1", label: "Extract & Prepare & (Code)", status: "pending" },
+        { id: "2", label: "Submit Request", status: "pending" },
+        { id: "3", label: "Prior Authorization Posted", status: "pending" },
+        { id: "4", label: "Response Retrieved", status: "pending" },
+      ],
+      isError: false
     },
     claimSubmission: {
       status: "waiting", // Current status of the claim submission process
@@ -2920,6 +4476,27 @@ export const patientPersona: PatientPersona[] = [
         { id: "3", label: "Claim Posted", status: "pending" },
         { id: "4", label: "Claim ID Received & Updated", status: "pending" },
       ],
+      claimAttempts: [
+        {
+          date: "2025-10-20",
+          claimAmount: 836,
+          claimId: 1014891283,
+          rejectionCode: "F14",
+        },
+        {
+          date: "2025-10-20",
+          claimAmount: 836,
+          claimId: 1014891283,
+          rejectionCode: "F14",
+        },
+        {
+          date: "2025-10-20",
+          claimAmount: 836,
+          claimId: 1014891283,
+          rejectionCode: "F14",
+        },
+      ],
+      isError: false
     },
     denialManagement: {
       status: "waiting", // Current status of the denial management process
@@ -2929,6 +4506,27 @@ export const patientPersona: PatientPersona[] = [
         { id: "3", label: "Appeal Generated", status: "pending" },
         { id: "4", label: "Appeal Submitted", status: "pending" },
       ],
+      denialAttempts: [
+        {
+          claimId: 1014891283,
+          denialId: 2002931,
+          amount: 836,
+          denialCode: "12345",
+        },
+        {
+          claimId: 1014891283,
+          denialId: 2002931,
+          amount: 836,
+          denialCode: "12345",
+        },
+        {
+          claimId: 1014891283,
+          denialId: 2002931,
+          amount: 836,
+          denialCode: "12345",
+        },
+      ],
+      isError: false
     },
     postPayment: {
       status: "waiting", // Current status of the post-payment process
@@ -2938,6 +4536,13 @@ export const patientPersona: PatientPersona[] = [
         { id: "3", label: "Adjustments Applied", status: "pending" },
         { id: "4", label: "Ledger Updated", status: "pending" },
       ],
+      details: {
+        date: "2025-09-11",
+        paymentFile: 836,
+        claimId: "1014891283",
+        difference: -136,
+      },
+      isError: false
     },
     attachments: [
       {
@@ -3019,7 +4624,7 @@ export const patientPersona: PatientPersona[] = [
       profilePhoto: "/avatar.png",
     },
     eligibilityCheck: {
-      status: "covered",
+      status: "waiting",
       insuranDetials: {
         insuranceProvider: "Daman-AUH-001",
         imageUrl: "/insurance-image.png",
@@ -3029,18 +4634,38 @@ export const patientPersona: PatientPersona[] = [
         { label: "Network", value: "Yes" },
         { label: "Coverage", value: "100%" },
       ],
+      steps: [
+        { id: "1", label: "Extract Patient & Payer Data", status: "pending" },
+        { id: "2", label: "Validate Coverage", status: "pending" },
+        { id: "3", label: "Update & Flag Issues", status: "pending" },
+      ],
+      isError: false
     },
     medicalCoding: {
-      status: "inprogress", // Medical coding status
+      status: "waiting", // Medical coding status
       details: [
-        { label: "Encounter Date", value: "2025-08-30" },
-        { label: "Encounter Type", value: "Outpatient" },
+        // { label: "Encounter Date", value: "2025-08-30" },
+        // { label: "Encounter Type", value: "Outpatient" },
+        // { label: "Physician", value: "Dr. Al Shamsi" },
+        // { label: "Department", value: "Orthopaedics" },
+        { label: "Encounter Type", value: "Out patient" },
+        { label: "ICD Code", value: "99213" },
+        { label: "CPT Code", value: "99213" },
+        { label: "Drug Code", value: "12345" },
+        { label: "Encounter Date", value: "2024-07-21" },
         { label: "Physician", value: "Dr. Al Shamsi" },
         { label: "Department", value: "Orthopaedics" },
       ],
+      steps: [
+        { id: "1", label: "Extract & Suggest Code", status: "pending" },
+        { id: "2", label: "Validate & Check Compliance", status: "pending" },
+        { id: "3", label: "Claim Posted", status: "pending" },
+        { id: "4", label: "Human Review & Approval", status: "pending" },
+      ],
+      isError: false
     },
     priorAuthorization: {
-      status: "approved", // Prior authorization status
+      status: "waiting", // Prior authorization status
       details: [
         { label: "Encounter ID", value: "ENC-2025-0789" },
         { label: "CPT Code", value: "29880" },
@@ -3049,6 +4674,13 @@ export const patientPersona: PatientPersona[] = [
         { label: "Prior Auth ID", value: "PA-556677" },
         { label: "Drug Codes", value: "NDC-0002" },
       ],
+      steps: [
+        { id: "1", label: "Extract & Prepare & (Code)", status: "pending" },
+        { id: "2", label: "Submit Request", status: "pending" },
+        { id: "3", label: "Prior Authorization Posted", status: "pending" },
+        { id: "4", label: "Response Retrieved", status: "pending" },
+      ],
+      isError: false
     },
     claimSubmission: {
       status: "waiting", // Current status of the claim submission process
@@ -3058,6 +4690,27 @@ export const patientPersona: PatientPersona[] = [
         { id: "3", label: "Claim Posted", status: "pending" },
         { id: "4", label: "Claim ID Received & Updated", status: "pending" },
       ],
+      claimAttempts: [
+        {
+          date: "2025-10-20",
+          claimAmount: 836,
+          claimId: 1014891283,
+          rejectionCode: "F14",
+        },
+        {
+          date: "2025-10-20",
+          claimAmount: 836,
+          claimId: 1014891283,
+          rejectionCode: "F14",
+        },
+        {
+          date: "2025-10-20",
+          claimAmount: 836,
+          claimId: 1014891283,
+          rejectionCode: "F14",
+        },
+      ],
+      isError: false
     },
     denialManagement: {
       status: "waiting", // Current status of the denial management process
@@ -3067,6 +4720,27 @@ export const patientPersona: PatientPersona[] = [
         { id: "3", label: "Appeal Generated", status: "pending" },
         { id: "4", label: "Appeal Submitted", status: "pending" },
       ],
+      denialAttempts: [
+        {
+          claimId: 1014891283,
+          denialId: 2002931,
+          amount: 836,
+          denialCode: "12345",
+        },
+        {
+          claimId: 1014891283,
+          denialId: 2002931,
+          amount: 836,
+          denialCode: "12345",
+        },
+        {
+          claimId: 1014891283,
+          denialId: 2002931,
+          amount: 836,
+          denialCode: "12345",
+        },
+      ],
+      isError: false
     },
     postPayment: {
       status: "waiting", // Current status of the post-payment process
@@ -3076,6 +4750,13 @@ export const patientPersona: PatientPersona[] = [
         { id: "3", label: "Adjustments Applied", status: "pending" },
         { id: "4", label: "Ledger Updated", status: "pending" },
       ],
+      details: {
+        date: "2025-09-11",
+        paymentFile: 836,
+        claimId: "1014891283",
+        difference: -136,
+      },
+      isError: false
     },
     attachments: [
       {
@@ -3157,7 +4838,7 @@ export const patientPersona: PatientPersona[] = [
       profilePhoto: "/avatar.png",
     },
     eligibilityCheck: {
-      status: "covered",
+      status: "waiting",
       insuranDetials: {
         insuranceProvider: "Daman-AUH-001",
         imageUrl: "/insurance-image.png",
@@ -3167,18 +4848,38 @@ export const patientPersona: PatientPersona[] = [
         { label: "Network", value: "Yes" },
         { label: "Coverage", value: "100%" },
       ],
+      steps: [
+        { id: "1", label: "Extract Patient & Payer Data", status: "pending" },
+        { id: "2", label: "Validate Coverage", status: "pending" },
+        { id: "3", label: "Update & Flag Issues", status: "pending" },
+      ],
+      isError: false
     },
     medicalCoding: {
-      status: "inprogress", // Medical coding status
+      status: "waiting", // Medical coding status
       details: [
-        { label: "Encounter Date", value: "2025-08-30" },
-        { label: "Encounter Type", value: "Outpatient" },
+        // { label: "Encounter Date", value: "2025-08-30" },
+        // { label: "Encounter Type", value: "Outpatient" },
+        // { label: "Physician", value: "Dr. Al Shamsi" },
+        // { label: "Department", value: "Orthopaedics" },
+        { label: "Encounter Type", value: "Out patient" },
+        { label: "ICD Code", value: "99213" },
+        { label: "CPT Code", value: "99213" },
+        { label: "Drug Code", value: "12345" },
+        { label: "Encounter Date", value: "2024-07-21" },
         { label: "Physician", value: "Dr. Al Shamsi" },
         { label: "Department", value: "Orthopaedics" },
       ],
+      steps: [
+        { id: "1", label: "Extract & Suggest Code", status: "pending" },
+        { id: "2", label: "Validate & Check Compliance", status: "pending" },
+        { id: "3", label: "Claim Posted", status: "pending" },
+        { id: "4", label: "Human Review & Approval", status: "pending" },
+      ],
+      isError: false
     },
     priorAuthorization: {
-      status: "approved", // Prior authorization status
+      status: "waiting", // Prior authorization status
       details: [
         { label: "Encounter ID", value: "ENC-2025-0789" },
         { label: "CPT Code", value: "29880" },
@@ -3187,6 +4888,13 @@ export const patientPersona: PatientPersona[] = [
         { label: "Prior Auth ID", value: "PA-556677" },
         { label: "Drug Codes", value: "NDC-0002" },
       ],
+      steps: [
+        { id: "1", label: "Extract & Prepare & (Code)", status: "pending" },
+        { id: "2", label: "Submit Request", status: "pending" },
+        { id: "3", label: "Prior Authorization Posted", status: "pending" },
+        { id: "4", label: "Response Retrieved", status: "pending" },
+      ],
+      isError: false
     },
     claimSubmission: {
       status: "waiting", // Current status of the claim submission process
@@ -3196,6 +4904,27 @@ export const patientPersona: PatientPersona[] = [
         { id: "3", label: "Claim Posted", status: "pending" },
         { id: "4", label: "Claim ID Received & Updated", status: "pending" },
       ],
+      claimAttempts: [
+        {
+          date: "2025-10-20",
+          claimAmount: 836,
+          claimId: 1014891283,
+          rejectionCode: "F14",
+        },
+        {
+          date: "2025-10-20",
+          claimAmount: 836,
+          claimId: 1014891283,
+          rejectionCode: "F14",
+        },
+        {
+          date: "2025-10-20",
+          claimAmount: 836,
+          claimId: 1014891283,
+          rejectionCode: "F14",
+        },
+      ],
+      isError: false
     },
     denialManagement: {
       status: "waiting", // Current status of the denial management process
@@ -3205,6 +4934,27 @@ export const patientPersona: PatientPersona[] = [
         { id: "3", label: "Appeal Generated", status: "pending" },
         { id: "4", label: "Appeal Submitted", status: "pending" },
       ],
+      denialAttempts: [
+        {
+          claimId: 1014891283,
+          denialId: 2002931,
+          amount: 836,
+          denialCode: "12345",
+        },
+        {
+          claimId: 1014891283,
+          denialId: 2002931,
+          amount: 836,
+          denialCode: "12345",
+        },
+        {
+          claimId: 1014891283,
+          denialId: 2002931,
+          amount: 836,
+          denialCode: "12345",
+        },
+      ],
+      isError: false
     },
     postPayment: {
       status: "waiting", // Current status of the post-payment process
@@ -3214,6 +4964,13 @@ export const patientPersona: PatientPersona[] = [
         { id: "3", label: "Adjustments Applied", status: "pending" },
         { id: "4", label: "Ledger Updated", status: "pending" },
       ],
+      details: {
+        date: "2025-09-11",
+        paymentFile: 836,
+        claimId: "1014891283",
+        difference: -136,
+      },
+      isError: false
     },
     attachments: [
       {
@@ -3295,7 +5052,7 @@ export const patientPersona: PatientPersona[] = [
       profilePhoto: "/avatar.png",
     },
     eligibilityCheck: {
-      status: "covered",
+      status: "waiting",
       insuranDetials: {
         insuranceProvider: "Daman-AUH-001",
         imageUrl: "/insurance-image.png",
@@ -3305,18 +5062,38 @@ export const patientPersona: PatientPersona[] = [
         { label: "Network", value: "Yes" },
         { label: "Coverage", value: "100%" },
       ],
+      steps: [
+        { id: "1", label: "Extract Patient & Payer Data", status: "pending" },
+        { id: "2", label: "Validate Coverage", status: "pending" },
+        { id: "3", label: "Update & Flag Issues", status: "pending" },
+      ],
+      isError: false
     },
     medicalCoding: {
-      status: "inprogress", // Medical coding status
+      status: "waiting", // Medical coding status
       details: [
-        { label: "Encounter Date", value: "2025-08-30" },
-        { label: "Encounter Type", value: "Outpatient" },
+        // { label: "Encounter Date", value: "2025-08-30" },
+        // { label: "Encounter Type", value: "Outpatient" },
+        // { label: "Physician", value: "Dr. Al Shamsi" },
+        // { label: "Department", value: "Orthopaedics" },
+        { label: "Encounter Type", value: "Out patient" },
+        { label: "ICD Code", value: "99213" },
+        { label: "CPT Code", value: "99213" },
+        { label: "Drug Code", value: "12345" },
+        { label: "Encounter Date", value: "2024-07-21" },
         { label: "Physician", value: "Dr. Al Shamsi" },
         { label: "Department", value: "Orthopaedics" },
       ],
+      steps: [
+        { id: "1", label: "Extract & Suggest Code", status: "pending" },
+        { id: "2", label: "Validate & Check Compliance", status: "pending" },
+        { id: "3", label: "Claim Posted", status: "pending" },
+        { id: "4", label: "Human Review & Approval", status: "pending" },
+      ],
+      isError: false
     },
     priorAuthorization: {
-      status: "approved", // Prior authorization status
+      status: "waiting", // Prior authorization status
       details: [
         { label: "Encounter ID", value: "ENC-2025-0789" },
         { label: "CPT Code", value: "29880" },
@@ -3325,6 +5102,13 @@ export const patientPersona: PatientPersona[] = [
         { label: "Prior Auth ID", value: "PA-556677" },
         { label: "Drug Codes", value: "NDC-0002" },
       ],
+      steps: [
+        { id: "1", label: "Extract & Prepare & (Code)", status: "pending" },
+        { id: "2", label: "Submit Request", status: "pending" },
+        { id: "3", label: "Prior Authorization Posted", status: "pending" },
+        { id: "4", label: "Response Retrieved", status: "pending" },
+      ],
+      isError: false
     },
     claimSubmission: {
       status: "waiting", // Current status of the claim submission process
@@ -3334,6 +5118,27 @@ export const patientPersona: PatientPersona[] = [
         { id: "3", label: "Claim Posted", status: "pending" },
         { id: "4", label: "Claim ID Received & Updated", status: "pending" },
       ],
+      claimAttempts: [
+        {
+          date: "2025-10-20",
+          claimAmount: 836,
+          claimId: 1014891283,
+          rejectionCode: "F14",
+        },
+        {
+          date: "2025-10-20",
+          claimAmount: 836,
+          claimId: 1014891283,
+          rejectionCode: "F14",
+        },
+        {
+          date: "2025-10-20",
+          claimAmount: 836,
+          claimId: 1014891283,
+          rejectionCode: "F14",
+        },
+      ],
+      isError: false
     },
     denialManagement: {
       status: "waiting", // Current status of the denial management process
@@ -3343,6 +5148,27 @@ export const patientPersona: PatientPersona[] = [
         { id: "3", label: "Appeal Generated", status: "pending" },
         { id: "4", label: "Appeal Submitted", status: "pending" },
       ],
+      denialAttempts: [
+        {
+          claimId: 1014891283,
+          denialId: 2002931,
+          amount: 836,
+          denialCode: "12345",
+        },
+        {
+          claimId: 1014891283,
+          denialId: 2002931,
+          amount: 836,
+          denialCode: "12345",
+        },
+        {
+          claimId: 1014891283,
+          denialId: 2002931,
+          amount: 836,
+          denialCode: "12345",
+        },
+      ],
+      isError: false
     },
     postPayment: {
       status: "waiting", // Current status of the post-payment process
@@ -3352,6 +5178,13 @@ export const patientPersona: PatientPersona[] = [
         { id: "3", label: "Adjustments Applied", status: "pending" },
         { id: "4", label: "Ledger Updated", status: "pending" },
       ],
+      details: {
+        date: "2025-09-11",
+        paymentFile: 836,
+        claimId: "1014891283",
+        difference: -136,
+      },
+      isError: false
     },
     attachments: [
       {
@@ -3433,7 +5266,7 @@ export const patientPersona: PatientPersona[] = [
       profilePhoto: "/avatar.png",
     },
     eligibilityCheck: {
-      status: "covered",
+      status: "waiting",
       insuranDetials: {
         insuranceProvider: "Daman-AUH-001",
         imageUrl: "/insurance-image.png",
@@ -3443,18 +5276,38 @@ export const patientPersona: PatientPersona[] = [
         { label: "Network", value: "Yes" },
         { label: "Coverage", value: "100%" },
       ],
+      steps: [
+        { id: "1", label: "Extract Patient & Payer Data", status: "pending" },
+        { id: "2", label: "Validate Coverage", status: "pending" },
+        { id: "3", label: "Update & Flag Issues", status: "pending" },
+      ],
+      isError: false
     },
     medicalCoding: {
-      status: "inprogress", // Medical coding status
+      status: "waiting", // Medical coding status
       details: [
-        { label: "Encounter Date", value: "2025-08-30" },
-        { label: "Encounter Type", value: "Outpatient" },
+        // { label: "Encounter Date", value: "2025-08-30" },
+        // { label: "Encounter Type", value: "Outpatient" },
+        // { label: "Physician", value: "Dr. Al Shamsi" },
+        // { label: "Department", value: "Orthopaedics" },
+        { label: "Encounter Type", value: "Out patient" },
+        { label: "ICD Code", value: "99213" },
+        { label: "CPT Code", value: "99213" },
+        { label: "Drug Code", value: "12345" },
+        { label: "Encounter Date", value: "2024-07-21" },
         { label: "Physician", value: "Dr. Al Shamsi" },
         { label: "Department", value: "Orthopaedics" },
       ],
+      steps: [
+        { id: "1", label: "Extract & Suggest Code", status: "pending" },
+        { id: "2", label: "Validate & Check Compliance", status: "pending" },
+        { id: "3", label: "Claim Posted", status: "pending" },
+        { id: "4", label: "Human Review & Approval", status: "pending" },
+      ],
+      isError: false
     },
     priorAuthorization: {
-      status: "approved", // Prior authorization status
+      status: "waiting", // Prior authorization status
       details: [
         { label: "Encounter ID", value: "ENC-2025-0789" },
         { label: "CPT Code", value: "29880" },
@@ -3463,6 +5316,13 @@ export const patientPersona: PatientPersona[] = [
         { label: "Prior Auth ID", value: "PA-556677" },
         { label: "Drug Codes", value: "NDC-0002" },
       ],
+      steps: [
+        { id: "1", label: "Extract & Prepare & (Code)", status: "pending" },
+        { id: "2", label: "Submit Request", status: "pending" },
+        { id: "3", label: "Prior Authorization Posted", status: "pending" },
+        { id: "4", label: "Response Retrieved", status: "pending" },
+      ],
+      isError: false
     },
     claimSubmission: {
       status: "waiting", // Current status of the claim submission process
@@ -3472,6 +5332,27 @@ export const patientPersona: PatientPersona[] = [
         { id: "3", label: "Claim Posted", status: "pending" },
         { id: "4", label: "Claim ID Received & Updated", status: "pending" },
       ],
+      claimAttempts: [
+        {
+          date: "2025-10-20",
+          claimAmount: 836,
+          claimId: 1014891283,
+          rejectionCode: "F14",
+        },
+        {
+          date: "2025-10-20",
+          claimAmount: 836,
+          claimId: 1014891283,
+          rejectionCode: "F14",
+        },
+        {
+          date: "2025-10-20",
+          claimAmount: 836,
+          claimId: 1014891283,
+          rejectionCode: "F14",
+        },
+      ],
+      isError: false
     },
     denialManagement: {
       status: "waiting", // Current status of the denial management process
@@ -3481,6 +5362,27 @@ export const patientPersona: PatientPersona[] = [
         { id: "3", label: "Appeal Generated", status: "pending" },
         { id: "4", label: "Appeal Submitted", status: "pending" },
       ],
+      denialAttempts: [
+        {
+          claimId: 1014891283,
+          denialId: 2002931,
+          amount: 836,
+          denialCode: "12345",
+        },
+        {
+          claimId: 1014891283,
+          denialId: 2002931,
+          amount: 836,
+          denialCode: "12345",
+        },
+        {
+          claimId: 1014891283,
+          denialId: 2002931,
+          amount: 836,
+          denialCode: "12345",
+        },
+      ],
+      isError: false
     },
     postPayment: {
       status: "waiting", // Current status of the post-payment process
@@ -3490,6 +5392,13 @@ export const patientPersona: PatientPersona[] = [
         { id: "3", label: "Adjustments Applied", status: "pending" },
         { id: "4", label: "Ledger Updated", status: "pending" },
       ],
+      details: {
+        date: "2025-09-11",
+        paymentFile: 836,
+        claimId: "1014891283",
+        difference: -136,
+      },
+      isError: false
     },
     attachments: [
       {
@@ -3571,7 +5480,7 @@ export const patientPersona: PatientPersona[] = [
       profilePhoto: "/avatar.png",
     },
     eligibilityCheck: {
-      status: "covered",
+      status: "waiting",
       insuranDetials: {
         insuranceProvider: "Daman-AUH-001",
         imageUrl: "/insurance-image.png",
@@ -3581,18 +5490,38 @@ export const patientPersona: PatientPersona[] = [
         { label: "Network", value: "Yes" },
         { label: "Coverage", value: "100%" },
       ],
+      steps: [
+        { id: "1", label: "Extract Patient & Payer Data", status: "pending" },
+        { id: "2", label: "Validate Coverage", status: "pending" },
+        { id: "3", label: "Update & Flag Issues", status: "pending" },
+      ],
+      isError: false
     },
     medicalCoding: {
-      status: "inprogress", // Medical coding status
+      status: "waiting", // Medical coding status
       details: [
-        { label: "Encounter Date", value: "2025-08-30" },
-        { label: "Encounter Type", value: "Outpatient" },
+        // { label: "Encounter Date", value: "2025-08-30" },
+        // { label: "Encounter Type", value: "Outpatient" },
+        // { label: "Physician", value: "Dr. Al Shamsi" },
+        // { label: "Department", value: "Orthopaedics" },
+        { label: "Encounter Type", value: "Out patient" },
+        { label: "ICD Code", value: "99213" },
+        { label: "CPT Code", value: "99213" },
+        { label: "Drug Code", value: "12345" },
+        { label: "Encounter Date", value: "2024-07-21" },
         { label: "Physician", value: "Dr. Al Shamsi" },
         { label: "Department", value: "Orthopaedics" },
       ],
+      steps: [
+        { id: "1", label: "Extract & Suggest Code", status: "pending" },
+        { id: "2", label: "Validate & Check Compliance", status: "pending" },
+        { id: "3", label: "Claim Posted", status: "pending" },
+        { id: "4", label: "Human Review & Approval", status: "pending" },
+      ],
+      isError: false
     },
     priorAuthorization: {
-      status: "approved", // Prior authorization status
+      status: "waiting", // Prior authorization status
       details: [
         { label: "Encounter ID", value: "ENC-2025-0789" },
         { label: "CPT Code", value: "29880" },
@@ -3601,6 +5530,13 @@ export const patientPersona: PatientPersona[] = [
         { label: "Prior Auth ID", value: "PA-556677" },
         { label: "Drug Codes", value: "NDC-0002" },
       ],
+      steps: [
+        { id: "1", label: "Extract & Prepare & (Code)", status: "pending" },
+        { id: "2", label: "Submit Request", status: "pending" },
+        { id: "3", label: "Prior Authorization Posted", status: "pending" },
+        { id: "4", label: "Response Retrieved", status: "pending" },
+      ],
+      isError: false
     },
     claimSubmission: {
       status: "waiting", // Current status of the claim submission process
@@ -3610,6 +5546,27 @@ export const patientPersona: PatientPersona[] = [
         { id: "3", label: "Claim Posted", status: "pending" },
         { id: "4", label: "Claim ID Received & Updated", status: "pending" },
       ],
+      claimAttempts: [
+        {
+          date: "2025-10-20",
+          claimAmount: 836,
+          claimId: 1014891283,
+          rejectionCode: "F14",
+        },
+        {
+          date: "2025-10-20",
+          claimAmount: 836,
+          claimId: 1014891283,
+          rejectionCode: "F14",
+        },
+        {
+          date: "2025-10-20",
+          claimAmount: 836,
+          claimId: 1014891283,
+          rejectionCode: "F14",
+        },
+      ],
+      isError: false
     },
     denialManagement: {
       status: "waiting", // Current status of the denial management process
@@ -3619,6 +5576,27 @@ export const patientPersona: PatientPersona[] = [
         { id: "3", label: "Appeal Generated", status: "pending" },
         { id: "4", label: "Appeal Submitted", status: "pending" },
       ],
+      denialAttempts: [
+        {
+          claimId: 1014891283,
+          denialId: 2002931,
+          amount: 836,
+          denialCode: "12345",
+        },
+        {
+          claimId: 1014891283,
+          denialId: 2002931,
+          amount: 836,
+          denialCode: "12345",
+        },
+        {
+          claimId: 1014891283,
+          denialId: 2002931,
+          amount: 836,
+          denialCode: "12345",
+        },
+      ],
+      isError: false
     },
     postPayment: {
       status: "waiting", // Current status of the post-payment process
@@ -3628,6 +5606,13 @@ export const patientPersona: PatientPersona[] = [
         { id: "3", label: "Adjustments Applied", status: "pending" },
         { id: "4", label: "Ledger Updated", status: "pending" },
       ],
+      details: {
+        date: "2025-09-11",
+        paymentFile: 836,
+        claimId: "1014891283",
+        difference: -136,
+      },
+      isError: false
     },
     attachments: [
       {
@@ -3709,7 +5694,7 @@ export const patientPersona: PatientPersona[] = [
       profilePhoto: "/avatar.png",
     },
     eligibilityCheck: {
-      status: "covered",
+      status: "waiting",
       insuranDetials: {
         insuranceProvider: "Daman-AUH-001",
         imageUrl: "/insurance-image.png",
@@ -3719,18 +5704,38 @@ export const patientPersona: PatientPersona[] = [
         { label: "Network", value: "Yes" },
         { label: "Coverage", value: "100%" },
       ],
+      steps: [
+        { id: "1", label: "Extract Patient & Payer Data", status: "pending" },
+        { id: "2", label: "Validate Coverage", status: "pending" },
+        { id: "3", label: "Update & Flag Issues", status: "pending" },
+      ],
+      isError: false
     },
     medicalCoding: {
-      status: "inprogress", // Medical coding status
+      status: "waiting", // Medical coding status
       details: [
-        { label: "Encounter Date", value: "2025-08-30" },
-        { label: "Encounter Type", value: "Outpatient" },
+        // { label: "Encounter Date", value: "2025-08-30" },
+        // { label: "Encounter Type", value: "Outpatient" },
+        // { label: "Physician", value: "Dr. Al Shamsi" },
+        // { label: "Department", value: "Orthopaedics" },
+        { label: "Encounter Type", value: "Out patient" },
+        { label: "ICD Code", value: "99213" },
+        { label: "CPT Code", value: "99213" },
+        { label: "Drug Code", value: "12345" },
+        { label: "Encounter Date", value: "2024-07-21" },
         { label: "Physician", value: "Dr. Al Shamsi" },
         { label: "Department", value: "Orthopaedics" },
       ],
+      steps: [
+        { id: "1", label: "Extract & Suggest Code", status: "pending" },
+        { id: "2", label: "Validate & Check Compliance", status: "pending" },
+        { id: "3", label: "Claim Posted", status: "pending" },
+        { id: "4", label: "Human Review & Approval", status: "pending" },
+      ],
+      isError: false
     },
     priorAuthorization: {
-      status: "approved", // Prior authorization status
+      status: "waiting", // Prior authorization status
       details: [
         { label: "Encounter ID", value: "ENC-2025-0789" },
         { label: "CPT Code", value: "29880" },
@@ -3739,6 +5744,13 @@ export const patientPersona: PatientPersona[] = [
         { label: "Prior Auth ID", value: "PA-556677" },
         { label: "Drug Codes", value: "NDC-0002" },
       ],
+      steps: [
+        { id: "1", label: "Extract & Prepare & (Code)", status: "pending" },
+        { id: "2", label: "Submit Request", status: "pending" },
+        { id: "3", label: "Prior Authorization Posted", status: "pending" },
+        { id: "4", label: "Response Retrieved", status: "pending" },
+      ],
+      isError: false
     },
     claimSubmission: {
       status: "waiting", // Current status of the claim submission process
@@ -3748,6 +5760,27 @@ export const patientPersona: PatientPersona[] = [
         { id: "3", label: "Claim Posted", status: "pending" },
         { id: "4", label: "Claim ID Received & Updated", status: "pending" },
       ],
+      claimAttempts: [
+        {
+          date: "2025-10-20",
+          claimAmount: 836,
+          claimId: 1014891283,
+          rejectionCode: "F14",
+        },
+        {
+          date: "2025-10-20",
+          claimAmount: 836,
+          claimId: 1014891283,
+          rejectionCode: "F14",
+        },
+        {
+          date: "2025-10-20",
+          claimAmount: 836,
+          claimId: 1014891283,
+          rejectionCode: "F14",
+        },
+      ],
+      isError: false
     },
     denialManagement: {
       status: "waiting", // Current status of the denial management process
@@ -3757,6 +5790,27 @@ export const patientPersona: PatientPersona[] = [
         { id: "3", label: "Appeal Generated", status: "pending" },
         { id: "4", label: "Appeal Submitted", status: "pending" },
       ],
+      denialAttempts: [
+        {
+          claimId: 1014891283,
+          denialId: 2002931,
+          amount: 836,
+          denialCode: "12345",
+        },
+        {
+          claimId: 1014891283,
+          denialId: 2002931,
+          amount: 836,
+          denialCode: "12345",
+        },
+        {
+          claimId: 1014891283,
+          denialId: 2002931,
+          amount: 836,
+          denialCode: "12345",
+        },
+      ],
+      isError: false
     },
     postPayment: {
       status: "waiting", // Current status of the post-payment process
@@ -3766,6 +5820,13 @@ export const patientPersona: PatientPersona[] = [
         { id: "3", label: "Adjustments Applied", status: "pending" },
         { id: "4", label: "Ledger Updated", status: "pending" },
       ],
+      details: {
+        date: "2025-09-11",
+        paymentFile: 836,
+        claimId: "1014891283",
+        difference: -136,
+      },
+      isError: false
     },
     attachments: [
       {
@@ -3847,7 +5908,7 @@ export const patientPersona: PatientPersona[] = [
       profilePhoto: "/avatar.png",
     },
     eligibilityCheck: {
-      status: "covered",
+      status: "waiting",
       insuranDetials: {
         insuranceProvider: "Daman-AUH-001",
         imageUrl: "/insurance-image.png",
@@ -3857,18 +5918,38 @@ export const patientPersona: PatientPersona[] = [
         { label: "Network", value: "Yes" },
         { label: "Coverage", value: "100%" },
       ],
+      steps: [
+        { id: "1", label: "Extract Patient & Payer Data", status: "pending" },
+        { id: "2", label: "Validate Coverage", status: "pending" },
+        { id: "3", label: "Update & Flag Issues", status: "pending" },
+      ],
+      isError: false
     },
     medicalCoding: {
-      status: "inprogress", // Medical coding status
+      status: "waiting", // Medical coding status
       details: [
-        { label: "Encounter Date", value: "2025-08-30" },
-        { label: "Encounter Type", value: "Outpatient" },
+        // { label: "Encounter Date", value: "2025-08-30" },
+        // { label: "Encounter Type", value: "Outpatient" },
+        // { label: "Physician", value: "Dr. Al Shamsi" },
+        // { label: "Department", value: "Orthopaedics" },
+        { label: "Encounter Type", value: "Out patient" },
+        { label: "ICD Code", value: "99213" },
+        { label: "CPT Code", value: "99213" },
+        { label: "Drug Code", value: "12345" },
+        { label: "Encounter Date", value: "2024-07-21" },
         { label: "Physician", value: "Dr. Al Shamsi" },
         { label: "Department", value: "Orthopaedics" },
       ],
+      steps: [
+        { id: "1", label: "Extract & Suggest Code", status: "pending" },
+        { id: "2", label: "Validate & Check Compliance", status: "pending" },
+        { id: "3", label: "Claim Posted", status: "pending" },
+        { id: "4", label: "Human Review & Approval", status: "pending" },
+      ],
+      isError: false
     },
     priorAuthorization: {
-      status: "approved", // Prior authorization status
+      status: "waiting", // Prior authorization status
       details: [
         { label: "Encounter ID", value: "ENC-2025-0789" },
         { label: "CPT Code", value: "29880" },
@@ -3877,6 +5958,13 @@ export const patientPersona: PatientPersona[] = [
         { label: "Prior Auth ID", value: "PA-556677" },
         { label: "Drug Codes", value: "NDC-0002" },
       ],
+      steps: [
+        { id: "1", label: "Extract & Prepare & (Code)", status: "pending" },
+        { id: "2", label: "Submit Request", status: "pending" },
+        { id: "3", label: "Prior Authorization Posted", status: "pending" },
+        { id: "4", label: "Response Retrieved", status: "pending" },
+      ],
+      isError: false
     },
     claimSubmission: {
       status: "waiting", // Current status of the claim submission process
@@ -3886,6 +5974,27 @@ export const patientPersona: PatientPersona[] = [
         { id: "3", label: "Claim Posted", status: "pending" },
         { id: "4", label: "Claim ID Received & Updated", status: "pending" },
       ],
+      claimAttempts: [
+        {
+          date: "2025-10-20",
+          claimAmount: 836,
+          claimId: 1014891283,
+          rejectionCode: "F14",
+        },
+        {
+          date: "2025-10-20",
+          claimAmount: 836,
+          claimId: 1014891283,
+          rejectionCode: "F14",
+        },
+        {
+          date: "2025-10-20",
+          claimAmount: 836,
+          claimId: 1014891283,
+          rejectionCode: "F14",
+        },
+      ],
+      isError: false
     },
     denialManagement: {
       status: "waiting", // Current status of the denial management process
@@ -3895,6 +6004,27 @@ export const patientPersona: PatientPersona[] = [
         { id: "3", label: "Appeal Generated", status: "pending" },
         { id: "4", label: "Appeal Submitted", status: "pending" },
       ],
+      denialAttempts: [
+        {
+          claimId: 1014891283,
+          denialId: 2002931,
+          amount: 836,
+          denialCode: "12345",
+        },
+        {
+          claimId: 1014891283,
+          denialId: 2002931,
+          amount: 836,
+          denialCode: "12345",
+        },
+        {
+          claimId: 1014891283,
+          denialId: 2002931,
+          amount: 836,
+          denialCode: "12345",
+        },
+      ],
+      isError: false
     },
     postPayment: {
       status: "waiting", // Current status of the post-payment process
@@ -3904,6 +6034,13 @@ export const patientPersona: PatientPersona[] = [
         { id: "3", label: "Adjustments Applied", status: "pending" },
         { id: "4", label: "Ledger Updated", status: "pending" },
       ],
+      details: {
+        date: "2025-09-11",
+        paymentFile: 836,
+        claimId: "1014891283",
+        difference: -136,
+      },
+      isError: false
     },
     attachments: [
       {
@@ -3985,7 +6122,7 @@ export const patientPersona: PatientPersona[] = [
       profilePhoto: "/avatar.png",
     },
     eligibilityCheck: {
-      status: "covered",
+      status: "waiting",
       insuranDetials: {
         insuranceProvider: "Daman-AUH-001",
         imageUrl: "/insurance-image.png",
@@ -3995,18 +6132,38 @@ export const patientPersona: PatientPersona[] = [
         { label: "Network", value: "Yes" },
         { label: "Coverage", value: "100%" },
       ],
+      steps: [
+        { id: "1", label: "Extract Patient & Payer Data", status: "pending" },
+        { id: "2", label: "Validate Coverage", status: "pending" },
+        { id: "3", label: "Update & Flag Issues", status: "pending" },
+      ],
+      isError: false
     },
     medicalCoding: {
-      status: "inprogress", // Medical coding status
+      status: "waiting", // Medical coding status
       details: [
-        { label: "Encounter Date", value: "2025-08-30" },
-        { label: "Encounter Type", value: "Outpatient" },
+        // { label: "Encounter Date", value: "2025-08-30" },
+        // { label: "Encounter Type", value: "Outpatient" },
+        // { label: "Physician", value: "Dr. Al Shamsi" },
+        // { label: "Department", value: "Orthopaedics" },
+        { label: "Encounter Type", value: "Out patient" },
+        { label: "ICD Code", value: "99213" },
+        { label: "CPT Code", value: "99213" },
+        { label: "Drug Code", value: "12345" },
+        { label: "Encounter Date", value: "2024-07-21" },
         { label: "Physician", value: "Dr. Al Shamsi" },
         { label: "Department", value: "Orthopaedics" },
       ],
+      steps: [
+        { id: "1", label: "Extract & Suggest Code", status: "pending" },
+        { id: "2", label: "Validate & Check Compliance", status: "pending" },
+        { id: "3", label: "Claim Posted", status: "pending" },
+        { id: "4", label: "Human Review & Approval", status: "pending" },
+      ],
+      isError: false
     },
     priorAuthorization: {
-      status: "approved", // Prior authorization status
+      status: "waiting", // Prior authorization status
       details: [
         { label: "Encounter ID", value: "ENC-2025-0789" },
         { label: "CPT Code", value: "29880" },
@@ -4015,6 +6172,13 @@ export const patientPersona: PatientPersona[] = [
         { label: "Prior Auth ID", value: "PA-556677" },
         { label: "Drug Codes", value: "NDC-0002" },
       ],
+      steps: [
+        { id: "1", label: "Extract & Prepare & (Code)", status: "pending" },
+        { id: "2", label: "Submit Request", status: "pending" },
+        { id: "3", label: "Prior Authorization Posted", status: "pending" },
+        { id: "4", label: "Response Retrieved", status: "pending" },
+      ],
+      isError: false
     },
     claimSubmission: {
       status: "waiting", // Current status of the claim submission process
@@ -4024,6 +6188,27 @@ export const patientPersona: PatientPersona[] = [
         { id: "3", label: "Claim Posted", status: "pending" },
         { id: "4", label: "Claim ID Received & Updated", status: "pending" },
       ],
+      claimAttempts: [
+        {
+          date: "2025-10-20",
+          claimAmount: 836,
+          claimId: 1014891283,
+          rejectionCode: "F14",
+        },
+        {
+          date: "2025-10-20",
+          claimAmount: 836,
+          claimId: 1014891283,
+          rejectionCode: "F14",
+        },
+        {
+          date: "2025-10-20",
+          claimAmount: 836,
+          claimId: 1014891283,
+          rejectionCode: "F14",
+        },
+      ],
+      isError: false
     },
     denialManagement: {
       status: "waiting", // Current status of the denial management process
@@ -4033,6 +6218,27 @@ export const patientPersona: PatientPersona[] = [
         { id: "3", label: "Appeal Generated", status: "pending" },
         { id: "4", label: "Appeal Submitted", status: "pending" },
       ],
+      denialAttempts: [
+        {
+          claimId: 1014891283,
+          denialId: 2002931,
+          amount: 836,
+          denialCode: "12345",
+        },
+        {
+          claimId: 1014891283,
+          denialId: 2002931,
+          amount: 836,
+          denialCode: "12345",
+        },
+        {
+          claimId: 1014891283,
+          denialId: 2002931,
+          amount: 836,
+          denialCode: "12345",
+        },
+      ],
+      isError: false
     },
     postPayment: {
       status: "waiting", // Current status of the post-payment process
@@ -4042,6 +6248,13 @@ export const patientPersona: PatientPersona[] = [
         { id: "3", label: "Adjustments Applied", status: "pending" },
         { id: "4", label: "Ledger Updated", status: "pending" },
       ],
+      details: {
+        date: "2025-09-11",
+        paymentFile: 836,
+        claimId: "1014891283",
+        difference: -136,
+      },
+      isError: false
     },
     attachments: [
       {
@@ -4123,7 +6336,7 @@ export const patientPersona: PatientPersona[] = [
       profilePhoto: "/avatar.png",
     },
     eligibilityCheck: {
-      status: "covered",
+      status: "waiting",
       insuranDetials: {
         insuranceProvider: "Daman-AUH-001",
         imageUrl: "/insurance-image.png",
@@ -4133,18 +6346,38 @@ export const patientPersona: PatientPersona[] = [
         { label: "Network", value: "Yes" },
         { label: "Coverage", value: "100%" },
       ],
+      steps: [
+        { id: "1", label: "Extract Patient & Payer Data", status: "pending" },
+        { id: "2", label: "Validate Coverage", status: "pending" },
+        { id: "3", label: "Update & Flag Issues", status: "pending" },
+      ],
+      isError: false
     },
     medicalCoding: {
-      status: "inprogress", // Medical coding status
+      status: "waiting", // Medical coding status
       details: [
-        { label: "Encounter Date", value: "2025-08-30" },
-        { label: "Encounter Type", value: "Outpatient" },
+        // { label: "Encounter Date", value: "2025-08-30" },
+        // { label: "Encounter Type", value: "Outpatient" },
+        // { label: "Physician", value: "Dr. Al Shamsi" },
+        // { label: "Department", value: "Orthopaedics" },
+        { label: "Encounter Type", value: "Out patient" },
+        { label: "ICD Code", value: "99213" },
+        { label: "CPT Code", value: "99213" },
+        { label: "Drug Code", value: "12345" },
+        { label: "Encounter Date", value: "2024-07-21" },
         { label: "Physician", value: "Dr. Al Shamsi" },
         { label: "Department", value: "Orthopaedics" },
       ],
+      steps: [
+        { id: "1", label: "Extract & Suggest Code", status: "pending" },
+        { id: "2", label: "Validate & Check Compliance", status: "pending" },
+        { id: "3", label: "Claim Posted", status: "pending" },
+        { id: "4", label: "Human Review & Approval", status: "pending" },
+      ],
+      isError: false
     },
     priorAuthorization: {
-      status: "approved", // Prior authorization status
+      status: "waiting", // Prior authorization status
       details: [
         { label: "Encounter ID", value: "ENC-2025-0789" },
         { label: "CPT Code", value: "29880" },
@@ -4153,6 +6386,13 @@ export const patientPersona: PatientPersona[] = [
         { label: "Prior Auth ID", value: "PA-556677" },
         { label: "Drug Codes", value: "NDC-0002" },
       ],
+      steps: [
+        { id: "1", label: "Extract & Prepare & (Code)", status: "pending" },
+        { id: "2", label: "Submit Request", status: "pending" },
+        { id: "3", label: "Prior Authorization Posted", status: "pending" },
+        { id: "4", label: "Response Retrieved", status: "pending" },
+      ],
+      isError: false
     },
     claimSubmission: {
       status: "waiting", // Current status of the claim submission process
@@ -4162,6 +6402,27 @@ export const patientPersona: PatientPersona[] = [
         { id: "3", label: "Claim Posted", status: "pending" },
         { id: "4", label: "Claim ID Received & Updated", status: "pending" },
       ],
+      claimAttempts: [
+        {
+          date: "2025-10-20",
+          claimAmount: 836,
+          claimId: 1014891283,
+          rejectionCode: "F14",
+        },
+        {
+          date: "2025-10-20",
+          claimAmount: 836,
+          claimId: 1014891283,
+          rejectionCode: "F14",
+        },
+        {
+          date: "2025-10-20",
+          claimAmount: 836,
+          claimId: 1014891283,
+          rejectionCode: "F14",
+        },
+      ],
+      isError: false
     },
     denialManagement: {
       status: "waiting", // Current status of the denial management process
@@ -4171,6 +6432,27 @@ export const patientPersona: PatientPersona[] = [
         { id: "3", label: "Appeal Generated", status: "pending" },
         { id: "4", label: "Appeal Submitted", status: "pending" },
       ],
+      denialAttempts: [
+        {
+          claimId: 1014891283,
+          denialId: 2002931,
+          amount: 836,
+          denialCode: "12345",
+        },
+        {
+          claimId: 1014891283,
+          denialId: 2002931,
+          amount: 836,
+          denialCode: "12345",
+        },
+        {
+          claimId: 1014891283,
+          denialId: 2002931,
+          amount: 836,
+          denialCode: "12345",
+        },
+      ],
+      isError: false
     },
     postPayment: {
       status: "waiting", // Current status of the post-payment process
@@ -4180,6 +6462,13 @@ export const patientPersona: PatientPersona[] = [
         { id: "3", label: "Adjustments Applied", status: "pending" },
         { id: "4", label: "Ledger Updated", status: "pending" },
       ],
+      details: {
+        date: "2025-09-11",
+        paymentFile: 836,
+        claimId: "1014891283",
+        difference: -136,
+      },
+      isError: false
     },
     attachments: [
       {
@@ -4261,7 +6550,7 @@ export const patientPersona: PatientPersona[] = [
       profilePhoto: "/avatar.png",
     },
     eligibilityCheck: {
-      status: "covered",
+      status: "waiting",
       insuranDetials: {
         insuranceProvider: "Daman-AUH-001",
         imageUrl: "/insurance-image.png",
@@ -4271,18 +6560,38 @@ export const patientPersona: PatientPersona[] = [
         { label: "Network", value: "Yes" },
         { label: "Coverage", value: "100%" },
       ],
+      steps: [
+        { id: "1", label: "Extract Patient & Payer Data", status: "pending" },
+        { id: "2", label: "Validate Coverage", status: "pending" },
+        { id: "3", label: "Update & Flag Issues", status: "pending" },
+      ],
+      isError: false
     },
     medicalCoding: {
-      status: "inprogress", // Medical coding status
+      status: "waiting", // Medical coding status
       details: [
-        { label: "Encounter Date", value: "2025-08-30" },
-        { label: "Encounter Type", value: "Outpatient" },
+        // { label: "Encounter Date", value: "2025-08-30" },
+        // { label: "Encounter Type", value: "Outpatient" },
+        // { label: "Physician", value: "Dr. Al Shamsi" },
+        // { label: "Department", value: "Orthopaedics" },
+        { label: "Encounter Type", value: "Out patient" },
+        { label: "ICD Code", value: "99213" },
+        { label: "CPT Code", value: "99213" },
+        { label: "Drug Code", value: "12345" },
+        { label: "Encounter Date", value: "2024-07-21" },
         { label: "Physician", value: "Dr. Al Shamsi" },
         { label: "Department", value: "Orthopaedics" },
       ],
+      steps: [
+        { id: "1", label: "Extract & Suggest Code", status: "pending" },
+        { id: "2", label: "Validate & Check Compliance", status: "pending" },
+        { id: "3", label: "Claim Posted", status: "pending" },
+        { id: "4", label: "Human Review & Approval", status: "pending" },
+      ],
+      isError: false
     },
     priorAuthorization: {
-      status: "approved", // Prior authorization status
+      status: "waiting", // Prior authorization status
       details: [
         { label: "Encounter ID", value: "ENC-2025-0789" },
         { label: "CPT Code", value: "29880" },
@@ -4291,6 +6600,13 @@ export const patientPersona: PatientPersona[] = [
         { label: "Prior Auth ID", value: "PA-556677" },
         { label: "Drug Codes", value: "NDC-0002" },
       ],
+      steps: [
+        { id: "1", label: "Extract & Prepare & (Code)", status: "pending" },
+        { id: "2", label: "Submit Request", status: "pending" },
+        { id: "3", label: "Prior Authorization Posted", status: "pending" },
+        { id: "4", label: "Response Retrieved", status: "pending" },
+      ],
+      isError: false
     },
     claimSubmission: {
       status: "waiting", // Current status of the claim submission process
@@ -4300,6 +6616,27 @@ export const patientPersona: PatientPersona[] = [
         { id: "3", label: "Claim Posted", status: "pending" },
         { id: "4", label: "Claim ID Received & Updated", status: "pending" },
       ],
+      claimAttempts: [
+        {
+          date: "2025-10-20",
+          claimAmount: 836,
+          claimId: 1014891283,
+          rejectionCode: "F14",
+        },
+        {
+          date: "2025-10-20",
+          claimAmount: 836,
+          claimId: 1014891283,
+          rejectionCode: "F14",
+        },
+        {
+          date: "2025-10-20",
+          claimAmount: 836,
+          claimId: 1014891283,
+          rejectionCode: "F14",
+        },
+      ],
+      isError: false
     },
     denialManagement: {
       status: "waiting", // Current status of the denial management process
@@ -4309,6 +6646,27 @@ export const patientPersona: PatientPersona[] = [
         { id: "3", label: "Appeal Generated", status: "pending" },
         { id: "4", label: "Appeal Submitted", status: "pending" },
       ],
+      denialAttempts: [
+        {
+          claimId: 1014891283,
+          denialId: 2002931,
+          amount: 836,
+          denialCode: "12345",
+        },
+        {
+          claimId: 1014891283,
+          denialId: 2002931,
+          amount: 836,
+          denialCode: "12345",
+        },
+        {
+          claimId: 1014891283,
+          denialId: 2002931,
+          amount: 836,
+          denialCode: "12345",
+        },
+      ],
+      isError: false
     },
     postPayment: {
       status: "waiting", // Current status of the post-payment process
@@ -4318,6 +6676,13 @@ export const patientPersona: PatientPersona[] = [
         { id: "3", label: "Adjustments Applied", status: "pending" },
         { id: "4", label: "Ledger Updated", status: "pending" },
       ],
+      details: {
+        date: "2025-09-11",
+        paymentFile: 836,
+        claimId: "1014891283",
+        difference: -136,
+      },
+      isError: false
     },
     attachments: [
       {
@@ -4399,7 +6764,7 @@ export const patientPersona: PatientPersona[] = [
       profilePhoto: "/avatar.png",
     },
     eligibilityCheck: {
-      status: "covered",
+      status: "waiting",
       insuranDetials: {
         insuranceProvider: "Daman-AUH-001",
         imageUrl: "/insurance-image.png",
@@ -4409,18 +6774,38 @@ export const patientPersona: PatientPersona[] = [
         { label: "Network", value: "Yes" },
         { label: "Coverage", value: "100%" },
       ],
+      steps: [
+        { id: "1", label: "Extract Patient & Payer Data", status: "pending" },
+        { id: "2", label: "Validate Coverage", status: "pending" },
+        { id: "3", label: "Update & Flag Issues", status: "pending" },
+      ],
+      isError: false
     },
     medicalCoding: {
-      status: "inprogress", // Medical coding status
+      status: "waiting", // Medical coding status
       details: [
-        { label: "Encounter Date", value: "2025-08-30" },
-        { label: "Encounter Type", value: "Outpatient" },
+        // { label: "Encounter Date", value: "2025-08-30" },
+        // { label: "Encounter Type", value: "Outpatient" },
+        // { label: "Physician", value: "Dr. Al Shamsi" },
+        // { label: "Department", value: "Orthopaedics" },
+        { label: "Encounter Type", value: "Out patient" },
+        { label: "ICD Code", value: "99213" },
+        { label: "CPT Code", value: "99213" },
+        { label: "Drug Code", value: "12345" },
+        { label: "Encounter Date", value: "2024-07-21" },
         { label: "Physician", value: "Dr. Al Shamsi" },
         { label: "Department", value: "Orthopaedics" },
       ],
+      steps: [
+        { id: "1", label: "Extract & Suggest Code", status: "pending" },
+        { id: "2", label: "Validate & Check Compliance", status: "pending" },
+        { id: "3", label: "Claim Posted", status: "pending" },
+        { id: "4", label: "Human Review & Approval", status: "pending" },
+      ],
+      isError: false
     },
     priorAuthorization: {
-      status: "approved", // Prior authorization status
+      status: "waiting", // Prior authorization status
       details: [
         { label: "Encounter ID", value: "ENC-2025-0789" },
         { label: "CPT Code", value: "29880" },
@@ -4429,6 +6814,13 @@ export const patientPersona: PatientPersona[] = [
         { label: "Prior Auth ID", value: "PA-556677" },
         { label: "Drug Codes", value: "NDC-0002" },
       ],
+      steps: [
+        { id: "1", label: "Extract & Prepare & (Code)", status: "pending" },
+        { id: "2", label: "Submit Request", status: "pending" },
+        { id: "3", label: "Prior Authorization Posted", status: "pending" },
+        { id: "4", label: "Response Retrieved", status: "pending" },
+      ],
+      isError: false
     },
     claimSubmission: {
       status: "waiting", // Current status of the claim submission process
@@ -4438,6 +6830,27 @@ export const patientPersona: PatientPersona[] = [
         { id: "3", label: "Claim Posted", status: "pending" },
         { id: "4", label: "Claim ID Received & Updated", status: "pending" },
       ],
+      claimAttempts: [
+        {
+          date: "2025-10-20",
+          claimAmount: 836,
+          claimId: 1014891283,
+          rejectionCode: "F14",
+        },
+        {
+          date: "2025-10-20",
+          claimAmount: 836,
+          claimId: 1014891283,
+          rejectionCode: "F14",
+        },
+        {
+          date: "2025-10-20",
+          claimAmount: 836,
+          claimId: 1014891283,
+          rejectionCode: "F14",
+        },
+      ],
+      isError: false
     },
     denialManagement: {
       status: "waiting", // Current status of the denial management process
@@ -4447,6 +6860,27 @@ export const patientPersona: PatientPersona[] = [
         { id: "3", label: "Appeal Generated", status: "pending" },
         { id: "4", label: "Appeal Submitted", status: "pending" },
       ],
+      denialAttempts: [
+        {
+          claimId: 1014891283,
+          denialId: 2002931,
+          amount: 836,
+          denialCode: "12345",
+        },
+        {
+          claimId: 1014891283,
+          denialId: 2002931,
+          amount: 836,
+          denialCode: "12345",
+        },
+        {
+          claimId: 1014891283,
+          denialId: 2002931,
+          amount: 836,
+          denialCode: "12345",
+        },
+      ],
+      isError: false
     },
     postPayment: {
       status: "waiting", // Current status of the post-payment process
@@ -4456,6 +6890,13 @@ export const patientPersona: PatientPersona[] = [
         { id: "3", label: "Adjustments Applied", status: "pending" },
         { id: "4", label: "Ledger Updated", status: "pending" },
       ],
+      details: {
+        date: "2025-09-11",
+        paymentFile: 836,
+        claimId: "1014891283",
+        difference: -136,
+      },
+      isError: false
     },
     attachments: [
       {
