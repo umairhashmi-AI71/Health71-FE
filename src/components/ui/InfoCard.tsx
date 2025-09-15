@@ -47,13 +47,13 @@ const InfoCard: React.FC<InfoCardProps> = ({
   };
   return (
     <div className={`flex gap-9 items-center mb-6  justify-between ${style}`}>
-      <p className="text-2xl mackinac min-w-[330px] ">{errorConfig[type].title}</p>
+      <p className="text-2xl mackinac min-w-[330px] ">{errorConfig[type as keyof typeof errorConfig].title}</p>
 
       <div
         className={`px-3.5 py-5 flex gap-3 rounded-xl items-center shadow grow max-w-[969px] ${type}-border`}
       >
         <div>{getIcon(type)}</div>
-        <p>{errorConfig[type].desc}</p>
+        <p>{errorConfig[type as keyof typeof errorConfig].desc}</p>
       </div>
       {/* {type === 'writeoff' && (<div className="flex gap-2">
 
