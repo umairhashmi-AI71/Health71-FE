@@ -473,7 +473,7 @@ const RedirectPage = () => {
                           )}
                         </div>
                       </td>
-                      <td className="px-4 py-3 whitespace-nowrap text-sm  max-w-[140px]">
+                      <td className="px-4 py-3 whitespace-nowrap text-sm  max-w-[170px]">
                         {patient.name} {patient.surname}
                       </td>
                       <td className="px-4 py-3 whitespace-nowrap text-sm ">

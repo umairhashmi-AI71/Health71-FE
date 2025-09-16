@@ -24,7 +24,7 @@ export const underPaymentData : PaymentDetailsSchema[] = [
     status: "Underpayment",
     difference: -100,
   },
-];
+]
 
 
 export const partialapprovalData : PaymentDetailsSchema[] = [

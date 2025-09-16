@@ -81,7 +81,7 @@ Sara Al Naoumi, a 40-year-old female, presents with left knee pain persisting fo
 export const patientPersona: PatientPersona[] = [
   {
     "agentDetails": {
-      "agentIssue": "Dee",
+      "agentIssue": "Clara",
       "agentSuggestion": "Payer denial: duplicate lab test billed",
       "coT": "Two labs billed within 24h; agent cannot auto-resolve → flagged for review."
     },
@@ -410,7 +410,7 @@ export const patientPersona: PatientPersona[] = [
         "ecgImageUrl": "/ecg-report.png"
       }
     ],
-    "isSubmitted": false,
+    "isSubmitted": true,
     "id": "20231245",
     "profileCreatedDate": "2025-09-16T10:22:59.194Z"
   },
@@ -425,7 +425,7 @@ export const patientPersona: PatientPersona[] = [
       "age": 39,
       "name": "Fatima",
       "surname": "Al Mansoori",
-      "mrn": "MRN-1023",
+      "mrn": "1023",
       "eid": "784-1991-5566778-4",
       "emiratesId": "784-1991-5566778-4",
       "sex": "Female",
@@ -722,15 +722,15 @@ export const patientPersona: PatientPersona[] = [
         "ecgImageUrl": "/ecg-report.png"
       }
     ],
-    "isSubmitted": false,
-    "id": "MRN-1023",
+    "isSubmitted": true,
+    "id": "1023",
     "profileCreatedDate": "2025-09-16T10:22:59.203Z"
   },
   {
     "agentDetails": {
-      "agentIssue": "Dee",
-      "agentSuggestion": "Payer denial: duplicate lab test billed",
-      "coT": "Two labs billed within 24h; agent cannot auto-resolve → flagged for review."
+      "agentIssue": "Coda",
+      "agentSuggestion": "Claim denied due to coding mismatch. Resubmitting with updated CPT and ICD codes.",
+      "coT": "Claim denied for coding mismatch. Agent flagged to review mapped CPT/ICD codes and resubmit with corrected combination."
     },
     "profile": {
       "profilePhoto": "/avatar.png",
@@ -1382,15 +1382,15 @@ export const patientPersona: PatientPersona[] = [
         "ecgImageUrl": "/ecg-report.png"
       }
     ],
-    "isSubmitted": false,
+    "isSubmitted": true,
     "id": "101300",
     "profileCreatedDate": "2025-09-16T10:22:59.203Z"
   },
   {
     "agentDetails": {
-      "agentIssue": "Dee",
-      "agentSuggestion": "Payer denial: duplicate lab test billed",
-      "coT": "Two labs billed within 24h; agent cannot auto-resolve → flagged for review."
+      "agentIssue": "Clara",
+      "agentSuggestion": "Partial claim approved. Remaining services denied for insufficient documentation. Suggest write-off per policy.",
+      "coT": "Partial claim approved but some services denied for insufficient documentation. Agent recommended write-off as per payer guidelines."
     },
     "profile": {
       "profilePhoto": "/avatar.png",
@@ -1713,9 +1713,9 @@ export const patientPersona: PatientPersona[] = [
   },
  {
     "agentDetails": {
-      "agentIssue": "Dee",
-      "agentSuggestion": "Payer denial: duplicate lab test billed",
-      "coT": "Two labs billed within 24h; agent cannot auto-resolve → flagged for review."
+      "agentIssue": "Clara",
+      "agentSuggestion": "Appeal letter generated and submitted to payer for review of medical necessity.",
+      "coT": "Claim denied for insufficient documentation. Agent generated appeal letter with supporting documents and submitted to payer."
     },
     "profile": {
       "profilePhoto": "/avatar.png",
@@ -2363,15 +2363,15 @@ export const patientPersona: PatientPersona[] = [
         "ecgImageUrl": "/ecg-report.png"
       }
     ],
-    "isSubmitted": false,
+    "isSubmitted": true,
     "id": "208745",
     "profileCreatedDate": "2025-09-16T12:32:28.570Z"
   },
    {
     "agentDetails": {
-      "agentIssue": "Dee",
-      "agentSuggestion": "Payer denial: duplicate lab test billed",
-      "coT": "Two labs billed within 24h; agent cannot auto-resolve → flagged for review."
+      "agentIssue": "Clara",
+      "agentSuggestion": "Partial approval received. Agent flagged CPT code mismatch, retrieved correct CPT from codebook, re-ran medical coding, and resubmitted claim. Claim approved on second round.",
+      "coT": "Agent identified CPT code mismatch, retrieved correct CPT, and suggest rerunning coding."
     },
     "profile": {
       "profilePhoto": "/avatar.png",
