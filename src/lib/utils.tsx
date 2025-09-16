@@ -79,8 +79,8 @@ export const errorConfig = {
     desc: "Submission not reaching payer or regulator due to timeout or network error. We are trying to reconnect",
   },
   autoresubmittion: {
-    title: "",
-    desc: "",
+    title: "Auto Resubmission",
+    desc: "Claim rejected due to missing Rendering Provider Specialty Code. Clara agent fetched specialty code from provider master, updated payload, and resubmitted automatically. Claim approved on resubmission. Validation engine updated with new schema rule.",
   },
   codesuggestion: {
     title: "Different Code Suggestion",
@@ -103,6 +103,10 @@ export const errorConfig = {
     desc: "On 2025-09-09, at 12:12 pm payment of 250 AED was received and matched exactly to Claim ID 104891283. All adjustments were applied correctly, and patient responsibility has been posted on 2025-09-09, at 12:13 pm.  No further action required."
   },
 
+  partialapproval: {
+ title: "Partial Approval",
+    desc: "This claim was partially approved — some services were denied due to reasons such as coding/diagnosis mismatch, lack of medical necessity, or missing prior authorization. Please review denied items for correction or appeal."
+  },
 
   noteligible: {
     title: "Not Eligible",
@@ -131,7 +135,13 @@ export const errorConfig = {
   pandingapproval: {
     title: "Pending Approval",
     desc: "Prior authorization submitted and marked pending by payer — encounter is on hold until decision is received, then appointment is auto-booked upon approval."
+  },
+  overautomation: {
+     title: "Over-Automation Error",
+    desc: "Claim was initially denied due to incorrect automated rules. Dee flagged the issue, human review corrected the error, claim resubmitted, and approved. System updated to prevent recurrence."
+  
   }
+
 
 };
  

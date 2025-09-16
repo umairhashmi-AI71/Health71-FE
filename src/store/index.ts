@@ -1,12 +1,14 @@
 import { configureStore } from '@reduxjs/toolkit'
 import patientReducer from './slice/Patient';
 import writeReducer from './slice/Writeoff';
+import paymentReducer from './slice/Patienttable';
 
 
 export const store = configureStore({
   reducer: {
     patientlist: patientReducer,
-    writeoffList: writeReducer
+    writeoffList: writeReducer,
+    paymenttableData: paymentReducer
   },
 })
 

@@ -16,4 +16,6 @@ export type ErrorType =
   | "overpayment"
   | "partialpayment"
   | "costtopatient"
-  | "pandingapproval";
+  | "pandingapproval"
+  | "overautomation"
+  | "partialapproval";

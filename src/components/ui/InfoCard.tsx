@@ -36,6 +36,8 @@ const InfoCard: React.FC<InfoCardProps> = ({
         case "panotapproved":
         case "paappeal":
        case "pandingapproval":
+        case "partialapproval":
+          case "overautomation" :
         return (
           <NotebookPen className="w-10 h-10 bg-[#EFF7F6]  rounded-lg p-2"  strokeWidth={1.5} />
         );

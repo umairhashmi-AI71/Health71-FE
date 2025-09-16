@@ -72,7 +72,7 @@ const HealthcareCard: React.FC<HealthcareCardProps> = ({
           />
           <div>
             <h3 className="text-lg font-semibold mb-1">
-              {insuranceDetails?.insuranceProvider}
+              {insuranceDetails?.insurance}
             </h3>
             <p className="text-sm font-medium">
               {insuranceDetails?.policyNumber}

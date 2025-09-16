@@ -3,6 +3,7 @@ import type { PayloadAction } from "@reduxjs/toolkit";
 import type { RootState } from "../index";
 import { patientPersona } from "@/lib/mockPersona";
 import { ICDCode, PatientPersona } from "@/types/patient";
+import { ErrorType } from "@/types/error";
 
 // Define the initial state using that type
 const initialState: PatientPersona[] = patientPersona;
@@ -37,7 +38,7 @@ export const patientSlice = createSlice({
       const patient = state.find((p) => p.id === patientId);
       if (patient) {
         if (type == "icd") {
-          const code = patient.icdCodes.find((i) => i.id === icdId);
+          const code = patient.icdCodes.find((i) => i.code === icdId);
 
           if (code) {
             Object.assign(code, updatedICD);
@@ -45,7 +46,14 @@ export const patientSlice = createSlice({
         }
 
          if (type == "cpt") {
-          const code = patient.cptCode.find((i) => i.id === icdId);
+          const code = patient.cptCode.find((i) => i.code === icdId);
+
+          if (code) {
+            Object.assign(code, updatedICD);
+          }
+        }
+        if (type == "drug") {
+          const code = patient.drugCode.find((i) => i.code === icdId);
 
           if (code) {
             Object.assign(code, updatedICD);
@@ -70,6 +78,8 @@ export const patientSlice = createSlice({
             return;
           case "cpt":
             patient.cptCode.push(newICD);
+            case "drug":
+            patient.drugCode.push(newICD);
             return;
         }
       }
@@ -85,16 +95,38 @@ export const patientSlice = createSlice({
       const { patientId, icdId, type } = action.payload;
       const patient = state.find((p) => p.id === patientId);
       if (patient) {
+        console.log(icdId, type)
         switch (type) {
           case "icd":
-            patient.icdCodes = patient.icdCodes.filter((i) => i.id !== icdId);
+            patient.icdCodes = patient.icdCodes.filter((i) => i.code !== icdId);
             return;
           case "cpt":
-            patient.cptCode = patient.cptCode.filter((i) => i.id !== icdId);
+            patient.cptCode = patient.cptCode.filter((i) => i.code !== icdId);
+            return;
+          case "drug":
+            patient.drugCode = patient.drugCode.filter((i) => i.code !== icdId);
             return;
         }
       }
     },
+     updatePriorAuthError(
+      state,
+      action: PayloadAction<{
+        patientId: string;
+        errorType: ErrorType;
+      }>
+    ) {
+      const { patientId, errorType } = action.payload;
+      const patient = state.find((p) => p.id === patientId);
+
+      if (patient && patient.priorAuthorization) {
+        patient.priorAuthorization.isError = true;
+        patient.priorAuthorization.errorDetails = {
+          errorType,
+        };
+      }
+    },
+    
   },
 });
 
@@ -105,6 +137,7 @@ export const {
   updatePatientICDCode,
   addPatientICDCode,
   deletePatientICDCode,
+  updatePriorAuthError
 } = patientSlice.actions;
 
 export default patientSlice.reducer;

@@ -507,7 +507,9 @@ body {
  .panotapproved-border,
  .paappeal-border,
  .pandingapproval-border,
-.outofnetwork-border {
+.outofnetwork-border,
+.overautomation-border,
+  .partialapproval-border {
   border: 1px solid #AFD8D4;
 }
 

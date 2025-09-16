@@ -62,3 +62,51 @@ export const underpaymentColDef: ColDef[] = [
     width: 120
   },
 ];
+
+export const partialapprovalColDef: ColDef[] = [
+  
+  {
+    headerName: "Service",
+    field: "service",
+    flex: 1,
+    // cellClass: "flex items-center text-sm",
+    autoHeight: true,
+  },
+  {
+    headerName: "CPT Code",
+    field: "cptCode",
+    width: 120,
+    // cellClass: "flex items-center text-sm",
+    autoHeight: true,
+  },
+  {
+    headerName: "Amount (AED)",
+    field: "amount",
+    width: 120,
+    // cellClass: "flex items-center text-sm",
+    valueFormatter: (params) => `${params.value}`,
+    autoHeight: true,
+  },
+  {
+    headerName: "Status",
+    field: "status",
+    width: 160,
+    // cellClass: (params) =>
+    //   params.value === "Denied"
+    //     ? "text-sm font-medium text-red-600"
+    //     : "text-sm text-green-600",
+        autoHeight: true,
+  },
+  {
+    headerName: "Rejection Reason",
+    field: "reason",
+    cellClass: "flex items-center text-sm ",
+    autoHeight: true,
+  },
+    {
+    headerName: "Agent Suggestion",
+    field: "suggestion",
+    cellClass: "flex items-center text-sm ",
+    autoHeight: true,
+  },
+];

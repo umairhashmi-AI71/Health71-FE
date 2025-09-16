@@ -8,11 +8,13 @@ import {
   SelectionChangedEvent,
 } from "ag-grid-community";
 import { AgGridReact } from "ag-grid-react";
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useMemo, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import AlertModal from "./AlertModal";
 import { changeWriteoffStatus } from "@/store/slice/Writeoff";
 import { Check, Send, SquarePen } from "lucide-react";
+import ProcessMapping from "./ui/ProcessMapping";
+import { ProcessSteps } from "@/types/patient";
 
 ModuleRegistry.registerModules([AllCommunityModule]);
 
@@ -29,6 +31,45 @@ export const WriteoffTable: React.FC = () => {
   const writeList: WriteofcolumnType[] = useSelector(
     (state: RootState) => state.writeoffList
   );
+
+
+      const [writeoffEscalate, setWriteoffEscalate] = useState([
+      { id: "1", label: "Validate Write-Offs", status: "pending" },
+      { id: "2", label: "Notify Payer", status: "pending" },
+      { id: "4", label: "Update Ledger", status: "pending" },
+    ]); 
+  
+   const cancelRef = useRef(false);
+
+  const markStepsAsComplete = async () => {
+    cancelRef.current = false; // reset cancel flag before starting
+
+    for (let i = 0; i < writeoffEscalate.length; i++) {
+      // break early if cancel button clicked
+      if (cancelRef.current) break;
+
+      await new Promise((resolve) => setTimeout(resolve, 500));
+
+      if (cancelRef.current) break;
+
+      setWriteoffEscalate((prevSteps) =>
+        prevSteps.map((step, index) =>
+          index === i ? { ...step, status: "completed" } : step
+        )
+      );
+    }
+  };
+
+  const stopSteps = () => {
+    cancelRef.current = true; // tell loop to stop
+  };
+
+  const resetSteps = () => {
+    cancelRef.current = true; // also stop loop
+    setWriteoffEscalate((steps) =>
+      steps.map((step) => ({ ...step, status: "pending" }))
+    );
+  };
 
   const [selectedRows, setSelectedRows] = useState<WriteofcolumnType[]>([]);
 
@@ -59,12 +100,12 @@ export const WriteoffTable: React.FC = () => {
               };
               return (
                 <div className="flex gap-2 items-center">
-                  {status.toLocaleLowerCase() != "accepted" &&
-                    status.toLocaleLowerCase() != "denied    →   accepted" && (
+                  {status.toLocaleLowerCase() != "accepted" && (
                       <>
                         <button
                           className="cursor-pointer  border-base bg-white items-center rounded-xl border p-4 py-2 flex gap-2"
                           onClick={() => {
+                            markStepsAsComplete()
                             setModal("escalate");
                           }}
                         >
@@ -130,8 +171,7 @@ export const WriteoffTable: React.FC = () => {
             Accept Confirmation
           </div>
           <div className="text-muted mb-6">
-            Are you sure you want to accept this patient? This action cannot be
-            undone.
+           Are you sure you want to accept the {selectedRows.length > 1 ? selectedRows.length: ''} write-offs? Important: Once accepted, this action cannot be undone.
           </div>
           <div className="flex justify-end gap-4">
             <button
@@ -148,7 +188,7 @@ export const WriteoffTable: React.FC = () => {
                     dispatch(
                       changeWriteoffStatus({
                         id: data.id,
-                        status: "Denied    →   Accepted",
+                        status: "Accepted",
                       })
                     );
                   });
@@ -169,21 +209,25 @@ export const WriteoffTable: React.FC = () => {
             Escalate
           </div>
           <div className="text-muted mb-6">
-            Write-off accepted and notification sent to payer. No further action
-            is required.
+            Write-off not accepted and notification sent to payer. No further action is required.
           </div>
-          {selectedRows.length}
+          <div>
+            <ProcessMapping processGap="h-3.5" processSteps={writeoffEscalate as ProcessSteps[]} />
+          </div>
           <div className="flex justify-end gap-4">
             <button
               className="border rounded-xl px-5 py-2 text-base-primary bg-white"
-              onClick={() => setModal("")}
+              onClick={() => {
+               resetSteps()
+                      setModal("")}}
             >
               Cancel
             </button>
             <button
               className="rounded-xl px-5 py-2 text-white bg-green"
-              onClick={() => {
+              onClick={() => { 
                 setModal("");
+                resetSteps()
               }}
             >
               Continue

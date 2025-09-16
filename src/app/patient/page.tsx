@@ -57,7 +57,7 @@ const RedirectPage = () => {
   const filteredAndSortedPatients = useMemo(() => {
     const filtered = patients.filter((patient) => {
       const matchesSearch =
-        patient.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        patient.name.toLowerCase().includes(searchTerm.toLowerCase()) 
         patient.id.includes(searchTerm);
       const matchesFilter =
         selectedSuggestions.length === 0 ||

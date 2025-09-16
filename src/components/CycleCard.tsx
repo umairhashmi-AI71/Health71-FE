@@ -9,7 +9,6 @@ import {
 import ProcessMapping from "./ui/ProcessMapping";
 import { getStatusConfig } from "@/lib/utils";
 
-
 interface Props {
   title: string;
   status: StatusType;
@@ -32,6 +31,7 @@ const CycleCard: React.FC<Props> = ({
   processSteps,
 }) => {
   const claimAttempts = {
+    claimRound: "Claim Round",
     date: "Date",
     claimAmount: "Claim Amount",
     claimId: "Claim ID",
@@ -39,12 +39,12 @@ const CycleCard: React.FC<Props> = ({
   };
 
   const denialAttemps = {
+    claimRound: "Claim Round",
     claimId: "Claim ID",
     denialId: "Denial ID",
-    amount: "Denial Amount",
+    denialAmount: "Denial Amount",
     denialCode: "Denial Code",
   };
-
 
   const statusConfig = getStatusConfig(status);
   const getStepIcon = (stepStatus: StatusType): JSX.Element => {
@@ -110,7 +110,13 @@ const CycleCard: React.FC<Props> = ({
       {/* Header */}
 
       <div className={`flex items-center justify-between ${titleGap}`}>
-        <h2 className={`text-lg font-semibold ${status == 'notinvoked' ? 'opacity-30' : ''}`}>{title}</h2>
+        <h2
+          className={`text-lg font-semibold ${
+            status == "notinvoked" ? "opacity-30" : ""
+          }`}
+        >
+          {title}
+        </h2>
         <div
           className={`flex items-center space-x-1 px-3 py-1 rounded-lg text-sm font-medium ${statusConfig.className} py-1 px-2.5`}
         >
@@ -120,54 +126,56 @@ const CycleCard: React.FC<Props> = ({
 
       {/** Process Not finish yet */}
 
-      {!isProcessFinish && (<ProcessMapping processGap={processGap} processSteps={processSteps} />)}
+      {!isProcessFinish && (
+        <ProcessMapping processGap={processGap} processSteps={processSteps} />
+      )}
 
       {/** Process is finished */}
       {isProcessFinish && (
         <div>
-        <div className="space-y-3.5">
-          <p className=" font-medium text-base text-green">
-            Cycle Number {page + 1}
-          </p>
           <div className="space-y-3.5">
-            <div className="flex justify-between grid grid-cols-2 gap-4">
-              {Object.keys(currentItems).map((key, idx) => {
-                const claimType = key as keyof typeof claimAttempts;
-                const denialType = key as keyof typeof denialAttemps;
-                return (
-                  <div key={idx} className="min-w-[48%]">
-                    <h3 className="text-base text-foreground">
-                      {type == "claim"
-                        ? claimAttempts[claimType]
-                        : denialAttemps[denialType]}
-                    </h3>
-                    <p className="text-base font-semibold">
-                      {currentItems[key as keyof typeof currentItems]}
-                    </p>
-                  </div>
-                );
-              })}
+            <p className=" font-medium text-base text-green">
+              Cycle Number {page + 1}
+            </p>
+            <div className="space-y-3.5">
+              <div className="flex justify-between grid grid-cols-2 gap-4">
+                {Object.keys(currentItems).map((key, idx) => {
+                  const claimType = key as keyof typeof claimAttempts;
+                  const denialType = key as keyof typeof denialAttemps;
+                  if (claimType != "claimRound" || denialType != "claimRound") {
+                    return (
+                      <div key={idx} className="min-w-[48%]">
+                        <h3 className="text-base text-foreground">
+                          {type == "claim"
+                            ? claimAttempts[claimType]
+                            : denialAttemps[denialType]}
+                        </h3>
+                        <p className="text-base font-semibold">
+                          {currentItems[key as keyof typeof currentItems]}
+                        </p>
+                      </div>
+                    );
+                  }
+                })}
+              </div>
             </div>
           </div>
-        </div>
-        {/* Pagination Dots */}
-      {totalPages > 1 && (
-        <div className="flex justify-center mt-2 gap-2">
-          {Array.from({ length: totalPages }).map((_, i) => (
-            <button
-              key={i}
-              onClick={() => setPage(i)}
-              className={`h-2 w-2 rounded-full ${
-                page === i ? "bg-teal-600" : "bg-gray-300"
-              }`}
-            />
-          ))}
+          {/* Pagination Dots */}
+          {totalPages > 1 && (
+            <div className="flex justify-center mt-2 gap-2">
+              {Array.from({ length: totalPages }).map((_, i) => (
+                <button
+                  key={i}
+                  onClick={() => setPage(i)}
+                  className={`h-2 w-2 rounded-full ${
+                    page === i ? "bg-teal-600" : "bg-gray-300"
+                  }`}
+                />
+              ))}
+            </div>
+          )}
         </div>
       )}
-        </div>
-      )}
-
-      
     </div>
   );
 };

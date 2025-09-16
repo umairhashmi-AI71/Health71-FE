@@ -80,6 +80,7 @@ export default function DashboardPage() {
   const router = useRouter();
   const icdRef = useRef<HTMLDivElement>(null);
   const cptref = useRef<HTMLDivElement>(null);
+  const drugref = useRef<HTMLDivElement>(null);
   const dispatch = useDispatch();
   const patients: PatientPersona = useSelector(
     (state: RootState) =>
@@ -149,9 +150,10 @@ export default function DashboardPage() {
       data: (
         <ICDCodes
           id="drug"
+          ref={drugref}
           mrn={patients.id}
           title="Drug Codes"
-          initialCodes={[]}
+          initialCodes={patients?.drugCode}
         />
       ),
       icon: Pill,
@@ -159,10 +161,7 @@ export default function DashboardPage() {
   ];
 
   const appealsLetter = [];
-  const eligibilityCheck = {
-    Network: "Yes",
-    Coverage: "100%",
-  };
+ 
 
   const [modal, setModal] = React.useState<string>();
   const [isSubmitted, setIsSubmitted] = React.useState<boolean>(false);
@@ -257,15 +256,28 @@ export default function DashboardPage() {
     error: boolean;
   }
 
-  const { claimSubmission, denialManagement, postPayment, icdCodes, cptCode } =
+  const { eligibilityCheck,
+      priorAuthorization,
+      medicalCoding,
+      claimSubmission,
+      denialManagement,
+      postPayment, icdCodes, cptCode, drugCode } =
     patients;
-  const { isError, errorDetails, step } = checkHealthWorkflowErrors(patients);
+    console.log('patients', patients)
+  const { isError, errorDetails, step } = checkHealthWorkflowErrors({eligibilityCheck,
+      priorAuthorization,
+      medicalCoding,
+      claimSubmission,
+      denialManagement,
+      postPayment});
+      console.log(isError)
   const [contactSteps, setContactSteps] = useState([
     { id: "1", label: "Calculate Patient Responsibility", status: "pending" },
     { id: "2", label: "Send to Patient", status: "pending" },
     { id: "3", label: "Confirm Patient Approval", status: "pending" },
     { id: "4", label: "Update Ledger", status: "pending" },
   ]);
+ 
   const [appealDetails, setAppealDetails] = useState<Appeal>({
     isAccepted: false,
     error: false,
@@ -285,7 +297,7 @@ export default function DashboardPage() {
   };
 
   const getInfo = () => {
-    if (isError && errorDetails?.errorType && step !== 'postPayment') {
+    if (isError && errorDetails?.errorType ) {
       return (
         <InfoCard
           // title={errorTitle}
@@ -303,6 +315,16 @@ export default function DashboardPage() {
 
   const soapRef = useRef<SOAPNoteRef>(null);
 
+  const showButton = () => {
+    console.log('errorDetails?.errorType', errorDetails?.errorType)
+    const error = ['technical', 'medicalnecessity', 'overautomation']
+    if(error.includes(errorDetails?.errorType as ErrorType)) {
+      return false
+    }
+
+    
+    return true
+  }
   return (
     <DashboardLayout>
       <div
@@ -316,7 +338,7 @@ export default function DashboardPage() {
                   <Breadcrumb />
                 </div>
                 <div className="flex  gap-2 mb-6">
-                  {buttons.map((data) => (
+                   {showButton() && buttons.map((data) => (
                     <button
                       key={data.label}
                       className={`rounded-xl cursor-pointer px-4 py-3 text-sm font-medium text-base-primary ${data.style}`}
@@ -346,11 +368,16 @@ export default function DashboardPage() {
                             type: 'cpt',
                             data: cptCode,
                             ref: cptref,
+                          },
+                           {
+                            type: 'drug',
+                            data: drugCode,
+                            ref: drugref,
                           }
                         ];
 
                         for (const codeType of codeTypes) {
-                          const hasError = codeType.data.some(code => code.isApproved === false);
+                          const hasError = codeType?.data.some(code => code.isApproved === false);
                           if (hasError) {
                             markdownRef.current?.scrollIntoView({
                               behavior: "smooth",
@@ -578,7 +605,7 @@ export default function DashboardPage() {
                 )}
 
               {/** Payment fault */}
-              {isError && step == "postPayment" && <PaymentDetailsTable type={postPayment.errorDetails?.errorType as string} />}
+              {isError && step == "postPayment" && <PaymentDetailsTable type={postPayment.errorDetails?.errorType as string} patientId={patients?.id} />}
             </main>
 
             {/* Cancel Modal */}

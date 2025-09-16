@@ -4,27 +4,46 @@ import {
     GridApi,
     ICellRendererParams,
     ModuleRegistry,
+    SelectionChangedEvent,
 } from "ag-grid-community";
 import { AgGridReact } from "ag-grid-react";
 import { useCallback, useMemo, useState } from "react";
-import { underPaymentData } from "./calldef/paymentDetails";
-import { underpaymentColDef } from "./calldef/underpayment";
+import {
+    partialapprovalData,
+    PaymentDetailsSchema,
+    underPaymentData,
+} from "./calldef/paymentDetails";
+import {
+    partialapprovalColDef,
+    underpaymentColDef,
+} from "./calldef/underpayment";
 import AlertModal from "../AlertModal";
 import ProcessMapping from "./ProcessMapping";
-import { Check, Send, SquarePen, SwitchCamera } from "lucide-react";
+import { Check, Search, Send, SquarePen, SwitchCamera } from "lucide-react";
 import Markdown from "react-markdown";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
-import { claimReconsiderationMarkdown, refundLettermarkdown } from "@/lib/utils";
+import {
+    claimReconsiderationMarkdown,
+    refundLettermarkdown,
+} from "@/lib/utils";
+import { PaymentDetails } from "@/types/patient";
+import { useDispatch, useSelector } from "react-redux";
+import { updatePriorAuthError } from "@/store/slice/Patient";
+import { useRouter } from "next/navigation";
+import { RootState } from "@/store";
+import { deletetableData } from "@/store/slice/Patienttable";
 
 interface PaymentDetailsTable {
     type: string;
+    patientId: string
 }
 
 ModuleRegistry.registerModules([AllCommunityModule]);
 
 export const PaymentDetailsTable: React.FC<PaymentDetailsTable> = ({
     type,
+    patientId
 }) => {
     const defaultColDef = useMemo(
         () => ({
@@ -36,9 +55,19 @@ export const PaymentDetailsTable: React.FC<PaymentDetailsTable> = ({
     );
     const [modal, setModal] = useState<string>("");
     const [accepted, setAccepted] = useState<boolean>(false);
+    const dispatch = useDispatch();
+    const route = useRouter();
+
+    const partialTable = useSelector(
+        (state: RootState) =>
+            state.paymenttableData
+    );
+
+    console.log(partialTable)
+
+
     const underpaymentaction = (params: ICellRendererParams) => {
         const { status } = params.data as { status: string };
-
         return (
             <div className="flex gap-2">
                 <button
@@ -87,10 +116,53 @@ export const PaymentDetailsTable: React.FC<PaymentDetailsTable> = ({
         );
     };
 
+    const partialApprovalAction = (params: ICellRendererParams) => {
+        const { reason } = params.data as { reason: string };
+        if (reason != '-') {
+            return (
+
+                <div className="flex justify-between items-center w-15">
+                    <button className="cursor-pointer"
+                        onClick={() => {
+                            // if(reason == 'Code Mismatched') {
+                            //   dispatch(updatePriorAuthError({ patientId,
+                            //           errorType: 'codesuggestion'}))
+                            // }
+                            //  if(reason == 'Medical Necessity') {
+                            //     dispatch(updatePriorAuthError({ patientId,
+                            //           errorType: 'medicalnecessity'}))
+                            // }
+
+                            if (reason == 'Code Mismatched') {
+                                route.push('/patient/20457891')
+                            }
+                            if (reason == 'Medical Necessity') {
+
+                                route.push('/patient/101300')
+                            }
+                        }}>
+                        <Search className="h-4 w-4" strokeWidth={1.5} />
+                    </button>
+                    <button
+                        className={`cursor-pointer `}
+                        onClick={() => {
+                            setModal("acceptcodesuggetion");
+                            // dispatch(markPatientSubmitted(row.id));
+                        }}
+                    >
+                        <Check className="h-4 w-4" strokeWidth={1.5} />
+                    </button>
+                </div>
+            );
+        }
+
+    };
+
     const getColDef = () => {
         switch (type) {
             case "underpayment":
                 return [
+
                     ...underpaymentColDef,
                     {
                         sortable: false,
@@ -117,7 +189,7 @@ export const PaymentDetailsTable: React.FC<PaymentDetailsTable> = ({
                 return [
                     ...underpaymentColDef,
                     {
-                       headerName: "Discription",
+                        headerName: "Discription",
                         field: "discription",
                         sortable: false,
                         filter: false,
@@ -125,21 +197,42 @@ export const PaymentDetailsTable: React.FC<PaymentDetailsTable> = ({
                         // cellClass: "flex items-center flex justify-center items-center",
                     },
                 ];
-            case 'costtopatient':
+            case "costtopatient":
                 return [
                     ...underpaymentColDef,
                     {
-                       headerName: "Time",
+                        headerName: "Time",
                         field: "time",
                         sortable: false,
                         filter: false,
                         // cellClass: "flex items-center flex justify-center items-center",
                     },
-                     {
-                       headerName: "Chanel",
+                    {
+                        headerName: "Chanel",
                         field: "chanel",
                         sortable: false,
                         filter: false,
+                        // cellClass: "flex items-center flex justify-center items-center",
+                    },
+                ];
+            case "partialapproval":
+                return [
+                    {
+                        headerName: "",
+                        field: "select",
+                        // checkboxSelection: true,
+                        headerCheckboxSelection: true,
+                        checkboxSelection: true,
+                        width: 50,
+
+                        // cellRenderer: CustomCheckbox,
+                    },
+                    ...partialapprovalColDef,
+                    {
+                         headerName: "",
+                        sortable: false,
+                        filter: false,
+                        cellRenderer: partialApprovalAction,
                         // cellClass: "flex items-center flex justify-center items-center",
                     },
                 ];
@@ -150,16 +243,29 @@ export const PaymentDetailsTable: React.FC<PaymentDetailsTable> = ({
             case "underpayment":
             case "overpayment":
                 return underPaymentData;
-                case "partialpayment" :
-                underPaymentData[0].discription = "Waiting for remaining payment / Fix manually if needed"
-                return underPaymentData
+            case "partialpayment":
+                underPaymentData[0].discription =
+                    "Waiting for remaining payment / Fix manually if needed";
+                return underPaymentData;
 
-                 case "costtopatient" :
-                underPaymentData[0].time = "Sep 5, 2024 - 10:20"
-                underPaymentData[0].chanel = "Whatsapp"
-                return underPaymentData
+            case "costtopatient":
+                underPaymentData[0].time = "Sep 5, 2024 - 10:20";
+                underPaymentData[0].chanel = "Whatsapp";
+                return underPaymentData;
+
+            case "partialapproval":
+                return partialTable;
         }
     };
+
+    const [selectedRows, setSelectedRows] = useState<PaymentDetailsSchema[]>([]);
+
+    // Handle selection change
+    const onSelectionChanged = useCallback((event: SelectionChangedEvent) => {
+        const selectedNodes = event.api.getSelectedNodes();
+        const selectedData = selectedNodes.map((node) => node.data);
+        setSelectedRows(selectedData);
+    }, []);
     return (
         <>
             <div className="ag-theme-alpine">
@@ -168,6 +274,10 @@ export const PaymentDetailsTable: React.FC<PaymentDetailsTable> = ({
                     rowData={getRows()}
                     columnDefs={getColDef()}
                     defaultColDef={defaultColDef}
+                    rowSelection="multiple"
+                    // paginationPageSize={10}
+                    onSelectionChanged={onSelectionChanged}
+
                     animateRows={true}
                     pagination={false}
                     // paginationPageSize={10}
@@ -177,7 +287,21 @@ export const PaymentDetailsTable: React.FC<PaymentDetailsTable> = ({
                     rowHeight={60}
                 // onGridReady={onGridReady}
                 />
+                 
             </div>
+            {type == 'partialapproval' && (
+                 <div className="flex justify-end my-10">
+            <button
+              className={` text-white px-6 py-2 rounded-lg  ${
+                selectedRows.length > 0 ? "bg-green" : "bg-[#F5F2EF]"
+              }`}
+              onClick={() => setModal("acceptcodesuggetion")}
+              disabled={selectedRows.length > 0 ? false : true}
+            >
+              Accept
+            </button>
+          </div>
+            )}
 
             <AlertModal open={modal === "escalate"} onClose={() => setModal("")}>
                 <div>
@@ -258,9 +382,9 @@ export const PaymentDetailsTable: React.FC<PaymentDetailsTable> = ({
                         Refund
                     </div>
                     <div className="text-muted mb-6">
-                        This claim has been flagged for overpayment. The excess amount will be refunded or applied as credit.
+                        This claim has been flagged for overpayment. The excess amount will
+                        be refunded or applied as credit.
                         <div className="pt-5">
-
                             <ProcessMapping
                                 processGap="h-6"
                                 processSteps={[
@@ -285,7 +409,6 @@ export const PaymentDetailsTable: React.FC<PaymentDetailsTable> = ({
                         </div>
                     </div>
                     <div className="flex justify-end gap-4">
-
                         <button
                             className="rounded-xl px-5 py-2 text-white bg-green"
                             onClick={() => {
@@ -350,6 +473,38 @@ export const PaymentDetailsTable: React.FC<PaymentDetailsTable> = ({
                     </div>
                 </div>
             </AlertModal>
+
+            <AlertModal open={modal === "acceptcodesuggetion"} onClose={() => setModal("")}>
+                <div>
+                    <div className="font-semibold text-lg mb-2 text-base-primary">
+                        Accept Confirmation
+                    </div>
+                    <div className="text-muted mb-6">
+                        Are you sure you want to accept the {selectedRows.length > 1 ? selectedRows.length : ''} code suggestion(s)? Important: Once accepted, this action cannot be undone.
+                    </div>
+                    <div className="flex justify-end gap-4">
+                        <button
+                            className="border rounded-xl px-5 py-2 text-base-primary bg-white"
+                            onClick={() => setModal("")}
+                        >
+                            No
+                        </button>
+                        <button
+                            className="rounded-xl px-5 py-2 text-white bg-green"
+                            onClick={() => {
+                                setModal("");
+                                selectedRows.forEach((row) => {
+                                    console.log(row)
+                                    dispatch(deletetableData(row.id || 0));
+                                });
+                            }}
+                        >
+                            Yes
+                        </button>
+                    </div>
+                </div>
+            </AlertModal>
+
         </>
     );
 };

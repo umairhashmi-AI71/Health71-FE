@@ -41,10 +41,9 @@ const ICDCodes = forwardRef<HTMLDivElement, ICDCodesProps>(
     const handleAddCode = () => {
       if (newCode.trim()) {
         const newICD: ICDCode = {
-          id: Date.now().toString(),
           code: newCode.toUpperCase(),
           isApproved: false,
-          desc:
+          description:
             id === "cpt"
               ? "Diagnostic Radiology Procedures of the Lower Extremities"
               : "",
@@ -78,7 +77,7 @@ const ICDCodes = forwardRef<HTMLDivElement, ICDCodesProps>(
       dispatch(updatePatientICDCode({
         patientId: mrn,
         icdId: rowid,
-        updatedICD: { isApproved: !codes.find(e => e.id == rowid)?.isApproved },
+        updatedICD: { isApproved: !codes.find(e => e.code == rowid)?.isApproved },
         type: id
       }))
     };
@@ -116,7 +115,7 @@ const ICDCodes = forwardRef<HTMLDivElement, ICDCodesProps>(
         {/* ICD Codes List */}
         <div className="space-y-4 "  ref={localRef}>
           {codes.map((icdCode, index) => (
-            <div key={icdCode.id} className={`bg-basecard p-4 rounded-lg ${icdCode.isApproved ? "accepted" : 'not-acceptede'}`}>
+            <div key={index} className={`bg-basecard p-4 rounded-lg ${icdCode.isApproved ? "accepted" : 'not-acceptede'}`}>
               <div className="flex items-center space-x-2 mb-3">
                 {/* Code Input/Display */}
                 <div
@@ -131,7 +130,7 @@ const ICDCodes = forwardRef<HTMLDivElement, ICDCodesProps>(
                 {/* Action Buttons */}
 
                 <button
-                  onClick={() => handleApproveCode(icdCode.id)}
+                  onClick={() => handleApproveCode(icdCode.code)}
                   className={`p-3 border border-sidebar bg-white rounded-lg transition-colors ${icdCode.isApproved ? "" : "hidden"
                     }`}
                 >
@@ -139,7 +138,7 @@ const ICDCodes = forwardRef<HTMLDivElement, ICDCodesProps>(
                 </button>
 
                 <button
-                  onClick={() => handleDeleteCode(icdCode.id)}
+                  onClick={() => handleDeleteCode(icdCode.code)}
                   className={`p-3 bg-base-agent-10 rounded-lg transition-colors ${icdCode.isApproved ? "hidden" : ""
                     }`}
                 >
@@ -147,7 +146,7 @@ const ICDCodes = forwardRef<HTMLDivElement, ICDCodesProps>(
                 </button>
 
                 <button
-                  onClick={() => handleApproveCode(icdCode.id)}
+                  onClick={() => handleApproveCode(icdCode.code)}
                   className={`p-3 rounded-lg transition-colors ${icdCode.isApproved ? "hidden" : "bg-primary-foreground"
                     }`}
                 >
@@ -163,7 +162,7 @@ const ICDCodes = forwardRef<HTMLDivElement, ICDCodesProps>(
                   }
                 }}
               >
-                <p>{icdCode.desc}</p>
+                <p>{icdCode.description}</p>
 
                 {icdCode.confidence && (
                   <p className="mt-1">Confidence Score: {icdCode.confidence}</p>

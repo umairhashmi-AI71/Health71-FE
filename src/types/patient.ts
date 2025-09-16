@@ -14,10 +14,13 @@ export interface PatientProfile {
   dateOfBirth: string; // YYYY-MM-DD format
   nationality: string;
   language: string;
-  phoneNumber: string;
+  phoneNumber: number;
   email: string;
   age: number;
   profilePhoto: string;
+  mrn?: number | string
+  eid?: string
+  dob?: number
 }
 
 export interface MedicalCodingDetail {
@@ -85,9 +88,10 @@ type processStepStatusType =
   | "waiting";
 
 export interface ClaimAttempts {
+  claimRound?: string;
   date: string;
-  claimAmount: number;
-  claimId: number;
+  claimAmount: string;
+  claimId: string;
   rejectionCode: string;
 }
 export interface ClaimSubmission {
@@ -101,9 +105,10 @@ export interface ClaimSubmission {
 }
 
 export interface DenialAttempts {
-  claimId: number;
-  denialId: number;
-  amount: number;
+  claimRound: string
+  claimId: string;
+  denialId: string;
+  denialAmount: string;
   denialCode: string;
 }
 
@@ -141,29 +146,29 @@ export interface Attachment {
 }
 
 export interface ICDCode {
-  id: string;
   code: string;
   confidence?: number;
   isApproved?: boolean;
-  desc?: string;
+  description?: string;
   suggestion?: string
   suggestionCode?:string
 }
-
-export interface InsuranDetials {
+ export interface InsuranDetials {
   insuranceProvider: string;
   imageUrl: string;
   policyNumber: string;
+  insurance?: string;
+  number?: string
+  network?: string
+  coverage?: string
 }
 export interface EligibilityCheck {
-  status: StatusType;
-  insuranDetials: InsuranDetials;
-  details: MedicalCodingDetail[];
-  steps: ProcessSteps[]
-  isError: boolean;
-  errorDetails? :{
-    errorType: ErrorType,
-  }
+  status: StatusType;                  // ✅ "waiting"
+  insuranDetials: InsuranDetials;      // ✅ object with provider, policy, etc.
+  details: MedicalCodingDetail[];      // ✅ array of label/value pairs
+  steps: ProcessSteps[];               // ✅ array of process steps
+  isError: boolean;                      // (optional, stored inside insuranDetials)
+  errorDetails?: { errorType: ErrorType } // (optional, not included)
 }
 
 // Main User Persona Interface that integrates all the sections
@@ -188,6 +193,7 @@ export interface PatientPersona {
   markdown?: string; // Markdown content for the patient notes
   icdCodes: ICDCode[];
   cptCode: ICDCode[];
+  drugCode: ICDCode[];
   ProcessStepsStatus?: ProcessSteps[];
   postPaymentStatus?: ProcessSteps[];
   dentalManagementStatus?: ProcessSteps[];
