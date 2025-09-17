@@ -989,7 +989,7 @@ export const patientPersona: PatientPersona[] = [
       "isError": false
     },
     "denialManagement": {
-      "status": "inprogress",
+      "status": "waiting",
       "steps": [
         {
           "id": "1",
