@@ -8,7 +8,7 @@ import {
   SelectionChangedEvent,
 } from "ag-grid-community";
 import { AgGridReact } from "ag-grid-react";
-import { useCallback, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import AlertModal from "./AlertModal";
 import { changeWriteoffStatus, escalate } from "@/store/slice/Writeoff";
@@ -40,10 +40,12 @@ export const WriteoffTable: React.FC = () => {
   ]);
 
   const cancelRef = useRef(false);
+  const [isProcessing, setisProcessing] = useState<boolean>(false)
 
+  const isCompleted = writeoffEscalate.every(i => i.status === 'completed')
   const markStepsAsComplete = async () => {
     cancelRef.current = false; // reset cancel flag before starting
-
+setisProcessing(true)
     for (let i = 0; i < writeoffEscalate.length; i++) {
       // break early if cancel button clicked
       if (cancelRef.current) break;
@@ -59,6 +61,12 @@ export const WriteoffTable: React.FC = () => {
       );
     }
   };
+
+  useEffect(()=> {
+    if(isCompleted) {
+      setisProcessing(false)
+    }
+  }, [isCompleted])
 
   const stopSteps = () => {
     cancelRef.current = true; // tell loop to stop
@@ -80,6 +88,17 @@ export const WriteoffTable: React.FC = () => {
     setSelectedRows(selectedData);
   }, []);
 
+  useEffect(() => {
+    const element = document.querySelector('.errorclass')
+    if(!element?.classList.contains('hidden')) {
+       const isdone = writeList.every(e => e.status == 'Accepted');
+       if(isdone) {
+        element?.classList.add('hidden')
+        
+        document.querySelector('.border-error')?.classList.remove('border-error')
+       }
+    }
+  })
   const [modal, setModal] = useState("");
   const dispatch = useDispatch();
   return (
@@ -154,7 +173,7 @@ export const WriteoffTable: React.FC = () => {
         rowHeight={60}
       />
       </div>
-      <div className="text-base-destructive text-right pt-2 error-text hidden">Action Required: Please accept or escalate the write-off before proceeding. This step is mandatory to finalize the process.</div>
+      <div className="text-base-destructive text-right pt-2 error-text hidden errorclass">Action Required: Please accept or escalate the write-off before proceeding. This step is mandatory to finalize the process.</div>
       <div className="flex justify-end my-10">
         <button
           className={` text-white px-6 py-2 rounded-lg  ${selectedRows.length > 0 ? "bg-green" : "bg-[#F5F2EF]"
@@ -226,7 +245,8 @@ export const WriteoffTable: React.FC = () => {
               Cancel
             </button>
             <button
-              className="rounded-xl px-5 py-2 text-white bg-green"
+              className={`rounded-xl px-5 py-2 text-white ${isProcessing ? 'bg-gray-300': 'bg-green '}`}
+              disabled={isProcessing}
               onClick={() => {
                 selectedRows?.forEach(item => dispatch(escalate(item.id)))
 

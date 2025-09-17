@@ -151,7 +151,7 @@ export default function DashboardPage() {
     {
       id: "drug",
       label: "DRUG",
-      data: (
+      data: () => (
         <ICDCodes
           id="drug"
           ref={drugref}
@@ -267,7 +267,6 @@ export default function DashboardPage() {
     denialManagement,
     postPayment, icdCodes, cptCode, drugCode, information, medicalReports } =
     patients;
-  console.log('patients', patients)
   const { isError, errorDetails, step } = checkHealthWorkflowErrors({
     eligibilityCheck,
     priorAuthorization,
@@ -276,7 +275,6 @@ export default function DashboardPage() {
     denialManagement,
     postPayment
   });
-  console.log(isError)
   const [contactSteps, setContactSteps] = useState([
     { id: "1", label: "Calculate Patient Responsibility", status: "pending" },
     { id: "2", label: "Send to Patient", status: "pending" },
@@ -392,8 +390,8 @@ export default function DashboardPage() {
                         ];
 
                         for (const codeType of codeTypes) {
-                          const hasError = codeType?.data.some(code => code.isApproved === false);
-                          if (hasError) {
+                          const hasError = codeType?.data.every(code => code.status == 'Accepted');
+                           if (!hasError) {
                             markdownRef.current?.scrollIntoView({
                               behavior: "smooth",
                               block: "center",
@@ -402,7 +400,7 @@ export default function DashboardPage() {
                             soapRef.current?.setActiveTab(codeType.type);
 
                             codeType.ref.current?.querySelectorAll(".not-acceptede").forEach((el) => {
-                              el.setAttribute('style', 'border: 1px solid');
+                              el.classList.add('border-error');
                             });
 
                             codeType.ref.current

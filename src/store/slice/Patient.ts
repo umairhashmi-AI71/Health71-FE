@@ -45,7 +45,7 @@ export const patientSlice = createSlice({
           }
         }
 
-         if (type == "cpt") {
+        if (type == "cpt") {
           const code = patient.cptCode.find((i) => i.code === icdId);
 
           if (code) {
@@ -78,7 +78,7 @@ export const patientSlice = createSlice({
             return;
           case "cpt":
             patient.cptCode.push(newICD);
-            case "drug":
+          case "drug":
             patient.drugCode.push(newICD);
             return;
         }
@@ -95,7 +95,6 @@ export const patientSlice = createSlice({
       const { patientId, icdId, type } = action.payload;
       const patient = state.find((p) => p.id === patientId);
       if (patient) {
-        console.log(icdId, type)
         switch (type) {
           case "icd":
             patient.icdCodes = patient.icdCodes.filter((i) => i.code !== icdId);
@@ -109,7 +108,7 @@ export const patientSlice = createSlice({
         }
       }
     },
-     updatePriorAuthError(
+    updatePriorAuthError(
       state,
       action: PayloadAction<{
         patientId: string;
@@ -134,17 +133,53 @@ export const patientSlice = createSlice({
       }>
     ) {
       const { patientId, title } = action.payload;
-  const patient = state.find((p) => p.id === patientId);
+      const patient = state.find((p) => p.id === patientId);
 
-  if (patient && patient.postPayment.steps) {
-    const step = patient.postPayment.steps.find(
-      (s) => s.label === title
-    );
+      if (patient && patient.postPayment.steps) {
+        const step = patient.postPayment.steps.find(
+          (s) => s.label === title
+        );
 
-    if (step) {
-      step.status = "completed";
-    }
-    }},
+        if (step) {
+          step.status = "completed";
+        }
+      }
+    },
+    changeCodeStatus(
+      state,
+      action: PayloadAction<{
+        patientId: string;
+        code: string;
+        status: string,
+        type: string,
+      }>
+    ) {
+
+      const { patientId, code, status, type } = action.payload;
+      const patient = state.find((p) => p.id === patientId);
+      
+
+      if(type == 'icd') {
+        const  step = patient?.icdCodes.find((s) => s.code === code);
+        if (step) {
+        step.status = status;
+      }
+      }
+      if(type == 'cpt') {
+        const  step = patient?.cptCode.find((s) => s.code === code);
+        if (step) {
+        step.status = status;
+      }
+      }
+       if(type == 'drug') {
+        const  step = patient?.drugCode.find((s) => s.code === code);
+        if (step) {
+        step.status = status;
+      }
+      }
+      
+      
+    },
     changeStatus(
       state,
       action: PayloadAction<{
@@ -152,14 +187,15 @@ export const patientSlice = createSlice({
       }>
     ) {
       const { patientId } = action.payload;
-  const patient = state.find((p) => p.id === patientId);
+      const patient = state.find((p) => p.id === patientId);
 
-  if (patient && patient.postPayment) {
-    
-    if (patient.postPayment) {
-      patient.postPayment.status = "done";
+      if (patient && patient.postPayment) {
+
+        if (patient.postPayment) {
+          patient.postPayment.status = "done";
+        }
+      }
     }
-    }}
   },
 });
 
@@ -172,7 +208,8 @@ export const {
   deletePatientICDCode,
   updatePriorAuthError,
   updatePaymentStep,
-changeStatus
+  changeStatus,
+  changeCodeStatus
 } = patientSlice.actions;
 
 export default patientSlice.reducer;

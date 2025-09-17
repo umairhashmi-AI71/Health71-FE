@@ -63,7 +63,6 @@ export const PaymentDetailsTable: React.FC<PaymentDetailsTable> = ({
             state.paymenttableData
     );
 
-    console.log(partialTable)
 
 
     const underpaymentaction = (params: ICellRendererParams) => {
@@ -495,7 +494,6 @@ export const PaymentDetailsTable: React.FC<PaymentDetailsTable> = ({
                             onClick={() => {
                                 setModal("");
                                 selectedRows.forEach((row) => {
-                                    console.log(row)
                                     dispatch(updateStatus({id: row.id || 0, status : 'Accepted' }));
                                 });
                             }}

@@ -43,9 +43,11 @@ const persona3mark = `
  - BP 126/80 mmHg, 
  - HR 76 bpm, afebrile.
 ### **Physical Examination:**
-- Right knee shows mild effusion, crepitus on flexion, tenderness along medial joint line. ROM slightly decreased due to pain.
-**Assessment**: Chronic osteoarthritis of right knee (ICD-10: M17.11).
-**Plan:** Continue conservative management (RICE), prescribe naproxen 500 mg PO BID x 7 days, refer to physiotherapy, update CPT code to 99213, resubmit claim."
+- Right knee shows mild effusion, crepitus on flexion, tenderness along medial joint line. ROM slightly decreased due to pain.   
+**Assessment**:   
+Chronic osteoarthritis of right knee (ICD-10: M17.11).   
+**Plan:**   
+Continue conservative management (RICE), prescribe naproxen 500 mg PO BID x 7 days, refer to physiotherapy, update CPT code to 99213, resubmit claim."   
 `
 
 const markdown = `### <u class="markdown-heading">**Subjective**</u>
@@ -1037,27 +1039,33 @@ export const patientPersona: PatientPersona[] = [
     },
     "icdCodes": [
       {
-        isApproved: false,
         "code": "M17.11",
-        "description": "Unilateral primary osteoarthritis, right knee"
+        "description": "Unilateral primary osteoarthritis, right knee",
+        "status": ''
       }
     ],
     "cptCode": [
       {
         "code": "99203",
-        isApproved: false,
-        "description": "Office/outpatient visit, new patient, low complexity"
+        "newCode": "99213",
+        status: "Changed",
+        "description": "Confidence 95% - Patient is established, documentation shows follow-up with low complexity MDM. Updated code aligns with payer rules and avoids denial."
       },
       {
-        "code": "99213",
-        isApproved: false,
-        "description": "Office/outpatient visit, established patient, low complexity"
+        "code": "73562",
+        status: 'Deleted',
+        "description": "Confidence 80% - Duplicate knee X-ray within 30 days. Removal prevents automatic denial; attach documentation if repeat imaging is justified."
+      },
+      {
+        "code": "85027",
+        status: 'Accepted',
+        "description": "Confidence 98% - CBC retained. Clinical notes show knee swelling with suspected inflammation. Lab test supports ruling out infection or inflammatory arthritis"
       }
     ],
     "drugCode": [
       {
         "code": "98765",
-        isApproved: false,
+        status: '',
         "description": "Naproxen 500mg tablets, oral, BID x 7 days"
       }
     ],

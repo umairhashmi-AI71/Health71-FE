@@ -147,6 +147,8 @@ export interface Attachment {
 
 export interface ICDCode {
   code: string;
+  newCode?: string;
+  status: string;
   confidence?: number;
   isApproved?: boolean;
   description?: string;

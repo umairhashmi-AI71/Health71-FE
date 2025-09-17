@@ -1,8 +1,8 @@
 import React, { forwardRef, useImperativeHandle, useMemo, useRef, useState } from "react";
-import { Plus, Trash2, Check, X, Square, SquarePen, Pill } from "lucide-react";
+import { Plus, Trash2, Check, X, Square, SquarePen, Pill, Undo2 } from "lucide-react";
 import { ICDCode } from "@/types/patient";
 import { useDispatch } from "react-redux";
-import { updatePatientICDCode, addPatientICDCode, deletePatientICDCode } from "@/store/slice/Patient";
+import { updatePatientICDCode, addPatientICDCode, deletePatientICDCode, changeCodeStatus } from "@/store/slice/Patient";
 
 interface ICDCodesProps {
   initialCodes?: ICDCode[];
@@ -42,7 +42,7 @@ const ICDCodes = forwardRef<HTMLDivElement, ICDCodesProps>(
       if (newCode.trim()) {
         const newICD: ICDCode = {
           code: newCode.toUpperCase(),
-          isApproved: false,
+          status: '',
           description:
             id === "cpt"
               ? "Diagnostic Radiology Procedures of the Lower Extremities"
@@ -69,15 +69,26 @@ const ICDCodes = forwardRef<HTMLDivElement, ICDCodesProps>(
       }))
     };
 
-    const handleApproveCode = (rowid: string) => {
+    const handleApproveCode = (rowid: string, status: string) => {
       if (removeHighlight) {
         removeHighlight(rowid);
       }
 
-      dispatch(updatePatientICDCode({
+       
+      dispatch(changeCodeStatus({
         patientId: mrn,
-        icdId: rowid,
-        updatedICD: { isApproved: !codes.find(e => e.code == rowid)?.isApproved },
+        code: rowid,
+        status: status,
+        type: id
+      }))
+    };
+
+    const handleUndo =  (rowid: string) => {
+      
+      dispatch(changeCodeStatus({
+        patientId: mrn,
+        code: rowid,
+        status: '',
         type: id
       }))
     };
@@ -115,23 +126,25 @@ const ICDCodes = forwardRef<HTMLDivElement, ICDCodesProps>(
         {/* ICD Codes List */}
         <div className="space-y-4 "  ref={localRef}>
           {codes.map((icdCode, index) => (
-            <div key={index} className={`bg-basecard p-4 rounded-lg ${icdCode.isApproved ? "accepted" : 'not-acceptede'}`}>
+            <div key={index} className={`bg-basecard p-4 rounded-lg ${icdCode.status == 'Accepted' ? "accepted" : 'not-acceptede'}`}>
               <div className="flex items-center space-x-2 mb-3">
                 {/* Code Input/Display */}
                 <div
-                  className={`flex-1 px-4 py-3 border rounded-lg bg-white ${icdCode.isApproved
+                  className={`flex-1 px-4 py-3 border rounded-lg bg-white ${icdCode.status == 'Accepted'
                       ? "bg-base-muted border-base"
                       : "border-base"
                     }`}
                 >
-                  <span className="">{icdCode.suggestionCode || icdCode.code}</span>
+                  {icdCode.status != 'Deleted' && <span className="" >{icdCode.newCode || icdCode.code}</span>}
+                  {icdCode.status == 'Deleted' && <span className="" style={{ textDecoration: "line-through" }}>{icdCode.newCode || icdCode.code}</span>}
+                  
                 </div>
 
                 {/* Action Buttons */}
 
                 <button
-                  onClick={() => handleApproveCode(icdCode.code)}
-                  className={`p-3 border border-sidebar bg-white rounded-lg transition-colors ${icdCode.isApproved ? "" : "hidden"
+                  onClick={() => handleApproveCode(icdCode.code, '')}
+                  className={`p-3 border border-sidebar bg-white rounded-lg transition-colors ${icdCode.status == 'Accepted' ? "" : "hidden"
                     }`}
                 >
                   <SquarePen className="w-5 h-5 " />
@@ -139,19 +152,26 @@ const ICDCodes = forwardRef<HTMLDivElement, ICDCodesProps>(
 
                 <button
                   onClick={() => handleDeleteCode(icdCode.code)}
-                  className={`p-3 bg-base-agent-10 rounded-lg transition-colors ${icdCode.isApproved ? "hidden" : ""
+                  className={`p-3 bg-base-agent-10 rounded-lg transition-colors ${icdCode.status == 'Accepted' ? "hidden" : ""
                     }`}
                 >
                   <Trash2 className="w-5 h-5 text-base-destructive" />
                 </button>
 
-                <button
-                  onClick={() => handleApproveCode(icdCode.code)}
-                  className={`p-3 rounded-lg transition-colors ${icdCode.isApproved ? "hidden" : "bg-primary-foreground"
+               {icdCode.status != 'Deleted' &&  <button
+                  onClick={() => handleApproveCode(icdCode.code, 'Accepted')}
+                  className={`p-3 rounded-lg transition-colors ${icdCode.status == 'Accepted' ? "hidden" : "bg-primary-foreground"
                     }`}
                 >
                   <Check className="w-5 h-5 text-green " />
-                </button>
+                </button>}
+
+                {icdCode.status == 'Deleted' && <button
+                  onClick={() => handleUndo(icdCode.code)}
+                  className={`p-3 rounded-lg transition-colors bg-primary-foreground`}
+                >
+                  <Undo2 className="w-5 h-5 text-green " />
+                </button>}
               </div>
               {!icdCode.suggestion && <div
                 className={`text-deep-ocean text-sm ${id == "icd" ? "cursor-pointer" : ""
@@ -162,7 +182,9 @@ const ICDCodes = forwardRef<HTMLDivElement, ICDCodesProps>(
                   }
                 }}
               >
+                {icdCode.status == 'Changed' ? <p className="mb-1">Changed from {icdCode.code} to {icdCode.newCode}</p>: ''}
                 <p>{icdCode.description}</p>
+
 
                 {icdCode.confidence && (
                   <p className="mt-1">Confidence Score: {icdCode.confidence}</p>
@@ -232,3 +254,4 @@ const ICDCodes = forwardRef<HTMLDivElement, ICDCodesProps>(
 
   
 export default ICDCodes; 
+ 
