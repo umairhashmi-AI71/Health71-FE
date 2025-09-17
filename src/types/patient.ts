@@ -172,6 +172,12 @@ export interface EligibilityCheck {
 }
 
 // Main User Persona Interface that integrates all the sections
+
+export interface Information {
+  infoType: string;
+  infoCode: string,
+  infoMessage: string
+}
 export interface PatientPersona {
   id: string;
   profileCreatedDate: string;
@@ -189,7 +195,9 @@ export interface PatientPersona {
   claimSubmission: ClaimSubmission;
   denialManagement: DenialManagement;
   postPayment: PostPayment;
+  medicalReports? :Attachment[];
   attachments?: Attachment[];
+  information?:Information;
   markdown?: string; // Markdown content for the patient notes
   icdCodes: ICDCode[];
   cptCode: ICDCode[];

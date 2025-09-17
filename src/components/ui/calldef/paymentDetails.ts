@@ -30,7 +30,7 @@ export const underPaymentData : PaymentDetailsSchema[] = [
 export const partialapprovalData : PaymentDetailsSchema[] = [
   {
     id: 1,
-    service: "MRI – Left Knee",
+    service: "MRI – Right Knee",
     cptCode: "73721",
     amount: "586",
     status: "Accepted",
@@ -39,20 +39,20 @@ export const partialapprovalData : PaymentDetailsSchema[] = [
   },
   {
     id: 2,
-    service: "CT",
-    cptCode: "73721",
+    service: "CT Scan",
+    cptCode: "70450",
     amount: "586",
     status: "Recoverable",
-    reason: 'Code Mismatched',
-    suggestion: "-"
+    reason: 'Code mismatch',
+    suggestion: "Update to 70452 (with contrast) based on clinical context"
   },
   {
     id: 3,
     service: "CBC (Complete Blood Count)",
-    cptCode: "73721",
+    cptCode: "85027",
     amount: "586",
-    status: "Recoverable",
-    reason: 'Medical Necessity',
+    status: "Accepted",
+    reason: '-',
     suggestion: "-"
   },
 ];

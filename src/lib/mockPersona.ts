@@ -25,6 +25,29 @@ export const mockFetchSuccessResponse = new Response(
   }
 );
 
+const persona3mark = `
+### <u class="markdown-heading">**Subjective**</u>
+
+### **Chief Complaint (CC):**
+ Right knee pain, persistent and worsening over the last 6 weeks.
+
+### **History of Present Illness (HPI):**
+37-year-old male reports gradually worsening pain and stiffness in the right knee, worse in the morning and after long periods of standing. Pain rated 7/10. Denies trauma or recent injury. Reports swelling and mild clicking sound when walking upstairs. OTC ibuprofen provides partial relief.
+### **Review of Systems (ROS):**
+- **Musculoskeletal**: Positive for pain, swelling, stiffness.
+- **General**: Denies fever, weight loss.
+- **Neurological**: No numbness or tingling.
+- **Cardiovascular**: No chest pain.
+
+### **Vital Signs:**
+ - BP 126/80 mmHg, 
+ - HR 76 bpm, afebrile.
+### **Physical Examination:**
+- Right knee shows mild effusion, crepitus on flexion, tenderness along medial joint line. ROM slightly decreased due to pain.
+**Assessment**: Chronic osteoarthritis of right knee (ICD-10: M17.11).
+**Plan:** Continue conservative management (RICE), prescribe naproxen 500 mg PO BID x 7 days, refer to physiotherapy, update CPT code to 99213, resubmit claim."
+`
+
 const markdown = `### <u class="markdown-heading">**Subjective**</u>
 
 ### **Chief Complaint (CC):**
@@ -100,6 +123,11 @@ export const patientPersona: PatientPersona[] = [
       "language": "Arabic",
       "phoneNumber": 971501234567,
       "email": "layla.alfardan@example.com"
+    },
+    "information": {
+      infoType: 'Technical Error',
+      "infoCode": "T500",
+      "infoMessage": "Submission not reaching payer due to timeout. Retrying connection..."
     },
     "markdown": "-",
     "eligibilityCheck": {
@@ -436,6 +464,11 @@ export const patientPersona: PatientPersona[] = [
       "phoneNumber": 971502223344,
       "email": "fatima.almansoori@example.com"
     },
+    "information": {
+      "infoType" : "Auto-Resubmission",
+      "infoCode": "AI-RESUB-001",
+      "infoMessage": "Claim rejected due to missing Rendering Provider Specialty Code. Clara agent fetched specialty code from provider master, updated payload, and resubmitted automatically. Claim approved on resubmission. Validation engine updated with new schema rule."
+    },
     "markdown": "-",
       "eligibilityCheck": {
         "status": "covered",
@@ -552,8 +585,8 @@ export const patientPersona: PatientPersona[] = [
           "value": "I10"
         },
         {
-          "label": "Department",
-          "value": "Cardiology"
+          "label": "Prior AuthID",
+          "value": "PA-2025-053"
         },
         {
           "label": "Drug codes",
@@ -585,7 +618,7 @@ export const patientPersona: PatientPersona[] = [
       "isError": false
     },
     "claimSubmission": {
-      "status": "waiting",
+      "status": "done",
       "steps": [
         {
           "id": "1",
@@ -673,7 +706,7 @@ export const patientPersona: PatientPersona[] = [
         {
           "id": "1",
           "label": "Payment Retrieved",
-          "status": "completed"
+          "status": "pending"
         },
         {
           "id": "2",
@@ -748,7 +781,12 @@ export const patientPersona: PatientPersona[] = [
       "phoneNumber": 971502345678,
       "email": "mohammed.bkhalid@example.com"
     },
-    "markdown": "Soap Note Subjective:\r\nChief Complaint: Right knee pain, persistent and worsening over the last 6 weeks.\r\nHistory of Present Illness (HPI): 37-year-old male reports gradually worsening pain and stiffness in the right knee, worse in the morning and after long periods of standing. Pain rated 7/10. Denies trauma or recent injury. Reports swelling and mild clicking sound when walking upstairs. OTC ibuprofen provides partial relief.\r\nReview of Systems (ROS): Musculoskeletal: Positive for pain, swelling, stiffness. General: Denies fever, weight loss. Neurological: No numbness or tingling. Cardiovascular: No chest pain.\r\nObjective:\r\nVital Signs: BP 126/80 mmHg, HR 76 bpm, afebrile.\r\nPhysical Exam: Right knee shows mild effusion, crepitus on flexion, tenderness along medial joint line. ROM slightly decreased due to pain.\r\nAssessment: Chronic osteoarthritis of right knee (ICD-10: M17.11).\r\nPlan: Continue conservative management (RICE), prescribe naproxen 500 mg PO BID x 7 days, refer to physiotherapy, update CPT code to 99213, resubmit claim.",
+    "information": {
+      infoType: "Code Suggestion",
+      "infoCode": "CMS-110",
+      "infoMessage": "Claim denied due to coding mismatch. Resubmitting with updated CPT and ICD codes."
+    },
+    "markdown": persona3mark,
     "eligibilityCheck": {
       "status": "covered",
       "insuranDetials": {
@@ -867,8 +905,8 @@ export const patientPersona: PatientPersona[] = [
           "value": "M17.11"
         },
          {
-          "label": "Department",
-          "value": "Rheumatology"
+          "label": "Prior AuthID",
+          "value": "PA-2025-053"
         },
         {
           "label": "Drug codes",
@@ -900,7 +938,7 @@ export const patientPersona: PatientPersona[] = [
       "isError": false
     },
     "claimSubmission": {
-      "status": "inprogress",
+      "status": "done",
       "steps": [
         {
           "id": "1",
@@ -949,7 +987,7 @@ export const patientPersona: PatientPersona[] = [
       "isError": false
     },
     "denialManagement": {
-      "status": "done",
+      "status": "inprogress",
       "steps": [
         {
           "id": "1",
@@ -1104,6 +1142,11 @@ export const patientPersona: PatientPersona[] = [
       "phoneNumber": 97155467830,
       "email": "sara.nuaimi@gmail.com"
     },
+     "information": {
+      infoType: "Medical Necessity",
+      "infoCode": "MN-REQ-001",
+      "infoMessage": "On 2025-09-08, at 12:12 pm Dr. Al Shamsi was contacted for the third time to submit medical-necessity documentation to support the patient’s appeal and resolve the denial."
+    },
     "markdown": "-",
     "eligibilityCheck": {
       "status": "covered",
@@ -1215,8 +1258,16 @@ export const patientPersona: PatientPersona[] = [
           "value": "99213"
         },
         {
+          "label": "Prior AuthID",
+          "value": "PA-2025-024"
+        },
+        {
           "label": "ICD codes",
           "value": "M23.2"
+        },
+        {
+          "label": "Physcian",
+          "value": "Dr. Al Shamsi"
         },
         {
           "label": "Drug codes",
@@ -1392,6 +1443,11 @@ export const patientPersona: PatientPersona[] = [
       "agentSuggestion": "Partial claim approved. Remaining services denied for insufficient documentation. Suggest write-off per policy.",
       "coT": "Partial claim approved but some services denied for insufficient documentation. Agent recommended write-off as per payer guidelines."
     },
+    "information": {
+      infoType: "Write-Off",
+      "infoCode": "WR-105",
+      "infoMessage": "Partial claim approved. Remaining services denied for insufficient documentation. Suggest write-off per policy."
+    },
     "profile": {
       "profilePhoto": "/avatar.png",
       "age": 39,
@@ -1516,8 +1572,16 @@ export const patientPersona: PatientPersona[] = [
           "value": "73721, 70450, 85027, 99213"
         },
         {
+          "label": "Prior AuthID",
+          "value": "PA-2025-076"
+        },
+        {
           "label": "ICD codes",
           "value": "M54.5"
+        },
+         {
+          "label": "Physcian",
+          "value": "Dr. Mariam Al Hosani"
         },
         {
           "label": "Drug codes",
@@ -1549,7 +1613,7 @@ export const patientPersona: PatientPersona[] = [
       "isError": false
     },
     "claimSubmission": {
-      "status": "inprogress",
+      "status": "done",
       "steps": [
         {
           "id": "1",
@@ -1732,6 +1796,11 @@ export const patientPersona: PatientPersona[] = [
       "language": "Arabic",
       "phoneNumber": 971507654321,
       "email": "leila.almansouri@example.com"
+    },
+    "information": {
+      infoType: "Appeal Letter",
+      "infoCode": "APL-003",
+      "infoMessage": "Appeal letter generated and submitted to payer for review of medical necessity."
     },
     "markdown": "-",
     "eligibilityCheck": {
@@ -2019,6 +2088,28 @@ export const patientPersona: PatientPersona[] = [
         "errorType": "costtopatient"
       }
     },
+    medicalReports: [
+{
+        "fileName": "Appeal Letter.pdf",
+        "fileSize": "200 KB",
+        "ecgImageUrl": "/sob.pdf"
+      },
+      {
+        "fileName": "Clinical Notes.pdf",
+        "fileSize": "200 KB",
+        "ecgImageUrl": "/sob.pdf"
+      },
+      {
+        "fileName": "Radiology Request & MRI Report.pdf",
+        "fileSize": "200 KB",
+        "ecgImageUrl": "/sob.pdf"
+      },
+      {
+        "fileName": "Pre-Auth Approval Document.pdf",
+        "fileSize": "200 KB",
+        "ecgImageUrl": "/sob.pdf"
+      },
+    ],
     "attachments": [
       {
         "fileName": "SOB.pdf",
@@ -2066,6 +2157,11 @@ export const patientPersona: PatientPersona[] = [
       "language": "Arabic",
       "phoneNumber": 971503334455,
       "email": "noora.alhashmi@example.com"
+    },
+    "information": {
+      infoType:"Over-Automation Error",
+      "infoCode": "OA-ERR-001",
+      "infoMessage": "Claim was denied due to incorrect automated payer rule application. Dee flagged the issue, HITL corrected the rule logic, and the claim was resubmitted and approved. System updated to prevent recurrence."
     },
     "markdown": "-",
     "eligibilityCheck": {
@@ -2220,7 +2316,7 @@ export const patientPersona: PatientPersona[] = [
       "isError": false
     },
     "claimSubmission": {
-      "status": "inprogress",
+      "status": "done",
       "steps": [
         {
           "id": "1",
@@ -2307,7 +2403,7 @@ export const patientPersona: PatientPersona[] = [
     "cptCode": [],
     "drugCode": [],
     "postPayment": {
-      "status": "inprogress",
+      "status": "waiting",
       "steps": [
         {
           "id": "1",
@@ -2388,6 +2484,11 @@ export const patientPersona: PatientPersona[] = [
       "language": "Arabic",
       "phoneNumber": 971505443322,
       "email": "khalid.alameri@example.com"
+    },
+    "information": {
+      infoType:"Code Correction",
+      "infoCode": "CC-001",
+      "infoMessage": "Partial approval received. Agent flagged CT code mismatch, retrieved correct CPT from codebook, re-ran medical coding, and resubmitted claim. Claim approved on second round."
     },
     "markdown": "Chief Complaint: Right knee pain and limited mobility for 3 weeks, worsening with activity.\r\n\r\nHistory of Present Illness: 35-year-old male presents with progressive right knee pain, swelling, and stiffness for 3 weeks. Pain is constant (7/10), worse with weight-bearing and stairs. No trauma history. Minimal relief with OTC analgesics. Reports occasional \"locking\" sensation and difficulty with extension.\r\n\r\nReview of Systems:\r\n- Musculoskeletal: Pain, swelling, limited ROM right knee.\r\n- Constitutional: No fever, weight loss.\r\n- Neurological: No weakness or paresthesia.\r\n\r\nObjective: \r\nVitals stable. Right knee: swelling, mild effusion, medial joint line tenderness, positive McMurray’s sign. No erythema. ROM mildly restricted.\r\n\r\nAssessment:\r\nM25.561 – Pain in right knee, likely medial meniscus tear. Imaging required to exclude fracture, infection, or tumor.\r\n\r\nPlan:\r\n- MRI (73721) right knee\r\n- CBC (85027) to rule out infection\r\n- CT scan — updated to contrast-enhanced (70452) based on concern for occult bone lesion\r\n- Analgesics PRN",
     "eligibilityCheck": {
@@ -2539,7 +2640,7 @@ export const patientPersona: PatientPersona[] = [
       "isError": false
     },
     "claimSubmission": {
-      "status": "inprogress",
+      "status": "done",
       "steps": [
         {
           "id": "1",

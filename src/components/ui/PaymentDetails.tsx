@@ -32,7 +32,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { updatePriorAuthError } from "@/store/slice/Patient";
 import { useRouter } from "next/navigation";
 import { RootState } from "@/store";
-import { deletetableData } from "@/store/slice/Patienttable";
+import { updateStatus } from "@/store/slice/Patienttable";
 
 interface PaymentDetailsTable {
     type: string;
@@ -117,8 +117,8 @@ export const PaymentDetailsTable: React.FC<PaymentDetailsTable> = ({
     };
 
     const partialApprovalAction = (params: ICellRendererParams) => {
-        const { reason } = params.data as { reason: string };
-        if (reason != '-') {
+        const { reason, status } = params.data as { reason: string, status: string };
+        if (status != 'Accepted') {
             return (
 
                 <div className="flex justify-between items-center w-15">
@@ -143,7 +143,7 @@ export const PaymentDetailsTable: React.FC<PaymentDetailsTable> = ({
                         }}>
                         <Search className="h-4 w-4" strokeWidth={1.5} />
                     </button>
-                    <button
+                    {reason !== 'Medical Necessity' && <button
                         className={`cursor-pointer `}
                         onClick={() => {
                             setModal("acceptcodesuggetion");
@@ -151,7 +151,7 @@ export const PaymentDetailsTable: React.FC<PaymentDetailsTable> = ({
                         }}
                     >
                         <Check className="h-4 w-4" strokeWidth={1.5} />
-                    </button>
+                    </button>}
                 </div>
             );
         }
@@ -269,7 +269,7 @@ export const PaymentDetailsTable: React.FC<PaymentDetailsTable> = ({
     return (
         <>
             <div className="ag-theme-alpine">
-                <AgGridReact
+                <div className="ag-table rounded-lg border-base-destructive"><AgGridReact
                     // theme={themeQuartz}
                     rowData={getRows()}
                     columnDefs={getColDef()}
@@ -287,7 +287,8 @@ export const PaymentDetailsTable: React.FC<PaymentDetailsTable> = ({
                     rowHeight={60}
                 // onGridReady={onGridReady}
                 />
-                 
+                 </div>
+                 <div className="text-base-destructive text-right pt-2 error-text hidden partial-approval">Action Required: The codes must be corrected or removed to continue.</div>
             </div>
             {type == 'partialapproval' && (
                  <div className="flex justify-end my-10">
@@ -495,7 +496,7 @@ export const PaymentDetailsTable: React.FC<PaymentDetailsTable> = ({
                                 setModal("");
                                 selectedRows.forEach((row) => {
                                     console.log(row)
-                                    dispatch(deletetableData(row.id || 0));
+                                    dispatch(updateStatus({id: row.id || 0, status : 'Accepted' }));
                                 });
                             }}
                         >

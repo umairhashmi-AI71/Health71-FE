@@ -19,11 +19,16 @@ export const patientTable = createSlice({
   // `createSlice` will infer the state type from the `initialState` argument
   initialState,
   reducers: {
-   deletetableData: (state, action: PayloadAction<number>) =>
-      state.filter((p) => p.id !== action.payload),
+   updateStatus: (state, action: PayloadAction<ChangeStatusPayload>) => {
+       const payment = state.find(p => p.id === action.payload.id);
+      if (payment) {
+        payment.status = action.payload.status;
+      }
+   }
+     
   },
 })
 
-export const { deletetableData } = patientTable.actions
+export const { updateStatus } = patientTable.actions
 
 export default patientTable.reducer

@@ -64,12 +64,13 @@ import AppealLetter from "@/components/AppealLetter";
 import rehypeRaw from "rehype-raw";
 import Markdown from "react-markdown";
 import PostPaymentCard from "@/components/PostPaymentCard";
-import { ErrorType } from "@/types/error";
+import { ErrorCode, ErrorType } from "@/types/error";
 import { PaymentDetailsTable } from "@/components/ui/PaymentDetails";
 import {
   checkHealthWorkflowErrors,
   contactMethods,
   writeofcolumn,
+  WriteofcolumnType,
 } from "@/lib/utils";
 import InfoCard from "@/components/ui/InfoCard";
 import { WriteoffTable } from "@/components/WriteoffTable";
@@ -81,6 +82,9 @@ export default function DashboardPage() {
   const icdRef = useRef<HTMLDivElement>(null);
   const cptref = useRef<HTMLDivElement>(null);
   const drugref = useRef<HTMLDivElement>(null);
+  const writeoffref = useRef<HTMLDivElement>(null);
+  const paymentSectionRef = useRef<HTMLDivElement>(null);
+
   const dispatch = useDispatch();
   const patients: PatientPersona = useSelector(
     (state: RootState) =>
@@ -100,7 +104,7 @@ export default function DashboardPage() {
       label: "SOAP Note",
       data: patients?.markdown as string,
       icon: NotepadText,
-      className: "text-muted h-200",
+      className: "text-muted h-120",
     },
     {
       id: "attachments",
@@ -160,8 +164,8 @@ export default function DashboardPage() {
     },
   ];
 
-  const appealsLetter = [];
- 
+  
+
 
   const [modal, setModal] = React.useState<string>();
   const [isSubmitted, setIsSubmitted] = React.useState<boolean>(false);
@@ -257,31 +261,35 @@ export default function DashboardPage() {
   }
 
   const { eligibilityCheck,
-      priorAuthorization,
-      medicalCoding,
-      claimSubmission,
-      denialManagement,
-      postPayment, icdCodes, cptCode, drugCode } =
+    priorAuthorization,
+    medicalCoding,
+    claimSubmission,
+    denialManagement,
+    postPayment, icdCodes, cptCode, drugCode, information, medicalReports } =
     patients;
-    console.log('patients', patients)
-  const { isError, errorDetails, step } = checkHealthWorkflowErrors({eligibilityCheck,
-      priorAuthorization,
-      medicalCoding,
-      claimSubmission,
-      denialManagement,
-      postPayment});
-      console.log(isError)
+  console.log('patients', patients)
+  const { isError, errorDetails, step } = checkHealthWorkflowErrors({
+    eligibilityCheck,
+    priorAuthorization,
+    medicalCoding,
+    claimSubmission,
+    denialManagement,
+    postPayment
+  });
+  console.log(isError)
   const [contactSteps, setContactSteps] = useState([
     { id: "1", label: "Calculate Patient Responsibility", status: "pending" },
     { id: "2", label: "Send to Patient", status: "pending" },
     { id: "3", label: "Confirm Patient Approval", status: "pending" },
     { id: "4", label: "Update Ledger", status: "pending" },
   ]);
- 
+
   const [appealDetails, setAppealDetails] = useState<Appeal>({
     isAccepted: false,
     error: false,
   });
+
+  const [writeoffError, setWriteoffError] = useState<boolean>(false);
 
   const markStepsAsComplete = async () => {
     for (let i = 0; i < contactSteps.length; i++) {
@@ -297,12 +305,12 @@ export default function DashboardPage() {
   };
 
   const getInfo = () => {
-    if (isError && errorDetails?.errorType ) {
+    if (patients.information && patients.information.infoCode != 'APL-003') {
       return (
         <InfoCard
-          // title={errorTitle}
-          // errorDescription={errorDesc}
-          type={errorDetails?.errorType as ErrorType}
+          title={patients.information.infoType}
+          errorDescription={patients.information.infoMessage}
+          type={patients.information.infoCode as ErrorCode}
           style={`mb-5`}
         />
       );
@@ -316,15 +324,23 @@ export default function DashboardPage() {
   const soapRef = useRef<SOAPNoteRef>(null);
 
   const showButton = () => {
-    console.log('errorDetails?.errorType', errorDetails?.errorType)
-    const error = ['technical', 'medicalnecessity', 'overautomation']
-    if(error.includes(errorDetails?.errorType as ErrorType)) {
+
+    const code = patients?.information?.infoCode;
+    const error = ['AI-RESUB-001', 'T500', 'MN-REQ-001', 'OA-ERR-001']
+    if (code && error.includes(code)) {
       return false
     }
 
-    
+
     return true
   }
+  const writeList: WriteofcolumnType[] = useSelector(
+    (state: RootState) => state.writeoffList
+  );
+  const partialTableData = useSelector(
+    (state: RootState) =>
+      state.paymenttableData
+  );
   return (
     <DashboardLayout>
       <div
@@ -338,15 +354,14 @@ export default function DashboardPage() {
                   <Breadcrumb />
                 </div>
                 <div className="flex  gap-2 mb-6">
-                   {showButton() && buttons.map((data) => (
+                  {showButton() && buttons.map((data) => (
                     <button
                       key={data.label}
                       className={`rounded-xl cursor-pointer px-4 py-3 text-sm font-medium text-base-primary ${data.style}`}
                       onClick={() => {
                         // Handle error on denialManagement step
                         if (
-                          isError &&
-                          step === "denialManagement" &&
+                         information?.infoCode == "APL-003" &&
                           !appealDetails.isAccepted
                         ) {
                           setAppealDetails({ ...appealDetails, error: true });
@@ -369,7 +384,7 @@ export default function DashboardPage() {
                             data: cptCode,
                             ref: cptref,
                           },
-                           {
+                          {
                             type: 'drug',
                             data: drugCode,
                             ref: drugref,
@@ -387,7 +402,7 @@ export default function DashboardPage() {
                             soapRef.current?.setActiveTab(codeType.type);
 
                             codeType.ref.current?.querySelectorAll(".not-acceptede").forEach((el) => {
-                              el.setAttribute('style', 'border: 1px solid red');
+                              el.setAttribute('style', 'border: 1px solid');
                             });
 
                             codeType.ref.current
@@ -398,6 +413,42 @@ export default function DashboardPage() {
                           }
                         }
 
+                        if (isError && errorDetails?.errorType == 'writeoff') {
+                          const isAccepted = writeList.every(item => item.status == 'Accepted');
+
+                          if (!isAccepted) {
+                            setWriteoffError(true)
+                            writeoffref.current
+                              ?.querySelector('.error-text')
+                              ?.classList.remove('hidden');
+                            writeoffref.current
+                              ?.querySelector('.ag-table')
+                              ?.setAttribute('class', 'border-error');
+                            writeoffref.current?.scrollIntoView({
+                              behavior: "smooth",
+                              block: "center",
+                            });
+                            return;
+                          }
+                        }
+                        const ispartialApproved = partialTableData.every(item => item.status == 'Accepted');
+
+                        if ( information && information?.infoCode == 'CC-001' && !ispartialApproved) {
+                           paymentSectionRef.current
+                              ?.querySelector('.error-text')
+                              ?.classList.remove('hidden');
+                            paymentSectionRef.current
+                              ?.querySelector('.ag-table')
+                              ?.setAttribute('class', 'border-error');
+                          paymentSectionRef.current?.scrollIntoView({
+                            behavior: "smooth",
+                            block: "center",
+                          });
+
+                          return;
+
+
+                        }
                         // No errors found, open modal
                         setModal(data.label.toLowerCase());
                       }}
@@ -493,7 +544,7 @@ export default function DashboardPage() {
 
               {getInfo()}
               {/** Appeal Letter */}
-              {isError && step == "denialManagement" && (
+              {information?.infoCode == "APL-003" && (
                 <div
                   className="grid grid-cols-[70%_1fr] gap-4"
                   ref={markdownRef}
@@ -516,23 +567,7 @@ export default function DashboardPage() {
                   <div>
                     <MedicalRecords title="Medical Records" Icon={Paperclip}>
                       <div className="space-y-3">
-                        {[
-                          {
-                            fileName: "SOB.pdf",
-                            fileSize: "200 KB",
-                            ecgImageUrl: "/sob.pdf",
-                          },
-                          {
-                            fileName: "exclusion.pdf",
-                            fileSize: "150 KB",
-                            ecgImageUrl: "/exclusion.pdf",
-                          },
-                          {
-                            fileName: "Clinical Notes & Radiology Requ..",
-                            fileSize: "200 KB",
-                            ecgImageUrl: "/policy.pdf",
-                          },
-                        ].map((data, key) => (
+                       {medicalReports?.map((data, key) => (
                           <AttachmentCard
                             key={key}
                             ecgImageUrl={data.ecgImageUrl}
@@ -587,7 +622,7 @@ export default function DashboardPage() {
               )}
 
               {isError && errorDetails?.errorType == "writeoff" && (
-                <WriteoffTable />
+                <div ref={writeoffref}><WriteoffTable /></div>
               )}
 
               {isError &&
@@ -605,7 +640,7 @@ export default function DashboardPage() {
                 )}
 
               {/** Payment fault */}
-              {isError && step == "postPayment" && <PaymentDetailsTable type={postPayment.errorDetails?.errorType as string} patientId={patients?.id} />}
+              {isError && step == "postPayment" && <div ref={paymentSectionRef}><PaymentDetailsTable type={postPayment.errorDetails?.errorType as string} patientId={patients?.id} /></div>}
             </main>
 
             {/* Cancel Modal */}

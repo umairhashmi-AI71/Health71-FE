@@ -24,9 +24,10 @@ export const writeoffSlice = createSlice({
         patient.status = action.payload.status;
       }
     },
+    escalate : (state, action: PayloadAction<number>) => state.filter(p => p.id !== action.payload)
   },
 })
 
-export const { changeWriteoffStatus } = writeoffSlice.actions
+export const { changeWriteoffStatus, escalate } = writeoffSlice.actions
 
 export default writeoffSlice.reducer

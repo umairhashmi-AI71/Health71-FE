@@ -126,7 +126,40 @@ export const patientSlice = createSlice({
         };
       }
     },
+    updatePaymentStep(
+      state,
+      action: PayloadAction<{
+        patientId: string;
+        title: string;
+      }>
+    ) {
+      const { patientId, title } = action.payload;
+  const patient = state.find((p) => p.id === patientId);
+
+  if (patient && patient.postPayment.steps) {
+    const step = patient.postPayment.steps.find(
+      (s) => s.label === title
+    );
+
+    if (step) {
+      step.status = "completed";
+    }
+    }},
+    changeStatus(
+      state,
+      action: PayloadAction<{
+        patientId: string;
+      }>
+    ) {
+      const { patientId } = action.payload;
+  const patient = state.find((p) => p.id === patientId);
+
+  if (patient && patient.postPayment) {
     
+    if (patient.postPayment) {
+      patient.postPayment.status = "done";
+    }
+    }}
   },
 });
 
@@ -137,7 +170,9 @@ export const {
   updatePatientICDCode,
   addPatientICDCode,
   deletePatientICDCode,
-  updatePriorAuthError
+  updatePriorAuthError,
+  updatePaymentStep,
+changeStatus
 } = patientSlice.actions;
 
 export default patientSlice.reducer;

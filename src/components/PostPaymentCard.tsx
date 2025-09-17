@@ -1,4 +1,4 @@
-import React, { JSX } from "react";
+import React, { JSX, useEffect, useState } from "react";
 import { Check } from "lucide-react";
 import {
   InsuranDetials,
@@ -9,6 +9,9 @@ import {
 } from "@/types/patient";
 import { number } from "zod";
 import ProcessMapping from "./ui/ProcessMapping";
+import { useDispatch } from "react-redux";
+import { changeStatus, updatePaymentStep } from "@/store/slice/Patient";
+import { useParams } from "next/navigation";
 
 // Type definitions for better type safety
 type ModeType = "grid" | "process";
@@ -106,12 +109,40 @@ const PostPaymentCard: React.FC<PostPaymentCardProps> = ({
     }
   };
 
+  const dispatch = useDispatch();
+
+
+  const params = useParams();
+  const [index, setIndex] = useState(0);
+
+  useEffect(() => {
+    if (index >= processSteps.length) return; // stop when done
+
+    let interval: NodeJS.Timeout;
+    if (status == 'inprogress') {
+      interval = setInterval(() => {
+        dispatch(updatePaymentStep({ patientId: params.id as string, title: processSteps[index].label })); // send message to redux
+        setIndex((prev) => prev + 1); // move to next message
+      }, 5000);
+    }
+
+
+    return () => clearInterval(interval); // cleanup
+  }, [index, dispatch]);
+
   const statusConfig = getStatusConfig(status);
-  
- 
+
+
   const isPaymentCompeted = processSteps.every(
     (step) => step.status === "completed"
   );
+
+
+  useEffect(() => {
+    if (isPaymentCompeted) {
+      dispatch(changeStatus({ patientId: params.id as string })); // send message to redux
+    }
+  }, [isPaymentCompeted]);
 
   const detailsKey = {
     date: "Date",
@@ -149,14 +180,17 @@ const PostPaymentCard: React.FC<PostPaymentCardProps> = ({
           <span>{statusConfig.text}</span>
         </div>
       </div>
+      <div className="">
+        <ProcessMapping processSteps={processSteps} processGap={processGap} />
+      </div>
 
-      {!isPaymentCompeted && (
+      {/* {!isPaymentCompeted && (
         <div className="">
           <ProcessMapping processSteps={processSteps}  processGap={processGap} />
         </div>
-      )}
+      )} */}
 
-      {isPaymentCompeted && (
+      {/* {isPaymentCompeted && (
         <div className="space-y-4">
           <div className="flex justify-between grid grid-cols-2 gap-4">
             {details &&
@@ -183,7 +217,7 @@ const PostPaymentCard: React.FC<PostPaymentCardProps> = ({
               })}
           </div>
         </div>
-      )}
+      )} */}
     </div>
   );
 };

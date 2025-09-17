@@ -11,7 +11,7 @@ import { AgGridReact } from "ag-grid-react";
 import { useCallback, useMemo, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import AlertModal from "./AlertModal";
-import { changeWriteoffStatus } from "@/store/slice/Writeoff";
+import { changeWriteoffStatus, escalate } from "@/store/slice/Writeoff";
 import { Check, Send, SquarePen } from "lucide-react";
 import ProcessMapping from "./ui/ProcessMapping";
 import { ProcessSteps } from "@/types/patient";
@@ -33,13 +33,13 @@ export const WriteoffTable: React.FC = () => {
   );
 
 
-      const [writeoffEscalate, setWriteoffEscalate] = useState([
-      { id: "1", label: "Validate Write-Offs", status: "pending" },
-      { id: "2", label: "Notify Payer", status: "pending" },
-      { id: "4", label: "Update Ledger", status: "pending" },
-    ]); 
-  
-   const cancelRef = useRef(false);
+  const [writeoffEscalate, setWriteoffEscalate] = useState([
+    { id: "1", label: "Validate Write-Offs", status: "pending" },
+    { id: "2", label: "Notify Payer", status: "pending" },
+    { id: "4", label: "Update Ledger", status: "pending" },
+  ]);
+
+  const cancelRef = useRef(false);
 
   const markStepsAsComplete = async () => {
     cancelRef.current = false; // reset cancel flag before starting
@@ -84,7 +84,8 @@ export const WriteoffTable: React.FC = () => {
   const dispatch = useDispatch();
   return (
     <div className="ag-theme-alpine mb-5">
-      <AgGridReact
+      <div className="ag-table rounded-lg border-base-destructive ">
+        <AgGridReact
         // theme={themeQuartz}
         rowData={writeList}
         columnDefs={[
@@ -101,28 +102,28 @@ export const WriteoffTable: React.FC = () => {
               return (
                 <div className="flex gap-2 items-center">
                   {status.toLocaleLowerCase() != "accepted" && (
-                      <>
-                        <button
-                          className="cursor-pointer  border-base bg-white items-center rounded-xl border p-4 py-2 flex gap-2"
-                          onClick={() => {
-                            markStepsAsComplete()
-                            setModal("escalate");
-                          }}
-                        >
-                          <Send className="w-4 h-4" strokeWidth={1.5} />{" "}
-                          Escalate
-                        </button>
-                        <button
-                          className="cursor-pointer rounded-xl items-center bg-[#AFD8D4] p-4 py-2 flex gap-2"
-                          onClick={() => {
-                            setModal("accept");
-                          }}
-                        >
-                          <Check className="w-4 h-4" strokeWidth={2} /> Accept
-                        </button>
-                      </>
-                    )}
-                  {status.toLocaleLowerCase() == "denied    →   accepted" && (
+                    <>
+                      <button
+                        className="cursor-pointer  border-base bg-white items-center rounded-xl border p-4 py-2 flex gap-2"
+                        onClick={() => {
+                          markStepsAsComplete()
+                          setModal("escalate");
+                        }}
+                      >
+                        <Send className="w-4 h-4" strokeWidth={1.5} />{" "}
+                        Escalate
+                      </button>
+                      <button
+                        className="cursor-pointer rounded-xl items-center bg-[#AFD8D4] p-4 py-2 flex gap-2"
+                        onClick={() => {
+                          setModal("accept");
+                        }}
+                      >
+                        <Check className="w-4 h-4" strokeWidth={2} /> Accept
+                      </button>
+                    </>
+                  )}
+                  {/* {status.toLocaleLowerCase() == "Accepted" && (
                     <button
                       className="cursor-pointer"
                       onClick={() =>
@@ -131,7 +132,7 @@ export const WriteoffTable: React.FC = () => {
                     >
                       <SquarePen className="w-4 h-4" strokeWidth={1.5} />
                     </button>
-                  )}
+                  )} */}
                 </div>
               );
             },
@@ -152,12 +153,12 @@ export const WriteoffTable: React.FC = () => {
         domLayout="autoHeight"
         rowHeight={60}
       />
-
+      </div>
+      <div className="text-base-destructive text-right pt-2 error-text hidden">Action Required: Please accept or escalate the write-off before proceeding. This step is mandatory to finalize the process.</div>
       <div className="flex justify-end my-10">
         <button
-          className={` text-white px-6 py-2 rounded-lg  ${
-            selectedRows.length > 0 ? "bg-green" : "bg-[#F5F2EF]"
-          }`}
+          className={` text-white px-6 py-2 rounded-lg  ${selectedRows.length > 0 ? "bg-green" : "bg-[#F5F2EF]"
+            }`}
           onClick={() => setModal("accept")}
           disabled={selectedRows.length > 0 ? false : true}
         >
@@ -171,7 +172,7 @@ export const WriteoffTable: React.FC = () => {
             Accept Confirmation
           </div>
           <div className="text-muted mb-6">
-           Are you sure you want to accept the {selectedRows.length > 1 ? selectedRows.length: ''} write-offs? Important: Once accepted, this action cannot be undone.
+            Are you sure you want to accept the {selectedRows.length > 1 ? selectedRows.length : ''} write-offs? Important: Once accepted, this action cannot be undone.
           </div>
           <div className="flex justify-end gap-4">
             <button
@@ -218,14 +219,17 @@ export const WriteoffTable: React.FC = () => {
             <button
               className="border rounded-xl px-5 py-2 text-base-primary bg-white"
               onClick={() => {
-               resetSteps()
-                      setModal("")}}
+                resetSteps()
+                setModal("")
+              }}
             >
               Cancel
             </button>
             <button
               className="rounded-xl px-5 py-2 text-white bg-green"
-              onClick={() => { 
+              onClick={() => {
+                selectedRows?.forEach(item => dispatch(escalate(item.id)))
+
                 setModal("");
                 resetSteps()
               }}

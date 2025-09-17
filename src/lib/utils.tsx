@@ -73,78 +73,7 @@ export const getStatusConfig = (status: StatusType): StatusConfig => {
   }
 };
 
-export const errorConfig = {
-  technical: {
-    title: "Technical Error",
-    desc: "Submission not reaching payer or regulator due to timeout or network error. We are trying to reconnect",
-  },
-  autoresubmittion: {
-    title: "Auto Resubmission",
-    desc: "Claim rejected due to missing Rendering Provider Specialty Code. Clara agent fetched specialty code from provider master, updated payload, and resubmitted automatically. Claim approved on resubmission. Validation engine updated with new schema rule.",
-  },
-  codesuggestion: {
-    title: "Different Code Suggestion",
-    desc: "On 2025-09-08, the claim was denied due to coding mismatch. We are suggesting resubmitting with updated codes",
-  },
-  writeoff: {
-    title: "Write-Off",
-    desc: "On 2025-09-08, we suggest writing off the claim because the spinal fusion surgery, although approved in prior authorization, did not meet the state law requirement for documented failed conservative therapy of at least 6 months.",
-  },
-  paymentmatch: {
-    title: "Payment Match",
-    desc: "On 2025-09-09, payment of 1,250 AED was received and matched exactly to Claim ID 104891283. All adjustments were applied correctly, and patient responsibility has been posted. No further action required.",
-  },
-  medicalnecessity: {
-    title: "Medical Necessity",
-    desc: "On 2025-09-08, at 12:12 pm Dr. Al Shamsi was contacted for the third time to submit medical-necessity information to support the patient’s appeal and resolve the denial.",
-  },
-  unmatchpayment: {
-    title: "Unmatched Payment",
-    desc: "On 2025-09-09, at 12:12 pm payment of 250 AED was received and matched exactly to Claim ID 104891283. All adjustments were applied correctly, and patient responsibility has been posted on 2025-09-09, at 12:13 pm.  No further action required."
-  },
 
-  partialapproval: {
- title: "Partial Approval",
-    desc: "This claim was partially approved — some services were denied due to reasons such as coding/diagnosis mismatch, lack of medical necessity, or missing prior authorization. Please review denied items for correction or appeal."
-  },
-
-  noteligible: {
-    title: "Not Eligible",
-    desc: "Emirates ID verified, but coverage was 19.04.2025 — eligibility was denied, and patient is advised to self-pay or provide alternate coverage."
-  },
-  outofnetwork: {
-    title: "Out Of Network",
-    desc: "Emirates ID verified, but provider is out-of-network — according to the Schedule of Benefits patient was marked as Partially Covered. "
-  },
-  panotrequire: {
-    title: "PA Not Required",
-    desc: "CPT/ICD codes checked — no prior authorization required and appointment is being booked.. "
-  },
-  paapproved: {
-    title: "PA Approved",
-    desc: "Prior authorization auto-submitted and approved — patient cleared for service and appointment is being booked."
-  },
-  panotapproved: {
-    title: "PA Not Approved",
-    desc: "Prior authorization required but submission failed because it is not covered — offer patient out-of-pocket (OOP) payment. "
-  },
-  paappeal: {
-    title: "PA Appeal",
-    desc: "Prior authorization denied for medical necessity — gathered physician documentation, and drafted the appeal letter"
-  },
-  pandingapproval: {
-    title: "Pending Approval",
-    desc: "Prior authorization submitted and marked pending by payer — encounter is on hold until decision is received, then appointment is auto-booked upon approval."
-  },
-  overautomation: {
-     title: "Over-Automation Error",
-    desc: "Claim was initially denied due to incorrect automated rules. Dee flagged the issue, human review corrected the error, claim resubmitted, and approved. System updated to prevent recurrence."
-  
-  }
-
-
-};
- 
 
 export const claimReconsiderationMarkdown = `**Date:** 2025-10-20  
 **Payer:** Daman – AUH-001  
@@ -282,7 +211,6 @@ export  const checkHealthWorkflowErrors = (data : ValidationData) : ReturnValue 
     cptCode: string,
     amount:number,
     status: string,
-    denialCode: string,
     rejectionReason:string,
     isAccepted: boolean
   }
@@ -293,33 +221,30 @@ export  const checkHealthWorkflowErrors = (data : ValidationData) : ReturnValue 
 export const writeofcolumn : WriteofcolumnType[]= [
   {
     id: 1,
-    service: "MRI – Left Knee",
+    service: "MRI of a lower extremity joint (hip, knee, ankle, etc.) without contrast",
     cptCode: "73721",
     amount: 586,
     status: "Accepted",
-    denialCode: "12345",
     rejectionReason: "-",
     isAccepted: true
     
   },
   {
     id: 2,
-    service: "CT",
-    cptCode: "73721",
+    service: "CT Scan, Head/Brain, Without Contrast",
+    cptCode: "70450",
     amount: 586,
-    status: "Denied",
-    denialCode: "12345",
-    rejectionReason: "Insufficient documentation for necessity",
+    status: "Denied → Accepted (on resubmission)",
+    rejectionReason: "Insufficient documentation for necessity (resolved)",
     isAccepted: false
     
   },
   {
     id: 3,
-    service: "MRI – Left Knee",
+    service: "MRI of a lower extremity joint (hip, knee, ankle, etc.) without contrast",
     cptCode: "73721",
     amount: 586,
     status: "Accepted",
-    denialCode: "12345",
     rejectionReason: "-",
     isAccepted: true
 
@@ -327,23 +252,21 @@ export const writeofcolumn : WriteofcolumnType[]= [
   },
   {
     id: 4,
-    service: "MRI – Left Knee",
-    cptCode: "73721",
-    amount: 586,
-    status: "Denied",
-    denialCode: "12345",
+    service: "Complete Blood Count (CBC), automated, without differential",
+    cptCode: "85027",
+    amount: 291,
+    status: "Denied (write-off recommended)",
     rejectionReason: "Insufficient documentation for necessity",
-        isAccepted: false
+    isAccepted: false
 
     
   },
   {
     id: 5,
-    service: "Consultation Fee",
-    cptCode: "73721",
-    amount: 586,
-    status: "Denied",
-    denialCode: "12345",
+    service: "Established patient, low to moderate complexity, 20–29 minutes (typical)",
+    cptCode: "99213",
+    amount: 291,
+    status: "Denied (write-off recommended)",
     rejectionReason: "Insufficient documentation for necessity",
         isAccepted: false
 

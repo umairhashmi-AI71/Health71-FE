@@ -148,6 +148,9 @@ body {
 .text-base-destructive {
   color: var(--base-destructive);
 }
+.border-base-destructive {
+  border-color: var(--base-destructive);
+}
 
 .bg-base-destructive {
   background-color: var(--base-destructive);
@@ -536,4 +539,15 @@ body {
 .ag-center-cols-container,
 .ag-center-cols-viewport {
   min-height: auto !important;
+}
+
+.border-error {
+  border: 1px solid var(--base-destructive);
+  border-radius: 8px;
+}
+
+ 
+.search-bar:focus {
+  border: 2px solid #CAE8E4; /* Apply a blue border */
+  outline: none; /* Remove the default outline */
 }

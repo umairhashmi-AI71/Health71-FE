@@ -282,7 +282,7 @@ const RedirectPage = () => {
                         <label
                           key={suggestion}
                           onClick={() => toggleSuggestionFilter(suggestion)}
-                          className="flex items-center gap-3 p-2 hover:bg-[#E8E2DB] rounded cursor-pointer"
+                          className="flex items-center gap-3 p-2 hover:bg-[#EFF7F6] rounded cursor-pointer"
                         >
                           {/* <input
                             type="checkbox"
@@ -348,7 +348,7 @@ const RedirectPage = () => {
                           setSortBy("latest");
                           setShowSortMenu(false);
                         }}
-                        className={`px-4 py-2 text-left rounded-lg hover:bg-[#E8E2DB] ${
+                        className={`px-4 py-2 text-left rounded-lg hover:bg-[#EFF7F6] ${
                           sortBy === "latest" ? "bg-[#E8E2DB] font-medium" : ""
                         }`}
                       >
@@ -359,7 +359,7 @@ const RedirectPage = () => {
                           setSortBy("oldest");
                           setShowSortMenu(false);
                         }}
-                        className={`px-4 py-2 text-left rounded-lg hover:bg-[#E8E2DB] ${
+                        className={`px-4 py-2 text-left rounded-lg hover:bg-[#EFF7F6] ${
                           sortBy === "oldest" ? "bg-[#E8E2DB] font-medium" : ""
                         }`}
                       >
@@ -370,7 +370,7 @@ const RedirectPage = () => {
                           setSortBy("roi");
                           setShowSortMenu(false);
                         }}
-                        className={`px-4 py-2 text-left rounded-lg hover:bg-[#E8E2DB] ${
+                        className={`px-4 py-2 text-left rounded-lg hover:bg-[#EFF7F6] ${
                           sortBy === "roi" ? "bg-[#E8E2DB] font-medium" : ""
                         }`}
                       >
@@ -389,7 +389,7 @@ const RedirectPage = () => {
                   placeholder="Search"
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
-                  className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-teal-500"
+                  className="w-full pl-10 pr-4 py-2 border border-2 border-gray-300 rounded-lg search-bar"
                 />
               </div>
             </div>
@@ -400,7 +400,7 @@ const RedirectPage = () => {
             <table className="min-w-full divide-y divide-gray-200">
               <thead className="">
                 <tr>
-                  <th className="w-12 px-3 py-3">
+                  <th className=" pl-3 py-2">
                     {/* <input
                       type="checkbox"
                       checked={allSelected}
@@ -456,7 +456,7 @@ const RedirectPage = () => {
                         patient.selected ? "selected" : ""
                       }`}
                     >
-                      <td className="px-3 py-4">
+                      <td className="pl-3 py-2">
                         {/* <input
                           type="checkbox"
                           checked={patient.selected}

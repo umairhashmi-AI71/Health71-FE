@@ -75,14 +75,14 @@ export const partialapprovalColDef: ColDef[] = [
   {
     headerName: "CPT Code",
     field: "cptCode",
-    width: 120,
+    width: 100,
     // cellClass: "flex items-center text-sm",
     autoHeight: true,
   },
   {
     headerName: "Amount (AED)",
     field: "amount",
-    width: 120,
+    width: 140,
     // cellClass: "flex items-center text-sm",
     valueFormatter: (params) => `${params.value}`,
     autoHeight: true,
@@ -90,7 +90,7 @@ export const partialapprovalColDef: ColDef[] = [
   {
     headerName: "Status",
     field: "status",
-    width: 160,
+    width: 140,
     // cellClass: (params) =>
     //   params.value === "Denied"
     //     ? "text-sm font-medium text-red-600"
@@ -101,11 +101,14 @@ export const partialapprovalColDef: ColDef[] = [
     headerName: "Rejection Reason",
     field: "reason",
     cellClass: "flex items-center text-sm ",
+    width:180,
     autoHeight: true,
   },
     {
     headerName: "Agent Suggestion",
     field: "suggestion",
+    flex: 1,
+    wrapText: true,
     cellClass: "flex items-center text-sm ",
     autoHeight: true,
   },

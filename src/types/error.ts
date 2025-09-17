@@ -19,3 +19,14 @@ export type ErrorType =
   | "pandingapproval"
   | "overautomation"
   | "partialapproval";
+
+export type ErrorCode =
+  | "T500"
+  | "AI-RESUB-001"
+  | "CMS-110"
+  | "MN-REQ-001"
+  | "WR-105"
+  | "CC-001"
+  | "MN-002"
+  | "APL-003"
+  | "OA-ERR-001";

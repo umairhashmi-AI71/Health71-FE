@@ -23,20 +23,21 @@ export const writeofcolumnDef: ColDef[] = [
     headerName: "Service",
     field: "service",
     flex: 1,
+    wrapText: true,
     cellClass: "flex items-center text-sm",
     autoHeight: true,
   },
   {
     headerName: "CPT Code",
     field: "cptCode",
-    width: 140,
+    width: 100,
     cellClass: "flex items-center text-sm",
     autoHeight: true,
   },
   {
     headerName: "Amount (AED)",
     field: "amount",
-    width: 160,
+    width: 140,
     cellClass: "flex items-center text-sm",
     valueFormatter: (params) => `${params.value}`,
     autoHeight: true,
@@ -44,7 +45,8 @@ export const writeofcolumnDef: ColDef[] = [
   {
     headerName: "Status",
     field: "status",
-    width: 140,
+    width: 160,
+    wrapText: true,
     // cellClass: (params) =>
     //   params.value === "Denied"
     //     ? "text-sm font-medium text-red-600"
@@ -52,66 +54,40 @@ export const writeofcolumnDef: ColDef[] = [
     autoHeight: true,
   },
   {
-    headerName: "Denial Code",
-    field: "denialCode",
-    width: 150,
-    cellClass: "flex items-center text-sm ",
-    autoHeight: true,
-  },
-  {
     headerName: "Rejection Reason",
     field: "rejectionReason",
-    flex: 1.5,
     wrapText: true,
     autoHeight: true,
   },
 ];
 
-export const appealLetterMarkDown = `**Date:** September 4, 2025  
+export const  appealLetterMarkDown = `
+**Date:** September 10, 2025  
+**From:**  CityMed Hospital, Al Safa, Dubai, UAE  
+**To:**  Claims Appeals Department, NoorCare Insurance, P.O. Box 7755, Dubai, UAE  
 
-**From:** CityCare Hospital, 123 Al Noor Street, Abu Dhabi, UAE  
+**Subject:**  Appeal for Denied Claim – Patient: Leila Al Mansouri, Claim ID: 20250905-L03  
 
-**To:** Claims Appeals Department, Daman Insurance, P.O. Box 4455, Abu Dhabi, UAE  
+**Dear Appeals Officer,**   
 
-**Subject:** Appeal for Denied Claim – Patient: Sarah Johnson, Claim ID: DMN-452871  
+We are writing on behalf of our patient, Leila Al Mansouri, to appeal the denial of Claim ID 20250905-L03 for services rendered on August 15, 2025. The claim was denied citing ""Insufficient documentation / medical necessity.""  
 
-**Dear Appeals Officer,**  
+After reviewing both the denial letter and the patient’s clinical documentation, we respectfully request reconsideration for the following reasons:  
 
-I am writing on behalf of Sarah Johnson, insured under **Daman Insurance Policy #DXB-773491**, to formally appeal the denial of Claim ID **DMN-452871**, originally submitted on August 15, 2025, for services rendered on August 3, 2025 at **CityCare Hospital**.  
+###1. **Medical Necessity:**  
+The ordered procedure — MRI of the left knee (CPT 73721) — was medically indicated due to persistent left knee pain, swelling, and limited mobility. Failure to perform this imaging would have delayed diagnosis and appropriate treatment, potentially worsening the patient’s condition.  
 
-The claim was denied citing: *“Insufficient documentation for medical necessity.”* After reviewing both the denial letter and the patient’s medical file, we respectfully disagree with this decision.  
+###2. **Supporting Documentation:**  
+- Treating physician’s detailed notes (dated August 15, 2025)  
+- Orthopaedic referral letter recommending MRI  
+- Radiology request form and pre-authorization approval  
 
-
-### **1. Medical Necessity**
-The service in question — **MRI of the left knee (CPT 73721)** — was medically necessary due to the patient’s presenting symptoms of chronic knee pain, swelling, and reduced mobility following a fall. Failure to perform this diagnostic imaging would have delayed appropriate treatment and potentially worsened the patient’s condition.  
-
-
-### **2. Supporting Documentation**
-Enclosed are:  
-- The treating physician’s detailed clinical notes dated August 2, 2025.  
-- Radiology request form signed by Dr. Khalid Mansour (Orthopedic Specialist).  
-- Progress notes documenting failed conservative treatment (NSAIDs, physiotherapy).  
-
-
-### **3. Coding & Accuracy**
-The ICD-10 code submitted (**M25.562 – Pain in left knee**) and the CPT code (**73721 – MRI, knee, without contrast**) are correct and fully aligned with the service performed.  
-
-
-Given the clinical evidence and supporting documentation, we respectfully request that Daman Insurance reprocess this claim and approve coverage in accordance with policy benefits.  
-
-
-### **Attachments Included:**
-- Letter of Medical Necessity – Dr. Khalid Mansour  
-- Clinical Notes & Radiology Request  
-- MRI Report  
-- Corrected CMS-1500 Claim Form  
-
-<br/>
-
-We appreciate your reconsideration of this appeal and look forward to your favorable response. Should you require additional information, please contact **Maria Lopez, Billing Officer, CityCare Hospital** at **+971-50-123-4567** or **m.lopez@citycare.ae**.  
+We kindly request prompt review and overturning of this denial.  
 
 Sincerely,  
-**Maria Lopez**  
-Billing & Claims Officer  
-CityCare Hospital  
-`;
+**Dr. Aisha Al Qubaisi**.   
+Consultant Orthopaedic Surgeon   
+CityMed Hospital"
+
+`
+ 
