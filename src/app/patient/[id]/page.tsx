@@ -362,7 +362,7 @@ export default function DashboardPage() {
   const showButton = () => {
 
     const code = patients?.information?.infoCode;
-    const error = ['AI-RESUB-001', 'T500', 'OA-ERR-001']
+    const error = ['AI-RESUB-001', 'T500', 'OA-ERR-001', 'MN-REQ-001']
     if (code && error.includes(code)) {
       return false
     }
