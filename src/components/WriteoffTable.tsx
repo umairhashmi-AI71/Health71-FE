@@ -42,7 +42,7 @@ export const WriteoffTable: React.FC = () => {
   const cancelRef = useRef(false);
   const [isProcessing, setisProcessing] = useState<boolean>(false)
 
-  const isCompleted = writeoffEscalate.some(i => i.status === 'completed')
+  const isCompleted = writeoffEscalate.every(i => i.status === 'completed')
   const markStepsAsComplete = async () => {
     cancelRef.current = false; // reset cancel flag before starting
 setisProcessing(true)
@@ -64,9 +64,10 @@ setisProcessing(true)
 
   useEffect(()=> {
     if(isCompleted) {
-      resetSteps()
       setisProcessing(false)
       setModal('')
+      resetSteps()
+
     }
   }, [isCompleted])
 
@@ -251,11 +252,12 @@ setisProcessing(true)
               className={`rounded-xl px-5 py-2 text-white ${isProcessing ? 'bg-gray-300': 'bg-green '}`}
               disabled={isProcessing}
               onClick={() => {
+                markStepsAsComplete()
                 selectedRows?.forEach(item => dispatch( changeWriteoffStatus({
                         id: item.id,
                         status: `${item.status} → Escalated`,
                       })))
-                markStepsAsComplete()
+                
               }}
             >
               Continue

@@ -75,6 +75,7 @@ import {
 import InfoCard from "@/components/ui/InfoCard";
 import { WriteoffTable } from "@/components/WriteoffTable";
 import ProcessMapping from "@/components/ui/ProcessMapping";
+import { MedicalNecessity } from "@/components/ui/MedicalNecessity/MedicalNecessity";
 
 export default function DashboardPage() {
   const params = useParams();
@@ -361,7 +362,7 @@ export default function DashboardPage() {
   const showButton = () => {
 
     const code = patients?.information?.infoCode;
-    const error = ['AI-RESUB-001', 'T500', 'MN-REQ-001', 'OA-ERR-001']
+    const error = ['AI-RESUB-001', 'T500', 'OA-ERR-001']
     if (code && error.includes(code)) {
       return false
     }
@@ -377,7 +378,7 @@ export default function DashboardPage() {
       state.paymenttableData
   );
 
-  const errorCode = ['T500', "MN-REQ-001", "AI-RESUB-001", "OA-ERR-001"]
+  const errorCode = ['T500',  "AI-RESUB-001", "OA-ERR-001"]
 
   return (
     <DashboardLayout>
@@ -412,6 +413,8 @@ export default function DashboardPage() {
                           }
                           return;
                         } 
+
+                     
 
                         if(information && information.infoCode == 'CMS-110') {
                           // Common error-check logic for icdCodes and cptCode
@@ -599,7 +602,7 @@ export default function DashboardPage() {
                 </>
                 
               )}
-
+   {information && information.infoCode == 'MN-REQ-001' && <MedicalNecessity patient={patients} />}
 
               {information?.infoCode == "APL-003" && (
                 <>
