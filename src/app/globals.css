@@ -551,3 +551,9 @@ body {
   border: 2px solid #CAE8E4; /* Apply a blue border */
   outline: none; /* Remove the default outline */
 }
+
+
+.appeal-textarea:focus {
+  border: 2px solid #CAE8E4; /* Apply a blue border */
+  outline: none; /* Remove the default outline */
+}

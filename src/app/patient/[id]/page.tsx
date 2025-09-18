@@ -85,6 +85,43 @@ export default function DashboardPage() {
   const writeoffref = useRef<HTMLDivElement>(null);
   const paymentSectionRef = useRef<HTMLDivElement>(null);
 
+    const [appealSubmitStep, setappealSubmitStep] = useState([
+    { id: "1", label: "Submission to Payer", status: "pending" },
+    { id: "2", label: "Logging & Tracking", status: "pending" },
+    { id: "3", label: "Notification & Monitoring", status: "pending" },
+    { id: "4", label: "Update Ledger", status: "pending" },
+  ]);
+
+
+
+    const isAppealCompleted = appealSubmitStep.every(i => i.status === 'completed')
+  const markAppealStepsAsComplete = async () => {
+     for (let i = 0; i < appealSubmitStep.length; i++) {
+      // break early if cancel button clicked
+ 
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+
+ 
+      setappealSubmitStep((prevSteps) =>
+        prevSteps.map((step, index) =>
+          index === i ? { ...step, status: "completed" } : step
+        )
+      );
+    }
+  };
+
+  // useEffect(()=> {
+  //   if(isAppealCompleted) {
+  //     setappealSubmitStep((prevSteps) =>
+  //       prevSteps.map((step, index) => ({ ...step, status: "pending" })
+  //       )
+  //     );
+  //   }
+  // }, [isAppealCompleted])
+
+
+
+
   const dispatch = useDispatch();
   const patients: PatientPersona = useSelector(
     (state: RootState) =>
@@ -303,7 +340,7 @@ export default function DashboardPage() {
   };
 
   const getInfo = () => {
-    if (patients.information && patients.information.infoCode != 'APL-003') {
+    if (patients.information && patients.information.infoCode) {
       return (
         <InfoCard
           title={patients.information.infoType}
@@ -339,6 +376,9 @@ export default function DashboardPage() {
     (state: RootState) =>
       state.paymenttableData
   );
+
+  const errorCode = ['T500', "MN-REQ-001", "AI-RESUB-001", "OA-ERR-001"]
+
   return (
     <DashboardLayout>
       <div
@@ -359,18 +399,22 @@ export default function DashboardPage() {
                       onClick={() => {
                         // Handle error on denialManagement step
                         if (
-                         information?.infoCode == "APL-003" &&
-                          !appealDetails.isAccepted
+                         information?.infoCode == "APL-003"
                         ) {
+                          if(!appealDetails.isAccepted) {
                           setAppealDetails({ ...appealDetails, error: true });
                           markdownRef.current?.scrollIntoView({
                             behavior: "smooth",
                             block: "center",
-                          });
-                          return;
-                        }
+                          });} else {
+                           setModal('appealSubmittion');
 
-                        // Common error-check logic for icdCodes and cptCode
+                          }
+                          return;
+                        } 
+
+                        if(information && information.infoCode == 'CMS-110') {
+                          // Common error-check logic for icdCodes and cptCode
                         const codeTypes = [
                           {
                             type: 'icd',
@@ -410,11 +454,14 @@ export default function DashboardPage() {
                             return;
                           }
                         }
+                        }
+
+                        
 
                         if (isError && errorDetails?.errorType == 'writeoff') {
-                          const isAccepted = writeList.every(item => item.status == 'Accepted');
+                          const isAccepted = writeList.some(item => item.status == 'Denied');
 
-                          if (!isAccepted) {
+                          if (isAccepted) {
                             setWriteoffError(true)
                             writeoffref.current
                               ?.querySelector('.error-text')
@@ -536,13 +583,27 @@ export default function DashboardPage() {
                     mode="process"
                     processSteps={patients?.postPayment.steps as ProcessSteps[]}
                     details={patients?.postPayment.details as PaymentDetails}
+                    titleGap="mb-[16px]"
+                    processGap="h-3"
                   />
                 </div>
               </div>
 
-              {getInfo()}
-              {/** Appeal Letter */}
+              
+
+              
+              {errorCode.includes(information?.infoCode as string) && (
+                <>
+                {getInfo()}
+                
+                </>
+                
+              )}
+
+
               {information?.infoCode == "APL-003" && (
+                <>
+                {getInfo()}
                 <div
                   className="grid grid-cols-[70%_1fr] gap-4"
                   ref={markdownRef}
@@ -554,13 +615,9 @@ export default function DashboardPage() {
                       className={`p-2.5 overflow-y-auto h-114`}
                       appealDetails={appealDetails}
                       acceptHandeler={acceptHandeler}
-                    >
-                      <div className="markbg">
-                        <Markdown rehypePlugins={[rehypeRaw]}>
-                          {appealLetterMarkDown}
-                        </Markdown>
-                      </div>
-                    </AppealLetter>
+                      markdownContent={appealLetterMarkDown}
+                    />
+                      
                   </div>
                   <div>
                     <MedicalRecords title="Medical Records" Icon={Paperclip}>
@@ -603,10 +660,14 @@ export default function DashboardPage() {
                     </MedicalRecords>
                   </div>
                 </div>
+                </>
+                
               )}
 
-              {isError && errorDetails?.errorType == "codesuggestion" && (
-                <div
+              {information && information.infoCode == "CMS-110" && (
+                <div>
+                  {getInfo()}
+                   <div
                   className="grid grid-cols-[70%_1fr] gap-4"
                   ref={markdownRef}
                 >
@@ -617,10 +678,12 @@ export default function DashboardPage() {
                     <SOAPNote tabs={icdTabs} ref={soapRef} defaultActiveTab="icd" />
                   </div>
                 </div>
+                </div>
+               
               )}
 
               {isError && errorDetails?.errorType == "writeoff" && (
-                <div ref={writeoffref}><WriteoffTable /></div>
+                <div ref={writeoffref}>{getInfo()}<WriteoffTable /></div>
               )}
 
               {isError &&
@@ -638,7 +701,7 @@ export default function DashboardPage() {
                 )}
 
               {/** Payment fault */}
-              {isError && step == "postPayment" && <div ref={paymentSectionRef}><PaymentDetailsTable type={postPayment.errorDetails?.errorType as string} patientId={patients?.id} /></div>}
+              {information?.infoCode == 'CC-001' && <div ref={paymentSectionRef}>{getInfo()}<PaymentDetailsTable type={postPayment.errorDetails?.errorType as string} patientId={patients?.id} /></div>}
             </main>
 
             {/* Cancel Modal */}
@@ -716,6 +779,36 @@ export default function DashboardPage() {
                     cancelHandel={cancelHandel}
                     userId={params.id as string}
                   />
+                </div>
+              </div>
+            </AlertModal>
+
+            <AlertModal open={modal === "appealSubmittion"} onClose={() => setModal("")}>
+              <div>
+                <div className="font-semibold text-lg mb-2 text-base-primary">
+                  Submit
+                </div>
+                <div className="text-muted mb-6">
+                  Our <span className="font-semibold">agents</span> are on the{" "}
+                  <span className="font-semibold">appeal letter</span>. We’ll
+                  notify you if anything else is needed.
+                </div>
+                <div className="mb-6">
+                  <ProcessMapping processGap="h-3.5" processSteps={appealSubmitStep as ProcessSteps[]} />
+                </div>
+                <div className="flex justify-end gap-4">
+                  {isAppealCompleted ? <button
+                    className="border rounded-xl px-5 py-2 cursor-pointer text-base-primary bg-white"
+                    onClick={() => { route.push('/patient') ; setModal("") ;}}
+                  >
+                    Go Home
+                  </button> :
+                  <button
+                    className="rounded-xl px-5 py-2 cursor-pointer text-white bg-green"
+                    onClick={() => markAppealStepsAsComplete()}
+                  >
+                    Yes
+                  </button>}
                 </div>
               </div>
             </AlertModal>

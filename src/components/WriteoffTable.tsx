@@ -42,7 +42,7 @@ export const WriteoffTable: React.FC = () => {
   const cancelRef = useRef(false);
   const [isProcessing, setisProcessing] = useState<boolean>(false)
 
-  const isCompleted = writeoffEscalate.every(i => i.status === 'completed')
+  const isCompleted = writeoffEscalate.some(i => i.status === 'completed')
   const markStepsAsComplete = async () => {
     cancelRef.current = false; // reset cancel flag before starting
 setisProcessing(true)
@@ -64,7 +64,9 @@ setisProcessing(true)
 
   useEffect(()=> {
     if(isCompleted) {
+      resetSteps()
       setisProcessing(false)
+      setModal('')
     }
   }, [isCompleted])
 
@@ -91,7 +93,7 @@ setisProcessing(true)
   useEffect(() => {
     const element = document.querySelector('.errorclass')
     if(!element?.classList.contains('hidden')) {
-       const isdone = writeList.every(e => e.status == 'Accepted');
+       const isdone = writeList.every(e => e.status != 'Denied');
        if(isdone) {
         element?.classList.add('hidden')
         
@@ -120,12 +122,11 @@ setisProcessing(true)
               };
               return (
                 <div className="flex gap-2 items-center">
-                  {status.toLocaleLowerCase() != "accepted" && (
+                  {status != "Denied → Accepted" && status != "Accepted"  && status != 'Denied → Escalated' && (
                     <>
                       <button
                         className="cursor-pointer  border-base bg-white items-center rounded-xl border p-4 py-2 flex gap-2"
                         onClick={() => {
-                          markStepsAsComplete()
                           setModal("escalate");
                         }}
                       >
@@ -208,7 +209,7 @@ setisProcessing(true)
                     dispatch(
                       changeWriteoffStatus({
                         id: data.id,
-                        status: "Accepted",
+                        status: `${data.status} → Accepted`,
                       })
                     );
                   });
@@ -238,6 +239,8 @@ setisProcessing(true)
             <button
               className="border rounded-xl px-5 py-2 text-base-primary bg-white"
               onClick={() => {
+                          
+
                 resetSteps()
                 setModal("")
               }}
@@ -248,10 +251,11 @@ setisProcessing(true)
               className={`rounded-xl px-5 py-2 text-white ${isProcessing ? 'bg-gray-300': 'bg-green '}`}
               disabled={isProcessing}
               onClick={() => {
-                selectedRows?.forEach(item => dispatch(escalate(item.id)))
-
-                setModal("");
-                resetSteps()
+                selectedRows?.forEach(item => dispatch( changeWriteoffStatus({
+                        id: item.id,
+                        status: `${item.status} → Escalated`,
+                      })))
+                markStepsAsComplete()
               }}
             >
               Continue

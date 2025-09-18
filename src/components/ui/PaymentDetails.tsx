@@ -29,7 +29,7 @@ import {
 } from "@/lib/utils";
 import { PaymentDetails } from "@/types/patient";
 import { useDispatch, useSelector } from "react-redux";
-import { updatePriorAuthError } from "@/store/slice/Patient";
+import { changeErrorCode } from "@/store/slice/Patient";
 import { useRouter } from "next/navigation";
 import { RootState } from "@/store";
 import { updateStatus } from "@/store/slice/Patienttable";
@@ -116,29 +116,27 @@ export const PaymentDetailsTable: React.FC<PaymentDetailsTable> = ({
     };
 
     const partialApprovalAction = (params: ICellRendererParams) => {
-        const { reason, status } = params.data as { reason: string, status: string };
+        const { reason, status, errorTitle, errorMessage } = params.data as {errorMessage: string, errorTitle: string, reason: string, status: string };
         if (status != 'Accepted') {
             return (
 
                 <div className="flex justify-between items-center w-15">
                     <button className="cursor-pointer"
                         onClick={() => {
-                            // if(reason == 'Code Mismatched') {
-                            //   dispatch(updatePriorAuthError({ patientId,
-                            //           errorType: 'codesuggestion'}))
-                            // }
-                            //  if(reason == 'Medical Necessity') {
-                            //     dispatch(updatePriorAuthError({ patientId,
-                            //           errorType: 'medicalnecessity'}))
-                            // }
-
-                            if (reason == 'Code Mismatched') {
-                                route.push('/patient/20457891')
+                            if(reason == 'Code Mismatch') {
+                              dispatch(changeErrorCode({ patientId,
+                                      errorType: 'CMS-110',
+                                    errorTitle,
+                                    errorMessage}))
                             }
-                            if (reason == 'Medical Necessity') {
-
-                                route.push('/patient/101300')
+                             if(reason == 'Medical Necessity') {
+                                dispatch(changeErrorCode({ patientId,
+                                      errorType: 'MN-REQ-001',
+                                        errorTitle,
+                                    errorMessage}))
                             }
+
+                           
                         }}>
                         <Search className="h-4 w-4" strokeWidth={1.5} />
                     </button>

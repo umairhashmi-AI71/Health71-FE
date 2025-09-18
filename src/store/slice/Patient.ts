@@ -3,7 +3,7 @@ import type { PayloadAction } from "@reduxjs/toolkit";
 import type { RootState } from "../index";
 import { patientPersona } from "@/lib/mockPersona";
 import { ICDCode, PatientPersona } from "@/types/patient";
-import { ErrorType } from "@/types/error";
+import { ErrorCode, ErrorType } from "@/types/error";
 
 // Define the initial state using that type
 const initialState: PatientPersona[] = patientPersona;
@@ -108,21 +108,25 @@ export const patientSlice = createSlice({
         }
       }
     },
-    updatePriorAuthError(
+    changeErrorCode(
       state,
       action: PayloadAction<{
         patientId: string;
-        errorType: ErrorType;
+        errorType: ErrorCode;
+        errorTitle : string;
+
+                                    errorMessage: string;
       }>
     ) {
-      const { patientId, errorType } = action.payload;
+      const { patientId, errorType, errorTitle,
+                                    errorMessage } = action.payload;
       const patient = state.find((p) => p.id === patientId);
 
-      if (patient && patient.priorAuthorization) {
-        patient.priorAuthorization.isError = true;
-        patient.priorAuthorization.errorDetails = {
-          errorType,
-        };
+      if (patient && patient.information) {
+        patient.information.infoCode = errorType;
+        patient.information.infoType = errorTitle;
+        patient.information.infoMessage = errorMessage;
+       
       }
     },
     updatePaymentStep(
@@ -206,7 +210,7 @@ export const {
   updatePatientICDCode,
   addPatientICDCode,
   deletePatientICDCode,
-  updatePriorAuthError,
+  changeErrorCode,
   updatePaymentStep,
   changeStatus,
   changeCodeStatus

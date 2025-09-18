@@ -1,5 +1,5 @@
 "use client";
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useContext, useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 
 import { useRouter } from "next/navigation";
@@ -19,9 +19,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { formatDate } from "@/lib/dateformate";
 import AlertModal from "@/components/AlertModal";
 import { markPatientSubmitted } from "@/store/slice/Patient";
+import { AgentContext } from "../layout";
 
 const RedirectPage = () => {
   const router = useRouter();
+  const { agent } = useContext(AgentContext);
 
   const list = useSelector((state: RootState) => state.patientlist);
   const [patients, setPatients] = useState<PatientTableRow[]>([]);
@@ -43,6 +45,7 @@ const RedirectPage = () => {
         }))
     );
   }, [list]);
+  
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedSuggestions, setSelectedSuggestions] = useState<string[]>([]);
   const [sortBy, setSortBy] = useState("latest");
@@ -116,6 +119,12 @@ const RedirectPage = () => {
         : [...prev, suggestion]
     );
   }, []);
+
+  useEffect(() => {
+   if (agent && patients.length > 0) {
+    toggleSuggestionFilter(agent);
+  }
+  }, [agent, patients])
 
   // Clear filters
   const clearFilters = useCallback(() => {

@@ -54,6 +54,16 @@ export default function SearchPatient() {
   };
 
   const onSubmitDetails = (data: DetailsForm) => {
+
+    const date = new Date(data.dob);
+
+    // Format: Jan 1, 1970
+    const formatted = date.toLocaleDateString("en-US", {
+      month: "short",
+      day: "numeric",
+      year: "numeric",
+    });
+    alert(formatted)
     const patient: PatientPersona[] = patientList.filter(
       (p) =>
         (data.surname
@@ -62,7 +72,7 @@ export default function SearchPatient() {
         (data.firstName
           ? p.profile.name.toLowerCase() === data.firstName.toLowerCase()
           : true) &&
-        (data.dob ? p.profile.dateOfBirth === data.dob : true)
+        (formatted ? p.profile.dateOfBirth === formatted : true)
     );
 
     if (patient.length) {

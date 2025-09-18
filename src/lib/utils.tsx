@@ -234,7 +234,7 @@ export const writeofcolumn : WriteofcolumnType[]= [
     service: "CT Scan, Head/Brain, Without Contrast",
     cptCode: "70450",
     amount: 586,
-    status: "Denied → Accepted (on resubmission)",
+    status: "Denied",
     rejectionReason: "Insufficient documentation for necessity (resolved)",
     isAccepted: false
     
@@ -255,7 +255,7 @@ export const writeofcolumn : WriteofcolumnType[]= [
     service: "Complete Blood Count (CBC), automated, without differential",
     cptCode: "85027",
     amount: 291,
-    status: "Denied (write-off recommended)",
+    status: "Denied",
     rejectionReason: "Insufficient documentation for necessity",
     isAccepted: false
 
@@ -266,7 +266,7 @@ export const writeofcolumn : WriteofcolumnType[]= [
     service: "Established patient, low to moderate complexity, 20–29 minutes (typical)",
     cptCode: "99213",
     amount: 291,
-    status: "Denied (write-off recommended)",
+    status: "Denied",
     rejectionReason: "Insufficient documentation for necessity",
         isAccepted: false
 

@@ -2034,7 +2034,7 @@ export const patientPersona: PatientPersona[] = [
        
       ],
       "denialAttempts": [
-        {
+       {
           "claimRound": "1",
           "claimId": "20250820-L01",
           "denialId": "DEN-3301",
@@ -2052,8 +2052,8 @@ export const patientPersona: PatientPersona[] = [
           "claimRound": "3",
           "claimId": "20250905-L03",
           "denialId": "DEN-3303",
-           "denialAmount": "-",
-          "denialCode": "-"
+          "denialAmount": "1,200 AED",
+          "denialCode": "D12"
         }
       ],
       "isError": true

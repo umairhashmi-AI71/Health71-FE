@@ -31,6 +31,7 @@ const InfoCard: React.FC<InfoCardProps> = ({
       case "WR-105":
         case "CC-001":
           case "MN-REQ-001" :
+            case "APL-003" :
       // case "noteligible":
       //   case "panotrequire":
       //   case "paapproved":
@@ -60,6 +61,7 @@ const InfoCard: React.FC<InfoCardProps> = ({
       case "WR-105":
         case "CC-001":
           case "MN-REQ-001" :
+          case "APL-003" :
       // case "noteligible":
       //   case "panotrequire":
       //   case "paapproved":

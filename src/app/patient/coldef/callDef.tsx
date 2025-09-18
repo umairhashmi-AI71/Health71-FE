@@ -13,10 +13,11 @@ export const writeofcolumnDef: ColDef[] = [
     field: "select",
     // checkboxSelection: true,
     headerCheckboxSelection: true,
-     checkboxSelection: true,
-    width: 50,
+     width: 50,
     pinned: "left",
- 
+ checkboxSelection: (params: any) => {
+    return params.data && params.data.status !== "Accepted";
+  },
     // cellRenderer: CustomCheckbox,
   },
   {
