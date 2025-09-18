@@ -182,8 +182,8 @@ const ICDCodes = forwardRef<HTMLDivElement, ICDCodesProps>(
                   }
                 }}
               >
-                {icdCode.status == 'Changed' ? <p className="mb-1">Changed from {icdCode.code} to {icdCode.newCode}</p>: ''}
-                <p>{icdCode.description}</p>
+                {icdCode.status == 'Changed' ? <p className="mb-1 pl-2">Changed from {icdCode.code} to {icdCode.newCode}</p>: ''}
+                <p className="pl-2">{icdCode.description}</p>
 
 
                 {icdCode.confidence && (

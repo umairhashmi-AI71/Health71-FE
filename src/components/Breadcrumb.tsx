@@ -10,7 +10,13 @@ const breadcrumbMap: Record<string, string> = {
 
 export default function Breadcrumb() {
   const pathname = usePathname();
- const segments = pathname.replace(/^\/home/, "").split("/").filter(Boolean);
+const excluded = ["medicalnecessity", "missmatch", "preview"];
+
+const segments = pathname
+  .replace(/^\/home/, "")
+  .split("/")
+  .filter(Boolean)
+  .filter((seg) => !excluded.includes(seg));
 
   // Always start with Home
   const items = [

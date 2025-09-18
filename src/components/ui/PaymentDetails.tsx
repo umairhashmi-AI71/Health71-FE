@@ -124,16 +124,10 @@ export const PaymentDetailsTable: React.FC<PaymentDetailsTable> = ({
                     <button className="cursor-pointer"
                         onClick={() => {
                             if(reason == 'Code Mismatch') {
-                              dispatch(changeErrorCode({ patientId,
-                                      errorType: 'CMS-110',
-                                    errorTitle,
-                                    errorMessage}))
+                               route.push(`${patientId}/missmatch`)
                             }
                              if(reason == 'Medical Necessity') {
-                                dispatch(changeErrorCode({ patientId,
-                                      errorType: 'MN-REQ-001',
-                                        errorTitle,
-                                    errorMessage}))
+                               route.push(`${patientId}/medicalnecessity`)
                             }
 
                            

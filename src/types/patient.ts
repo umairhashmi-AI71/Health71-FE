@@ -200,6 +200,7 @@ export interface PatientPersona {
   medicalReports? :Attachment[];
   attachments?: Attachment[];
   information?:Information;
+  otherErrors? :Information[];
   markdown?: string; // Markdown content for the patient notes
   icdCodes: ICDCode[];
   cptCode: ICDCode[];

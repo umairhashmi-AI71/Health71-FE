@@ -381,13 +381,8 @@ export default function DashboardPage() {
   const errorCode = ['T500',  "AI-RESUB-001", "OA-ERR-001"]
 
   return (
-    <DashboardLayout>
-      <div
-        className={`flex-1 flex min-h-[100vh] flex-col lg:ml-0 rounded-xl bg-white`}
-      >
-        <main className="size-full max-w-345 xl:mx-auto ">
-          <div>
-            <main className="p-6 size-full max-w-345 xl:mx-auto">
+     
+            <div >
               <div className="flex justify-between items-center items-start">
                 <div>
                   <Breadcrumb />
@@ -398,6 +393,9 @@ export default function DashboardPage() {
                       key={data.label}
                       className={`rounded-xl cursor-pointer px-4 py-3 text-sm font-medium text-base-primary ${data.style}`}
                       onClick={() => {
+                      if(data.label == 'Save' || data.label == 'Cancel') {
+                          route.push('/patient')
+                      } else {
                         // Handle error on denialManagement step
                         if (
                          information?.infoCode == "APL-003"
@@ -499,6 +497,8 @@ export default function DashboardPage() {
                         }
                         // No errors found, open modal
                         setModal(data.label.toLowerCase());
+                      
+                      }
                       }}
                     >
                       {data.label}
@@ -602,7 +602,9 @@ export default function DashboardPage() {
                 </>
                 
               )}
-   {information && information.infoCode == 'MN-REQ-001' && <MedicalNecessity patient={patients} />}
+   {information && information.infoCode == 'MN-REQ-001' && (<div>
+    {getInfo()}
+    <MedicalNecessity patient={patients} /></div>)}
 
               {information?.infoCode == "APL-003" && (
                 <>
@@ -705,9 +707,9 @@ export default function DashboardPage() {
 
               {/** Payment fault */}
               {information?.infoCode == 'CC-001' && <div ref={paymentSectionRef}>{getInfo()}<PaymentDetailsTable type={postPayment.errorDetails?.errorType as string} patientId={patients?.id} /></div>}
-            </main>
-
-            {/* Cancel Modal */}
+            
+            
+              {/* Cancel Modal */}
             <AlertModal open={modal === "cancel"} onClose={() => setModal("")}>
               <div>
                 <div className="font-semibold text-lg mb-2 text-base-primary">
@@ -932,9 +934,12 @@ export default function DashboardPage() {
                 </div>
               </div>
             </AlertModal>
-          </div>
-        </main>
-      </div>
-    </DashboardLayout>
+            
+            </div>
+
+          
+        
+      
+  
   );
 }

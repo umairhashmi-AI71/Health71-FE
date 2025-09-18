@@ -2498,6 +2498,13 @@ export const patientPersona: PatientPersona[] = [
       "infoCode": "CC-001",
       "infoMessage": "Partial approval received. Agent flagged CT code mismatch, retrieved correct CPT from codebook, re-ran medical coding, and resubmitted claim. Claim approved on second round."
     },
+    otherErrors: [
+      {
+      infoType:"Medical Necessity",
+      "infoCode": "MN-REQ-001",
+      "infoMessage": "One service denied for medical necessity. Agent is obtaining required documentation."
+      },
+    ],
     "markdown": "Chief Complaint: Right knee pain and limited mobility for 3 weeks, worsening with activity.\r\n\r\nHistory of Present Illness: 35-year-old male presents with progressive right knee pain, swelling, and stiffness for 3 weeks. Pain is constant (7/10), worse with weight-bearing and stairs. No trauma history. Minimal relief with OTC analgesics. Reports occasional \"locking\" sensation and difficulty with extension.\r\n\r\nReview of Systems:\r\n- Musculoskeletal: Pain, swelling, limited ROM right knee.\r\n- Constitutional: No fever, weight loss.\r\n- Neurological: No weakness or paresthesia.\r\n\r\nObjective: \r\nVitals stable. Right knee: swelling, mild effusion, medial joint line tenderness, positive McMurray’s sign. No erythema. ROM mildly restricted.\r\n\r\nAssessment:\r\nM25.561 – Pain in right knee, likely medial meniscus tear. Imaging required to exclude fracture, infection, or tumor.\r\n\r\nPlan:\r\n- MRI (73721) right knee\r\n- CBC (85027) to rule out infection\r\n- CT scan — updated to contrast-enhanced (70452) based on concern for occult bone lesion\r\n- Analgesics PRN",
     "eligibilityCheck": {
       "status": "covered",
@@ -2731,9 +2738,38 @@ export const patientPersona: PatientPersona[] = [
       ],
       "isError": false
     },
-    "icdCodes": [],
-    "cptCode": [],
-    "drugCode": [],
+   "icdCodes": [
+      {
+        "code": "M25.561",
+        "description": "Pain in right knee",
+        "status": ""
+      }
+    ],
+    "cptCode": [
+      {
+        "code": "73721",
+        "description": "MRI, lower extremity, joint, without contrast",
+        "status": ""
+      },
+      {
+        "code": "70450",
+        newCode:"70452",
+        "description": "CT head/brain without contrast (original) → with contrast (suggested by agent for better diagnostic yield)",
+        "status": "Changed"
+      },
+      {
+        "code": "85027",
+        "description": "Complete blood count (CBC)",
+        "status": ""
+      }
+    ],
+    "drugCode": [
+      {
+        "code": "NDC-0099",
+        "description": "Paracetamol 500mg tablets, oral, PRN for pain",
+        status: ''
+      }
+    ],
     "postPayment": {
       "status": "paused",
       "steps": [
