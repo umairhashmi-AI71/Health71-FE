@@ -1,6 +1,6 @@
 import AlertModal from "@/components/AlertModal";
 import { changeWriteoffStatus } from "@/store/slice/Writeoff";
-import { ColDef, ICellRendererParams } from "ag-grid-community";
+import { CheckboxSelectionCallbackParams, ColDef, ICellRendererParams } from "ag-grid-community";
 import { Check, Send, SquarePen } from "lucide-react";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
@@ -15,7 +15,7 @@ export const writeofcolumnDef: ColDef[] = [
     headerCheckboxSelection: true,
      width: 50,
     pinned: "left",
- checkboxSelection: (params: any) => {
+ checkboxSelection: (params: CheckboxSelectionCallbackParams) => {
     return params.data && params.data.status !== "Accepted";
   },
     // cellRenderer: CustomCheckbox,
