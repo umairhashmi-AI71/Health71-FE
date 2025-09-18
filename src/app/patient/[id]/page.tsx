@@ -76,6 +76,7 @@ import InfoCard from "@/components/ui/InfoCard";
 import { WriteoffTable } from "@/components/WriteoffTable";
 import ProcessMapping from "@/components/ui/ProcessMapping";
 import { MedicalNecessity } from "@/components/ui/MedicalNecessity/MedicalNecessity";
+import { markPatientSubmitted } from "@/store/slice/Patient";
 
 export default function DashboardPage() {
   const params = useParams();
@@ -111,14 +112,14 @@ export default function DashboardPage() {
     }
   };
 
-  // useEffect(()=> {
-  //   if(isAppealCompleted) {
-  //     setappealSubmitStep((prevSteps) =>
-  //       prevSteps.map((step, index) => ({ ...step, status: "pending" })
-  //       )
-  //     );
-  //   }
-  // }, [isAppealCompleted])
+  useEffect(()=> {
+    if(isAppealCompleted) {
+      // setappealSubmitStep((prevSteps) =>
+      //   prevSteps.map((step, index) => ({ ...step, status: "pending" })
+      //   )
+      // );
+    }
+  }, [isAppealCompleted])
 
 
 
@@ -407,7 +408,7 @@ export default function DashboardPage() {
                             block: "center",
                           });} else {
                            setModal('appealSubmittion');
-
+markAppealStepsAsComplete()
                           }
                           return;
                         } 
@@ -804,13 +805,13 @@ export default function DashboardPage() {
                 <div className="flex justify-end gap-4">
                   {isAppealCompleted ? <button
                     className="border rounded-xl px-5 py-2 cursor-pointer text-base-primary bg-white"
-                    onClick={() => { route.push('/patient') ; setModal("") ;}}
+                    onClick={() => {}}
                   >
                     Go Home
                   </button> :
                   <button
                     className="rounded-xl px-5 py-2 cursor-pointer text-white bg-green"
-                    onClick={() => markAppealStepsAsComplete()}
+                    onClick={() => { route.push('/patient') ; dispatch(markPatientSubmitted(patients.id)) ;setModal("") ;}}
                   >
                     Yes
                   </button>}

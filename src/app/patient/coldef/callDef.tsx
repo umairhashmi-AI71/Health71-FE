@@ -75,10 +75,10 @@ We are writing on behalf of our patient, Leila Al Mansouri, to appeal the denial
 
 After reviewing both the denial letter and the patient’s clinical documentation, we respectfully request reconsideration for the following reasons:  
 
-###1. **Medical Necessity:**  
+###**Medical Necessity:**  
 The ordered procedure — MRI of the left knee (CPT 73721) — was medically indicated due to persistent left knee pain, swelling, and limited mobility. Failure to perform this imaging would have delayed diagnosis and appropriate treatment, potentially worsening the patient’s condition.  
 
-###2. **Supporting Documentation:**  
+###**Supporting Documentation:**  
 - Treating physician’s detailed notes (dated August 15, 2025)  
 - Orthopaedic referral letter recommending MRI  
 - Radiology request form and pre-authorization approval  
@@ -88,7 +88,7 @@ We kindly request prompt review and overturning of this denial.
 Sincerely,  
 **Dr. Aisha Al Qubaisi**.   
 Consultant Orthopaedic Surgeon   
-CityMed Hospital"
+CityMed Hospital
 
 `
  
