@@ -107,6 +107,8 @@ export const demoData: PatientPersona[] = [
   {
     "agentDetails": {
       "agents": ["Clara"],
+      agentAction: "Submission not reaching payer due to timeout. Retrying connection...",
+      "currentProcess": 'Clara',
       "agentSuggestion": "Payer denial: duplicate lab test billed",
       "coT": "Two labs billed within 24h; agent cannot auto-resolve → flagged for review."
     },
@@ -447,6 +449,8 @@ export const demoData: PatientPersona[] = [
   {
     "agentDetails": {
       "agents": ["Clara"],
+       agentAction: "Claim rejected due to missing Rendering Provider Specialty Code. Clara agent fetched specialty code from provider master, updated payload, and resubmitted automatically. Claim approved on resubmission.",
+      "currentProcess": 'Payne',
       "agentSuggestion": "Payer denial: duplicate lab test billed",
       "coT": "Two labs billed within 24h; agent cannot auto-resolve → flagged for review."
     },
@@ -1131,6 +1135,8 @@ export const demoData: PatientPersona[] = [
   {
     "agentDetails": {
       agents: ["Clara", "Coda"],
+        agentAction: "On 2025-09-08, at 12:12 pm Dr. Al Shamsi was contacted for the third time to submit medical-necessity documentation to support the patient’s appeal and resolve the denial.",
+      "currentProcess": 'Clara',
       "agentSuggestion": "Payer denial: duplicate lab test billed",
       "coT": "Two labs billed within 24h; agent cannot auto-resolve → flagged for review."
     },
@@ -2147,6 +2153,8 @@ export const demoData: PatientPersona[] = [
   {
     "agentDetails": {
       "agents": ["Clara"],
+       agentAction: "Claim was denied due to incorrect automated payer rule application. Dee flagged the issue, HITL corrected the rule logic, and the claim was resubmitted and approved. System updated to prevent recurrence.",
+      "currentProcess": 'Payne',
       "agentSuggestion": "Payer denial: duplicate lab test billed",
       "coT": "Two labs billed within 24h; agent cannot auto-resolve → flagged for review."
     },
@@ -3159,198 +3167,6 @@ export const demoData: PatientPersona[] = [
 
 
 export const fakePersona: PatientPersona[] = [
-  {
-    id: "101300",
-    isSubmitted: true,
-    profileCreatedDate: new Date("9/2/2025 20:00:00").toISOString(),
-    agentDetails: {
-      agents: ["Coda"],
-      agentSuggestion: "Verify coding: M25.562 (Pain in left knee)	",
-      coT: "SOAP note indicates knee pain with imaging ordered; agent flagged to confirm ICD-10 and CPT alignment and ensure diagnosis supports X-ray medical necessity.	.",
-    },
-    profile: {
-      name: "Sara",
-      surname: "Al Nuaimi",
-      age: 40,
-      emiratesId: "748-1985-2233445-4",
-      sex: "Female",
-      dateOfBirth: "1985-07-21", // YYYY-MM-DD format
-      nationality: "UAE",
-      language: "Arabic",
-      phoneNumber: 97155467830,
-      email: "Sara.nuaimi@gmail.com",
-      profilePhoto: "/avatar.png",
-    },
-    eligibilityCheck: {
-        "steps": [
-        {
-          "id": "1",
-          "label": "Extract Patient & Payer Data",
-          "status": "completed"
-        },
-        {
-          "id": "2",
-          "label": "Validate Coverage",
-          "status": "completed"
-        },
-        {
-          "id": "3",
-          "label": "Update & Flag Issues",
-          "status": "completed"
-        }
-      ],
-        isError: false,
-      status: "covered",
-      insuranDetials: {
-        insuranceProvider: "Daman-AUH-001",
-        imageUrl: "/insurance-image.png",
-        policyNumber: "42122566",
-      },
-      details: [
-        { label: "Network", value: "Yes" },
-        { label: "Coverage", value: "100%" },
-      ],
-    },
-    medicalCoding: {
-        isError: false,
-          "steps": [
-        {
-          "id": "1",
-          "label": "Extract & Suggest Code",
-          "status": "pending"
-        },
-        {
-          "id": "2",
-          "label": "Validate & Check Compliance",
-          "status": "pending"
-        },
-        {
-          "id": "3",
-          "label": "Claim Posted",
-          "status": "pending"
-        },
-        {
-          "id": "4",
-          "label": "Human Review & Approval",
-          "status": "pending"
-        }
-      ],
-      status: "done", // Medical coding status
-      details: [
-        // { label: "Encounter Date", value: "2025-08-30" },
-        // { label: "Encounter Type", value: "Outpatient" },
-        // { label: "Physician", value: "Dr. Al Shamsi" },
-        // { label: "Department", value: "Orthopaedics" },
-        { label: "Encounter Type", value: "Out patient" },
-        { label: "ICD Code", value: "99213" },
-        { label: "CPT Code", value: "99213" },
-        { label: "Drug Code", value: "12345" },
-        { label: "Encounter Date", value: "2024-07-21" },
-        { label: "Physician", value: "Dr. Al Shamsi" },
-        { label: "Department", value: "Orthopaedics" },
-      ],
-    },
-    priorAuthorization: {
-         "steps": [
-        {
-          "id": "1",
-          "label": "Extract & Prepare & (Code)",
-          "status": "pending"
-        },
-        {
-          "id": "2",
-          "label": "Submit Request",
-          "status": "pending"
-        },
-        {
-          "id": "3",
-          "label": "Prior Authorization Posted",
-          "status": "pending"
-        },
-        {
-          "id": "4",
-          "label": "Response Retrieved",
-          "status": "pending"
-        }
-      ],
-        isError: false,
-      status: "waiting", // Prior authorization status
-      details: [
-        { label: "Encounter ID", value: "ENC-2025-0789" },
-        { label: "CPT Code", value: "29880" },
-        { label: "ICD Code", value: "M23.2" },
-        { label: "Physician", value: "Dr. Al Shamsi" },
-        { label: "Prior Auth ID", value: "PA-556677" },
-        { label: "Drug Codes", value: "NDC-0002" },
-      ],
-    },
-    claimSubmission: {
-        isError: false,
-      status: "inprogress", // Current status of the claim submission process
-      steps: [
-        { id: "1", label: "Compliance Check & Adjustment", status: "pending" },
-        { id: "2", label: "XML File Generated", status: "pending" },
-        { id: "3", label: "Claim Posted", status: "pending" },
-        { id: "4", label: "Claim ID Received & Updated", status: "pending" },
-      ],
-      claimAttempts: [
-        {date: '2025-10-20', claimAmount: "836", claimId: "1014891283", rejectionCode: 'F14'  },
-        {date: '2025-10-20', claimAmount: "836", claimId: "1014891283", rejectionCode: 'F14'  },
-        {date: '2025-10-20', claimAmount: "836", claimId: "1014891283", rejectionCode: 'F14'  },
-        
-      ],
-    },
-      
-    "drugCode": [],
-    denialManagement: {
-       
-      status: "done", // Current status of the denial management process
-      steps: [
-        { id: "1", label: "Denial Code Analyzed", status: "pending" },
-        { id: "2", label: "Suggested Edits", status: "pending" },
-        { id: "3", label: "Appeal Generated", status: "pending" },
-        { id: "4", label: "Appeal Submitted", status: "pending" },
-      ],
-      denialAttempts: [],
-      isError: true,
-    },
-    postPayment: {
-        isError: false,
-      status: "waiting", // Current status of the post-payment process
-      steps: [
-        { id: "1", label: "Payment Retrieved", status: "pending" },
-        { id: "2", label: "Payment Matched", status: "pending" },
-        { id: "3", label: "Adjustments Applied", status: "pending" },
-        { id: "4", label: "Ledger Updated", status: "pending" },
-      ],
-      
-    },
-    attachments: [
-      {
-        fileName: "SOB.pdf",
-        fileSize: "200 KB",
-        ecgImageUrl: "/sob.pdf",
-      },
-      {
-        fileName: "exclusion.pdf",
-        fileSize: "150 KB",
-        ecgImageUrl: "/exclusion.pdf",
-      },
-      {
-        fileName: "policy.pdf",
-        fileSize: "180 KB",
-        ecgImageUrl: "/policy.pdf",
-      },
-      {
-        fileName: "ECG.png",
-        fileSize: "220 KB",
-        ecgImageUrl: "/ecg-report.png",
-      },
-    ],
-    markdown,
-    icdCodes: [],
-    cptCode: [],
-  },
   {
     id: "483920",
     isSubmitted: false,
