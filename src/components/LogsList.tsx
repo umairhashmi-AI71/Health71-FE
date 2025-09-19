@@ -10,7 +10,7 @@ interface LogsListProps {
 }
 
 const LogsList: React.FC<LogsListProps> = ({ data }) => {
-    const [activeTab, setActiveTab] = useState<Number>(0);
+    const [activeTab, setActiveTab] = useState<number>(0);
 
 
     return (
