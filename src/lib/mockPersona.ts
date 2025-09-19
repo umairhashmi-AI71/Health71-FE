@@ -103,7 +103,7 @@ Sara Al Naoumi, a 40-year-old female, presents with left knee pain persisting fo
  
 `;
 
-export const patientPersona: PatientPersona[] = [
+export const demoData: PatientPersona[] = [
   {
     "agentDetails": {
       "agents": ["Clara"],
@@ -3156,3 +3156,5691 @@ export const patientPersona: PatientPersona[] = [
   },
   
 ]
+
+
+export const fakePersona: PatientPersona[] = [
+  {
+    id: "101300",
+    isSubmitted: true,
+    profileCreatedDate: new Date("9/2/2025 20:00:00").toISOString(),
+    agentDetails: {
+      agents: ["Coda"],
+      agentSuggestion: "Verify coding: M25.562 (Pain in left knee)	",
+      coT: "SOAP note indicates knee pain with imaging ordered; agent flagged to confirm ICD-10 and CPT alignment and ensure diagnosis supports X-ray medical necessity.	.",
+    },
+    profile: {
+      name: "Sara",
+      surname: "Al Nuaimi",
+      age: 40,
+      emiratesId: "748-1985-2233445-4",
+      sex: "Female",
+      dateOfBirth: "1985-07-21", // YYYY-MM-DD format
+      nationality: "UAE",
+      language: "Arabic",
+      phoneNumber: 97155467830,
+      email: "Sara.nuaimi@gmail.com",
+      profilePhoto: "/avatar.png",
+    },
+    eligibilityCheck: {
+        "steps": [
+        {
+          "id": "1",
+          "label": "Extract Patient & Payer Data",
+          "status": "completed"
+        },
+        {
+          "id": "2",
+          "label": "Validate Coverage",
+          "status": "completed"
+        },
+        {
+          "id": "3",
+          "label": "Update & Flag Issues",
+          "status": "completed"
+        }
+      ],
+        isError: false,
+      status: "covered",
+      insuranDetials: {
+        insuranceProvider: "Daman-AUH-001",
+        imageUrl: "/insurance-image.png",
+        policyNumber: "42122566",
+      },
+      details: [
+        { label: "Network", value: "Yes" },
+        { label: "Coverage", value: "100%" },
+      ],
+    },
+    medicalCoding: {
+        isError: false,
+          "steps": [
+        {
+          "id": "1",
+          "label": "Extract & Suggest Code",
+          "status": "pending"
+        },
+        {
+          "id": "2",
+          "label": "Validate & Check Compliance",
+          "status": "pending"
+        },
+        {
+          "id": "3",
+          "label": "Claim Posted",
+          "status": "pending"
+        },
+        {
+          "id": "4",
+          "label": "Human Review & Approval",
+          "status": "pending"
+        }
+      ],
+      status: "done", // Medical coding status
+      details: [
+        // { label: "Encounter Date", value: "2025-08-30" },
+        // { label: "Encounter Type", value: "Outpatient" },
+        // { label: "Physician", value: "Dr. Al Shamsi" },
+        // { label: "Department", value: "Orthopaedics" },
+        { label: "Encounter Type", value: "Out patient" },
+        { label: "ICD Code", value: "99213" },
+        { label: "CPT Code", value: "99213" },
+        { label: "Drug Code", value: "12345" },
+        { label: "Encounter Date", value: "2024-07-21" },
+        { label: "Physician", value: "Dr. Al Shamsi" },
+        { label: "Department", value: "Orthopaedics" },
+      ],
+    },
+    priorAuthorization: {
+         "steps": [
+        {
+          "id": "1",
+          "label": "Extract & Prepare & (Code)",
+          "status": "pending"
+        },
+        {
+          "id": "2",
+          "label": "Submit Request",
+          "status": "pending"
+        },
+        {
+          "id": "3",
+          "label": "Prior Authorization Posted",
+          "status": "pending"
+        },
+        {
+          "id": "4",
+          "label": "Response Retrieved",
+          "status": "pending"
+        }
+      ],
+        isError: false,
+      status: "waiting", // Prior authorization status
+      details: [
+        { label: "Encounter ID", value: "ENC-2025-0789" },
+        { label: "CPT Code", value: "29880" },
+        { label: "ICD Code", value: "M23.2" },
+        { label: "Physician", value: "Dr. Al Shamsi" },
+        { label: "Prior Auth ID", value: "PA-556677" },
+        { label: "Drug Codes", value: "NDC-0002" },
+      ],
+    },
+    claimSubmission: {
+        isError: false,
+      status: "inprogress", // Current status of the claim submission process
+      steps: [
+        { id: "1", label: "Compliance Check & Adjustment", status: "pending" },
+        { id: "2", label: "XML File Generated", status: "pending" },
+        { id: "3", label: "Claim Posted", status: "pending" },
+        { id: "4", label: "Claim ID Received & Updated", status: "pending" },
+      ],
+      claimAttempts: [
+        {date: '2025-10-20', claimAmount: "836", claimId: "1014891283", rejectionCode: 'F14'  },
+        {date: '2025-10-20', claimAmount: "836", claimId: "1014891283", rejectionCode: 'F14'  },
+        {date: '2025-10-20', claimAmount: "836", claimId: "1014891283", rejectionCode: 'F14'  },
+        
+      ],
+    },
+      
+    "drugCode": [],
+    denialManagement: {
+       
+      status: "done", // Current status of the denial management process
+      steps: [
+        { id: "1", label: "Denial Code Analyzed", status: "pending" },
+        { id: "2", label: "Suggested Edits", status: "pending" },
+        { id: "3", label: "Appeal Generated", status: "pending" },
+        { id: "4", label: "Appeal Submitted", status: "pending" },
+      ],
+      denialAttempts: [],
+      isError: true,
+    },
+    postPayment: {
+        isError: false,
+      status: "waiting", // Current status of the post-payment process
+      steps: [
+        { id: "1", label: "Payment Retrieved", status: "pending" },
+        { id: "2", label: "Payment Matched", status: "pending" },
+        { id: "3", label: "Adjustments Applied", status: "pending" },
+        { id: "4", label: "Ledger Updated", status: "pending" },
+      ],
+      
+    },
+    attachments: [
+      {
+        fileName: "SOB.pdf",
+        fileSize: "200 KB",
+        ecgImageUrl: "/sob.pdf",
+      },
+      {
+        fileName: "exclusion.pdf",
+        fileSize: "150 KB",
+        ecgImageUrl: "/exclusion.pdf",
+      },
+      {
+        fileName: "policy.pdf",
+        fileSize: "180 KB",
+        ecgImageUrl: "/policy.pdf",
+      },
+      {
+        fileName: "ECG.png",
+        fileSize: "220 KB",
+        ecgImageUrl: "/ecg-report.png",
+      },
+    ],
+    markdown,
+    icdCodes: [],
+    cptCode: [],
+  },
+  {
+    id: "483920",
+    isSubmitted: false,
+    profileCreatedDate: new Date("9/2/2025 20:33:45").toISOString(),
+
+    agentDetails: {
+      agents: ["Autho"],
+      agentSuggestion: "Attach clinical notes for MRI PA",
+      coT: "Diagnostic report mentioned in SOAP but not attached; agent cannot confirm if payer’s criteria for MRI are met.",
+    },
+    profile: {
+      name: "Fatima",
+      surname: "Rahman",
+      age: 34,
+      emiratesId: "748-1985-2233445-4",
+      sex: "Female",
+      dateOfBirth: "1985-07-21",
+      nationality: "UAE",
+      language: "Arabic",
+      phoneNumber: 97155467830,
+      email: "Sara.nuaimi@gmail.com",
+      profilePhoto: "/avatar.png",
+    },
+    eligibilityCheck: {
+        "steps": [
+        {
+          "id": "1",
+          "label": "Extract Patient & Payer Data",
+          "status": "completed"
+        },
+        {
+          "id": "2",
+          "label": "Validate Coverage",
+          "status": "completed"
+        },
+        {
+          "id": "3",
+          "label": "Update & Flag Issues",
+          "status": "completed"
+        }
+      ],
+        isError: false,
+      status: "covered",
+      insuranDetials: {
+        insuranceProvider: "Daman-AUH-001",
+        imageUrl: "/insurance-image.png",
+        policyNumber: "42122566",
+      },
+      details: [
+        { label: "Network", value: "Yes" },
+        { label: "Coverage", value: "100%" },
+      ],
+    },
+    medicalCoding: {
+        isError: false,
+          "steps": [
+        {
+          "id": "1",
+          "label": "Extract & Suggest Code",
+          "status": "pending"
+        },
+        {
+          "id": "2",
+          "label": "Validate & Check Compliance",
+          "status": "pending"
+        },
+        {
+          "id": "3",
+          "label": "Claim Posted",
+          "status": "pending"
+        },
+        {
+          "id": "4",
+          "label": "Human Review & Approval",
+          "status": "pending"
+        }
+      ],
+      status: "inprogress", // Medical coding status
+      details: [
+        { label: "Encounter Date", value: "2025-08-30" },
+        { label: "Encounter Type", value: "Outpatient" },
+        { label: "Physician", value: "Dr. Al Shamsi" },
+        { label: "Department", value: "Orthopaedics" },
+      ],
+    },
+    priorAuthorization: {
+         "steps": [
+        {
+          "id": "1",
+          "label": "Extract & Prepare & (Code)",
+          "status": "pending"
+        },
+        {
+          "id": "2",
+          "label": "Submit Request",
+          "status": "pending"
+        },
+        {
+          "id": "3",
+          "label": "Prior Authorization Posted",
+          "status": "pending"
+        },
+        {
+          "id": "4",
+          "label": "Response Retrieved",
+          "status": "pending"
+        }
+      ],
+        isError: false,
+      status: "waiting", // Prior authorization status
+      details: [
+        { label: "Encounter ID", value: "ENC-2025-0789" },
+        { label: "CPT Code", value: "29880" },
+        { label: "ICD Code", value: "M23.2" },
+        { label: "Physician", value: "Dr. Al Shamsi" },
+        { label: "Prior Auth ID", value: "PA-556677" },
+        { label: "Drug Codes", value: "NDC-0002" },
+      ],
+    },
+    claimSubmission: {
+        isError: false,
+      status: "waiting", // Current status of the claim submission process
+      steps: [
+        { id: "1", label: "Compliance Check & Adjustment", status: "pending" },
+        { id: "2", label: "XML File Generated", status: "pending" },
+        { id: "3", label: "Claim Posted", status: "pending" },
+        { id: "4", label: "Claim ID Received & Updated", status: "pending" },
+      ],
+    },
+      
+    "drugCode": [],
+    denialManagement: {
+        isError: false, 
+      status: "waiting", // Current status of the denial management process
+      steps: [
+        { id: "1", label: "Denial Code Analyzed", status: "pending" },
+        { id: "2", label: "Suggested Edits", status: "pending" },
+        { id: "3", label: "Appeal Generated", status: "pending" },
+        { id: "4", label: "Appeal Submitted", status: "pending" },
+      ],
+       
+    },
+    postPayment: {
+        isError: false,
+      status: "waiting", // Current status of the post-payment process
+      steps: [
+        { id: "1", label: "Payment Retrieved", status: "pending" },
+        { id: "2", label: "Payment Matched", status: "pending" },
+        { id: "3", label: "Adjustments Applied", status: "pending" },
+        { id: "4", label: "Ledger Updated", status: "pending" },
+      ],
+    },
+    attachments: [
+      {
+        fileName: "SOB.pdf",
+        fileSize: "200 KB",
+        ecgImageUrl: "/sob.pdf",
+      },
+      {
+        fileName: "Exclusion.pdf",
+        fileSize: "150 KB",
+        ecgImageUrl: "/ecg-report.png",
+      },
+      {
+        fileName: "Policy.pdf",
+        fileSize: "180 KB",
+        ecgImageUrl: "/policy.pdf",
+      },
+      {
+        fileName: "ECG.png",
+        fileSize: "220 KB",
+        ecgImageUrl: "/ecg-report.png",
+      },
+    ],
+    markdown,
+    icdCodes: [],
+    cptCode: [],
+  },
+  {
+    id: "762145",
+    isSubmitted: false,
+    profileCreatedDate: new Date("9/2/2025 21:07:30").toISOString(),
+    agentDetails: {
+      agents: ["Autho"],
+      agentSuggestion: "Resubmit PA for CT scan (denied once)",
+      coT: "Denial code shows “insufficient medical necessity” → agent requests isError with radiology justification.",
+    },
+    profile: {
+      name: "Layla",
+      surname: "Mansour",
+      age: 55,
+      emiratesId: "748-1985-2233445-4",
+      sex: "Female",
+      dateOfBirth: "1985-07-21",
+      nationality: "UAE",
+      language: "Arabic",
+      phoneNumber: 97155467830,
+      email: "Sara.nuaimi@gmail.com",
+      profilePhoto: "/avatar.png",
+    },
+    eligibilityCheck: {
+        "steps": [
+        {
+          "id": "1",
+          "label": "Extract Patient & Payer Data",
+          "status": "completed"
+        },
+        {
+          "id": "2",
+          "label": "Validate Coverage",
+          "status": "completed"
+        },
+        {
+          "id": "3",
+          "label": "Update & Flag Issues",
+          "status": "completed"
+        }
+      ],
+        isError: false,
+      status: "covered",
+      insuranDetials: {
+        insuranceProvider: "Daman-AUH-001",
+        imageUrl: "/insurance-image.png",
+        policyNumber: "42122566",
+      },
+      details: [
+        { label: "Network", value: "Yes" },
+        { label: "Coverage", value: "100%" },
+      ],
+    },
+    medicalCoding: {
+        isError: false,
+          "steps": [
+        {
+          "id": "1",
+          "label": "Extract & Suggest Code",
+          "status": "pending"
+        },
+        {
+          "id": "2",
+          "label": "Validate & Check Compliance",
+          "status": "pending"
+        },
+        {
+          "id": "3",
+          "label": "Claim Posted",
+          "status": "pending"
+        },
+        {
+          "id": "4",
+          "label": "Human Review & Approval",
+          "status": "pending"
+        }
+      ],
+      status: "inprogress", // Medical coding status
+      details: [
+        { label: "Encounter Date", value: "2025-08-30" },
+        { label: "Encounter Type", value: "Outpatient" },
+        { label: "Physician", value: "Dr. Al Shamsi" },
+        { label: "Department", value: "Orthopaedics" },
+      ],
+    },
+    priorAuthorization: {
+         "steps": [
+        {
+          "id": "1",
+          "label": "Extract & Prepare & (Code)",
+          "status": "pending"
+        },
+        {
+          "id": "2",
+          "label": "Submit Request",
+          "status": "pending"
+        },
+        {
+          "id": "3",
+          "label": "Prior Authorization Posted",
+          "status": "pending"
+        },
+        {
+          "id": "4",
+          "label": "Response Retrieved",
+          "status": "pending"
+        }
+      ],
+        isError: false,
+      status: "waiting", // Prior authorization status
+      details: [
+        { label: "Encounter ID", value: "ENC-2025-0789" },
+        { label: "CPT Code", value: "29880" },
+        { label: "ICD Code", value: "M23.2" },
+        { label: "Physician", value: "Dr. Al Shamsi" },
+        { label: "Prior Auth ID", value: "PA-556677" },
+        { label: "Drug Codes", value: "NDC-0002" },
+      ],
+    },
+    claimSubmission: {
+        isError: false,
+      status: "waiting", // Current status of the claim submission process
+      steps: [
+        { id: "1", label: "Compliance Check & Adjustment", status: "pending" },
+        { id: "2", label: "XML File Generated", status: "pending" },
+        { id: "3", label: "Claim Posted", status: "pending" },
+        { id: "4", label: "Claim ID Received & Updated", status: "pending" },
+      ],
+    },
+      
+    "drugCode": [],
+    denialManagement: {
+        isError: false,
+      status: "waiting", // Current status of the denial management process
+      steps: [
+        { id: "1", label: "Denial Code Analyzed", status: "pending" },
+        { id: "2", label: "Suggested Edits", status: "pending" },
+        { id: "3", label: "Appeal Generated", status: "pending" },
+        { id: "4", label: "Appeal Submitted", status: "pending" },
+      ],
+    },
+    postPayment: {
+        isError: false,
+      status: "waiting", // Current status of the post-payment process
+      steps: [
+        { id: "1", label: "Payment Retrieved", status: "pending" },
+        { id: "2", label: "Payment Matched", status: "pending" },
+        { id: "3", label: "Adjustments Applied", status: "pending" },
+        { id: "4", label: "Ledger Updated", status: "pending" },
+      ],
+    },
+    attachments: [
+      {
+        fileName: "SOB.pdf",
+        fileSize: "200 KB",
+        ecgImageUrl: "/sob.pdf",
+      },
+      {
+        fileName: "Exclusion.pdf",
+        fileSize: "150 KB",
+        ecgImageUrl: "/exclusion.pdf",
+      },
+      {
+        fileName: "Policy.pdf",
+        fileSize: "180 KB",
+        ecgImageUrl: "/policy.pdf",
+      },
+      {
+        fileName: "ECG.png",
+        fileSize: "220 KB",
+        ecgImageUrl: "/ecg-report.png",
+      },
+    ],
+    markdown,
+    icdCodes: [],
+    cptCode: [],
+  },
+  {
+    id: "198307",
+    isSubmitted: false,
+    profileCreatedDate: new Date("9/2/2025 21:41:15").toISOString(),
+
+    agentDetails: {
+      agents: ["Autho"],
+      agentSuggestion: "PA required for inpatient stay extension",
+      coT: "Payer requires re-auth after 5 days; agent drafted but physician must confirm ongoing medical necessity.",
+    },
+    profile: {
+      name: "Huda",
+      surname: "Mansoor",
+      age: 36,
+      emiratesId: "748-1985-2233445-4",
+      sex: "Female",
+      dateOfBirth: "1985-07-21",
+      nationality: "UAE",
+      language: "Arabic",
+      phoneNumber: 97155467830,
+      email: "Sara.nuaimi@gmail.com",
+      profilePhoto: "/avatar.png",
+    },
+    eligibilityCheck: {
+        "steps": [
+        {
+          "id": "1",
+          "label": "Extract Patient & Payer Data",
+          "status": "completed"
+        },
+        {
+          "id": "2",
+          "label": "Validate Coverage",
+          "status": "completed"
+        },
+        {
+          "id": "3",
+          "label": "Update & Flag Issues",
+          "status": "completed"
+        }
+      ],
+        isError: false,
+      status: "covered",
+      insuranDetials: {
+        insuranceProvider: "Daman-AUH-001",
+        imageUrl: "/insurance-image.png",
+        policyNumber: "42122566",
+      },
+      details: [
+        { label: "Network", value: "Yes" },
+        { label: "Coverage", value: "100%" },
+      ],
+    },
+    medicalCoding: {
+        isError: false,
+          "steps": [
+        {
+          "id": "1",
+          "label": "Extract & Suggest Code",
+          "status": "pending"
+        },
+        {
+          "id": "2",
+          "label": "Validate & Check Compliance",
+          "status": "pending"
+        },
+        {
+          "id": "3",
+          "label": "Claim Posted",
+          "status": "pending"
+        },
+        {
+          "id": "4",
+          "label": "Human Review & Approval",
+          "status": "pending"
+        }
+      ],
+      status: "inprogress", // Medical coding status
+      details: [
+        { label: "Encounter Date", value: "2025-08-30" },
+        { label: "Encounter Type", value: "Outpatient" },
+        { label: "Physician", value: "Dr. Al Shamsi" },
+        { label: "Department", value: "Orthopaedics" },
+      ],
+    },
+    priorAuthorization: {
+         "steps": [
+        {
+          "id": "1",
+          "label": "Extract & Prepare & (Code)",
+          "status": "pending"
+        },
+        {
+          "id": "2",
+          "label": "Submit Request",
+          "status": "pending"
+        },
+        {
+          "id": "3",
+          "label": "Prior Authorization Posted",
+          "status": "pending"
+        },
+        {
+          "id": "4",
+          "label": "Response Retrieved",
+          "status": "pending"
+        }
+      ],
+        isError: false,
+      status: "waiting", // Prior authorization status
+      details: [
+        { label: "Encounter ID", value: "ENC-2025-0789" },
+        { label: "CPT Code", value: "29880" },
+        { label: "ICD Code", value: "M23.2" },
+        { label: "Physician", value: "Dr. Al Shamsi" },
+        { label: "Prior Auth ID", value: "PA-556677" },
+        { label: "Drug Codes", value: "NDC-0002" },
+      ],
+    },
+    claimSubmission: {
+        isError: false,
+      status: "waiting", // Current status of the claim submission process
+      steps: [
+        { id: "1", label: "Compliance Check & Adjustment", status: "pending" },
+        { id: "2", label: "XML File Generated", status: "pending" },
+        { id: "3", label: "Claim Posted", status: "pending" },
+        { id: "4", label: "Claim ID Received & Updated", status: "pending" },
+      ],
+    },
+      
+    "drugCode": [],
+    denialManagement: {
+        isError: false,
+      status: "waiting", // Current status of the denial management process
+      steps: [
+        { id: "1", label: "Denial Code Analyzed", status: "pending" },
+        { id: "2", label: "Suggested Edits", status: "pending" },
+        { id: "3", label: "Appeal Generated", status: "pending" },
+        { id: "4", label: "Appeal Submitted", status: "pending" },
+      ],
+    },
+    postPayment: {
+        isError: false,
+      status: "waiting", // Current status of the post-payment process
+      steps: [
+        { id: "1", label: "Payment Retrieved", status: "pending" },
+        { id: "2", label: "Payment Matched", status: "pending" },
+        { id: "3", label: "Adjustments Applied", status: "pending" },
+        { id: "4", label: "Ledger Updated", status: "pending" },
+      ],
+    },
+    attachments: [
+      {
+        fileName: "SOB.pdf",
+        fileSize: "200 KB",
+        ecgImageUrl: "/sob.pdf",
+      },
+      {
+        fileName: "Exclusion.pdf",
+        fileSize: "150 KB",
+        ecgImageUrl: "/exclusion.pdf",
+      },
+      {
+        fileName: "Policy.pdf",
+        fileSize: "180 KB",
+        ecgImageUrl: "/policy.pdf",
+      },
+      {
+        fileName: "ECG.png",
+        fileSize: "220 KB",
+        ecgImageUrl: "/ecg-report.png",
+      },
+    ],
+    markdown,
+    icdCodes: [],
+    cptCode: [],
+  },
+  {
+    id: "530412",
+    isSubmitted: false,
+    profileCreatedDate: new Date("9/2/2025 22:15:00").toISOString(),
+
+    agentDetails: {
+      agents: ["Dee"],
+      agentSuggestion: "Draft appeal: “not medically necessary”",
+      coT: "Denial code 50; flagged for physician medical justification + supporting guidelines.",
+    },
+    profile: {
+      name: "Olivier",
+      surname: "Dubois",
+      age: 44,
+      emiratesId: "748-1985-2233445-4",
+      sex: "Female",
+      dateOfBirth: "1985-07-21",
+      nationality: "UAE",
+      language: "Arabic",
+      phoneNumber: 97155467830,
+      email: "Sara.nuaimi@gmail.com",
+      profilePhoto: "/avatar.png",
+    },
+    eligibilityCheck: {
+        "steps": [
+        {
+          "id": "1",
+          "label": "Extract Patient & Payer Data",
+          "status": "completed"
+        },
+        {
+          "id": "2",
+          "label": "Validate Coverage",
+          "status": "completed"
+        },
+        {
+          "id": "3",
+          "label": "Update & Flag Issues",
+          "status": "completed"
+        }
+      ],
+        isError: false,
+      status: "covered",
+      insuranDetials: {
+        insuranceProvider: "Daman-AUH-001",
+        imageUrl: "/insurance-image.png",
+        policyNumber: "42122566",
+      },
+      details: [
+        { label: "Network", value: "Yes" },
+        { label: "Coverage", value: "100%" },
+      ],
+    },
+    medicalCoding: {
+        isError: false,
+          "steps": [
+        {
+          "id": "1",
+          "label": "Extract & Suggest Code",
+          "status": "pending"
+        },
+        {
+          "id": "2",
+          "label": "Validate & Check Compliance",
+          "status": "pending"
+        },
+        {
+          "id": "3",
+          "label": "Claim Posted",
+          "status": "pending"
+        },
+        {
+          "id": "4",
+          "label": "Human Review & Approval",
+          "status": "pending"
+        }
+      ],
+      status: "inprogress", // Medical coding status
+      details: [
+        { label: "Encounter Date", value: "2025-08-30" },
+        { label: "Encounter Type", value: "Outpatient" },
+        { label: "Physician", value: "Dr. Al Shamsi" },
+        { label: "Department", value: "Orthopaedics" },
+      ],
+    },
+    priorAuthorization: {
+         "steps": [
+        {
+          "id": "1",
+          "label": "Extract & Prepare & (Code)",
+          "status": "pending"
+        },
+        {
+          "id": "2",
+          "label": "Submit Request",
+          "status": "pending"
+        },
+        {
+          "id": "3",
+          "label": "Prior Authorization Posted",
+          "status": "pending"
+        },
+        {
+          "id": "4",
+          "label": "Response Retrieved",
+          "status": "pending"
+        }
+      ],
+        isError: false,
+      status: "waiting", // Prior authorization status
+      details: [
+        { label: "Encounter ID", value: "ENC-2025-0789" },
+        { label: "CPT Code", value: "29880" },
+        { label: "ICD Code", value: "M23.2" },
+        { label: "Physician", value: "Dr. Al Shamsi" },
+        { label: "Prior Auth ID", value: "PA-556677" },
+        { label: "Drug Codes", value: "NDC-0002" },
+      ],
+    },
+    claimSubmission: {
+        isError: false,
+      status: "waiting", // Current status of the claim submission process
+      steps: [
+        { id: "1", label: "Compliance Check & Adjustment", status: "pending" },
+        { id: "2", label: "XML File Generated", status: "pending" },
+        { id: "3", label: "Claim Posted", status: "pending" },
+        { id: "4", label: "Claim ID Received & Updated", status: "pending" },
+      ],
+    },
+      
+    "drugCode": [],
+    denialManagement: {
+        isError: false,
+      status: "waiting", // Current status of the denial management process
+      steps: [
+        { id: "1", label: "Denial Code Analyzed", status: "pending" },
+        { id: "2", label: "Suggested Edits", status: "pending" },
+        { id: "3", label: "Appeal Generated", status: "pending" },
+        { id: "4", label: "Appeal Submitted", status: "pending" },
+      ],
+    },
+    postPayment: {
+        isError: false,
+      status: "waiting", // Current status of the post-payment process
+      steps: [
+        { id: "1", label: "Payment Retrieved", status: "pending" },
+        { id: "2", label: "Payment Matched", status: "pending" },
+        { id: "3", label: "Adjustments Applied", status: "pending" },
+        { id: "4", label: "Ledger Updated", status: "pending" },
+      ],
+    },
+    attachments: [
+      {
+        fileName: "SOB.pdf",
+        fileSize: "200 KB",
+        ecgImageUrl: "/sob.pdf",
+      },
+      {
+        fileName: "Exclusion.pdf",
+        fileSize: "150 KB",
+        ecgImageUrl: "/ecg-report.png",
+      },
+      {
+        fileName: "Policy.pdf",
+        fileSize: "180 KB",
+        ecgImageUrl: "/policy.pdf",
+      },
+      {
+        fileName: "ECG.png",
+        fileSize: "220 KB",
+        ecgImageUrl: "/ecg-report.png",
+      },
+    ],
+    markdown,
+    icdCodes: [],
+    cptCode: [],
+  },
+  {
+    id: "824691",
+    isSubmitted: false,
+    profileCreatedDate: new Date("9/2/2025 22:48:45").toISOString(),
+
+    agentDetails: {
+      agents: ["Dee"],
+      agentSuggestion: "Denial reason: experimental procedure",
+      coT: "Payer denial flagged as investigational; requires physician statement + clinical literature.",
+    },
+    profile: {
+      name: "Mariam ",
+      surname: "Yusuf",
+      age: 37,
+      emiratesId: "748-1985-2233445-4",
+      sex: "Female",
+      dateOfBirth: "1985-07-21",
+      nationality: "UAE",
+      language: "Arabic",
+      phoneNumber: 97155467830,
+      email: "Sara.nuaimi@gmail.com",
+      profilePhoto: "/avatar.png",
+    },
+    eligibilityCheck: {
+        "steps": [
+        {
+          "id": "1",
+          "label": "Extract Patient & Payer Data",
+          "status": "completed"
+        },
+        {
+          "id": "2",
+          "label": "Validate Coverage",
+          "status": "completed"
+        },
+        {
+          "id": "3",
+          "label": "Update & Flag Issues",
+          "status": "completed"
+        }
+      ],
+        isError: false,
+      status: "covered",
+      insuranDetials: {
+        insuranceProvider: "Daman-AUH-001",
+        imageUrl: "/insurance-image.png",
+        policyNumber: "42122566",
+      },
+      details: [
+        { label: "Network", value: "Yes" },
+        { label: "Coverage", value: "100%" },
+      ],
+    },
+    medicalCoding: {
+        isError: false,
+          "steps": [
+        {
+          "id": "1",
+          "label": "Extract & Suggest Code",
+          "status": "pending"
+        },
+        {
+          "id": "2",
+          "label": "Validate & Check Compliance",
+          "status": "pending"
+        },
+        {
+          "id": "3",
+          "label": "Claim Posted",
+          "status": "pending"
+        },
+        {
+          "id": "4",
+          "label": "Human Review & Approval",
+          "status": "pending"
+        }
+      ],
+      status: "inprogress", // Medical coding status
+      details: [
+        { label: "Encounter Date", value: "2025-08-30" },
+        { label: "Encounter Type", value: "Outpatient" },
+        { label: "Physician", value: "Dr. Al Shamsi" },
+        { label: "Department", value: "Orthopaedics" },
+      ],
+    },
+    priorAuthorization: {
+         "steps": [
+        {
+          "id": "1",
+          "label": "Extract & Prepare & (Code)",
+          "status": "pending"
+        },
+        {
+          "id": "2",
+          "label": "Submit Request",
+          "status": "pending"
+        },
+        {
+          "id": "3",
+          "label": "Prior Authorization Posted",
+          "status": "pending"
+        },
+        {
+          "id": "4",
+          "label": "Response Retrieved",
+          "status": "pending"
+        }
+      ],
+        isError: false,
+      status: "waiting", // Prior authorization status
+      details: [
+        { label: "Encounter ID", value: "ENC-2025-0789" },
+        { label: "CPT Code", value: "29880" },
+        { label: "ICD Code", value: "M23.2" },
+        { label: "Physician", value: "Dr. Al Shamsi" },
+        { label: "Prior Auth ID", value: "PA-556677" },
+        { label: "Drug Codes", value: "NDC-0002" },
+      ],
+    },
+    claimSubmission: {
+        isError: false,
+      status: "waiting", // Current status of the claim submission process
+      steps: [
+        { id: "1", label: "Compliance Check & Adjustment", status: "pending" },
+        { id: "2", label: "XML File Generated", status: "pending" },
+        { id: "3", label: "Claim Posted", status: "pending" },
+        { id: "4", label: "Claim ID Received & Updated", status: "pending" },
+      ],
+    },
+      
+    "drugCode": [],
+    denialManagement: {
+        isError: false,
+      status: "waiting", // Current status of the denial management process
+      steps: [
+        { id: "1", label: "Denial Code Analyzed", status: "pending" },
+        { id: "2", label: "Suggested Edits", status: "pending" },
+        { id: "3", label: "Appeal Generated", status: "pending" },
+        { id: "4", label: "Appeal Submitted", status: "pending" },
+      ],
+    },
+    postPayment: {
+        isError: false,
+      status: "waiting", // Current status of the post-payment process
+      steps: [
+        { id: "1", label: "Payment Retrieved", status: "pending" },
+        { id: "2", label: "Payment Matched", status: "pending" },
+        { id: "3", label: "Adjustments Applied", status: "pending" },
+        { id: "4", label: "Ledger Updated", status: "pending" },
+      ],
+    },
+    attachments: [
+      {
+        fileName: "SOB.pdf",
+        fileSize: "200 KB",
+        ecgImageUrl: "/sob.pdf",
+      },
+      {
+        fileName: "Exclusion.pdf",
+        fileSize: "150 KB",
+        ecgImageUrl: "/exclusion.pdf",
+      },
+      {
+        fileName: "Policy.pdf",
+        fileSize: "180 KB",
+        ecgImageUrl: "/policy.pdf",
+      },
+      {
+        fileName: "ECG.png",
+        fileSize: "220 KB",
+        ecgImageUrl: "/ecg-report.png",
+      },
+    ],
+    markdown,
+    icdCodes: [],
+    cptCode: [],
+  },
+  {
+    id: "315478",
+    isSubmitted: false,
+    profileCreatedDate: new Date("9/2/2025 23:22:30").toISOString(),
+
+    agentDetails: {
+      agents: ["Coda"],
+      agentSuggestion:
+        "ICD-10: C34.9 (Malignant neoplasm of lung, unspecified)",
+      coT: "SOAP: “suspicious lung lesion” without biopsy confirmation → risk of premature cancer coding.",
+    },
+    profile: {
+      name: "Fatemeh ",
+      surname: "Esfandiari",
+      age: 61,
+      emiratesId: "748-1985-2233445-4",
+      sex: "Female",
+      dateOfBirth: "1985-07-21",
+      nationality: "UAE",
+      language: "Arabic",
+      phoneNumber: 97155467830,
+      email: "Sara.nuaimi@gmail.com",
+      profilePhoto: "/avatar.png",
+    },
+    eligibilityCheck: {
+        "steps": [
+        {
+          "id": "1",
+          "label": "Extract Patient & Payer Data",
+          "status": "completed"
+        },
+        {
+          "id": "2",
+          "label": "Validate Coverage",
+          "status": "completed"
+        },
+        {
+          "id": "3",
+          "label": "Update & Flag Issues",
+          "status": "completed"
+        }
+      ],
+        isError: false,
+      status: "covered",
+      insuranDetials: {
+        insuranceProvider: "Daman-AUH-001",
+        imageUrl: "/insurance-image.png",
+        policyNumber: "42122566",
+      },
+      details: [
+        { label: "Network", value: "Yes" },
+        { label: "Coverage", value: "100%" },
+      ],
+    },
+    medicalCoding: {
+        isError: false,
+          "steps": [
+        {
+          "id": "1",
+          "label": "Extract & Suggest Code",
+          "status": "pending"
+        },
+        {
+          "id": "2",
+          "label": "Validate & Check Compliance",
+          "status": "pending"
+        },
+        {
+          "id": "3",
+          "label": "Claim Posted",
+          "status": "pending"
+        },
+        {
+          "id": "4",
+          "label": "Human Review & Approval",
+          "status": "pending"
+        }
+      ],
+      status: "inprogress", // Medical coding status
+      details: [
+        { label: "Encounter Date", value: "2025-08-30" },
+        { label: "Encounter Type", value: "Outpatient" },
+        { label: "Physician", value: "Dr. Al Shamsi" },
+        { label: "Department", value: "Orthopaedics" },
+      ],
+    },
+    priorAuthorization: {
+         "steps": [
+        {
+          "id": "1",
+          "label": "Extract & Prepare & (Code)",
+          "status": "pending"
+        },
+        {
+          "id": "2",
+          "label": "Submit Request",
+          "status": "pending"
+        },
+        {
+          "id": "3",
+          "label": "Prior Authorization Posted",
+          "status": "pending"
+        },
+        {
+          "id": "4",
+          "label": "Response Retrieved",
+          "status": "pending"
+        }
+      ],
+        isError: false,
+      status: "waiting", // Prior authorization status
+      details: [
+        { label: "Encounter ID", value: "ENC-2025-0789" },
+        { label: "CPT Code", value: "29880" },
+        { label: "ICD Code", value: "M23.2" },
+        { label: "Physician", value: "Dr. Al Shamsi" },
+        { label: "Prior Auth ID", value: "PA-556677" },
+        { label: "Drug Codes", value: "NDC-0002" },
+      ],
+    },
+    claimSubmission: {
+        isError: false,
+      status: "waiting", // Current status of the claim submission process
+      steps: [
+        { id: "1", label: "Compliance Check & Adjustment", status: "pending" },
+        { id: "2", label: "XML File Generated", status: "pending" },
+        { id: "3", label: "Claim Posted", status: "pending" },
+        { id: "4", label: "Claim ID Received & Updated", status: "pending" },
+      ],
+    },
+      
+    "drugCode": [],
+    denialManagement: {
+        isError: false,
+      status: "waiting", // Current status of the denial management process
+      steps: [
+        { id: "1", label: "Denial Code Analyzed", status: "pending" },
+        { id: "2", label: "Suggested Edits", status: "pending" },
+        { id: "3", label: "Appeal Generated", status: "pending" },
+        { id: "4", label: "Appeal Submitted", status: "pending" },
+      ],
+    },
+    postPayment: {
+        isError: false,
+      status: "waiting", // Current status of the post-payment process
+      steps: [
+        { id: "1", label: "Payment Retrieved", status: "pending" },
+        { id: "2", label: "Payment Matched", status: "pending" },
+        { id: "3", label: "Adjustments Applied", status: "pending" },
+        { id: "4", label: "Ledger Updated", status: "pending" },
+      ],
+    },
+    attachments: [
+      {
+        fileName: "SOB.pdf",
+        fileSize: "200 KB",
+        ecgImageUrl: "/sob.pdf",
+      },
+      {
+        fileName: "Exclusion.pdf",
+        fileSize: "150 KB",
+        ecgImageUrl: "/exclusion.pdf",
+      },
+      {
+        fileName: "Policy.pdf",
+        fileSize: "180 KB",
+        ecgImageUrl: "/policy.pdf",
+      },
+      {
+        fileName: "ECG.png",
+        fileSize: "220 KB",
+        ecgImageUrl: "/ecg-report.png",
+      },
+    ],
+    markdown,
+    icdCodes: [],
+    cptCode: [],
+  },
+  {
+    id: "907263",
+    isSubmitted: false,
+    profileCreatedDate: new Date("9/2/2025 23:56:15").toISOString(),
+
+    agentDetails: {
+      agents: ["Payne"],
+      agentSuggestion: "ERA mismatch AED 450 vs 500 billed",
+      coT: "Underpayment 10% below contract; payer adjustment reason code unclear → finance validation needed.",
+    },
+    profile: {
+      name: "John",
+      surname: "Williams",
+      age: 60,
+      emiratesId: "748-1985-2233445-4",
+      sex: "Female",
+      dateOfBirth: "1985-07-21",
+      nationality: "UAE",
+      language: "Arabic",
+      phoneNumber: 97155467830,
+      email: "Sara.nuaimi@gmail.com",
+      profilePhoto: "/avatar.png",
+    },
+    eligibilityCheck: {
+        "steps": [
+        {
+          "id": "1",
+          "label": "Extract Patient & Payer Data",
+          "status": "completed"
+        },
+        {
+          "id": "2",
+          "label": "Validate Coverage",
+          "status": "completed"
+        },
+        {
+          "id": "3",
+          "label": "Update & Flag Issues",
+          "status": "completed"
+        }
+      ],
+        isError: false,
+      status: "covered",
+      insuranDetials: {
+        insuranceProvider: "Daman-AUH-001",
+        imageUrl: "/insurance-image.png",
+        policyNumber: "42122566",
+      },
+      details: [
+        { label: "Network", value: "Yes" },
+        { label: "Coverage", value: "100%" },
+      ],
+    },
+    medicalCoding: {
+        isError: false,
+          "steps": [
+        {
+          "id": "1",
+          "label": "Extract & Suggest Code",
+          "status": "pending"
+        },
+        {
+          "id": "2",
+          "label": "Validate & Check Compliance",
+          "status": "pending"
+        },
+        {
+          "id": "3",
+          "label": "Claim Posted",
+          "status": "pending"
+        },
+        {
+          "id": "4",
+          "label": "Human Review & Approval",
+          "status": "pending"
+        }
+      ],
+      status: "inprogress", // Medical coding status
+      details: [
+        { label: "Encounter Date", value: "2025-08-30" },
+        { label: "Encounter Type", value: "Outpatient" },
+        { label: "Physician", value: "Dr. Al Shamsi" },
+        { label: "Department", value: "Orthopaedics" },
+      ],
+    },
+    priorAuthorization: {
+         "steps": [
+        {
+          "id": "1",
+          "label": "Extract & Prepare & (Code)",
+          "status": "pending"
+        },
+        {
+          "id": "2",
+          "label": "Submit Request",
+          "status": "pending"
+        },
+        {
+          "id": "3",
+          "label": "Prior Authorization Posted",
+          "status": "pending"
+        },
+        {
+          "id": "4",
+          "label": "Response Retrieved",
+          "status": "pending"
+        }
+      ],
+        isError: false,
+      status: "waiting", // Prior authorization status
+      details: [
+        { label: "Encounter ID", value: "ENC-2025-0789" },
+        { label: "CPT Code", value: "29880" },
+        { label: "ICD Code", value: "M23.2" },
+        { label: "Physician", value: "Dr. Al Shamsi" },
+        { label: "Prior Auth ID", value: "PA-556677" },
+        { label: "Drug Codes", value: "NDC-0002" },
+      ],
+    },
+    claimSubmission: {
+        isError: false,
+      status: "waiting", // Current status of the claim submission process
+      steps: [
+        { id: "1", label: "Compliance Check & Adjustment", status: "pending" },
+        { id: "2", label: "XML File Generated", status: "pending" },
+        { id: "3", label: "Claim Posted", status: "pending" },
+        { id: "4", label: "Claim ID Received & Updated", status: "pending" },
+      ],
+    },
+      
+    "drugCode": [],
+    denialManagement: {
+        isError: false,
+      status: "waiting", // Current status of the denial management process
+      steps: [
+        { id: "1", label: "Denial Code Analyzed", status: "pending" },
+        { id: "2", label: "Suggested Edits", status: "pending" },
+        { id: "3", label: "Appeal Generated", status: "pending" },
+        { id: "4", label: "Appeal Submitted", status: "pending" },
+      ],
+    },
+    postPayment: {
+        isError: false,
+      status: "waiting", // Current status of the post-payment process
+      steps: [
+        { id: "1", label: "Payment Retrieved", status: "pending" },
+        { id: "2", label: "Payment Matched", status: "pending" },
+        { id: "3", label: "Adjustments Applied", status: "pending" },
+        { id: "4", label: "Ledger Updated", status: "pending" },
+      ],
+    },
+    attachments: [
+      {
+        fileName: "SOB.pdf",
+        fileSize: "200 KB",
+        ecgImageUrl: "/sob.pdf",
+      },
+      {
+        fileName: "Exclusion.pdf",
+        fileSize: "150 KB",
+        ecgImageUrl: "/exclusion.pdf",
+      },
+      {
+        fileName: "Policy.pdf",
+        fileSize: "180 KB",
+        ecgImageUrl: "/policy.pdf",
+      },
+      {
+        fileName: "ECG.png",
+        fileSize: "220 KB",
+        ecgImageUrl: "/ecg-report.png",
+      },
+    ],
+    markdown,
+    icdCodes: [],
+    cptCode: [],
+  },
+  {
+    id: "451809",
+    isSubmitted: false,
+    profileCreatedDate: new Date("9/3/2025 0:30:00").toISOString(),
+
+    agentDetails: {
+      agents: ["Payne"],
+      agentSuggestion: "Partial payment received AED 700/1,200",
+      coT: "Payer explanation of benefits shows patient deductible applied incorrectly.",
+    },
+    profile: {
+      name: "Sophie",
+      surname: "Martin",
+      age: 31,
+      emiratesId: "748-1985-2233445-4",
+      sex: "Female",
+      dateOfBirth: "1985-07-21",
+      nationality: "UAE",
+      language: "Arabic",
+      phoneNumber: 97155467830,
+      email: "Sara.nuaimi@gmail.com",
+      profilePhoto: "/avatar.png",
+    },
+    eligibilityCheck: {
+        "steps": [
+        {
+          "id": "1",
+          "label": "Extract Patient & Payer Data",
+          "status": "completed"
+        },
+        {
+          "id": "2",
+          "label": "Validate Coverage",
+          "status": "completed"
+        },
+        {
+          "id": "3",
+          "label": "Update & Flag Issues",
+          "status": "completed"
+        }
+      ],
+        isError: false,
+      status: "covered",
+      insuranDetials: {
+        insuranceProvider: "Daman-AUH-001",
+        imageUrl: "/insurance-image.png",
+        policyNumber: "42122566",
+      },
+      details: [
+        { label: "Network", value: "Yes" },
+        { label: "Coverage", value: "100%" },
+      ],
+    },
+    medicalCoding: {
+        isError: false,
+          "steps": [
+        {
+          "id": "1",
+          "label": "Extract & Suggest Code",
+          "status": "pending"
+        },
+        {
+          "id": "2",
+          "label": "Validate & Check Compliance",
+          "status": "pending"
+        },
+        {
+          "id": "3",
+          "label": "Claim Posted",
+          "status": "pending"
+        },
+        {
+          "id": "4",
+          "label": "Human Review & Approval",
+          "status": "pending"
+        }
+      ],
+      status: "inprogress", // Medical coding status
+      details: [
+        { label: "Encounter Date", value: "2025-08-30" },
+        { label: "Encounter Type", value: "Outpatient" },
+        { label: "Physician", value: "Dr. Al Shamsi" },
+        { label: "Department", value: "Orthopaedics" },
+      ],
+    },
+    priorAuthorization: {
+         "steps": [
+        {
+          "id": "1",
+          "label": "Extract & Prepare & (Code)",
+          "status": "pending"
+        },
+        {
+          "id": "2",
+          "label": "Submit Request",
+          "status": "pending"
+        },
+        {
+          "id": "3",
+          "label": "Prior Authorization Posted",
+          "status": "pending"
+        },
+        {
+          "id": "4",
+          "label": "Response Retrieved",
+          "status": "pending"
+        }
+      ],
+        isError: false,
+      status: "waiting", // Prior authorization status
+      details: [
+        { label: "Encounter ID", value: "ENC-2025-0789" },
+        { label: "CPT Code", value: "29880" },
+        { label: "ICD Code", value: "M23.2" },
+        { label: "Physician", value: "Dr. Al Shamsi" },
+        { label: "Prior Auth ID", value: "PA-556677" },
+        { label: "Drug Codes", value: "NDC-0002" },
+      ],
+    },
+    claimSubmission: {
+        isError: false,
+      status: "waiting", // Current status of the claim submission process
+      steps: [
+        { id: "1", label: "Compliance Check & Adjustment", status: "pending" },
+        { id: "2", label: "XML File Generated", status: "pending" },
+        { id: "3", label: "Claim Posted", status: "pending" },
+        { id: "4", label: "Claim ID Received & Updated", status: "pending" },
+      ],
+    },
+      
+    "drugCode": [],
+    denialManagement: {
+        isError: false,
+      status: "waiting", // Current status of the denial management process
+      steps: [
+        { id: "1", label: "Denial Code Analyzed", status: "pending" },
+        { id: "2", label: "Suggested Edits", status: "pending" },
+        { id: "3", label: "Appeal Generated", status: "pending" },
+        { id: "4", label: "Appeal Submitted", status: "pending" },
+      ],
+    },
+    postPayment: {
+        isError: false,
+      status: "waiting", // Current status of the post-payment process
+      steps: [
+        { id: "1", label: "Payment Retrieved", status: "pending" },
+        { id: "2", label: "Payment Matched", status: "pending" },
+        { id: "3", label: "Adjustments Applied", status: "pending" },
+        { id: "4", label: "Ledger Updated", status: "pending" },
+      ],
+    },
+    attachments: [
+      {
+        fileName: "SOB.pdf",
+        fileSize: "200 KB",
+        ecgImageUrl: "/sob.pdf",
+      },
+      {
+        fileName: "Exclusion.pdf",
+        fileSize: "150 KB",
+        ecgImageUrl: "/exclusion.pdf",
+      },
+      {
+        fileName: "Policy.pdf",
+        fileSize: "180 KB",
+        ecgImageUrl: "/policy.pdf",
+      },
+      {
+        fileName: "ECG.png",
+        fileSize: "220 KB",
+        ecgImageUrl: "/ecg-report.png",
+      },
+    ],
+    markdown,
+    icdCodes: [],
+    cptCode: [],
+  },
+  {
+    id: "672354",
+    isSubmitted: false,
+    profileCreatedDate: new Date("9/3/2025 1:03:45").toISOString(),
+
+    agentDetails: {
+      agents: ["Autho"],
+      agentSuggestion: "Missing authorization for infusion J1745",
+      coT: "Agent mapped drug code but payer benefit plan excludes biologic → requires override.",
+    },
+    profile: {
+      name: "Leila",
+      surname: "Haddad",
+      age: 28,
+      emiratesId: "748-1985-2233445-4",
+      sex: "Female",
+      dateOfBirth: "1985-07-21",
+      nationality: "UAE",
+      language: "Arabic",
+      phoneNumber: 97155467830,
+      email: "Sara.nuaimi@gmail.com",
+      profilePhoto: "/avatar.png",
+    },
+    eligibilityCheck: {
+        "steps": [
+        {
+          "id": "1",
+          "label": "Extract Patient & Payer Data",
+          "status": "completed"
+        },
+        {
+          "id": "2",
+          "label": "Validate Coverage",
+          "status": "completed"
+        },
+        {
+          "id": "3",
+          "label": "Update & Flag Issues",
+          "status": "completed"
+        }
+      ],
+        isError: false,
+      status: "covered",
+      insuranDetials: {
+        insuranceProvider: "Daman-AUH-001",
+        imageUrl: "/insurance-image.png",
+        policyNumber: "42122566",
+      },
+      details: [
+        { label: "Network", value: "Yes" },
+        { label: "Coverage", value: "100%" },
+      ],
+    },
+    medicalCoding: {
+        isError: false,
+          "steps": [
+        {
+          "id": "1",
+          "label": "Extract & Suggest Code",
+          "status": "pending"
+        },
+        {
+          "id": "2",
+          "label": "Validate & Check Compliance",
+          "status": "pending"
+        },
+        {
+          "id": "3",
+          "label": "Claim Posted",
+          "status": "pending"
+        },
+        {
+          "id": "4",
+          "label": "Human Review & Approval",
+          "status": "pending"
+        }
+      ],
+      status: "inprogress", // Medical coding status
+      details: [
+        { label: "Encounter Date", value: "2025-08-30" },
+        { label: "Encounter Type", value: "Outpatient" },
+        { label: "Physician", value: "Dr. Al Shamsi" },
+        { label: "Department", value: "Orthopaedics" },
+      ],
+    },
+    priorAuthorization: {
+         "steps": [
+        {
+          "id": "1",
+          "label": "Extract & Prepare & (Code)",
+          "status": "pending"
+        },
+        {
+          "id": "2",
+          "label": "Submit Request",
+          "status": "pending"
+        },
+        {
+          "id": "3",
+          "label": "Prior Authorization Posted",
+          "status": "pending"
+        },
+        {
+          "id": "4",
+          "label": "Response Retrieved",
+          "status": "pending"
+        }
+      ],
+        isError: false,
+      status: "waiting", // Prior authorization status
+      details: [
+        { label: "Encounter ID", value: "ENC-2025-0789" },
+        { label: "CPT Code", value: "29880" },
+        { label: "ICD Code", value: "M23.2" },
+        { label: "Physician", value: "Dr. Al Shamsi" },
+        { label: "Prior Auth ID", value: "PA-556677" },
+        { label: "Drug Codes", value: "NDC-0002" },
+      ],
+    },
+    claimSubmission: {
+        isError: false,
+      status: "waiting", // Current status of the claim submission process
+      steps: [
+        { id: "1", label: "Compliance Check & Adjustment", status: "pending" },
+        { id: "2", label: "XML File Generated", status: "pending" },
+        { id: "3", label: "Claim Posted", status: "pending" },
+        { id: "4", label: "Claim ID Received & Updated", status: "pending" },
+      ],
+    },
+      
+    "drugCode": [],
+    denialManagement: {
+        isError: false,
+      status: "waiting", // Current status of the denial management process
+      steps: [
+        { id: "1", label: "Denial Code Analyzed", status: "pending" },
+        { id: "2", label: "Suggested Edits", status: "pending" },
+        { id: "3", label: "Appeal Generated", status: "pending" },
+        { id: "4", label: "Appeal Submitted", status: "pending" },
+      ],
+    },
+    postPayment: {
+        isError: false,
+      status: "waiting", // Current status of the post-payment process
+      steps: [
+        { id: "1", label: "Payment Retrieved", status: "pending" },
+        { id: "2", label: "Payment Matched", status: "pending" },
+        { id: "3", label: "Adjustments Applied", status: "pending" },
+        { id: "4", label: "Ledger Updated", status: "pending" },
+      ],
+    },
+    attachments: [
+      {
+        fileName: "SOB.pdf",
+        fileSize: "200 KB",
+        ecgImageUrl: "/sob.pdf",
+      },
+      {
+        fileName: "Exclusion.pdf",
+        fileSize: "150 KB",
+        ecgImageUrl: "/exclusion.pdf",
+      },
+      {
+        fileName: "Policy.pdf",
+        fileSize: "180 KB",
+        ecgImageUrl: "/policy.pdf",
+      },
+      {
+        fileName: "ECG.png",
+        fileSize: "220 KB",
+        ecgImageUrl: "/ecg-report.png",
+      },
+    ],
+    markdown,
+    icdCodes: [],
+    cptCode: [],
+  },
+  {
+    id: "284931",
+    isSubmitted: false,
+    profileCreatedDate: new Date("9/3/2025 1:37:30").toISOString(),
+
+    agentDetails: {
+      agents: ["Clara"],
+      agentSuggestion: "Duplicate claim batch detected",
+      coT: "Two encounters submitted with identical DOS; payer likely to reject for duplication.",
+    },
+    profile: {
+      name: "Marcus",
+      surname: "Green",
+      age: 57,
+      emiratesId: "748-1985-2233445-4",
+      sex: "Female",
+      dateOfBirth: "1985-07-21",
+      nationality: "UAE",
+      language: "Arabic",
+      phoneNumber: 97155467830,
+      email: "Sara.nuaimi@gmail.com",
+      profilePhoto: "/avatar.png",
+    },
+    eligibilityCheck: {
+        "steps": [
+        {
+          "id": "1",
+          "label": "Extract Patient & Payer Data",
+          "status": "completed"
+        },
+        {
+          "id": "2",
+          "label": "Validate Coverage",
+          "status": "completed"
+        },
+        {
+          "id": "3",
+          "label": "Update & Flag Issues",
+          "status": "completed"
+        }
+      ],
+        isError: false,
+      status: "covered",
+      insuranDetials: {
+        insuranceProvider: "Daman-AUH-001",
+        imageUrl: "/insurance-image.png",
+        policyNumber: "42122566",
+      },
+      details: [
+        { label: "Network", value: "Yes" },
+        { label: "Coverage", value: "100%" },
+      ],
+    },
+    medicalCoding: {
+        isError: false,
+          "steps": [
+        {
+          "id": "1",
+          "label": "Extract & Suggest Code",
+          "status": "pending"
+        },
+        {
+          "id": "2",
+          "label": "Validate & Check Compliance",
+          "status": "pending"
+        },
+        {
+          "id": "3",
+          "label": "Claim Posted",
+          "status": "pending"
+        },
+        {
+          "id": "4",
+          "label": "Human Review & Approval",
+          "status": "pending"
+        }
+      ],
+      status: "inprogress", // Medical coding status
+      details: [
+        { label: "Encounter Date", value: "2025-08-30" },
+        { label: "Encounter Type", value: "Outpatient" },
+        { label: "Physician", value: "Dr. Al Shamsi" },
+        { label: "Department", value: "Orthopaedics" },
+      ],
+    },
+    priorAuthorization: {
+         "steps": [
+        {
+          "id": "1",
+          "label": "Extract & Prepare & (Code)",
+          "status": "pending"
+        },
+        {
+          "id": "2",
+          "label": "Submit Request",
+          "status": "pending"
+        },
+        {
+          "id": "3",
+          "label": "Prior Authorization Posted",
+          "status": "pending"
+        },
+        {
+          "id": "4",
+          "label": "Response Retrieved",
+          "status": "pending"
+        }
+      ],
+        isError: false,
+      status: "waiting", // Prior authorization status
+      details: [
+        { label: "Encounter ID", value: "ENC-2025-0789" },
+        { label: "CPT Code", value: "29880" },
+        { label: "ICD Code", value: "M23.2" },
+        { label: "Physician", value: "Dr. Al Shamsi" },
+        { label: "Prior Auth ID", value: "PA-556677" },
+        { label: "Drug Codes", value: "NDC-0002" },
+      ],
+    },
+    claimSubmission: {
+        isError: false,
+      status: "waiting", // Current status of the claim submission process
+      steps: [
+        { id: "1", label: "Compliance Check & Adjustment", status: "pending" },
+        { id: "2", label: "XML File Generated", status: "pending" },
+        { id: "3", label: "Claim Posted", status: "pending" },
+        { id: "4", label: "Claim ID Received & Updated", status: "pending" },
+      ],
+    },
+      
+    "drugCode": [],
+    denialManagement: {
+        isError: false,
+      status: "waiting", // Current status of the denial management process
+      steps: [
+        { id: "1", label: "Denial Code Analyzed", status: "pending" },
+        { id: "2", label: "Suggested Edits", status: "pending" },
+        { id: "3", label: "Appeal Generated", status: "pending" },
+        { id: "4", label: "Appeal Submitted", status: "pending" },
+      ],
+    },
+    postPayment: {
+        isError: false,
+      status: "waiting", // Current status of the post-payment process
+      steps: [
+        { id: "1", label: "Payment Retrieved", status: "pending" },
+        { id: "2", label: "Payment Matched", status: "pending" },
+        { id: "3", label: "Adjustments Applied", status: "pending" },
+        { id: "4", label: "Ledger Updated", status: "pending" },
+      ],
+    },
+    attachments: [
+      {
+        fileName: "SOB.pdf",
+        fileSize: "200 KB",
+        ecgImageUrl: "/sob.pdf",
+      },
+      {
+        fileName: "Exclusion.pdf",
+        fileSize: "150 KB",
+        ecgImageUrl: "/exclusion.pdf",
+      },
+      {
+        fileName: "Policy.pdf",
+        fileSize: "180 KB",
+        ecgImageUrl: "/policy.pdf",
+      },
+      {
+        fileName: "ECG.png",
+        fileSize: "220 KB",
+        ecgImageUrl: "/ecg-report.png",
+      },
+    ],
+    markdown,
+    icdCodes: [],
+    cptCode: [],
+  },
+  {
+    id: "905127",
+    isSubmitted: false,
+    profileCreatedDate: new Date("9/3/2025 2:11:15").toISOString(),
+
+    agentDetails: {
+      agents: ["Clara"],
+      agentSuggestion: "XML rejected → missing prior auth ID",
+      coT: "System populated wrong PA reference number (from earlier encounter) → mismatch flagged.",
+    },
+    profile: {
+      name: "Ali",
+      surname: "Hassan",
+      age: 50,
+      emiratesId: "748-1985-2233445-4",
+      sex: "Female",
+      dateOfBirth: "1985-07-21",
+      nationality: "UAE",
+      language: "Arabic",
+      phoneNumber: 97155467830,
+      email: "Sara.nuaimi@gmail.com",
+      profilePhoto: "/avatar.png",
+    },
+    eligibilityCheck: {
+        "steps": [
+        {
+          "id": "1",
+          "label": "Extract Patient & Payer Data",
+          "status": "completed"
+        },
+        {
+          "id": "2",
+          "label": "Validate Coverage",
+          "status": "completed"
+        },
+        {
+          "id": "3",
+          "label": "Update & Flag Issues",
+          "status": "completed"
+        }
+      ],
+        isError: false,
+      status: "covered",
+      insuranDetials: {
+        insuranceProvider: "Daman-AUH-001",
+        imageUrl: "/insurance-image.png",
+        policyNumber: "42122566",
+      },
+      details: [
+        { label: "Network", value: "Yes" },
+        { label: "Coverage", value: "100%" },
+      ],
+    },
+    medicalCoding: {
+        isError: false,
+          "steps": [
+        {
+          "id": "1",
+          "label": "Extract & Suggest Code",
+          "status": "pending"
+        },
+        {
+          "id": "2",
+          "label": "Validate & Check Compliance",
+          "status": "pending"
+        },
+        {
+          "id": "3",
+          "label": "Claim Posted",
+          "status": "pending"
+        },
+        {
+          "id": "4",
+          "label": "Human Review & Approval",
+          "status": "pending"
+        }
+      ],
+      status: "inprogress", // Medical coding status
+      details: [
+        { label: "Encounter Date", value: "2025-08-30" },
+        { label: "Encounter Type", value: "Outpatient" },
+        { label: "Physician", value: "Dr. Al Shamsi" },
+        { label: "Department", value: "Orthopaedics" },
+      ],
+    },
+    priorAuthorization: {
+         "steps": [
+        {
+          "id": "1",
+          "label": "Extract & Prepare & (Code)",
+          "status": "pending"
+        },
+        {
+          "id": "2",
+          "label": "Submit Request",
+          "status": "pending"
+        },
+        {
+          "id": "3",
+          "label": "Prior Authorization Posted",
+          "status": "pending"
+        },
+        {
+          "id": "4",
+          "label": "Response Retrieved",
+          "status": "pending"
+        }
+      ],
+        isError: false,
+      status: "waiting", // Prior authorization status
+      details: [
+        { label: "Encounter ID", value: "ENC-2025-0789" },
+        { label: "CPT Code", value: "29880" },
+        { label: "ICD Code", value: "M23.2" },
+        { label: "Physician", value: "Dr. Al Shamsi" },
+        { label: "Prior Auth ID", value: "PA-556677" },
+        { label: "Drug Codes", value: "NDC-0002" },
+      ],
+    },
+    claimSubmission: {
+        isError: false,
+      status: "waiting", // Current status of the claim submission process
+      steps: [
+        { id: "1", label: "Compliance Check & Adjustment", status: "pending" },
+        { id: "2", label: "XML File Generated", status: "pending" },
+        { id: "3", label: "Claim Posted", status: "pending" },
+        { id: "4", label: "Claim ID Received & Updated", status: "pending" },
+      ],
+    },
+      
+    "drugCode": [],
+    denialManagement: {
+        isError: false,
+      status: "waiting", // Current status of the denial management process
+      steps: [
+        { id: "1", label: "Denial Code Analyzed", status: "pending" },
+        { id: "2", label: "Suggested Edits", status: "pending" },
+        { id: "3", label: "Appeal Generated", status: "pending" },
+        { id: "4", label: "Appeal Submitted", status: "pending" },
+      ],
+    },
+    postPayment: {
+        isError: false,
+      status: "waiting", // Current status of the post-payment process
+      steps: [
+        { id: "1", label: "Payment Retrieved", status: "pending" },
+        { id: "2", label: "Payment Matched", status: "pending" },
+        { id: "3", label: "Adjustments Applied", status: "pending" },
+        { id: "4", label: "Ledger Updated", status: "pending" },
+      ],
+    },
+    attachments: [
+      {
+        fileName: "SOB.pdf",
+        fileSize: "200 KB",
+        ecgImageUrl: "/sob.pdf",
+      },
+      {
+        fileName: "Exclusion.pdf",
+        fileSize: "150 KB",
+        ecgImageUrl: "/exclusion.pdf",
+      },
+      {
+        fileName: "Policy.pdf",
+        fileSize: "180 KB",
+        ecgImageUrl: "/policy.pdf",
+      },
+      {
+        fileName: "ECG.png",
+        fileSize: "220 KB",
+        ecgImageUrl: "/ecg-report.png",
+      },
+    ],
+    markdown,
+    icdCodes: [],
+    cptCode: [],
+  },
+  {
+    id: "316842",
+    isSubmitted: false,
+    profileCreatedDate: new Date("9/3/2025 2:45:00").toISOString(),
+
+    agentDetails: {
+      agents: ["Clara"],
+      agentSuggestion: "Claim rejected → invalid date of service",
+      coT: "Date auto-pulled from discharge summary instead of encounter start; schema validator failed.",
+    },
+    profile: {
+      name: "Maria",
+      surname: "Lopez",
+      age: 39,
+      emiratesId: "748-1985-2233445-4",
+      sex: "Female",
+      dateOfBirth: "1985-07-21",
+      nationality: "UAE",
+      language: "Arabic",
+      phoneNumber: 97155467830,
+      email: "Sara.nuaimi@gmail.com",
+      profilePhoto: "/avatar.png",
+    },
+    eligibilityCheck: {
+        "steps": [
+        {
+          "id": "1",
+          "label": "Extract Patient & Payer Data",
+          "status": "completed"
+        },
+        {
+          "id": "2",
+          "label": "Validate Coverage",
+          "status": "completed"
+        },
+        {
+          "id": "3",
+          "label": "Update & Flag Issues",
+          "status": "completed"
+        }
+      ],
+        isError: false,
+      status: "covered",
+      insuranDetials: {
+        insuranceProvider: "Daman-AUH-001",
+        imageUrl: "/insurance-image.png",
+        policyNumber: "42122566",
+      },
+      details: [
+        { label: "Network", value: "Yes" },
+        { label: "Coverage", value: "100%" },
+      ],
+    },
+    medicalCoding: {
+        isError: false,
+          "steps": [
+        {
+          "id": "1",
+          "label": "Extract & Suggest Code",
+          "status": "pending"
+        },
+        {
+          "id": "2",
+          "label": "Validate & Check Compliance",
+          "status": "pending"
+        },
+        {
+          "id": "3",
+          "label": "Claim Posted",
+          "status": "pending"
+        },
+        {
+          "id": "4",
+          "label": "Human Review & Approval",
+          "status": "pending"
+        }
+      ],
+      status: "inprogress", // Medical coding status
+      details: [
+        { label: "Encounter Date", value: "2025-08-30" },
+        { label: "Encounter Type", value: "Outpatient" },
+        { label: "Physician", value: "Dr. Al Shamsi" },
+        { label: "Department", value: "Orthopaedics" },
+      ],
+    },
+    priorAuthorization: {
+         "steps": [
+        {
+          "id": "1",
+          "label": "Extract & Prepare & (Code)",
+          "status": "pending"
+        },
+        {
+          "id": "2",
+          "label": "Submit Request",
+          "status": "pending"
+        },
+        {
+          "id": "3",
+          "label": "Prior Authorization Posted",
+          "status": "pending"
+        },
+        {
+          "id": "4",
+          "label": "Response Retrieved",
+          "status": "pending"
+        }
+      ],
+        isError: false,
+      status: "waiting", // Prior authorization status
+      details: [
+        { label: "Encounter ID", value: "ENC-2025-0789" },
+        { label: "CPT Code", value: "29880" },
+        { label: "ICD Code", value: "M23.2" },
+        { label: "Physician", value: "Dr. Al Shamsi" },
+        { label: "Prior Auth ID", value: "PA-556677" },
+        { label: "Drug Codes", value: "NDC-0002" },
+      ],
+    },
+    claimSubmission: {
+        isError: false,
+      status: "waiting", // Current status of the claim submission process
+      steps: [
+        { id: "1", label: "Compliance Check & Adjustment", status: "pending" },
+        { id: "2", label: "XML File Generated", status: "pending" },
+        { id: "3", label: "Claim Posted", status: "pending" },
+        { id: "4", label: "Claim ID Received & Updated", status: "pending" },
+      ],
+    },
+      
+    "drugCode": [],
+    denialManagement: {
+        isError: false,
+      status: "waiting", // Current status of the denial management process
+      steps: [
+        { id: "1", label: "Denial Code Analyzed", status: "pending" },
+        { id: "2", label: "Suggested Edits", status: "pending" },
+        { id: "3", label: "Appeal Generated", status: "pending" },
+        { id: "4", label: "Appeal Submitted", status: "pending" },
+      ],
+    },
+    postPayment: {
+        isError: false,
+      status: "waiting", // Current status of the post-payment process
+      steps: [
+        { id: "1", label: "Payment Retrieved", status: "pending" },
+        { id: "2", label: "Payment Matched", status: "pending" },
+        { id: "3", label: "Adjustments Applied", status: "pending" },
+        { id: "4", label: "Ledger Updated", status: "pending" },
+      ],
+    },
+    attachments: [
+      {
+        fileName: "SOB.pdf",
+        fileSize: "200 KB",
+        ecgImageUrl: "/sob.pdf",
+      },
+      {
+        fileName: "Exclusion.pdf",
+        fileSize: "150 KB",
+        ecgImageUrl: "/exclusion.pdf",
+      },
+      {
+        fileName: "Policy.pdf",
+        fileSize: "180 KB",
+        ecgImageUrl: "/policy.pdf",
+      },
+      {
+        fileName: "ECG.png",
+        fileSize: "220 KB",
+        ecgImageUrl: "/ecg-report.png",
+      },
+    ],
+    markdown,
+    icdCodes: [],
+    cptCode: [],
+  },
+  {
+    id: "748509",
+    isSubmitted: false,
+    profileCreatedDate: new Date("9/3/2025 3:18:45").toISOString(),
+
+    agentDetails: {
+      agents: ["Clara"],
+      agentSuggestion: "Resubmit claim batch with corrected provider ID",
+      coT: "Provider NPI differs between header and service line → flagged inconsistency.",
+    },
+    profile: {
+      name: "Jamal",
+      surname: "Hassan",
+      age: 51,
+      emiratesId: "748-1985-2233445-4",
+      sex: "Female",
+      dateOfBirth: "1985-07-21",
+      nationality: "UAE",
+      language: "Arabic",
+      phoneNumber: 97155467830,
+      email: "Sara.nuaimi@gmail.com",
+      profilePhoto: "/avatar.png",
+    },
+    eligibilityCheck: {
+        "steps": [
+        {
+          "id": "1",
+          "label": "Extract Patient & Payer Data",
+          "status": "completed"
+        },
+        {
+          "id": "2",
+          "label": "Validate Coverage",
+          "status": "completed"
+        },
+        {
+          "id": "3",
+          "label": "Update & Flag Issues",
+          "status": "completed"
+        }
+      ],
+        isError: false,
+      status: "covered",
+      insuranDetials: {
+        insuranceProvider: "Daman-AUH-001",
+        imageUrl: "/insurance-image.png",
+        policyNumber: "42122566",
+      },
+      details: [
+        { label: "Network", value: "Yes" },
+        { label: "Coverage", value: "100%" },
+      ],
+    },
+    medicalCoding: {
+        isError: false,
+          "steps": [
+        {
+          "id": "1",
+          "label": "Extract & Suggest Code",
+          "status": "pending"
+        },
+        {
+          "id": "2",
+          "label": "Validate & Check Compliance",
+          "status": "pending"
+        },
+        {
+          "id": "3",
+          "label": "Claim Posted",
+          "status": "pending"
+        },
+        {
+          "id": "4",
+          "label": "Human Review & Approval",
+          "status": "pending"
+        }
+      ],
+      status: "inprogress", // Medical coding status
+      details: [
+        { label: "Encounter Date", value: "2025-08-30" },
+        { label: "Encounter Type", value: "Outpatient" },
+        { label: "Physician", value: "Dr. Al Shamsi" },
+        { label: "Department", value: "Orthopaedics" },
+      ],
+    },
+    priorAuthorization: {
+         "steps": [
+        {
+          "id": "1",
+          "label": "Extract & Prepare & (Code)",
+          "status": "pending"
+        },
+        {
+          "id": "2",
+          "label": "Submit Request",
+          "status": "pending"
+        },
+        {
+          "id": "3",
+          "label": "Prior Authorization Posted",
+          "status": "pending"
+        },
+        {
+          "id": "4",
+          "label": "Response Retrieved",
+          "status": "pending"
+        }
+      ],
+        isError: false,
+      status: "waiting", // Prior authorization status
+      details: [
+        { label: "Encounter ID", value: "ENC-2025-0789" },
+        { label: "CPT Code", value: "29880" },
+        { label: "ICD Code", value: "M23.2" },
+        { label: "Physician", value: "Dr. Al Shamsi" },
+        { label: "Prior Auth ID", value: "PA-556677" },
+        { label: "Drug Codes", value: "NDC-0002" },
+      ],
+    },
+    claimSubmission: {
+        isError: false,
+      status: "waiting", // Current status of the claim submission process
+      steps: [
+        { id: "1", label: "Compliance Check & Adjustment", status: "pending" },
+        { id: "2", label: "XML File Generated", status: "pending" },
+        { id: "3", label: "Claim Posted", status: "pending" },
+        { id: "4", label: "Claim ID Received & Updated", status: "pending" },
+      ],
+    },
+      
+    "drugCode": [],
+    denialManagement: {
+        isError: false,
+      status: "waiting", // Current status of the denial management process
+      steps: [
+        { id: "1", label: "Denial Code Analyzed", status: "pending" },
+        { id: "2", label: "Suggested Edits", status: "pending" },
+        { id: "3", label: "Appeal Generated", status: "pending" },
+        { id: "4", label: "Appeal Submitted", status: "pending" },
+      ],
+    },
+    postPayment: {
+        isError: false,
+      status: "waiting", // Current status of the post-payment process
+      steps: [
+        { id: "1", label: "Payment Retrieved", status: "pending" },
+        { id: "2", label: "Payment Matched", status: "pending" },
+        { id: "3", label: "Adjustments Applied", status: "pending" },
+        { id: "4", label: "Ledger Updated", status: "pending" },
+      ],
+    },
+    attachments: [
+      {
+        fileName: "SOB.pdf",
+        fileSize: "200 KB",
+        ecgImageUrl: "/sob.pdf",
+      },
+      {
+        fileName: "Exclusion.pdf",
+        fileSize: "150 KB",
+        ecgImageUrl: "/exclusion.pdf",
+      },
+      {
+        fileName: "Policy.pdf",
+        fileSize: "180 KB",
+        ecgImageUrl: "/policy.pdf",
+      },
+      {
+        fileName: "ECG.png",
+        fileSize: "220 KB",
+        ecgImageUrl: "/ecg-report.png",
+      },
+    ],
+    markdown,
+    icdCodes: [],
+    cptCode: [],
+  },
+  {
+    id: "293608",
+    isSubmitted: false,
+    profileCreatedDate: new Date("9/3/2025 3:52:30").toISOString(),
+
+    agentDetails: {
+      agents: ["Dee"],
+      agentSuggestion: "Draft appeal: missing modifier CPT 93010",
+      coT: "Payer denied ECG professional component; appeal drafted to add modifier -26.",
+    },
+    profile: {
+      name: "John",
+      surname: "Smith",
+      age: 52,
+      emiratesId: "748-1985-2233445-4",
+      sex: "Female",
+      dateOfBirth: "1985-07-21",
+      nationality: "UAE",
+      language: "Arabic",
+      phoneNumber: 97155467830,
+      email: "Sara.nuaimi@gmail.com",
+      profilePhoto: "/avatar.png",
+    },
+    eligibilityCheck: {
+        "steps": [
+        {
+          "id": "1",
+          "label": "Extract Patient & Payer Data",
+          "status": "completed"
+        },
+        {
+          "id": "2",
+          "label": "Validate Coverage",
+          "status": "completed"
+        },
+        {
+          "id": "3",
+          "label": "Update & Flag Issues",
+          "status": "completed"
+        }
+      ],
+        isError: false,
+      status: "covered",
+      insuranDetials: {
+        insuranceProvider: "Daman-AUH-001",
+        imageUrl: "/insurance-image.png",
+        policyNumber: "42122566",
+      },
+      details: [
+        { label: "Network", value: "Yes" },
+        { label: "Coverage", value: "100%" },
+      ],
+    },
+    medicalCoding: {
+        isError: false,
+          "steps": [
+        {
+          "id": "1",
+          "label": "Extract & Suggest Code",
+          "status": "pending"
+        },
+        {
+          "id": "2",
+          "label": "Validate & Check Compliance",
+          "status": "pending"
+        },
+        {
+          "id": "3",
+          "label": "Claim Posted",
+          "status": "pending"
+        },
+        {
+          "id": "4",
+          "label": "Human Review & Approval",
+          "status": "pending"
+        }
+      ],
+      status: "inprogress", // Medical coding status
+      details: [
+        { label: "Encounter Date", value: "2025-08-30" },
+        { label: "Encounter Type", value: "Outpatient" },
+        { label: "Physician", value: "Dr. Al Shamsi" },
+        { label: "Department", value: "Orthopaedics" },
+      ],
+    },
+    priorAuthorization: {
+         "steps": [
+        {
+          "id": "1",
+          "label": "Extract & Prepare & (Code)",
+          "status": "pending"
+        },
+        {
+          "id": "2",
+          "label": "Submit Request",
+          "status": "pending"
+        },
+        {
+          "id": "3",
+          "label": "Prior Authorization Posted",
+          "status": "pending"
+        },
+        {
+          "id": "4",
+          "label": "Response Retrieved",
+          "status": "pending"
+        }
+      ],
+        isError: false,
+      status: "waiting", // Prior authorization status
+      details: [
+        { label: "Encounter ID", value: "ENC-2025-0789" },
+        { label: "CPT Code", value: "29880" },
+        { label: "ICD Code", value: "M23.2" },
+        { label: "Physician", value: "Dr. Al Shamsi" },
+        { label: "Prior Auth ID", value: "PA-556677" },
+        { label: "Drug Codes", value: "NDC-0002" },
+      ],
+    },
+    claimSubmission: {
+        isError: false,
+      status: "waiting", // Current status of the claim submission process
+      steps: [
+        { id: "1", label: "Compliance Check & Adjustment", status: "pending" },
+        { id: "2", label: "XML File Generated", status: "pending" },
+        { id: "3", label: "Claim Posted", status: "pending" },
+        { id: "4", label: "Claim ID Received & Updated", status: "pending" },
+      ],
+    },
+      
+    "drugCode": [],
+    denialManagement: {
+        isError: false,
+      status: "waiting", // Current status of the denial management process
+      steps: [
+        { id: "1", label: "Denial Code Analyzed", status: "pending" },
+        { id: "2", label: "Suggested Edits", status: "pending" },
+        { id: "3", label: "Appeal Generated", status: "pending" },
+        { id: "4", label: "Appeal Submitted", status: "pending" },
+      ],
+    },
+    postPayment: {
+        isError: false,
+      status: "waiting", // Current status of the post-payment process
+      steps: [
+        { id: "1", label: "Payment Retrieved", status: "pending" },
+        { id: "2", label: "Payment Matched", status: "pending" },
+        { id: "3", label: "Adjustments Applied", status: "pending" },
+        { id: "4", label: "Ledger Updated", status: "pending" },
+      ],
+    },
+    attachments: [
+      {
+        fileName: "SOB.pdf",
+        fileSize: "200 KB",
+        ecgImageUrl: "/sob.pdf",
+      },
+      {
+        fileName: "Exclusion.pdf",
+        fileSize: "150 KB",
+        ecgImageUrl: "/exclusion.pdf",
+      },
+      {
+        fileName: "Policy.pdf",
+        fileSize: "180 KB",
+        ecgImageUrl: "/policy.pdf",
+      },
+      {
+        fileName: "ECG.png",
+        fileSize: "220 KB",
+        ecgImageUrl: "/ecg-report.png",
+      },
+    ],
+    markdown,
+    icdCodes: [],
+    cptCode: [],
+  },
+  {
+    id: "857134",
+    isSubmitted: false,
+    profileCreatedDate: new Date("9/3/2025 4:26:15").toISOString(),
+
+    agentDetails: {
+      agents: ["Payne"],
+      agentSuggestion: "Matched remit but offset applied",
+      coT: "Offset applied to unrelated claim batch; flagged for manual allocation.",
+    },
+    profile: {
+      name: "Karim",
+      surname: "Osman",
+      age: 49,
+      emiratesId: "748-1985-2233445-4",
+      sex: "Female",
+      dateOfBirth: "1985-07-21",
+      nationality: "UAE",
+      language: "Arabic",
+      phoneNumber: 97155467830,
+      email: "Sara.nuaimi@gmail.com",
+      profilePhoto: "/avatar.png",
+    },
+    eligibilityCheck: {
+        "steps": [
+        {
+          "id": "1",
+          "label": "Extract Patient & Payer Data",
+          "status": "completed"
+        },
+        {
+          "id": "2",
+          "label": "Validate Coverage",
+          "status": "completed"
+        },
+        {
+          "id": "3",
+          "label": "Update & Flag Issues",
+          "status": "completed"
+        }
+      ],
+        isError: false,
+      status: "covered",
+      insuranDetials: {
+        insuranceProvider: "Daman-AUH-001",
+        imageUrl: "/insurance-image.png",
+        policyNumber: "42122566",
+      },
+      details: [
+        { label: "Network", value: "Yes" },
+        { label: "Coverage", value: "100%" },
+      ],
+    },
+    medicalCoding: {
+        isError: false,
+          "steps": [
+        {
+          "id": "1",
+          "label": "Extract & Suggest Code",
+          "status": "pending"
+        },
+        {
+          "id": "2",
+          "label": "Validate & Check Compliance",
+          "status": "pending"
+        },
+        {
+          "id": "3",
+          "label": "Claim Posted",
+          "status": "pending"
+        },
+        {
+          "id": "4",
+          "label": "Human Review & Approval",
+          "status": "pending"
+        }
+      ],
+      status: "inprogress", // Medical coding status
+      details: [
+        { label: "Encounter Date", value: "2025-08-30" },
+        { label: "Encounter Type", value: "Outpatient" },
+        { label: "Physician", value: "Dr. Al Shamsi" },
+        { label: "Department", value: "Orthopaedics" },
+      ],
+    },
+    priorAuthorization: {
+         "steps": [
+        {
+          "id": "1",
+          "label": "Extract & Prepare & (Code)",
+          "status": "pending"
+        },
+        {
+          "id": "2",
+          "label": "Submit Request",
+          "status": "pending"
+        },
+        {
+          "id": "3",
+          "label": "Prior Authorization Posted",
+          "status": "pending"
+        },
+        {
+          "id": "4",
+          "label": "Response Retrieved",
+          "status": "pending"
+        }
+      ],
+        isError: false,
+      status: "waiting", // Prior authorization status
+      details: [
+        { label: "Encounter ID", value: "ENC-2025-0789" },
+        { label: "CPT Code", value: "29880" },
+        { label: "ICD Code", value: "M23.2" },
+        { label: "Physician", value: "Dr. Al Shamsi" },
+        { label: "Prior Auth ID", value: "PA-556677" },
+        { label: "Drug Codes", value: "NDC-0002" },
+      ],
+    },
+    claimSubmission: {
+        isError: false,
+      status: "waiting", // Current status of the claim submission process
+      steps: [
+        { id: "1", label: "Compliance Check & Adjustment", status: "pending" },
+        { id: "2", label: "XML File Generated", status: "pending" },
+        { id: "3", label: "Claim Posted", status: "pending" },
+        { id: "4", label: "Claim ID Received & Updated", status: "pending" },
+      ],
+    },
+      
+    "drugCode": [],
+    denialManagement: {
+        isError: false,
+      status: "waiting", // Current status of the denial management process
+      steps: [
+        { id: "1", label: "Denial Code Analyzed", status: "pending" },
+        { id: "2", label: "Suggested Edits", status: "pending" },
+        { id: "3", label: "Appeal Generated", status: "pending" },
+        { id: "4", label: "Appeal Submitted", status: "pending" },
+      ],
+    },
+    postPayment: {
+        isError: false,
+      status: "waiting", // Current status of the post-payment process
+      steps: [
+        { id: "1", label: "Payment Retrieved", status: "pending" },
+        { id: "2", label: "Payment Matched", status: "pending" },
+        { id: "3", label: "Adjustments Applied", status: "pending" },
+        { id: "4", label: "Ledger Updated", status: "pending" },
+      ],
+    },
+    attachments: [
+      {
+        fileName: "SOB.pdf",
+        fileSize: "200 KB",
+        ecgImageUrl: "/sob.pdf",
+      },
+      {
+        fileName: "Exclusion.pdf",
+        fileSize: "150 KB",
+        ecgImageUrl: "/exclusion.pdf",
+      },
+      {
+        fileName: "Policy.pdf",
+        fileSize: "180 KB",
+        ecgImageUrl: "/policy.pdf",
+      },
+      {
+        fileName: "ECG.png",
+        fileSize: "220 KB",
+        ecgImageUrl: "/ecg-report.png",
+      },
+    ],
+    markdown,
+    icdCodes: [],
+    cptCode: [],
+  },
+  {
+    id: "409672",
+    isSubmitted: false,
+    profileCreatedDate: new Date("9/3/2025 5:00:00").toISOString(),
+
+    agentDetails: {
+      agents: ["Dee"],
+      agentSuggestion: "Auto-resolved denial: late filing → corrected",
+      coT: "Waiver rule applied because payer accepted 30-day grace period; auto-refiled.",
+    },
+    profile: {
+      name: "Ahmad",
+      surname: "Saleh",
+      age: 47,
+      emiratesId: "748-1985-2233445-4",
+      sex: "Female",
+      dateOfBirth: "1985-07-21",
+      nationality: "UAE",
+      language: "Arabic",
+      phoneNumber: 97155467830,
+      email: "Sara.nuaimi@gmail.com",
+      profilePhoto: "/avatar.png",
+    },
+    eligibilityCheck: {
+        "steps": [
+        {
+          "id": "1",
+          "label": "Extract Patient & Payer Data",
+          "status": "completed"
+        },
+        {
+          "id": "2",
+          "label": "Validate Coverage",
+          "status": "completed"
+        },
+        {
+          "id": "3",
+          "label": "Update & Flag Issues",
+          "status": "completed"
+        }
+      ],
+        isError: false,
+      status: "covered",
+      insuranDetials: {
+        insuranceProvider: "Daman-AUH-001",
+        imageUrl: "/insurance-image.png",
+        policyNumber: "42122566",
+      },
+      details: [
+        { label: "Network", value: "Yes" },
+        { label: "Coverage", value: "100%" },
+      ],
+    },
+    medicalCoding: {
+        isError: false,
+          "steps": [
+        {
+          "id": "1",
+          "label": "Extract & Suggest Code",
+          "status": "pending"
+        },
+        {
+          "id": "2",
+          "label": "Validate & Check Compliance",
+          "status": "pending"
+        },
+        {
+          "id": "3",
+          "label": "Claim Posted",
+          "status": "pending"
+        },
+        {
+          "id": "4",
+          "label": "Human Review & Approval",
+          "status": "pending"
+        }
+      ],
+      status: "inprogress", // Medical coding status
+      details: [
+        { label: "Encounter Date", value: "2025-08-30" },
+        { label: "Encounter Type", value: "Outpatient" },
+        { label: "Physician", value: "Dr. Al Shamsi" },
+        { label: "Department", value: "Orthopaedics" },
+      ],
+    },
+    priorAuthorization: {
+         "steps": [
+        {
+          "id": "1",
+          "label": "Extract & Prepare & (Code)",
+          "status": "pending"
+        },
+        {
+          "id": "2",
+          "label": "Submit Request",
+          "status": "pending"
+        },
+        {
+          "id": "3",
+          "label": "Prior Authorization Posted",
+          "status": "pending"
+        },
+        {
+          "id": "4",
+          "label": "Response Retrieved",
+          "status": "pending"
+        }
+      ],
+        isError: false,
+      status: "waiting", // Prior authorization status
+      details: [
+        { label: "Encounter ID", value: "ENC-2025-0789" },
+        { label: "CPT Code", value: "29880" },
+        { label: "ICD Code", value: "M23.2" },
+        { label: "Physician", value: "Dr. Al Shamsi" },
+        { label: "Prior Auth ID", value: "PA-556677" },
+        { label: "Drug Codes", value: "NDC-0002" },
+      ],
+    },
+    claimSubmission: {
+        isError: false,
+      status: "waiting", // Current status of the claim submission process
+      steps: [
+        { id: "1", label: "Compliance Check & Adjustment", status: "pending" },
+        { id: "2", label: "XML File Generated", status: "pending" },
+        { id: "3", label: "Claim Posted", status: "pending" },
+        { id: "4", label: "Claim ID Received & Updated", status: "pending" },
+      ],
+    },
+      
+    "drugCode": [],
+    denialManagement: {
+        isError: false,
+      status: "waiting", // Current status of the denial management process
+      steps: [
+        { id: "1", label: "Denial Code Analyzed", status: "pending" },
+        { id: "2", label: "Suggested Edits", status: "pending" },
+        { id: "3", label: "Appeal Generated", status: "pending" },
+        { id: "4", label: "Appeal Submitted", status: "pending" },
+      ],
+    },
+    postPayment: {
+        isError: false,
+      status: "waiting", // Current status of the post-payment process
+      steps: [
+        { id: "1", label: "Payment Retrieved", status: "pending" },
+        { id: "2", label: "Payment Matched", status: "pending" },
+        { id: "3", label: "Adjustments Applied", status: "pending" },
+        { id: "4", label: "Ledger Updated", status: "pending" },
+      ],
+    },
+    attachments: [
+      {
+        fileName: "SOB.pdf",
+        fileSize: "200 KB",
+        ecgImageUrl: "/sob.pdf",
+      },
+      {
+        fileName: "Exclusion.pdf",
+        fileSize: "150 KB",
+        ecgImageUrl: "/exclusion.pdf",
+      },
+      {
+        fileName: "Policy.pdf",
+        fileSize: "180 KB",
+        ecgImageUrl: "/policy.pdf",
+      },
+      {
+        fileName: "ECG.png",
+        fileSize: "220 KB",
+        ecgImageUrl: "/ecg-report.png",
+      },
+    ],
+    markdown,
+    icdCodes: [],
+    cptCode: [],
+  },
+  {
+    id: "621395",
+    isSubmitted: false,
+    profileCreatedDate: new Date("9/3/2025 5:33:45").toISOString(),
+
+    agentDetails: {
+      agents: ["Coda"],
+      agentSuggestion: "ICD-10: K52.9 (Noninfective gastroenteritis)",
+      coT: "Note says “chronic diarrhea, unclear etiology” → could be functional vs inflammatory → flagged.",
+    },
+    profile: {
+      name: "Yasmine",
+      surname: "Al Farsi",
+      age: 42,
+      emiratesId: "748-1985-2233445-4",
+      sex: "Female",
+      dateOfBirth: "1985-07-21",
+      nationality: "UAE",
+      language: "Arabic",
+      phoneNumber: 97155467830,
+      email: "Sara.nuaimi@gmail.com",
+      profilePhoto: "/avatar.png",
+    },
+    eligibilityCheck: {
+        "steps": [
+        {
+          "id": "1",
+          "label": "Extract Patient & Payer Data",
+          "status": "completed"
+        },
+        {
+          "id": "2",
+          "label": "Validate Coverage",
+          "status": "completed"
+        },
+        {
+          "id": "3",
+          "label": "Update & Flag Issues",
+          "status": "completed"
+        }
+      ],
+        isError: false,
+      status: "covered",
+      insuranDetials: {
+        insuranceProvider: "Daman-AUH-001",
+        imageUrl: "/insurance-image.png",
+        policyNumber: "42122566",
+      },
+      details: [
+        { label: "Network", value: "Yes" },
+        { label: "Coverage", value: "100%" },
+      ],
+    },
+    medicalCoding: {
+        isError: false,
+          "steps": [
+        {
+          "id": "1",
+          "label": "Extract & Suggest Code",
+          "status": "pending"
+        },
+        {
+          "id": "2",
+          "label": "Validate & Check Compliance",
+          "status": "pending"
+        },
+        {
+          "id": "3",
+          "label": "Claim Posted",
+          "status": "pending"
+        },
+        {
+          "id": "4",
+          "label": "Human Review & Approval",
+          "status": "pending"
+        }
+      ],
+      status: "inprogress", // Medical coding status
+      details: [
+        { label: "Encounter Date", value: "2025-08-30" },
+        { label: "Encounter Type", value: "Outpatient" },
+        { label: "Physician", value: "Dr. Al Shamsi" },
+        { label: "Department", value: "Orthopaedics" },
+      ],
+    },
+    priorAuthorization: {
+         "steps": [
+        {
+          "id": "1",
+          "label": "Extract & Prepare & (Code)",
+          "status": "pending"
+        },
+        {
+          "id": "2",
+          "label": "Submit Request",
+          "status": "pending"
+        },
+        {
+          "id": "3",
+          "label": "Prior Authorization Posted",
+          "status": "pending"
+        },
+        {
+          "id": "4",
+          "label": "Response Retrieved",
+          "status": "pending"
+        }
+      ],
+        isError: false,
+      status: "waiting", // Prior authorization status
+      details: [
+        { label: "Encounter ID", value: "ENC-2025-0789" },
+        { label: "CPT Code", value: "29880" },
+        { label: "ICD Code", value: "M23.2" },
+        { label: "Physician", value: "Dr. Al Shamsi" },
+        { label: "Prior Auth ID", value: "PA-556677" },
+        { label: "Drug Codes", value: "NDC-0002" },
+      ],
+    },
+    claimSubmission: {
+        isError: false,
+      status: "waiting", // Current status of the claim submission process
+      steps: [
+        { id: "1", label: "Compliance Check & Adjustment", status: "pending" },
+        { id: "2", label: "XML File Generated", status: "pending" },
+        { id: "3", label: "Claim Posted", status: "pending" },
+        { id: "4", label: "Claim ID Received & Updated", status: "pending" },
+      ],
+    },
+      
+    "drugCode": [],
+    denialManagement: {
+        isError: false,
+      status: "waiting", // Current status of the denial management process
+      steps: [
+        { id: "1", label: "Denial Code Analyzed", status: "pending" },
+        { id: "2", label: "Suggested Edits", status: "pending" },
+        { id: "3", label: "Appeal Generated", status: "pending" },
+        { id: "4", label: "Appeal Submitted", status: "pending" },
+      ],
+    },
+    postPayment: {
+        isError: false,
+      status: "waiting", // Current status of the post-payment process
+      steps: [
+        { id: "1", label: "Payment Retrieved", status: "pending" },
+        { id: "2", label: "Payment Matched", status: "pending" },
+        { id: "3", label: "Adjustments Applied", status: "pending" },
+        { id: "4", label: "Ledger Updated", status: "pending" },
+      ],
+    },
+    attachments: [
+      {
+        fileName: "SOB.pdf",
+        fileSize: "200 KB",
+        ecgImageUrl: "/sob.pdf",
+      },
+      {
+        fileName: "Exclusion.pdf",
+        fileSize: "150 KB",
+        ecgImageUrl: "/exclusion.pdf",
+      },
+      {
+        fileName: "Policy.pdf",
+        fileSize: "180 KB",
+        ecgImageUrl: "/policy.pdf",
+      },
+      {
+        fileName: "ECG.png",
+        fileSize: "220 KB",
+        ecgImageUrl: "/ecg-report.png",
+      },
+    ],
+    markdown,
+    icdCodes: [],
+    cptCode: [],
+  },
+  {
+    id: "784210",
+    isSubmitted: false,
+    profileCreatedDate: new Date("9/3/2025 6:07:30").toISOString(),
+
+    agentDetails: {
+      agents: ["Clara"],
+      agentSuggestion: "Claim batch flagged: inconsistent revenue codes",
+      coT: "Service line had revenue code not aligned with CPT group; schema flagged risk.",
+    },
+    profile: {
+      name: "Imran",
+      surname: "Bashir",
+      age: 63,
+      emiratesId: "748-1985-2233445-4",
+      sex: "Female",
+      dateOfBirth: "1985-07-21",
+      nationality: "UAE",
+      language: "Arabic",
+      phoneNumber: 97155467830,
+      email: "Sara.nuaimi@gmail.com",
+      profilePhoto: "/avatar.png",
+    },
+    eligibilityCheck: {
+        "steps": [
+        {
+          "id": "1",
+          "label": "Extract Patient & Payer Data",
+          "status": "completed"
+        },
+        {
+          "id": "2",
+          "label": "Validate Coverage",
+          "status": "completed"
+        },
+        {
+          "id": "3",
+          "label": "Update & Flag Issues",
+          "status": "completed"
+        }
+      ],
+        isError: false,
+      status: "covered",
+      insuranDetials: {
+        insuranceProvider: "Daman-AUH-001",
+        imageUrl: "/insurance-image.png",
+        policyNumber: "42122566",
+      },
+      details: [
+        { label: "Network", value: "Yes" },
+        { label: "Coverage", value: "100%" },
+      ],
+    },
+    medicalCoding: {
+        isError: false,
+          "steps": [
+        {
+          "id": "1",
+          "label": "Extract & Suggest Code",
+          "status": "pending"
+        },
+        {
+          "id": "2",
+          "label": "Validate & Check Compliance",
+          "status": "pending"
+        },
+        {
+          "id": "3",
+          "label": "Claim Posted",
+          "status": "pending"
+        },
+        {
+          "id": "4",
+          "label": "Human Review & Approval",
+          "status": "pending"
+        }
+      ],
+      status: "inprogress", // Medical coding status
+      details: [
+        { label: "Encounter Date", value: "2025-08-30" },
+        { label: "Encounter Type", value: "Outpatient" },
+        { label: "Physician", value: "Dr. Al Shamsi" },
+        { label: "Department", value: "Orthopaedics" },
+      ],
+    },
+    priorAuthorization: {
+         "steps": [
+        {
+          "id": "1",
+          "label": "Extract & Prepare & (Code)",
+          "status": "pending"
+        },
+        {
+          "id": "2",
+          "label": "Submit Request",
+          "status": "pending"
+        },
+        {
+          "id": "3",
+          "label": "Prior Authorization Posted",
+          "status": "pending"
+        },
+        {
+          "id": "4",
+          "label": "Response Retrieved",
+          "status": "pending"
+        }
+      ],
+        isError: false,
+      status: "waiting", // Prior authorization status
+      details: [
+        { label: "Encounter ID", value: "ENC-2025-0789" },
+        { label: "CPT Code", value: "29880" },
+        { label: "ICD Code", value: "M23.2" },
+        { label: "Physician", value: "Dr. Al Shamsi" },
+        { label: "Prior Auth ID", value: "PA-556677" },
+        { label: "Drug Codes", value: "NDC-0002" },
+      ],
+    },
+    claimSubmission: {
+        isError: false,
+      status: "waiting", // Current status of the claim submission process
+      steps: [
+        { id: "1", label: "Compliance Check & Adjustment", status: "pending" },
+        { id: "2", label: "XML File Generated", status: "pending" },
+        { id: "3", label: "Claim Posted", status: "pending" },
+        { id: "4", label: "Claim ID Received & Updated", status: "pending" },
+      ],
+    },
+      
+    "drugCode": [],
+    denialManagement: {
+        isError: false,
+      status: "waiting", // Current status of the denial management process
+      steps: [
+        { id: "1", label: "Denial Code Analyzed", status: "pending" },
+        { id: "2", label: "Suggested Edits", status: "pending" },
+        { id: "3", label: "Appeal Generated", status: "pending" },
+        { id: "4", label: "Appeal Submitted", status: "pending" },
+      ],
+    },
+    postPayment: {
+        isError: false,
+      status: "waiting", // Current status of the post-payment process
+      steps: [
+        { id: "1", label: "Payment Retrieved", status: "pending" },
+        { id: "2", label: "Payment Matched", status: "pending" },
+        { id: "3", label: "Adjustments Applied", status: "pending" },
+        { id: "4", label: "Ledger Updated", status: "pending" },
+      ],
+    },
+    attachments: [
+      {
+        fileName: "SOB.pdf",
+        fileSize: "200 KB",
+        ecgImageUrl: "/sob.pdf",
+      },
+      {
+        fileName: "Exclusion.pdf",
+        fileSize: "150 KB",
+        ecgImageUrl: "/exclusion.pdf",
+      },
+      {
+        fileName: "Policy.pdf",
+        fileSize: "180 KB",
+        ecgImageUrl: "/policy.pdf",
+      },
+      {
+        fileName: "ECG.png",
+        fileSize: "220 KB",
+        ecgImageUrl: "/ecg-report.png",
+      },
+    ],
+    markdown,
+    icdCodes: [],
+    cptCode: [],
+  },
+  {
+    id: "359682",
+    isSubmitted: false,
+    profileCreatedDate: new Date("9/3/2025 6:41:15").toISOString(),
+
+    agentDetails: {
+      agents: ["Coda"],
+      agentSuggestion: "ICD-10: E66.9 (Obesity, unspecified)",
+      coT: "SOAP note: “BMI 32, mild hypertension” → borderline case; payer may deny if BMI <35.",
+    },
+    profile: {
+      name: "Samira",
+      surname: "Khan",
+      age: 38,
+      emiratesId: "748-1985-2233445-4",
+      sex: "Female",
+      dateOfBirth: "1985-07-21",
+      nationality: "UAE",
+      language: "Arabic",
+      phoneNumber: 97155467830,
+      email: "Sara.nuaimi@gmail.com",
+      profilePhoto: "/avatar.png",
+    },
+    eligibilityCheck: {
+        "steps": [
+        {
+          "id": "1",
+          "label": "Extract Patient & Payer Data",
+          "status": "completed"
+        },
+        {
+          "id": "2",
+          "label": "Validate Coverage",
+          "status": "completed"
+        },
+        {
+          "id": "3",
+          "label": "Update & Flag Issues",
+          "status": "completed"
+        }
+      ],
+        isError: false,
+      status: "covered",
+      insuranDetials: {
+        insuranceProvider: "Daman-AUH-001",
+        imageUrl: "/insurance-image.png",
+        policyNumber: "42122566",
+      },
+      details: [
+        { label: "Network", value: "Yes" },
+        { label: "Coverage", value: "100%" },
+      ],
+    },
+    medicalCoding: {
+        isError: false,
+          "steps": [
+        {
+          "id": "1",
+          "label": "Extract & Suggest Code",
+          "status": "pending"
+        },
+        {
+          "id": "2",
+          "label": "Validate & Check Compliance",
+          "status": "pending"
+        },
+        {
+          "id": "3",
+          "label": "Claim Posted",
+          "status": "pending"
+        },
+        {
+          "id": "4",
+          "label": "Human Review & Approval",
+          "status": "pending"
+        }
+      ],
+      status: "inprogress", // Medical coding status
+      details: [
+        { label: "Encounter Date", value: "2025-08-30" },
+        { label: "Encounter Type", value: "Outpatient" },
+        { label: "Physician", value: "Dr. Al Shamsi" },
+        { label: "Department", value: "Orthopaedics" },
+      ],
+    },
+    priorAuthorization: {
+         "steps": [
+        {
+          "id": "1",
+          "label": "Extract & Prepare & (Code)",
+          "status": "pending"
+        },
+        {
+          "id": "2",
+          "label": "Submit Request",
+          "status": "pending"
+        },
+        {
+          "id": "3",
+          "label": "Prior Authorization Posted",
+          "status": "pending"
+        },
+        {
+          "id": "4",
+          "label": "Response Retrieved",
+          "status": "pending"
+        }
+      ],
+        isError: false,
+      status: "waiting", // Prior authorization status
+      details: [
+        { label: "Encounter ID", value: "ENC-2025-0789" },
+        { label: "CPT Code", value: "29880" },
+        { label: "ICD Code", value: "M23.2" },
+        { label: "Physician", value: "Dr. Al Shamsi" },
+        { label: "Prior Auth ID", value: "PA-556677" },
+        { label: "Drug Codes", value: "NDC-0002" },
+      ],
+    },
+    claimSubmission: {
+        isError: false,
+      status: "waiting", // Current status of the claim submission process
+      steps: [
+        { id: "1", label: "Compliance Check & Adjustment", status: "pending" },
+        { id: "2", label: "XML File Generated", status: "pending" },
+        { id: "3", label: "Claim Posted", status: "pending" },
+        { id: "4", label: "Claim ID Received & Updated", status: "pending" },
+      ],
+    },
+      
+    "drugCode": [],
+    denialManagement: {
+        isError: false,
+      status: "waiting", // Current status of the denial management process
+      steps: [
+        { id: "1", label: "Denial Code Analyzed", status: "pending" },
+        { id: "2", label: "Suggested Edits", status: "pending" },
+        { id: "3", label: "Appeal Generated", status: "pending" },
+        { id: "4", label: "Appeal Submitted", status: "pending" },
+      ],
+    },
+    postPayment: {
+        isError: false,
+      status: "waiting", // Current status of the post-payment process
+      steps: [
+        { id: "1", label: "Payment Retrieved", status: "pending" },
+        { id: "2", label: "Payment Matched", status: "pending" },
+        { id: "3", label: "Adjustments Applied", status: "pending" },
+        { id: "4", label: "Ledger Updated", status: "pending" },
+      ],
+    },
+    attachments: [
+      {
+        fileName: "SOB.pdf",
+        fileSize: "200 KB",
+        ecgImageUrl: "/sob.pdf",
+      },
+      {
+        fileName: "Exclusion.pdf",
+        fileSize: "150 KB",
+        ecgImageUrl: "/exclusion.pdf",
+      },
+      {
+        fileName: "Policy.pdf",
+        fileSize: "180 KB",
+        ecgImageUrl: "/policy.pdf",
+      },
+      {
+        fileName: "ECG.png",
+        fileSize: "220 KB",
+        ecgImageUrl: "/ecg-report.png",
+      },
+    ],
+    markdown,
+    icdCodes: [],
+    cptCode: [],
+  },
+  {
+    id: "928401",
+    isSubmitted: false,
+    profileCreatedDate: new Date("9/3/2025 7:15:00").toISOString(),
+
+    agentDetails: {
+      agents: ["Dee"],
+      agentSuggestion: "Appeal drafted: coverage terminated mid-stay",
+      coT: "Inpatient claim denied after coverage ended; requires payer isError.",
+    },
+    profile: {
+      name: "Daniel",
+      surname: "Ruiz",
+      age: 59,
+      emiratesId: "748-1985-2233445-4",
+      sex: "Female",
+      dateOfBirth: "1985-07-21",
+      nationality: "UAE",
+      language: "Arabic",
+      phoneNumber: 97155467830,
+      email: "Sara.nuaimi@gmail.com",
+      profilePhoto: "/avatar.png",
+    },
+    eligibilityCheck: {
+        "steps": [
+        {
+          "id": "1",
+          "label": "Extract Patient & Payer Data",
+          "status": "completed"
+        },
+        {
+          "id": "2",
+          "label": "Validate Coverage",
+          "status": "completed"
+        },
+        {
+          "id": "3",
+          "label": "Update & Flag Issues",
+          "status": "completed"
+        }
+      ],
+        isError: false,
+      status: "covered",
+      insuranDetials: {
+        insuranceProvider: "Daman-AUH-001",
+        imageUrl: "/insurance-image.png",
+        policyNumber: "42122566",
+      },
+      details: [
+        { label: "Network", value: "Yes" },
+        { label: "Coverage", value: "100%" },
+      ],
+    },
+    medicalCoding: {
+        isError: false,
+          "steps": [
+        {
+          "id": "1",
+          "label": "Extract & Suggest Code",
+          "status": "pending"
+        },
+        {
+          "id": "2",
+          "label": "Validate & Check Compliance",
+          "status": "pending"
+        },
+        {
+          "id": "3",
+          "label": "Claim Posted",
+          "status": "pending"
+        },
+        {
+          "id": "4",
+          "label": "Human Review & Approval",
+          "status": "pending"
+        }
+      ],
+      status: "inprogress", // Medical coding status
+      details: [
+        { label: "Encounter Date", value: "2025-08-30" },
+        { label: "Encounter Type", value: "Outpatient" },
+        { label: "Physician", value: "Dr. Al Shamsi" },
+        { label: "Department", value: "Orthopaedics" },
+      ],
+    },
+    priorAuthorization: {
+         "steps": [
+        {
+          "id": "1",
+          "label": "Extract & Prepare & (Code)",
+          "status": "pending"
+        },
+        {
+          "id": "2",
+          "label": "Submit Request",
+          "status": "pending"
+        },
+        {
+          "id": "3",
+          "label": "Prior Authorization Posted",
+          "status": "pending"
+        },
+        {
+          "id": "4",
+          "label": "Response Retrieved",
+          "status": "pending"
+        }
+      ],
+        isError: false,
+      status: "waiting", // Prior authorization status
+      details: [
+        { label: "Encounter ID", value: "ENC-2025-0789" },
+        { label: "CPT Code", value: "29880" },
+        { label: "ICD Code", value: "M23.2" },
+        { label: "Physician", value: "Dr. Al Shamsi" },
+        { label: "Prior Auth ID", value: "PA-556677" },
+        { label: "Drug Codes", value: "NDC-0002" },
+      ],
+    },
+    claimSubmission: {
+        isError: false,
+      status: "waiting", // Current status of the claim submission process
+      steps: [
+        { id: "1", label: "Compliance Check & Adjustment", status: "pending" },
+        { id: "2", label: "XML File Generated", status: "pending" },
+        { id: "3", label: "Claim Posted", status: "pending" },
+        { id: "4", label: "Claim ID Received & Updated", status: "pending" },
+      ],
+    },
+      
+    "drugCode": [],
+    denialManagement: {
+        isError: false,
+      status: "waiting", // Current status of the denial management process
+      steps: [
+        { id: "1", label: "Denial Code Analyzed", status: "pending" },
+        { id: "2", label: "Suggested Edits", status: "pending" },
+        { id: "3", label: "Appeal Generated", status: "pending" },
+        { id: "4", label: "Appeal Submitted", status: "pending" },
+      ],
+    },
+    postPayment: {
+        isError: false,
+      status: "waiting", // Current status of the post-payment process
+      steps: [
+        { id: "1", label: "Payment Retrieved", status: "pending" },
+        { id: "2", label: "Payment Matched", status: "pending" },
+        { id: "3", label: "Adjustments Applied", status: "pending" },
+        { id: "4", label: "Ledger Updated", status: "pending" },
+      ],
+    },
+    attachments: [
+      {
+        fileName: "SOB.pdf",
+        fileSize: "200 KB",
+        ecgImageUrl: "/sob.pdf",
+      },
+      {
+        fileName: "Exclusion.pdf",
+        fileSize: "150 KB",
+        ecgImageUrl: "/exclusion.pdf",
+      },
+      {
+        fileName: "Policy.pdf",
+        fileSize: "180 KB",
+        ecgImageUrl: "/policy.pdf",
+      },
+      {
+        fileName: "ECG.png",
+        fileSize: "220 KB",
+        ecgImageUrl: "/ecg-report.png",
+      },
+    ],
+    markdown,
+    icdCodes: [],
+    cptCode: [],
+  },
+  {
+    id: "174563",
+    isSubmitted: false,
+    profileCreatedDate: new Date("9/3/2025 7:48:45").toISOString(),
+
+    agentDetails: {
+      agents: ["Payne"],
+      agentSuggestion: "Overpayment detected AED 1,200 vs 1,000 billed",
+      coT: "Over-remit posted; agent waiting to avoid duplicate refund cycle.",
+    },
+    profile: {
+      name: "Paul",
+      surname: "Andersen",
+      age: 45,
+      emiratesId: "748-1985-2233445-4",
+      sex: "Female",
+      dateOfBirth: "1985-07-21",
+      nationality: "UAE",
+      language: "Arabic",
+      phoneNumber: 97155467830,
+      email: "Sara.nuaimi@gmail.com",
+      profilePhoto: "/avatar.png",
+    },
+    eligibilityCheck: {
+        "steps": [
+        {
+          "id": "1",
+          "label": "Extract Patient & Payer Data",
+          "status": "completed"
+        },
+        {
+          "id": "2",
+          "label": "Validate Coverage",
+          "status": "completed"
+        },
+        {
+          "id": "3",
+          "label": "Update & Flag Issues",
+          "status": "completed"
+        }
+      ],
+        isError: false,
+      status: "covered",
+      insuranDetials: {
+        insuranceProvider: "Daman-AUH-001",
+        imageUrl: "/insurance-image.png",
+        policyNumber: "42122566",
+      },
+      details: [
+        { label: "Network", value: "Yes" },
+        { label: "Coverage", value: "100%" },
+      ],
+    },
+    medicalCoding: {
+        isError: false,
+          "steps": [
+        {
+          "id": "1",
+          "label": "Extract & Suggest Code",
+          "status": "pending"
+        },
+        {
+          "id": "2",
+          "label": "Validate & Check Compliance",
+          "status": "pending"
+        },
+        {
+          "id": "3",
+          "label": "Claim Posted",
+          "status": "pending"
+        },
+        {
+          "id": "4",
+          "label": "Human Review & Approval",
+          "status": "pending"
+        }
+      ],
+      status: "inprogress", // Medical coding status
+      details: [
+        { label: "Encounter Date", value: "2025-08-30" },
+        { label: "Encounter Type", value: "Outpatient" },
+        { label: "Physician", value: "Dr. Al Shamsi" },
+        { label: "Department", value: "Orthopaedics" },
+      ],
+    },
+    priorAuthorization: {
+         "steps": [
+        {
+          "id": "1",
+          "label": "Extract & Prepare & (Code)",
+          "status": "pending"
+        },
+        {
+          "id": "2",
+          "label": "Submit Request",
+          "status": "pending"
+        },
+        {
+          "id": "3",
+          "label": "Prior Authorization Posted",
+          "status": "pending"
+        },
+        {
+          "id": "4",
+          "label": "Response Retrieved",
+          "status": "pending"
+        }
+      ],
+        isError: false,
+      status: "waiting", // Prior authorization status
+      details: [
+        { label: "Encounter ID", value: "ENC-2025-0789" },
+        { label: "CPT Code", value: "29880" },
+        { label: "ICD Code", value: "M23.2" },
+        { label: "Physician", value: "Dr. Al Shamsi" },
+        { label: "Prior Auth ID", value: "PA-556677" },
+        { label: "Drug Codes", value: "NDC-0002" },
+      ],
+    },
+    claimSubmission: {
+        isError: false,
+      status: "waiting", // Current status of the claim submission process
+      steps: [
+        { id: "1", label: "Compliance Check & Adjustment", status: "pending" },
+        { id: "2", label: "XML File Generated", status: "pending" },
+        { id: "3", label: "Claim Posted", status: "pending" },
+        { id: "4", label: "Claim ID Received & Updated", status: "pending" },
+      ],
+    },
+      
+    "drugCode": [],
+    denialManagement: {
+        isError: false,
+      status: "waiting", // Current status of the denial management process
+      steps: [
+        { id: "1", label: "Denial Code Analyzed", status: "pending" },
+        { id: "2", label: "Suggested Edits", status: "pending" },
+        { id: "3", label: "Appeal Generated", status: "pending" },
+        { id: "4", label: "Appeal Submitted", status: "pending" },
+      ],
+    },
+    postPayment: {
+        isError: false,
+      status: "waiting", // Current status of the post-payment process
+      steps: [
+        { id: "1", label: "Payment Retrieved", status: "pending" },
+        { id: "2", label: "Payment Matched", status: "pending" },
+        { id: "3", label: "Adjustments Applied", status: "pending" },
+        { id: "4", label: "Ledger Updated", status: "pending" },
+      ],
+    },
+    attachments: [
+      {
+        fileName: "SOB.pdf",
+        fileSize: "200 KB",
+        ecgImageUrl: "/sob.pdf",
+      },
+      {
+        fileName: "Exclusion.pdf",
+        fileSize: "150 KB",
+        ecgImageUrl: "/exclusion.pdf",
+      },
+      {
+        fileName: "Policy.pdf",
+        fileSize: "180 KB",
+        ecgImageUrl: "/policy.pdf",
+      },
+      {
+        fileName: "ECG.png",
+        fileSize: "220 KB",
+        ecgImageUrl: "/ecg-report.png",
+      },
+    ],
+    markdown,
+    icdCodes: [],
+    cptCode: [],
+  },
+  {
+    id: "836092",
+    isSubmitted: false,
+    profileCreatedDate: new Date("9/3/2025 8:22:30").toISOString(),
+
+    agentDetails: {
+      agents: ["Autho"],
+      agentSuggestion: "Resubmit PA for physical therapy",
+      coT: "Payer limit exceeded (10 sessions); requires medical director override.",
+    },
+    profile: {
+      name: "Laila",
+      surname: "Karim",
+      age: 33,
+      emiratesId: "748-1985-2233445-4",
+      sex: "Female",
+      dateOfBirth: "1985-07-21",
+      nationality: "UAE",
+      language: "Arabic",
+      phoneNumber: 97155467830,
+      email: "Sara.nuaimi@gmail.com",
+      profilePhoto: "/avatar.png",
+    },
+    eligibilityCheck: {
+        "steps": [
+        {
+          "id": "1",
+          "label": "Extract Patient & Payer Data",
+          "status": "completed"
+        },
+        {
+          "id": "2",
+          "label": "Validate Coverage",
+          "status": "completed"
+        },
+        {
+          "id": "3",
+          "label": "Update & Flag Issues",
+          "status": "completed"
+        }
+      ],
+        isError: false,
+      status: "covered",
+      insuranDetials: {
+        insuranceProvider: "Daman-AUH-001",
+        imageUrl: "/insurance-image.png",
+        policyNumber: "42122566",
+      },
+      details: [
+        { label: "Network", value: "Yes" },
+        { label: "Coverage", value: "100%" },
+      ],
+    },
+    medicalCoding: {
+        isError: false,
+          "steps": [
+        {
+          "id": "1",
+          "label": "Extract & Suggest Code",
+          "status": "pending"
+        },
+        {
+          "id": "2",
+          "label": "Validate & Check Compliance",
+          "status": "pending"
+        },
+        {
+          "id": "3",
+          "label": "Claim Posted",
+          "status": "pending"
+        },
+        {
+          "id": "4",
+          "label": "Human Review & Approval",
+          "status": "pending"
+        }
+      ],
+      status: "inprogress", // Medical coding status
+      details: [
+        { label: "Encounter Date", value: "2025-08-30" },
+        { label: "Encounter Type", value: "Outpatient" },
+        { label: "Physician", value: "Dr. Al Shamsi" },
+        { label: "Department", value: "Orthopaedics" },
+      ],
+    },
+    priorAuthorization: {
+         "steps": [
+        {
+          "id": "1",
+          "label": "Extract & Prepare & (Code)",
+          "status": "pending"
+        },
+        {
+          "id": "2",
+          "label": "Submit Request",
+          "status": "pending"
+        },
+        {
+          "id": "3",
+          "label": "Prior Authorization Posted",
+          "status": "pending"
+        },
+        {
+          "id": "4",
+          "label": "Response Retrieved",
+          "status": "pending"
+        }
+      ],
+        isError: false,
+      status: "waiting", // Prior authorization status
+      details: [
+        { label: "Encounter ID", value: "ENC-2025-0789" },
+        { label: "CPT Code", value: "29880" },
+        { label: "ICD Code", value: "M23.2" },
+        { label: "Physician", value: "Dr. Al Shamsi" },
+        { label: "Prior Auth ID", value: "PA-556677" },
+        { label: "Drug Codes", value: "NDC-0002" },
+      ],
+    },
+    claimSubmission: {
+        isError: false,
+      status: "waiting", // Current status of the claim submission process
+      steps: [
+        { id: "1", label: "Compliance Check & Adjustment", status: "pending" },
+        { id: "2", label: "XML File Generated", status: "pending" },
+        { id: "3", label: "Claim Posted", status: "pending" },
+        { id: "4", label: "Claim ID Received & Updated", status: "pending" },
+      ],
+    },
+      
+    "drugCode": [],
+    denialManagement: {
+        isError: false,
+      status: "waiting", // Current status of the denial management process
+      steps: [
+        { id: "1", label: "Denial Code Analyzed", status: "pending" },
+        { id: "2", label: "Suggested Edits", status: "pending" },
+        { id: "3", label: "Appeal Generated", status: "pending" },
+        { id: "4", label: "Appeal Submitted", status: "pending" },
+      ],
+    },
+    postPayment: {
+        isError: false,
+      status: "waiting", // Current status of the post-payment process
+      steps: [
+        { id: "1", label: "Payment Retrieved", status: "pending" },
+        { id: "2", label: "Payment Matched", status: "pending" },
+        { id: "3", label: "Adjustments Applied", status: "pending" },
+        { id: "4", label: "Ledger Updated", status: "pending" },
+      ],
+    },
+    attachments: [
+      {
+        fileName: "SOB.pdf",
+        fileSize: "200 KB",
+        ecgImageUrl: "/sob.pdf",
+      },
+      {
+        fileName: "Exclusion.pdf",
+        fileSize: "150 KB",
+        ecgImageUrl: "/exclusion.pdf",
+      },
+      {
+        fileName: "Policy.pdf",
+        fileSize: "180 KB",
+        ecgImageUrl: "/policy.pdf",
+      },
+      {
+        fileName: "ECG.png",
+        fileSize: "220 KB",
+        ecgImageUrl: "/ecg-report.png",
+      },
+    ],
+    markdown,
+    icdCodes: [],
+    cptCode: [],
+  },
+  {
+    id: "492781",
+    isSubmitted: false,
+    profileCreatedDate: new Date("9/3/2025 8:56:15").toISOString(),
+
+    agentDetails: {
+      agents: ["Autho"],
+      agentSuggestion: "Submit PA for CPT 99213 (outpatient follow-up)",
+      coT: "CPT mapped to follow-up, but payer unexpectedly requires PA for low-acuity outpatient codes → flagged as unusual.",
+    },
+    profile: {
+      name: "Omar",
+      surname: "Khaled",
+      age: 62,
+      emiratesId: "748-1985-2233445-4",
+      sex: "Female",
+      dateOfBirth: "1985-07-21",
+      nationality: "UAE",
+      language: "Arabic",
+      phoneNumber: 97155467830,
+      email: "Sara.nuaimi@gmail.com",
+      profilePhoto: "/avatar.png",
+    },
+    eligibilityCheck: {
+        "steps": [
+        {
+          "id": "1",
+          "label": "Extract Patient & Payer Data",
+          "status": "completed"
+        },
+        {
+          "id": "2",
+          "label": "Validate Coverage",
+          "status": "completed"
+        },
+        {
+          "id": "3",
+          "label": "Update & Flag Issues",
+          "status": "completed"
+        }
+      ],
+        isError: false,
+      status: "covered",
+      insuranDetials: {
+        insuranceProvider: "Daman-AUH-001",
+        imageUrl: "/insurance-image.png",
+        policyNumber: "42122566",
+      },
+      details: [
+        { label: "Network", value: "Yes" },
+        { label: "Coverage", value: "100%" },
+      ],
+    },
+    medicalCoding: {
+        isError: false,
+          "steps": [
+        {
+          "id": "1",
+          "label": "Extract & Suggest Code",
+          "status": "pending"
+        },
+        {
+          "id": "2",
+          "label": "Validate & Check Compliance",
+          "status": "pending"
+        },
+        {
+          "id": "3",
+          "label": "Claim Posted",
+          "status": "pending"
+        },
+        {
+          "id": "4",
+          "label": "Human Review & Approval",
+          "status": "pending"
+        }
+      ],
+      status: "inprogress", // Medical coding status
+      details: [
+        { label: "Encounter Date", value: "2025-08-30" },
+        { label: "Encounter Type", value: "Outpatient" },
+        { label: "Physician", value: "Dr. Al Shamsi" },
+        { label: "Department", value: "Orthopaedics" },
+      ],
+    },
+    priorAuthorization: {
+         "steps": [
+        {
+          "id": "1",
+          "label": "Extract & Prepare & (Code)",
+          "status": "pending"
+        },
+        {
+          "id": "2",
+          "label": "Submit Request",
+          "status": "pending"
+        },
+        {
+          "id": "3",
+          "label": "Prior Authorization Posted",
+          "status": "pending"
+        },
+        {
+          "id": "4",
+          "label": "Response Retrieved",
+          "status": "pending"
+        }
+      ],
+        isError: false,
+      status: "waiting", // Prior authorization status
+      details: [
+        { label: "Encounter ID", value: "ENC-2025-0789" },
+        { label: "CPT Code", value: "29880" },
+        { label: "ICD Code", value: "M23.2" },
+        { label: "Physician", value: "Dr. Al Shamsi" },
+        { label: "Prior Auth ID", value: "PA-556677" },
+        { label: "Drug Codes", value: "NDC-0002" },
+      ],
+    },
+    claimSubmission: {
+        isError: false,
+      status: "waiting", // Current status of the claim submission process
+      steps: [
+        { id: "1", label: "Compliance Check & Adjustment", status: "pending" },
+        { id: "2", label: "XML File Generated", status: "pending" },
+        { id: "3", label: "Claim Posted", status: "pending" },
+        { id: "4", label: "Claim ID Received & Updated", status: "pending" },
+      ],
+    },
+      
+    "drugCode": [],
+    denialManagement: {
+        isError: false,
+      status: "waiting", // Current status of the denial management process
+      steps: [
+        { id: "1", label: "Denial Code Analyzed", status: "pending" },
+        { id: "2", label: "Suggested Edits", status: "pending" },
+        { id: "3", label: "Appeal Generated", status: "pending" },
+        { id: "4", label: "Appeal Submitted", status: "pending" },
+      ],
+    },
+    postPayment: {
+        isError: false,
+      status: "waiting", // Current status of the post-payment process
+      steps: [
+        { id: "1", label: "Payment Retrieved", status: "pending" },
+        { id: "2", label: "Payment Matched", status: "pending" },
+        { id: "3", label: "Adjustments Applied", status: "pending" },
+        { id: "4", label: "Ledger Updated", status: "pending" },
+      ],
+    },
+    attachments: [
+      {
+        fileName: "SOB.pdf",
+        fileSize: "200 KB",
+        ecgImageUrl: "/sob.pdf",
+      },
+      {
+        fileName: "Exclusion.pdf",
+        fileSize: "150 KB",
+        ecgImageUrl: "/exclusion.pdf",
+      },
+      {
+        fileName: "Policy.pdf",
+        fileSize: "180 KB",
+        ecgImageUrl: "/policy.pdf",
+      },
+      {
+        fileName: "ECG.png",
+        fileSize: "220 KB",
+        ecgImageUrl: "/ecg-report.png",
+      },
+    ],
+    markdown,
+    icdCodes: [],
+    cptCode: [],
+  },
+  {
+    id: "650237",
+    isSubmitted: false,
+    profileCreatedDate: new Date("9/3/2025 9:30:00").toISOString(),
+
+    agentDetails: {
+      agents: ["Coda"],
+      agentSuggestion: "ICD-10: R07.9 (Chest pain, unspecified)",
+      coT: "SOAP note: “intermittent retrosternal pressure, ?angina” → ambiguous between R07.9 vs I20.x; low confidence.",
+    },
+    profile: {
+      name: "David",
+      surname: "Chen",
+      age: 40,
+      emiratesId: "748-1985-2233445-4",
+      sex: "Female",
+      dateOfBirth: "1985-07-21",
+      nationality: "UAE",
+      language: "Arabic",
+      phoneNumber: 97155467830,
+      email: "Sara.nuaimi@gmail.com",
+      profilePhoto: "/avatar.png",
+    },
+    eligibilityCheck: {
+        "steps": [
+        {
+          "id": "1",
+          "label": "Extract Patient & Payer Data",
+          "status": "completed"
+        },
+        {
+          "id": "2",
+          "label": "Validate Coverage",
+          "status": "completed"
+        },
+        {
+          "id": "3",
+          "label": "Update & Flag Issues",
+          "status": "completed"
+        }
+      ],
+        isError: false,
+      status: "covered",
+      insuranDetials: {
+        insuranceProvider: "Daman-AUH-001",
+        imageUrl: "/insurance-image.png",
+        policyNumber: "42122566",
+      },
+      details: [
+        { label: "Network", value: "Yes" },
+        { label: "Coverage", value: "100%" },
+      ],
+    },
+    medicalCoding: {
+        isError: false,
+          "steps": [
+        {
+          "id": "1",
+          "label": "Extract & Suggest Code",
+          "status": "pending"
+        },
+        {
+          "id": "2",
+          "label": "Validate & Check Compliance",
+          "status": "pending"
+        },
+        {
+          "id": "3",
+          "label": "Claim Posted",
+          "status": "pending"
+        },
+        {
+          "id": "4",
+          "label": "Human Review & Approval",
+          "status": "pending"
+        }
+      ],
+      status: "inprogress", // Medical coding status
+      details: [
+        { label: "Encounter Date", value: "2025-08-30" },
+        { label: "Encounter Type", value: "Outpatient" },
+        { label: "Physician", value: "Dr. Al Shamsi" },
+        { label: "Department", value: "Orthopaedics" },
+      ],
+    },
+    priorAuthorization: {
+         "steps": [
+        {
+          "id": "1",
+          "label": "Extract & Prepare & (Code)",
+          "status": "pending"
+        },
+        {
+          "id": "2",
+          "label": "Submit Request",
+          "status": "pending"
+        },
+        {
+          "id": "3",
+          "label": "Prior Authorization Posted",
+          "status": "pending"
+        },
+        {
+          "id": "4",
+          "label": "Response Retrieved",
+          "status": "pending"
+        }
+      ],
+        isError: false,
+      status: "waiting", // Prior authorization status
+      details: [
+        { label: "Encounter ID", value: "ENC-2025-0789" },
+        { label: "CPT Code", value: "29880" },
+        { label: "ICD Code", value: "M23.2" },
+        { label: "Physician", value: "Dr. Al Shamsi" },
+        { label: "Prior Auth ID", value: "PA-556677" },
+        { label: "Drug Codes", value: "NDC-0002" },
+      ],
+    },
+    claimSubmission: {
+        isError: false,
+      status: "waiting", // Current status of the claim submission process
+      steps: [
+        { id: "1", label: "Compliance Check & Adjustment", status: "pending" },
+        { id: "2", label: "XML File Generated", status: "pending" },
+        { id: "3", label: "Claim Posted", status: "pending" },
+        { id: "4", label: "Claim ID Received & Updated", status: "pending" },
+      ],
+    },
+      
+    "drugCode": [],
+    denialManagement: {
+        isError: false,
+      status: "waiting", // Current status of the denial management process
+      steps: [
+        { id: "1", label: "Denial Code Analyzed", status: "pending" },
+        { id: "2", label: "Suggested Edits", status: "pending" },
+        { id: "3", label: "Appeal Generated", status: "pending" },
+        { id: "4", label: "Appeal Submitted", status: "pending" },
+      ],
+    },
+    postPayment: {
+        isError: false,
+      status: "waiting", // Current status of the post-payment process
+      steps: [
+        { id: "1", label: "Payment Retrieved", status: "pending" },
+        { id: "2", label: "Payment Matched", status: "pending" },
+        { id: "3", label: "Adjustments Applied", status: "pending" },
+        { id: "4", label: "Ledger Updated", status: "pending" },
+      ],
+    },
+    attachments: [
+      {
+        fileName: "SOB.pdf",
+        fileSize: "200 KB",
+        ecgImageUrl: "/sob.pdf",
+      },
+      {
+        fileName: "Exclusion.pdf",
+        fileSize: "150 KB",
+        ecgImageUrl: "/exclusion.pdf",
+      },
+      {
+        fileName: "Policy.pdf",
+        fileSize: "180 KB",
+        ecgImageUrl: "/policy.pdf",
+      },
+      {
+        fileName: "ECG.png",
+        fileSize: "220 KB",
+        ecgImageUrl: "/ecg-report.png",
+      },
+    ],
+    markdown,
+    icdCodes: [],
+    cptCode: [],
+  },
+  {
+    id: "718904",
+    isSubmitted: false,
+    profileCreatedDate: new Date("9/3/2025 10:03:45").toISOString(),
+
+    agentDetails: {
+      agents: ["Coda"],
+      agentSuggestion: "ICD-10: M54.5 (Low back pain)",
+      coT: "SOAP note says “lumbar pain after lifting box” → insufficient specificity (acute vs chronic).",
+    },
+    profile: {
+      name: "James",
+      surname: "Peterson",
+      age: 64,
+      emiratesId: "748-1985-2233445-4",
+      sex: "Female",
+      dateOfBirth: "1985-07-21",
+      nationality: "UAE",
+      language: "Arabic",
+      phoneNumber: 97155467830,
+      email: "Sara.nuaimi@gmail.com",
+      profilePhoto: "/avatar.png",
+    },
+    eligibilityCheck: {
+        "steps": [
+        {
+          "id": "1",
+          "label": "Extract Patient & Payer Data",
+          "status": "completed"
+        },
+        {
+          "id": "2",
+          "label": "Validate Coverage",
+          "status": "completed"
+        },
+        {
+          "id": "3",
+          "label": "Update & Flag Issues",
+          "status": "completed"
+        }
+      ],
+        isError: false,
+      status: "covered",
+      insuranDetials: {
+        insuranceProvider: "Daman-AUH-001",
+        imageUrl: "/insurance-image.png",
+        policyNumber: "42122566",
+      },
+      details: [
+        { label: "Network", value: "Yes" },
+        { label: "Coverage", value: "100%" },
+      ],
+    },
+    medicalCoding: {
+        isError: false,
+          "steps": [
+        {
+          "id": "1",
+          "label": "Extract & Suggest Code",
+          "status": "pending"
+        },
+        {
+          "id": "2",
+          "label": "Validate & Check Compliance",
+          "status": "pending"
+        },
+        {
+          "id": "3",
+          "label": "Claim Posted",
+          "status": "pending"
+        },
+        {
+          "id": "4",
+          "label": "Human Review & Approval",
+          "status": "pending"
+        }
+      ],
+      status: "inprogress", // Medical coding status
+      details: [
+        { label: "Encounter Date", value: "2025-08-30" },
+        { label: "Encounter Type", value: "Outpatient" },
+        { label: "Physician", value: "Dr. Al Shamsi" },
+        { label: "Department", value: "Orthopaedics" },
+      ],
+    },
+    priorAuthorization: {
+         "steps": [
+        {
+          "id": "1",
+          "label": "Extract & Prepare & (Code)",
+          "status": "pending"
+        },
+        {
+          "id": "2",
+          "label": "Submit Request",
+          "status": "pending"
+        },
+        {
+          "id": "3",
+          "label": "Prior Authorization Posted",
+          "status": "pending"
+        },
+        {
+          "id": "4",
+          "label": "Response Retrieved",
+          "status": "pending"
+        }
+      ],
+        isError: false,
+      status: "waiting", // Prior authorization status
+      details: [
+        { label: "Encounter ID", value: "ENC-2025-0789" },
+        { label: "CPT Code", value: "29880" },
+        { label: "ICD Code", value: "M23.2" },
+        { label: "Physician", value: "Dr. Al Shamsi" },
+        { label: "Prior Auth ID", value: "PA-556677" },
+        { label: "Drug Codes", value: "NDC-0002" },
+      ],
+    },
+    claimSubmission: {
+        isError: false,
+      status: "waiting", // Current status of the claim submission process
+      steps: [
+        { id: "1", label: "Compliance Check & Adjustment", status: "pending" },
+        { id: "2", label: "XML File Generated", status: "pending" },
+        { id: "3", label: "Claim Posted", status: "pending" },
+        { id: "4", label: "Claim ID Received & Updated", status: "pending" },
+      ],
+    },
+      
+    "drugCode": [],
+    denialManagement: {
+        isError: false,
+      status: "waiting", // Current status of the denial management process
+      steps: [
+        { id: "1", label: "Denial Code Analyzed", status: "pending" },
+        { id: "2", label: "Suggested Edits", status: "pending" },
+        { id: "3", label: "Appeal Generated", status: "pending" },
+        { id: "4", label: "Appeal Submitted", status: "pending" },
+      ],
+    },
+    postPayment: {
+        isError: false,
+      status: "waiting", // Current status of the post-payment process
+      steps: [
+        { id: "1", label: "Payment Retrieved", status: "pending" },
+        { id: "2", label: "Payment Matched", status: "pending" },
+        { id: "3", label: "Adjustments Applied", status: "pending" },
+        { id: "4", label: "Ledger Updated", status: "pending" },
+      ],
+    },
+    attachments: [
+      {
+        fileName: "SOB.pdf",
+        fileSize: "200 KB",
+        ecgImageUrl: "/sob.pdf",
+      },
+      {
+        fileName: "Exclusion.pdf",
+        fileSize: "150 KB",
+        ecgImageUrl: "/exclusion.pdf",
+      },
+      {
+        fileName: "Policy.pdf",
+        fileSize: "180 KB",
+        ecgImageUrl: "/policy.pdf",
+      },
+      {
+        fileName: "ECG.png",
+        fileSize: "220 KB",
+        ecgImageUrl: "/ecg-report.png",
+      },
+    ],
+    markdown,
+    icdCodes: [],
+    cptCode: [],
+  },
+  {
+    id: "203589",
+    isSubmitted: false,
+    profileCreatedDate: new Date("9/3/2025 10:37:30").toISOString(),
+
+    agentDetails: {
+      agents: ["Autho"],
+      agentSuggestion: "Payer flagged PA duplication request",
+      coT: "PA already approved but duplicate triggered; agent blocked.",
+    },
+    profile: {
+      name: "Noor ",
+      surname: "Al Hadi",
+      age: 47,
+      emiratesId: "748-1985-2233445-4",
+      sex: "Female",
+      dateOfBirth: "1985-07-21",
+      nationality: "UAE",
+      language: "Arabic",
+      phoneNumber: 97155467830,
+      email: "Sara.nuaimi@gmail.com",
+      profilePhoto: "/avatar.png",
+    },
+    eligibilityCheck: {
+        "steps": [
+        {
+          "id": "1",
+          "label": "Extract Patient & Payer Data",
+          "status": "completed"
+        },
+        {
+          "id": "2",
+          "label": "Validate Coverage",
+          "status": "completed"
+        },
+        {
+          "id": "3",
+          "label": "Update & Flag Issues",
+          "status": "completed"
+        }
+      ],
+        isError: false,
+      status: "covered",
+      insuranDetials: {
+        insuranceProvider: "Daman-AUH-001",
+        imageUrl: "/insurance-image.png",
+        policyNumber: "42122566",
+      },
+      details: [
+        { label: "Network", value: "Yes" },
+        { label: "Coverage", value: "100%" },
+      ],
+    },
+    medicalCoding: {
+        isError: false,
+          "steps": [
+        {
+          "id": "1",
+          "label": "Extract & Suggest Code",
+          "status": "pending"
+        },
+        {
+          "id": "2",
+          "label": "Validate & Check Compliance",
+          "status": "pending"
+        },
+        {
+          "id": "3",
+          "label": "Claim Posted",
+          "status": "pending"
+        },
+        {
+          "id": "4",
+          "label": "Human Review & Approval",
+          "status": "pending"
+        }
+      ],
+      status: "inprogress", // Medical coding status
+      details: [
+        { label: "Encounter Date", value: "2025-08-30" },
+        { label: "Encounter Type", value: "Outpatient" },
+        { label: "Physician", value: "Dr. Al Shamsi" },
+        { label: "Department", value: "Orthopaedics" },
+      ],
+    },
+    priorAuthorization: {
+         "steps": [
+        {
+          "id": "1",
+          "label": "Extract & Prepare & (Code)",
+          "status": "pending"
+        },
+        {
+          "id": "2",
+          "label": "Submit Request",
+          "status": "pending"
+        },
+        {
+          "id": "3",
+          "label": "Prior Authorization Posted",
+          "status": "pending"
+        },
+        {
+          "id": "4",
+          "label": "Response Retrieved",
+          "status": "pending"
+        }
+      ],
+        isError: false,
+      status: "waiting", // Prior authorization status
+      details: [
+        { label: "Encounter ID", value: "ENC-2025-0789" },
+        { label: "CPT Code", value: "29880" },
+        { label: "ICD Code", value: "M23.2" },
+        { label: "Physician", value: "Dr. Al Shamsi" },
+        { label: "Prior Auth ID", value: "PA-556677" },
+        { label: "Drug Codes", value: "NDC-0002" },
+      ],
+    },
+    claimSubmission: {
+        isError: false,
+      status: "waiting", // Current status of the claim submission process
+      steps: [
+        { id: "1", label: "Compliance Check & Adjustment", status: "pending" },
+        { id: "2", label: "XML File Generated", status: "pending" },
+        { id: "3", label: "Claim Posted", status: "pending" },
+        { id: "4", label: "Claim ID Received & Updated", status: "pending" },
+      ],
+    },
+      
+    "drugCode": [],
+    denialManagement: {
+        isError: false,
+      status: "waiting", // Current status of the denial management process
+      steps: [
+        { id: "1", label: "Denial Code Analyzed", status: "pending" },
+        { id: "2", label: "Suggested Edits", status: "pending" },
+        { id: "3", label: "Appeal Generated", status: "pending" },
+        { id: "4", label: "Appeal Submitted", status: "pending" },
+      ],
+    },
+    postPayment: {
+        isError: false,
+      status: "waiting", // Current status of the post-payment process
+      steps: [
+        { id: "1", label: "Payment Retrieved", status: "pending" },
+        { id: "2", label: "Payment Matched", status: "pending" },
+        { id: "3", label: "Adjustments Applied", status: "pending" },
+        { id: "4", label: "Ledger Updated", status: "pending" },
+      ],
+    },
+    attachments: [
+      {
+        fileName: "SOB.pdf",
+        fileSize: "200 KB",
+        ecgImageUrl: "/sob.pdf",
+      },
+      {
+        fileName: "Exclusion.pdf",
+        fileSize: "150 KB",
+        ecgImageUrl: "/exclusion.pdf",
+      },
+      {
+        fileName: "Policy.pdf",
+        fileSize: "180 KB",
+        ecgImageUrl: "/policy.pdf",
+      },
+      {
+        fileName: "ECG.png",
+        fileSize: "220 KB",
+        ecgImageUrl: "/ecg-report.png",
+      },
+    ],
+    markdown,
+    icdCodes: [],
+    cptCode: [],
+  },
+  {
+    id: "567491",
+    isSubmitted: false,
+    profileCreatedDate: new Date("9/3/2025 11:11:15").toISOString(),
+
+    agentDetails: {
+      agents: ["Coda"],
+      agentSuggestion: "ICD-10: R51.9 (Headache, unspecified)",
+      coT: "SOAP note: “episodic headache, ?migraine” → unclear → flagged for clarification.",
+    },
+    profile: {
+      name: "Richard",
+      surname: "Collins",
+      age: 54,
+      emiratesId: "748-1985-2233445-4",
+      sex: "Female",
+      dateOfBirth: "1985-07-21",
+      nationality: "UAE",
+      language: "Arabic",
+      phoneNumber: 97155467830,
+      email: "Sara.nuaimi@gmail.com",
+      profilePhoto: "/avatar.png",
+    },
+    eligibilityCheck: {
+        "steps": [
+        {
+          "id": "1",
+          "label": "Extract Patient & Payer Data",
+          "status": "completed"
+        },
+        {
+          "id": "2",
+          "label": "Validate Coverage",
+          "status": "completed"
+        },
+        {
+          "id": "3",
+          "label": "Update & Flag Issues",
+          "status": "completed"
+        }
+      ],
+        isError: false,
+      status: "covered",
+      insuranDetials: {
+        insuranceProvider: "Daman-AUH-001",
+        imageUrl: "/insurance-image.png",
+        policyNumber: "42122566",
+      },
+      details: [
+        { label: "Network", value: "Yes" },
+        { label: "Coverage", value: "100%" },
+      ],
+    },
+    medicalCoding: {
+        isError: false,
+          "steps": [
+        {
+          "id": "1",
+          "label": "Extract & Suggest Code",
+          "status": "pending"
+        },
+        {
+          "id": "2",
+          "label": "Validate & Check Compliance",
+          "status": "pending"
+        },
+        {
+          "id": "3",
+          "label": "Claim Posted",
+          "status": "pending"
+        },
+        {
+          "id": "4",
+          "label": "Human Review & Approval",
+          "status": "pending"
+        }
+      ],
+      status: "inprogress", // Medical coding status
+      details: [
+        { label: "Encounter Date", value: "2025-08-30" },
+        { label: "Encounter Type", value: "Outpatient" },
+        { label: "Physician", value: "Dr. Al Shamsi" },
+        { label: "Department", value: "Orthopaedics" },
+      ],
+    },
+    priorAuthorization: {
+         "steps": [
+        {
+          "id": "1",
+          "label": "Extract & Prepare & (Code)",
+          "status": "pending"
+        },
+        {
+          "id": "2",
+          "label": "Submit Request",
+          "status": "pending"
+        },
+        {
+          "id": "3",
+          "label": "Prior Authorization Posted",
+          "status": "pending"
+        },
+        {
+          "id": "4",
+          "label": "Response Retrieved",
+          "status": "pending"
+        }
+      ],
+        isError: false,
+      status: "waiting", // Prior authorization status
+      details: [
+        { label: "Encounter ID", value: "ENC-2025-0789" },
+        { label: "CPT Code", value: "29880" },
+        { label: "ICD Code", value: "M23.2" },
+        { label: "Physician", value: "Dr. Al Shamsi" },
+        { label: "Prior Auth ID", value: "PA-556677" },
+        { label: "Drug Codes", value: "NDC-0002" },
+      ],
+    },
+    claimSubmission: {
+        isError: false,
+      status: "waiting", // Current status of the claim submission process
+      steps: [
+        { id: "1", label: "Compliance Check & Adjustment", status: "pending" },
+        { id: "2", label: "XML File Generated", status: "pending" },
+        { id: "3", label: "Claim Posted", status: "pending" },
+        { id: "4", label: "Claim ID Received & Updated", status: "pending" },
+      ],
+    },
+      
+    "drugCode": [],
+    denialManagement: {
+        isError: false,
+      status: "waiting", // Current status of the denial management process
+      steps: [
+        { id: "1", label: "Denial Code Analyzed", status: "pending" },
+        { id: "2", label: "Suggested Edits", status: "pending" },
+        { id: "3", label: "Appeal Generated", status: "pending" },
+        { id: "4", label: "Appeal Submitted", status: "pending" },
+      ],
+    },
+    postPayment: {
+        isError: false,
+      status: "waiting", // Current status of the post-payment process
+      steps: [
+        { id: "1", label: "Payment Retrieved", status: "pending" },
+        { id: "2", label: "Payment Matched", status: "pending" },
+        { id: "3", label: "Adjustments Applied", status: "pending" },
+        { id: "4", label: "Ledger Updated", status: "pending" },
+      ],
+    },
+    attachments: [
+      {
+        fileName: "SOB.pdf",
+        fileSize: "200 KB",
+        ecgImageUrl: "/sob.pdf",
+      },
+      {
+        fileName: "Exclusion.pdf",
+        fileSize: "150 KB",
+        ecgImageUrl: "/exclusion.pdf",
+      },
+      {
+        fileName: "Policy.pdf",
+        fileSize: "180 KB",
+        ecgImageUrl: "/policy.pdf",
+      },
+      {
+        fileName: "ECG.png",
+        fileSize: "220 KB",
+        ecgImageUrl: "/ecg-report.png",
+      },
+    ],
+    markdown,
+    icdCodes: [],
+    cptCode: [],
+  },
+  {
+    id: "891034",
+    isSubmitted: false,
+    profileCreatedDate: new Date("9/3/2025 11:45:00").toISOString(),
+
+    agentDetails: {
+      agents: ["Clara"],
+      agentSuggestion: "Missing attending provider signature",
+      coT: "Claim built without digital signature field populated; compliance check blocked.",
+    },
+    profile: {
+      name: "Amina",
+      surname: "Farouk",
+      age: 41,
+      emiratesId: "748-1985-2233445-4",
+      sex: "Female",
+      dateOfBirth: "1985-07-21",
+      nationality: "UAE",
+      language: "Arabic",
+      phoneNumber: 97155467830,
+      email: "Sara.nuaimi@gmail.com",
+      profilePhoto: "/avatar.png",
+    },
+    eligibilityCheck: {
+        "steps": [
+        {
+          "id": "1",
+          "label": "Extract Patient & Payer Data",
+          "status": "completed"
+        },
+        {
+          "id": "2",
+          "label": "Validate Coverage",
+          "status": "completed"
+        },
+        {
+          "id": "3",
+          "label": "Update & Flag Issues",
+          "status": "completed"
+        }
+      ],
+        isError: false,
+      status: "covered",
+      insuranDetials: {
+        insuranceProvider: "Daman-AUH-001",
+        imageUrl: "/insurance-image.png",
+        policyNumber: "42122566",
+      },
+      details: [
+        { label: "Network", value: "Yes" },
+        { label: "Coverage", value: "100%" },
+      ],
+    },
+    medicalCoding: {
+        isError: false,
+          "steps": [
+        {
+          "id": "1",
+          "label": "Extract & Suggest Code",
+          "status": "pending"
+        },
+        {
+          "id": "2",
+          "label": "Validate & Check Compliance",
+          "status": "pending"
+        },
+        {
+          "id": "3",
+          "label": "Claim Posted",
+          "status": "pending"
+        },
+        {
+          "id": "4",
+          "label": "Human Review & Approval",
+          "status": "pending"
+        }
+      ],
+      status: "inprogress", // Medical coding status
+      details: [
+        { label: "Encounter Date", value: "2025-08-30" },
+        { label: "Encounter Type", value: "Outpatient" },
+        { label: "Physician", value: "Dr. Al Shamsi" },
+        { label: "Department", value: "Orthopaedics" },
+      ],
+    },
+    priorAuthorization: {
+         "steps": [
+        {
+          "id": "1",
+          "label": "Extract & Prepare & (Code)",
+          "status": "pending"
+        },
+        {
+          "id": "2",
+          "label": "Submit Request",
+          "status": "pending"
+        },
+        {
+          "id": "3",
+          "label": "Prior Authorization Posted",
+          "status": "pending"
+        },
+        {
+          "id": "4",
+          "label": "Response Retrieved",
+          "status": "pending"
+        }
+      ],
+        isError: false,
+      status: "waiting", // Prior authorization status
+      details: [
+        { label: "Encounter ID", value: "ENC-2025-0789" },
+        { label: "CPT Code", value: "29880" },
+        { label: "ICD Code", value: "M23.2" },
+        { label: "Physician", value: "Dr. Al Shamsi" },
+        { label: "Prior Auth ID", value: "PA-556677" },
+        { label: "Drug Codes", value: "NDC-0002" },
+      ],
+    },
+    claimSubmission: {
+        isError: false,
+      status: "waiting", // Current status of the claim submission process
+      steps: [
+        { id: "1", label: "Compliance Check & Adjustment", status: "pending" },
+        { id: "2", label: "XML File Generated", status: "pending" },
+        { id: "3", label: "Claim Posted", status: "pending" },
+        { id: "4", label: "Claim ID Received & Updated", status: "pending" },
+      ],
+    },
+      
+    "drugCode": [],
+    denialManagement: {
+        isError: false,
+      status: "waiting", // Current status of the denial management process
+      steps: [
+        { id: "1", label: "Denial Code Analyzed", status: "pending" },
+        { id: "2", label: "Suggested Edits", status: "pending" },
+        { id: "3", label: "Appeal Generated", status: "pending" },
+        { id: "4", label: "Appeal Submitted", status: "pending" },
+      ],
+    },
+    postPayment: {
+        isError: false,
+      status: "waiting", // Current status of the post-payment process
+      steps: [
+        { id: "1", label: "Payment Retrieved", status: "pending" },
+        { id: "2", label: "Payment Matched", status: "pending" },
+        { id: "3", label: "Adjustments Applied", status: "pending" },
+        { id: "4", label: "Ledger Updated", status: "pending" },
+      ],
+    },
+    attachments: [
+      {
+        fileName: "SOB.pdf",
+        fileSize: "200 KB",
+        ecgImageUrl: "/sob.pdf",
+      },
+      {
+        fileName: "Exclusion.pdf",
+        fileSize: "150 KB",
+        ecgImageUrl: "/exclusion.pdf",
+      },
+      {
+        fileName: "Policy.pdf",
+        fileSize: "180 KB",
+        ecgImageUrl: "/policy.pdf",
+      },
+      {
+        fileName: "ECG.png",
+        fileSize: "220 KB",
+        ecgImageUrl: "/ecg-report.png",
+      },
+    ],
+    markdown,
+    icdCodes: [],
+    cptCode: [],
+  },
+  {
+    id: "342657",
+    isSubmitted: false,
+    profileCreatedDate: new Date("9/3/2025 12:18:45").toISOString(),
+
+    agentDetails: {
+      agents: ["Payne"],
+      agentSuggestion: "EFT posted but payer remark code missing",
+      coT: "Funds matched, but no adjustment codes in remit → requires manual reconciliation.",
+    },
+    profile: {
+      name: "Peter",
+      surname: "Novak",
+      age: 58,
+      emiratesId: "748-1985-2233445-4",
+      sex: "Female",
+      dateOfBirth: "1985-07-21",
+      nationality: "UAE",
+      language: "Arabic",
+      phoneNumber: 97155467830,
+      email: "Sara.nuaimi@gmail.com",
+      profilePhoto: "/avatar.png",
+    },
+    eligibilityCheck: {
+        "steps": [
+        {
+          "id": "1",
+          "label": "Extract Patient & Payer Data",
+          "status": "completed"
+        },
+        {
+          "id": "2",
+          "label": "Validate Coverage",
+          "status": "completed"
+        },
+        {
+          "id": "3",
+          "label": "Update & Flag Issues",
+          "status": "completed"
+        }
+      ],
+        isError: false,
+      status: "covered",
+      insuranDetials: {
+        insuranceProvider: "Daman-AUH-001",
+        imageUrl: "/insurance-image.png",
+        policyNumber: "42122566",
+      },
+      details: [
+        { label: "Network", value: "Yes" },
+        { label: "Coverage", value: "100%" },
+      ],
+    },
+    medicalCoding: {
+        isError: false,
+          "steps": [
+        {
+          "id": "1",
+          "label": "Extract & Suggest Code",
+          "status": "pending"
+        },
+        {
+          "id": "2",
+          "label": "Validate & Check Compliance",
+          "status": "pending"
+        },
+        {
+          "id": "3",
+          "label": "Claim Posted",
+          "status": "pending"
+        },
+        {
+          "id": "4",
+          "label": "Human Review & Approval",
+          "status": "pending"
+        }
+      ],
+      status: "inprogress", // Medical coding status
+      details: [
+        { label: "Encounter Date", value: "2025-08-30" },
+        { label: "Encounter Type", value: "Outpatient" },
+        { label: "Physician", value: "Dr. Al Shamsi" },
+        { label: "Department", value: "Orthopaedics" },
+      ],
+    },
+    priorAuthorization: {
+         "steps": [
+        {
+          "id": "1",
+          "label": "Extract & Prepare & (Code)",
+          "status": "pending"
+        },
+        {
+          "id": "2",
+          "label": "Submit Request",
+          "status": "pending"
+        },
+        {
+          "id": "3",
+          "label": "Prior Authorization Posted",
+          "status": "pending"
+        },
+        {
+          "id": "4",
+          "label": "Response Retrieved",
+          "status": "pending"
+        }
+      ],
+        isError: false,
+      status: "waiting", // Prior authorization status
+      details: [
+        { label: "Encounter ID", value: "ENC-2025-0789" },
+        { label: "CPT Code", value: "29880" },
+        { label: "ICD Code", value: "M23.2" },
+        { label: "Physician", value: "Dr. Al Shamsi" },
+        { label: "Prior Auth ID", value: "PA-556677" },
+        { label: "Drug Codes", value: "NDC-0002" },
+      ],
+    },
+    claimSubmission: {
+        isError: false,
+      status: "waiting", // Current status of the claim submission process
+      steps: [
+        { id: "1", label: "Compliance Check & Adjustment", status: "pending" },
+        { id: "2", label: "XML File Generated", status: "pending" },
+        { id: "3", label: "Claim Posted", status: "pending" },
+        { id: "4", label: "Claim ID Received & Updated", status: "pending" },
+      ],
+    },
+      
+    "drugCode": [],
+    denialManagement: {
+        isError: false,
+      status: "waiting", // Current status of the denial management process
+      steps: [
+        { id: "1", label: "Denial Code Analyzed", status: "pending" },
+        { id: "2", label: "Suggested Edits", status: "pending" },
+        { id: "3", label: "Appeal Generated", status: "pending" },
+        { id: "4", label: "Appeal Submitted", status: "pending" },
+      ],
+    },
+    postPayment: {
+        isError: false,
+      status: "waiting", // Current status of the post-payment process
+      steps: [
+        { id: "1", label: "Payment Retrieved", status: "pending" },
+        { id: "2", label: "Payment Matched", status: "pending" },
+        { id: "3", label: "Adjustments Applied", status: "pending" },
+        { id: "4", label: "Ledger Updated", status: "pending" },
+      ],
+    },
+    attachments: [
+      {
+        fileName: "SOB.pdf",
+        fileSize: "200 KB",
+        ecgImageUrl: "/sob.pdf",
+      },
+      {
+        fileName: "Exclusion.pdf",
+        fileSize: "150 KB",
+        ecgImageUrl: "/exclusion.pdf",
+      },
+      {
+        fileName: "Policy.pdf",
+        fileSize: "180 KB",
+        ecgImageUrl: "/policy.pdf",
+      },
+      {
+        fileName: "ECG.png",
+        fileSize: "220 KB",
+        ecgImageUrl: "/ecg-report.png",
+      },
+    ],
+    markdown,
+    icdCodes: [],
+    cptCode: [],
+  },
+  {
+    id: "970218",
+    isSubmitted: false,
+    profileCreatedDate: new Date("9/3/2025 12:52:30").toISOString(),
+
+    agentDetails: {
+      agents: ["Coda"],
+      agentSuggestion: "ICD-10: J20.9 (Acute bronchitis, unspecified)",
+      coT: "SOAP: “productive cough, no x-ray done” → not clear if pneumonia → flagged precautionary.",
+    },
+    profile: {
+      name: "Clara",
+      surname: "Jensen",
+      age: 35,
+      emiratesId: "748-1985-2233445-4",
+      sex: "Female",
+      dateOfBirth: "1985-07-21",
+      nationality: "UAE",
+      language: "Arabic",
+      phoneNumber: 97155467830,
+      email: "Sara.nuaimi@gmail.com",
+      profilePhoto: "/avatar.png",
+    },
+    eligibilityCheck: {
+        "steps": [
+        {
+          "id": "1",
+          "label": "Extract Patient & Payer Data",
+          "status": "completed"
+        },
+        {
+          "id": "2",
+          "label": "Validate Coverage",
+          "status": "completed"
+        },
+        {
+          "id": "3",
+          "label": "Update & Flag Issues",
+          "status": "completed"
+        }
+      ],
+        isError: false,
+      status: "covered",
+      insuranDetials: {
+        insuranceProvider: "Daman-AUH-001",
+        imageUrl: "/insurance-image.png",
+        policyNumber: "42122566",
+      },
+      details: [
+        { label: "Network", value: "Yes" },
+        { label: "Coverage", value: "100%" },
+      ],
+    },
+    medicalCoding: {
+        isError: false,
+          "steps": [
+        {
+          "id": "1",
+          "label": "Extract & Suggest Code",
+          "status": "pending"
+        },
+        {
+          "id": "2",
+          "label": "Validate & Check Compliance",
+          "status": "pending"
+        },
+        {
+          "id": "3",
+          "label": "Claim Posted",
+          "status": "pending"
+        },
+        {
+          "id": "4",
+          "label": "Human Review & Approval",
+          "status": "pending"
+        }
+      ],
+      status: "inprogress", // Medical coding status
+      details: [
+        { label: "Encounter Date", value: "2025-08-30" },
+        { label: "Encounter Type", value: "Outpatient" },
+        { label: "Physician", value: "Dr. Al Shamsi" },
+        { label: "Department", value: "Orthopaedics" },
+      ],
+    },
+    priorAuthorization: {
+         "steps": [
+        {
+          "id": "1",
+          "label": "Extract & Prepare & (Code)",
+          "status": "pending"
+        },
+        {
+          "id": "2",
+          "label": "Submit Request",
+          "status": "pending"
+        },
+        {
+          "id": "3",
+          "label": "Prior Authorization Posted",
+          "status": "pending"
+        },
+        {
+          "id": "4",
+          "label": "Response Retrieved",
+          "status": "pending"
+        }
+      ],
+        isError: false,
+      status: "waiting", // Prior authorization status
+      details: [
+        { label: "Encounter ID", value: "ENC-2025-0789" },
+        { label: "CPT Code", value: "29880" },
+        { label: "ICD Code", value: "M23.2" },
+        { label: "Physician", value: "Dr. Al Shamsi" },
+        { label: "Prior Auth ID", value: "PA-556677" },
+        { label: "Drug Codes", value: "NDC-0002" },
+      ],
+    },
+    claimSubmission: {
+        isError: false,
+      status: "waiting", // Current status of the claim submission process
+      steps: [
+        { id: "1", label: "Compliance Check & Adjustment", status: "pending" },
+        { id: "2", label: "XML File Generated", status: "pending" },
+        { id: "3", label: "Claim Posted", status: "pending" },
+        { id: "4", label: "Claim ID Received & Updated", status: "pending" },
+      ],
+    },
+      
+    "drugCode": [],
+    denialManagement: {
+        isError: false,
+      status: "waiting", // Current status of the denial management process
+      steps: [
+        { id: "1", label: "Denial Code Analyzed", status: "pending" },
+        { id: "2", label: "Suggested Edits", status: "pending" },
+        { id: "3", label: "Appeal Generated", status: "pending" },
+        { id: "4", label: "Appeal Submitted", status: "pending" },
+      ],
+    },
+    postPayment: {
+        isError: false,
+      status: "waiting", // Current status of the post-payment process
+      steps: [
+        { id: "1", label: "Payment Retrieved", status: "pending" },
+        { id: "2", label: "Payment Matched", status: "pending" },
+        { id: "3", label: "Adjustments Applied", status: "pending" },
+        { id: "4", label: "Ledger Updated", status: "pending" },
+      ],
+    },
+    attachments: [
+      {
+        fileName: "SOB.pdf",
+        fileSize: "200 KB",
+        ecgImageUrl: "/sob.pdf",
+      },
+      {
+        fileName: "Exclusion.pdf",
+        fileSize: "150 KB",
+        ecgImageUrl: "/exclusion.pdf",
+      },
+      {
+        fileName: "Policy.pdf",
+        fileSize: "180 KB",
+        ecgImageUrl: "/policy.pdf",
+      },
+      {
+        fileName: "ECG.png",
+        fileSize: "220 KB",
+        ecgImageUrl: "/ecg-report.png",
+      },
+    ],
+    markdown,
+    icdCodes: [],
+    cptCode: [],
+  },
+  {
+    id: "583920",
+    isSubmitted: false,
+    profileCreatedDate: new Date("9/3/2025 13:26:15").toISOString(),
+
+    agentDetails: {
+      agents: ["Dee"],
+      agentSuggestion: "Payer denial: duplicate lab test billed",
+      coT: "Two labs billed within 24h; agent cannot auto-resolve → flagged for review.",
+    },
+    profile: {
+      name: "Hana",
+      surname: "Shafiq",
+      age: 29,
+      emiratesId: "748-1985-2233445-4",
+      sex: "Female",
+      dateOfBirth: "1985-07-21",
+      nationality: "UAE",
+      language: "Arabic",
+      phoneNumber: 97155467830,
+      email: "Sara.nuaimi@gmail.com",
+      profilePhoto: "/avatar.png",
+    },
+    eligibilityCheck: {
+        "steps": [
+        {
+          "id": "1",
+          "label": "Extract Patient & Payer Data",
+          "status": "completed"
+        },
+        {
+          "id": "2",
+          "label": "Validate Coverage",
+          "status": "completed"
+        },
+        {
+          "id": "3",
+          "label": "Update & Flag Issues",
+          "status": "completed"
+        }
+      ],
+        isError: false,
+      status: "covered",
+      insuranDetials: {
+        insuranceProvider: "Daman-AUH-001",
+        imageUrl: "/insurance-image.png",
+        policyNumber: "42122566",
+      },
+      details: [
+        { label: "Network", value: "Yes" },
+        { label: "Coverage", value: "100%" },
+      ],
+    },
+    medicalCoding: {
+        isError: false,
+          "steps": [
+        {
+          "id": "1",
+          "label": "Extract & Suggest Code",
+          "status": "pending"
+        },
+        {
+          "id": "2",
+          "label": "Validate & Check Compliance",
+          "status": "pending"
+        },
+        {
+          "id": "3",
+          "label": "Claim Posted",
+          "status": "pending"
+        },
+        {
+          "id": "4",
+          "label": "Human Review & Approval",
+          "status": "pending"
+        }
+      ],
+      status: "inprogress", // Medical coding status
+      details: [
+        { label: "Encounter Date", value: "2025-08-30" },
+        { label: "Encounter Type", value: "Outpatient" },
+        { label: "Physician", value: "Dr. Al Shamsi" },
+        { label: "Department", value: "Orthopaedics" },
+      ],
+    },
+    priorAuthorization: {
+         "steps": [
+        {
+          "id": "1",
+          "label": "Extract & Prepare & (Code)",
+          "status": "pending"
+        },
+        {
+          "id": "2",
+          "label": "Submit Request",
+          "status": "pending"
+        },
+        {
+          "id": "3",
+          "label": "Prior Authorization Posted",
+          "status": "pending"
+        },
+        {
+          "id": "4",
+          "label": "Response Retrieved",
+          "status": "pending"
+        }
+      ],
+        isError: false,
+      status: "waiting", // Prior authorization status
+      details: [
+        { label: "Encounter ID", value: "ENC-2025-0789" },
+        { label: "CPT Code", value: "29880" },
+        { label: "ICD Code", value: "M23.2" },
+        { label: "Physician", value: "Dr. Al Shamsi" },
+        { label: "Prior Auth ID", value: "PA-556677" },
+        { label: "Drug Codes", value: "NDC-0002" },
+      ],
+    },
+    claimSubmission: {
+        isError: false,
+      status: "waiting", // Current status of the claim submission process
+      steps: [
+        { id: "1", label: "Compliance Check & Adjustment", status: "pending" },
+        { id: "2", label: "XML File Generated", status: "pending" },
+        { id: "3", label: "Claim Posted", status: "pending" },
+        { id: "4", label: "Claim ID Received & Updated", status: "pending" },
+      ],
+    },
+      
+    "drugCode": [],
+    denialManagement: {
+        isError: false,
+      status: "waiting", // Current status of the denial management process
+      steps: [
+        { id: "1", label: "Denial Code Analyzed", status: "pending" },
+        { id: "2", label: "Suggested Edits", status: "pending" },
+        { id: "3", label: "Appeal Generated", status: "pending" },
+        { id: "4", label: "Appeal Submitted", status: "pending" },
+      ],
+    },
+    postPayment: {
+        isError: false,
+      status: "waiting", // Current status of the post-payment process
+      steps: [
+        { id: "1", label: "Payment Retrieved", status: "pending" },
+        { id: "2", label: "Payment Matched", status: "pending" },
+        { id: "3", label: "Adjustments Applied", status: "pending" },
+        { id: "4", label: "Ledger Updated", status: "pending" },
+      ],
+    },
+    attachments: [
+      {
+        fileName: "SOB.pdf",
+        fileSize: "200 KB",
+        ecgImageUrl: "/sob.pdf",
+      },
+      {
+        fileName: "Exclusion.pdf",
+        fileSize: "150 KB",
+        ecgImageUrl: "/exclusion.pdf",
+      },
+      {
+        fileName: "Policy.pdf",
+        fileSize: "180 KB",
+        ecgImageUrl: "/policy.pdf",
+      },
+      {
+        fileName: "ECG.png",
+        fileSize: "220 KB",
+        ecgImageUrl: "/ecg-report.png",
+      },
+    ],
+    markdown,
+    icdCodes: [],
+    cptCode: [],
+  },
+];
+
+
+
+export const patientPersona: PatientPersona[] = demoData.concat(fakePersona)
