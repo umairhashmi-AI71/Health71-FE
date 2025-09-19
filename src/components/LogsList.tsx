@@ -33,13 +33,13 @@ const LogsList: React.FC<LogsListProps> = ({ data }) => {
             <div className="relative">
                 {data.map((round, index) => {
                     return (
-                        <div className={`overflow-x-auto border border-gray-200 rounded-lg mb-10 ${activeTab === index ? "" : "hidden"}`} key={index}>
+                        <div className={`rounded-lg   ${activeTab === index ? "" : "hidden"}`} key={index}>
 
 
 
                             <table className="w-full">
                                 <tbody>
-                                    <tr className="border-b border-gray-200">
+                                    <tr className="">
                                         <td className="px-6 py-3 font-medium  w-[18%]">Date & Time</td>
                                         <td className="px-6 py-3 font-medium  w-[10%]">Actor</td>
                                         <td className="px-6 py-3 font-medium  w-[15%]">Step</td>
@@ -50,7 +50,7 @@ const LogsList: React.FC<LogsListProps> = ({ data }) => {
                                         return (
                                             <tr
                                                 key={idx}
-                                                className={`cursor-pointer transition-colors duration-20 patient-list hover:bg-[#EFF7F6] `}
+                                                className={`cursor-pointer transition-colors duration-20 patient-list hover:bg-[#EFF7F6] border-t border-gray-200 `}
                                             >
                                                 <td className="px-6 py-3">
                                                     {roundItem.date}
