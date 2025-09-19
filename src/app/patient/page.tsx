@@ -37,7 +37,7 @@ const RedirectPage = () => {
           surname: i.profile.surname,
           name: i.profile.name,
           age: i.profile.age,
-          agentIssue: i.agentDetails?.agentIssue || "",
+          agents: i.agentDetails?.agents || [],
           agentSuggestion: i.agentDetails?.agentSuggestion || "",
           cot: i.agentDetails?.coT || "",
           lastUpdated: new Date(i.profileCreatedDate).toISOString(),
@@ -45,7 +45,7 @@ const RedirectPage = () => {
         }))
     );
   }, [list]);
-  
+
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedSuggestions, setSelectedSuggestions] = useState<string[]>([]);
   const [sortBy, setSortBy] = useState("latest");
@@ -53,18 +53,25 @@ const RedirectPage = () => {
 
   // Get unique agent suggestions for filter
   const uniqueSuggestions = useMemo(() => {
-    return Array.from(new Set(patients.map((p) => p.agentIssue)));
+    // Flatten all patient.agents arrays into one big array
+    const allAgents = patients.flatMap((p) => p?.agents ?? []);
+    // Remove duplicates using Set
+    return Array.from(new Set(allAgents));
   }, [patients]);
+
 
   // Filter and sort patients
   const filteredAndSortedPatients = useMemo(() => {
     const filtered = patients.filter((patient) => {
       const matchesSearch =
-        patient.name.toLowerCase().includes(searchTerm.toLowerCase()) 
+        patient.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
         patient.id.includes(searchTerm);
+
       const matchesFilter =
         selectedSuggestions.length === 0 ||
-        selectedSuggestions.includes(patient.agentIssue);
+        // check if ANY of the patient's agentIssue values match a selected suggestion
+        patient?.agents.some((issue) => selectedSuggestions.includes(issue));
+
       return matchesSearch && matchesFilter;
     });
 
@@ -87,6 +94,7 @@ const RedirectPage = () => {
 
     return filtered;
   }, [patients, searchTerm, selectedSuggestions, sortBy]);
+
 
   // Handle row selection
   const handleRowSelect = useCallback((patientId: string) => {
@@ -111,7 +119,6 @@ const RedirectPage = () => {
     [filteredAndSortedPatients]
   );
 
-  // Handle suggestion filter toggle
   const toggleSuggestionFilter = useCallback((suggestion: string) => {
     setSelectedSuggestions((prev) =>
       prev.includes(suggestion)
@@ -121,9 +128,9 @@ const RedirectPage = () => {
   }, []);
 
   useEffect(() => {
-   if (agent && patients.length > 0) {
-    toggleSuggestionFilter(agent);
-  }
+    if (agent && patients.length > 0) {
+      toggleSuggestionFilter(agent);
+    }
   }, [agent, patients])
 
   // Clear filters
@@ -156,7 +163,7 @@ const RedirectPage = () => {
           p.name,
           p.surname,
           p.age,
-          p.agentIssue,
+          p.agents,
           `${p.agentSuggestion}`,
           p.cot,
           p.lastUpdated,
@@ -301,11 +308,10 @@ const RedirectPage = () => {
                           /> */}
                           <div
                             className={`w-5 h-5 flex items-center justify-center border rounded cursor-pointer
-        ${
-          selectedSuggestions.includes(suggestion)
-            ? "checkbox"
-            : "bg-white border-gray-400"
-        }`}
+        ${selectedSuggestions.includes(suggestion)
+                                ? "checkbox"
+                                : "bg-white border-gray-400"
+                              }`}
                           >
                             {selectedSuggestions.includes(suggestion) && (
                               <Check size={14} className="text-white" />
@@ -344,8 +350,8 @@ const RedirectPage = () => {
                   {sortBy === "latest"
                     ? "Newest"
                     : sortBy === "oldest"
-                    ? "Oldest"
-                    : "ROI"}
+                      ? "Oldest"
+                      : "ROI"}
                   <ChevronDown className="h-4 w-4" />
                 </button>
 
@@ -357,9 +363,8 @@ const RedirectPage = () => {
                           setSortBy("latest");
                           setShowSortMenu(false);
                         }}
-                        className={`px-4 py-2 text-left rounded-lg hover:bg-[#EFF7F6] ${
-                          sortBy === "latest" ? "bg-[#E8E2DB] font-medium" : ""
-                        }`}
+                        className={`px-4 py-2 text-left rounded-lg hover:bg-[#EFF7F6] ${sortBy === "latest" ? "bg-[#E8E2DB] font-medium" : ""
+                          }`}
                       >
                         Newest
                       </button>
@@ -368,9 +373,8 @@ const RedirectPage = () => {
                           setSortBy("oldest");
                           setShowSortMenu(false);
                         }}
-                        className={`px-4 py-2 text-left rounded-lg hover:bg-[#EFF7F6] ${
-                          sortBy === "oldest" ? "bg-[#E8E2DB] font-medium" : ""
-                        }`}
+                        className={`px-4 py-2 text-left rounded-lg hover:bg-[#EFF7F6] ${sortBy === "oldest" ? "bg-[#E8E2DB] font-medium" : ""
+                          }`}
                       >
                         Oldest
                       </button>
@@ -379,9 +383,8 @@ const RedirectPage = () => {
                           setSortBy("roi");
                           setShowSortMenu(false);
                         }}
-                        className={`px-4 py-2 text-left rounded-lg hover:bg-[#EFF7F6] ${
-                          sortBy === "roi" ? "bg-[#E8E2DB] font-medium" : ""
-                        }`}
+                        className={`px-4 py-2 text-left rounded-lg hover:bg-[#EFF7F6] ${sortBy === "roi" ? "bg-[#E8E2DB] font-medium" : ""
+                          }`}
                       >
                         ROI
                       </button>
@@ -461,9 +464,8 @@ const RedirectPage = () => {
                   return (
                     <tr
                       key={patient.id}
-                      className={`cursor-pointer transition-colors duration-20 patient-list hover:bg-[#EFF7F6] ${
-                        patient.selected ? "selected" : ""
-                      }`}
+                      className={`cursor-pointer transition-colors duration-20 patient-list hover:bg-[#EFF7F6] ${patient.selected ? "selected" : ""
+                        }`}
                     >
                       <td className="pl-3 py-2">
                         {/* <input
@@ -488,12 +490,16 @@ const RedirectPage = () => {
                       <td className="px-4 py-3 whitespace-nowrap text-sm ">
                         {patient.id}
                       </td>
-                      <td className="px-4 py-3 whitespace-nowrap text-sm ">
-                        <span
-                          className={`border bg-white rounded-2xl py-1 px-3 ${patient.agentIssue.toLowerCase()}-border`}
-                        >
-                          {patient.agentIssue}
-                        </span>
+                      <td className="px-4 py-3 whitespace-nowrap text-sm  ">
+                        <div className="flex flex-col gap-2">
+                          {patient.agents && patient.agents.map((i, idx) => <span
+                            key={idx}
+                            className={`border text-center bg-white rounded-2xl py-1 px-3 ${i.toLowerCase()}-border`}
+                          >
+                            {i}
+                          </span>)}
+                        </div>
+
                       </td>
 
                       <td className="px-4 py-3 text-sm  max-w-xs ">
@@ -511,7 +517,7 @@ const RedirectPage = () => {
                             <Search className="h-4 w-4" strokeWidth={1.5} />
                           </Link>
                           <button
-                            className={`cursor-pointer ${patient.selected ? 'opacity-0':''}`}
+                            className={`cursor-pointer ${patient.selected ? 'opacity-0' : ''}`}
                             disabled={patient.selected}
                             onClick={() => {
                               setSingleSelect(patient.id);
@@ -540,9 +546,8 @@ const RedirectPage = () => {
 
           <div className="flex justify-end mb-10">
             <button
-              className={` text-white px-6 py-2 rounded-lg  ${
-                selectedCount > 0 ? "bg-green" : "bg-[#F5F2EF]"
-              }`}
+              className={` text-white px-6 py-2 rounded-lg  ${selectedCount > 0 ? "bg-green" : "bg-[#F5F2EF]"
+                }`}
               onClick={() => setModal("accept")}
               disabled={selectedCount > 0 ? false : true}
             >

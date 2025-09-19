@@ -86,7 +86,6 @@ const AppealLetter: React.FC<Type> = ({
         <button
           className="rounded-xl  border border-base px-5 py-2 text-base-primary bg-white cursor-pointer"
           onClick={acceptHandeler}
-          disabled={isEditing}
         >
           Accept
         </button></div>}

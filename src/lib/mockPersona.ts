@@ -106,7 +106,7 @@ Sara Al Naoumi, a 40-year-old female, presents with left knee pain persisting fo
 export const patientPersona: PatientPersona[] = [
   {
     "agentDetails": {
-      "agentIssue": "Clara",
+      "agents": ["Clara"],
       "agentSuggestion": "Payer denial: duplicate lab test billed",
       "coT": "Two labs billed within 24h; agent cannot auto-resolve → flagged for review."
     },
@@ -446,7 +446,7 @@ export const patientPersona: PatientPersona[] = [
   },
   {
     "agentDetails": {
-      "agentIssue": "Dee",
+      "agents": ["Clara"],
       "agentSuggestion": "Payer denial: duplicate lab test billed",
       "coT": "Two labs billed within 24h; agent cannot auto-resolve → flagged for review."
     },
@@ -763,7 +763,7 @@ export const patientPersona: PatientPersona[] = [
   },
   {
     "agentDetails": {
-      "agentIssue": "Coda",
+      agents: ["Clara", "Coda", "Dee"],
       "agentSuggestion": "Claim denied due to coding mismatch. Resubmitting with updated CPT and ICD codes.",
       "coT": "Claim denied for coding mismatch. Agent flagged to review mapped CPT/ICD codes and resubmit with corrected combination."
     },
@@ -1130,7 +1130,7 @@ export const patientPersona: PatientPersona[] = [
   },
   {
     "agentDetails": {
-      "agentIssue": "Dee",
+      agents: ["Clara", "Coda"],
       "agentSuggestion": "Payer denial: duplicate lab test billed",
       "coT": "Two labs billed within 24h; agent cannot auto-resolve → flagged for review."
     },
@@ -1447,7 +1447,7 @@ export const patientPersona: PatientPersona[] = [
   },
   {
     "agentDetails": {
-      "agentIssue": "Clara",
+      "agents": ["Clara", "Dee"],
       "agentSuggestion": "Partial claim approved. Remaining services denied for insufficient documentation. Suggest write-off per policy.",
       "coT": "Partial claim approved but some services denied for insufficient documentation. Agent recommended write-off as per payer guidelines."
     },
@@ -1673,7 +1673,7 @@ export const patientPersona: PatientPersona[] = [
       }
     },
     "denialManagement": {
-      "status": "done",
+      "status": "inprogress",
       "steps": [
         {
           "id": "1",
@@ -1785,7 +1785,7 @@ export const patientPersona: PatientPersona[] = [
   },
  {
     "agentDetails": {
-      "agentIssue": "Clara",
+      "agents": ["Clara", "Dee"],
       "agentSuggestion": "Appeal letter generated and submitted to payer for review of medical necessity.",
       "coT": "Claim denied for insufficient documentation. Agent generated appeal letter with supporting documents and submitted to payer."
     },
@@ -2146,7 +2146,7 @@ export const patientPersona: PatientPersona[] = [
   },
   {
     "agentDetails": {
-      "agentIssue": "Dee",
+      "agents": ["Clara"],
       "agentSuggestion": "Payer denial: duplicate lab test billed",
       "coT": "Two labs billed within 24h; agent cannot auto-resolve → flagged for review."
     },
@@ -2473,7 +2473,7 @@ export const patientPersona: PatientPersona[] = [
   },
    {
     "agentDetails": {
-      "agentIssue": "Clara",
+      "agents": ["Clara", "Dee"],
       "agentSuggestion": "Partial approval received. Agent flagged CPT code mismatch, retrieved correct CPT from codebook, re-ran medical coding, and resubmitted claim. Claim approved on second round.",
       "coT": "Agent identified CPT code mismatch, retrieved correct CPT, and suggest rerunning coding."
     },
@@ -2829,6 +2829,329 @@ export const patientPersona: PatientPersona[] = [
     ],
     "isSubmitted": false,
     "id": "314500",
+    "profileCreatedDate": "2025-09-16T12:32:28.570Z"
+  },
+  {
+    "agentDetails": {
+      "agents": ['Clara', 'Dee'],
+      "agentSuggestion": "Partial approval received. Agent flagged CPT code mismatch, retrieved correct CPT from codebook, re-ran medical coding, and resubmitted claim. Claim approved on second round.",
+      "coT": "Agent identified CPT code mismatch, retrieved correct CPT, and suggest rerunning coding."
+    },
+    "profile": {
+      "profilePhoto": "/avatar.png",
+      "age": 39,
+      "name": "Aisha",
+      "surname": "Al Mehairi",
+      "mrn": "314501",
+      "eid": "784-1992-4455667-9",
+      "emiratesId": "784-1992-4455667-9",
+      "sex": "Female",
+      "dateOfBirth": "Jan 1, 1970",
+      "nationality": "UAE",
+      "language": "Arabic",
+      "phoneNumber": 971506789123,
+      "email": "aisha.almehairi@example.com"
+    },
+    "information": {
+      "infoType": "Medical Necessity",
+      "infoCode": "MN-REQ-001",
+      "infoMessage": "One service denied for medical necessity. Agent is obtaining required documentation."
+    },
+    "markdown": "-",
+    "eligibilityCheck": {
+      "status": "covered",
+      "insuranDetials": {
+        "insuranceProvider": "Daman-AUH-001",
+        "imageUrl": "/insurance-image.png",
+        "policyNumber": "42122566",
+        "insurance": "NoorCare-AD-007",
+        "number": "77889911",
+        "network": "Yes",
+        "coverage": "0.95"
+      },
+      "details": [
+        {
+          "label": "Network",
+          "value": "Yes"
+        },
+        {
+          "label": "Coverage",
+          "value": "95%"
+        }
+      ],
+      "steps": [
+        {
+          "id": "1",
+          "label": "Extract Patient & Payer Data",
+          "status": "completed"
+        },
+        {
+          "id": "2",
+          "label": "Validate Coverage",
+          "status": "completed"
+        },
+        {
+          "id": "3",
+          "label": "Update & Flag Issues",
+          "status": "completed"
+        }
+      ],
+      "isError": false
+    },
+    "medicalCoding": {
+      "status": "done",
+      "details": [
+        {
+          "label": "Encounter Type",
+          "value": "Out patient"
+        },
+        {
+          "label": "CPT codes",
+          "value": "73721, 85027"
+        },
+        {
+          "label": "ICD codes",
+          "value": "M25.562"
+        },
+        {
+          "label": "Drug codes",
+          "value": "NDC-0456"
+        },
+        {
+          "label": "Encounter Date",
+          "value": "45945"
+        },
+        {
+          "label": "Physician",
+          "value": "Dr. Amal Al Mazrouei"
+        },
+        {
+          "label": "Department",
+          "value": "Orthopaedics"
+        }
+      ],
+      "steps": [
+        {
+          "id": "1",
+          "label": "Extract & Suggest Code",
+          "status": "completed"
+        },
+        {
+          "id": "2",
+          "label": "Validate & Check Compliance",
+          "status": "completed"
+        },
+        {
+          "id": "3",
+          "label": "Claim Posted",
+          "status": "completed"
+        },
+        {
+          "id": "4",
+          "label": "Human Review & Approval",
+          "status": "completed"
+        }
+      ],
+      "isError": false
+    },
+    "priorAuthorization": {
+      "status": "approved",
+      "details": [
+        {
+          "label": "Encounter ID",
+          "value": "ENC-2025-3346"
+        },
+        {
+          "label": "Prior AuthID",
+          "value": "PA-2025-094"
+        },
+        {
+          "label": "Physcian",
+          "value": "Dr. Amal Al Mazrouei"
+        },
+        {
+          "label": "CPT codes",
+          "value": "73721, 85027"
+        },
+        {
+          "label": "ICD codes",
+          "value": "M25.562"
+        },
+        {
+          "label": "Drug codes",
+          "value": "NDC-0456"
+        }
+      ],
+      "steps": [
+        {
+          "id": "1",
+          "label": "Extract & Prepare & (Code)",
+          "status": "completed"
+        },
+        {
+          "id": "2",
+          "label": "Submit Request",
+          "status": "completed"
+        },
+        {
+          "id": "3",
+          "label": "Prior Authorization Posted",
+          "status": "completed"
+        },
+        {
+          "id": "4",
+          "label": "Response Retrieved",
+          "status": "completed"
+        }
+      ],
+      "isError": false
+    },
+    "claimSubmission": {
+      "status": "done",
+      "steps": [
+        {
+          "id": "1",
+          "label": "Compliance Check & Adjustment",
+          "status": "completed"
+        },
+        {
+          "id": "2",
+          "label": "XML File Generated",
+          "status": "completed"
+        },
+        {
+          "id": "3",
+          "label": "Claim Posted",
+          "status": "completed"
+        },
+        {
+          "id": "4",
+          "label": "Claim ID Received & Updated",
+          "status": "completed"
+        }
+      ],
+      "claimAttempts": [
+        {
+          "claimRound": "1",
+          "date": "45946",
+          "claimAmount": "877 AED",
+          "claimId": "20251016-MN1",
+          "rejectionCode": "F14"
+        },
+        {
+          "claimRound": "2",
+          "date": "45950",
+          "claimAmount": "877 AED",
+          "claimId": "20251020-MN2",
+          "rejectionCode": "-"
+        }
+      ],
+      "isError": false
+    },
+    "denialManagement": {
+      "status": "done",
+      "steps": [
+        {
+          "id": "1",
+          "label": "Denial Code Analyzed",
+          "status": "completed"
+        },
+        {
+          "id": "2",
+          "label": "Suggested Edits",
+          "status": "completed"
+        },
+        {
+          "id": "3",
+          "label": "Appeal Generated",
+          "status": "completed"
+        },
+        {
+          "id": "4",
+          "label": "Appeal Submitted",
+          "status": "completed"
+        }
+      ],
+      "denialAttempts": [
+        {
+          "claimRound": "1",
+          "claimId": "20251016-MN1",
+          "denialId": "DEN-6622",
+          "denialAmount": "291 AED",
+          "denialCode": "D12"
+        },
+        {
+          "claimRound": "2",
+          "claimId": "20251020-MN2",
+          "denialId": "-",
+          "denialAmount": "-",
+          "denialCode": "-"
+        }
+      ],
+      "isError": false
+    },
+    "icdCodes": [],
+    "cptCode": [],
+    "drugCode": [],
+    "postPayment": {
+      "status": "paused",
+      "steps": [
+        {
+          "id": "1",
+          "label": "Payment Retrieved",
+          "status": "pending"
+        },
+        {
+          "id": "2",
+          "label": "Payment Matched",
+          "status": "pending"
+        },
+        {
+          "id": "3",
+          "label": "Adjustments Applied",
+          "status": "pending"
+        },
+        {
+          "id": "4",
+          "label": "Ledger Updated",
+          "status": "pending"
+        }
+      ],
+      "details": {
+        "date": "2025-09-11",
+        "paymentFile": 836,
+        "claimId": "1014891283",
+        "difference": -136
+      },
+      "isError": false,
+      "errorDetails": {
+        "errorType": "costtopatient"
+      }
+    },
+    "attachments": [
+      {
+        "fileName": "SOB.pdf",
+        "fileSize": "200 KB",
+        "ecgImageUrl": "/sob.pdf"
+      },
+      {
+        "fileName": "exclusion.pdf",
+        "fileSize": "150 KB",
+        "ecgImageUrl": "/exclusion.pdf"
+      },
+      {
+        "fileName": "policy.pdf",
+        "fileSize": "180 KB",
+        "ecgImageUrl": "/policy.pdf"
+      },
+      {
+        "fileName": "ECG.png",
+        "fileSize": "220 KB",
+        "ecgImageUrl": "/ecg-report.png"
+      }
+    ],
+    "isSubmitted": false,
+    "id": "314501",
     "profileCreatedDate": "2025-09-16T12:32:28.570Z"
   },
   

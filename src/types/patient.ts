@@ -186,7 +186,7 @@ export interface PatientPersona {
 
   isSubmitted: boolean;
   agentDetails?: {
-    agentIssue: string;
+     agents: string[]
     agentSuggestion: string;
     coT: string; // Chain of Thought
   };
@@ -215,7 +215,7 @@ export interface PatientTableRow {
   name: string;
   surname: string;
   age: number;
-  agentIssue: string;
+  agents: string[];
   agentSuggestion: string;
   cot: string;
   lastUpdated: string;

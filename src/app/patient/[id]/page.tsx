@@ -87,23 +87,42 @@ export default function DashboardPage() {
   const writeoffref = useRef<HTMLDivElement>(null);
   const paymentSectionRef = useRef<HTMLDivElement>(null);
 
-    const [appealSubmitStep, setappealSubmitStep] = useState([
+  const [appealSubmitStep, setappealSubmitStep] = useState([
     { id: "1", label: "Submission to Payer", status: "pending" },
     { id: "2", label: "Logging & Tracking", status: "pending" },
     { id: "3", label: "Notification & Monitoring", status: "pending" },
     { id: "4", label: "Update Ledger", status: "pending" },
   ]);
 
+  const cancelRef = useRef(false);
 
 
-    const isAppealCompleted = appealSubmitStep.every(i => i.status === 'completed')
+  const isAppealCompleted = appealSubmitStep.every(i => i.status === 'completed')
+  const [isProcessing, setisProcessing] = useState<boolean>(false)
+
+
+   const stopSteps = () => {
+    cancelRef.current = true; // tell loop to stop
+  };
+
+  const resetSteps = () => {
+    setisProcessing(false)
+    cancelRef.current = true; // also stop loop
+    setappealSubmitStep((steps) =>
+      steps.map((step) => ({ ...step, status: "pending" }))
+    );
+  };
+
+
   const markAppealStepsAsComplete = async () => {
-     for (let i = 0; i < appealSubmitStep.length; i++) {
+    cancelRef.current = false; // reset cancel flag before starting
+    setisProcessing(true)
+    for (let i = 0; i < appealSubmitStep.length; i++) {
       // break early if cancel button clicked
- 
+  if (cancelRef.current) break;
       await new Promise((resolve) => setTimeout(resolve, 1000));
 
- 
+  if (cancelRef.current) break;
       setappealSubmitStep((prevSteps) =>
         prevSteps.map((step, index) =>
           index === i ? { ...step, status: "completed" } : step
@@ -112,12 +131,15 @@ export default function DashboardPage() {
     }
   };
 
-  useEffect(()=> {
-    if(isAppealCompleted) {
+  useEffect(() => {
+    if (isAppealCompleted) {
       // setappealSubmitStep((prevSteps) =>
       //   prevSteps.map((step, index) => ({ ...step, status: "pending" })
       //   )
       // );
+       dispatch(markPatientSubmitted(patients.id)); 
+      route.push("/patient")
+      setModal("");
     }
   }, [isAppealCompleted])
 
@@ -203,7 +225,7 @@ export default function DashboardPage() {
     },
   ];
 
-  
+
 
 
   const [modal, setModal] = React.useState<string>();
@@ -379,568 +401,572 @@ export default function DashboardPage() {
       state.paymenttableData
   );
 
-  const errorCode = ['T500',  "AI-RESUB-001", "OA-ERR-001"]
+  const errorCode = ['T500', "AI-RESUB-001", "OA-ERR-001"]
 
   return (
-     
-            <div >
-              <div className="flex justify-between items-center items-start">
-                <div>
-                  <Breadcrumb />
-                </div>
-                <div className="flex  gap-2 mb-6">
-                  {showButton() && buttons.map((data) => (
-                    <button
-                      key={data.label}
-                      className={`rounded-xl cursor-pointer px-4 py-3 text-sm font-medium text-base-primary ${data.style}`}
-                      onClick={() => {
-                      if(data.label == 'Save' || data.label == 'Cancel') {
-                          route.push('/patient')
-                      } else {
-                        // Handle error on denialManagement step
-                        if (
-                         information?.infoCode == "APL-003"
-                        ) {
-                          if(!appealDetails.isAccepted) {
-                          setAppealDetails({ ...appealDetails, error: true });
-                          markdownRef.current?.scrollIntoView({
-                            behavior: "smooth",
-                            block: "center",
-                          });} else {
-                           setModal('appealSubmittion');
-markAppealStepsAsComplete()
-                          }
-                          return;
-                        } 
 
-                     
-
-                        if(information && information.infoCode == 'CMS-110') {
-                          // Common error-check logic for icdCodes and cptCode
-                        const codeTypes = [
-                          {
-                            type: 'icd',
-                            data: icdCodes,
-                            ref: icdRef,
-                          },
-                          {
-                            type: 'cpt',
-                            data: cptCode,
-                            ref: cptref,
-                          },
-                          {
-                            type: 'drug',
-                            data: drugCode,
-                            ref: drugref,
-                          }
-                        ];
-
-                        for (const codeType of codeTypes) {
-                          const hasError = codeType?.data.every(code => code.status == 'Accepted');
-                           if (!hasError) {
-                            markdownRef.current?.scrollIntoView({
-                              behavior: "smooth",
-                              block: "center",
-                            });
-
-                            soapRef.current?.setActiveTab(codeType.type);
-
-                            codeType.ref.current?.querySelectorAll(".not-acceptede").forEach((el) => {
-                              el.classList.add('border-error');
-                            });
-
-                            codeType.ref.current
-                              ?.querySelector('.error-text')
-                              ?.setAttribute('style', 'display:block');
-
-                            return;
-                          }
-                        }
-                        }
-
-                        
-
-                        if (isError && errorDetails?.errorType == 'writeoff') {
-                          const isAccepted = writeList.some(item => item.status == 'Denied');
-
-                          if (isAccepted) {
-                            setWriteoffError(true)
-                            writeoffref.current
-                              ?.querySelector('.error-text')
-                              ?.classList.remove('hidden');
-                            writeoffref.current
-                              ?.querySelector('.ag-table')
-                              ?.setAttribute('class', 'border-error');
-                            writeoffref.current?.scrollIntoView({
-                              behavior: "smooth",
-                              block: "center",
-                            });
-                            return;
-                          }
-                        }
-                        const ispartialApproved = partialTableData.every(item => item.status == 'Accepted');
-
-                        if ( information && information?.infoCode == 'CC-001' && !ispartialApproved) {
-                           paymentSectionRef.current
-                              ?.querySelector('.error-text')
-                              ?.classList.remove('hidden');
-                            paymentSectionRef.current
-                              ?.querySelector('.ag-table')
-                              ?.setAttribute('class', 'border-error');
-                          paymentSectionRef.current?.scrollIntoView({
-                            behavior: "smooth",
-                            block: "center",
-                          });
-
-                          return;
+    <div className="size-full" >
+      <div className="flex justify-between items-center items-start ">
+        <div>
+          <Breadcrumb />
+        </div>
+        <div className="flex  gap-2 mb-6">
+          {showButton() && buttons.map((data) => (
+            <button
+              key={data.label}
+              className={`rounded-xl cursor-pointer px-4 py-3 text-sm font-medium text-base-primary ${data.style}`}
+              onClick={() => {
+                if (data.label == 'Save' || data.label == 'Cancel') {
+                  route.push('/patient')
+                } else {
+                  // Handle error on denialManagement step
+                  if (
+                    information?.infoCode == "APL-003"
+                  ) {
+                    if (!appealDetails.isAccepted) {
+                      setAppealDetails({ ...appealDetails, error: true });
+                      markdownRef.current?.scrollIntoView({
+                        behavior: "smooth",
+                        block: "center",
+                      });
+                    } else {
+                      setModal('appealSubmittion');
+                    }
+                    return;
+                  }
 
 
-                        }
-                        // No errors found, open modal
-                        setModal(data.label.toLowerCase());
-                      
+
+                  if (information && information.infoCode == 'CMS-110') {
+                    // Common error-check logic for icdCodes and cptCode
+                    const codeTypes = [
+                      {
+                        type: 'icd',
+                        data: icdCodes,
+                        ref: icdRef,
+                      },
+                      {
+                        type: 'cpt',
+                        data: cptCode,
+                        ref: cptref,
+                      },
+                      {
+                        type: 'drug',
+                        data: drugCode,
+                        ref: drugref,
                       }
-                      }}
-                    >
-                      {data.label}
-                    </button>
-                  ))}
-                </div>
-              </div>
-              <div className=" flex gap-4 mb-6 ">
-                <div className="flex-1 max-w-xs">
-                  <PatientProfileCard
-                    details={patients?.profile as PatientProfile}
-                    mrn={patients?.id as string}
-                  />
-                </div>
+                    ];
 
-                <div className="flex flex-col gap-4 flex-1 max-w-[315px]">
-                  <HealthcareCard
-                    title="Eligibility Check"
-                    status={patients?.eligibilityCheck.status as StatusType}
-                    gridData={
-                      patients?.eligibilityCheck
-                        .details as MedicalCodingDetail[]
-                    }
-                    insuranceDetails={patients?.eligibilityCheck.insuranDetials}
-                    isInsuranceInfoCard={true}
-                    processSteps={
-                      patients?.eligibilityCheck.steps as ProcessSteps[]
-                    }
-                    titleGap="mb-[16px]"
-                  />
+                    for (const codeType of codeTypes) {
+                      const hasError = codeType?.data.every(code => code.status == 'Accepted');
+                      if (!hasError) {
+                        markdownRef.current?.scrollIntoView({
+                          behavior: "smooth",
+                          block: "center",
+                        });
 
-                  <HealthcareCard
-                    title="Prior Authorization"
-                    status={patients?.priorAuthorization.status as StatusType}
-                    gridData={
-                      patients?.priorAuthorization
-                        .details as MedicalCodingDetail[]
-                    }
-                    processSteps={
-                      patients?.priorAuthorization.steps as ProcessSteps[]
-                    }
-                  />
-                </div>
-                <div className="flex flex-col gap-4 flex-1 max-w-[330px]">
-                  <MedicalCodingCard
-                    data={
-                      patients?.medicalCoding.details as MedicalCodingDetail[]
-                    }
-                    title="Medical Coding"
-                    status={patients?.medicalCoding.status as StatusType}
-                    processSteps={
-                      patients?.medicalCoding.steps as ProcessSteps[]
-                    }
-                  />
-                  <CycleCard
-                    type="claim"
-                    status={patients?.claimSubmission.status as StatusType}
-                    title="Claim Submission"
-                    processSteps={
-                      patients?.claimSubmission.steps as ProcessSteps[]
-                    }
-                    data={
-                      patients?.claimSubmission.claimAttempts as ClaimAttempts[]
-                    }
-                  />
-                </div>
+                        soapRef.current?.setActiveTab(codeType.type);
 
-                <div className="flex flex-col gap-4 flex-1 max-w-[330px]">
-                  <CycleCard
-                    type="denial"
-                    status={patients?.denialManagement.status as StatusType}
-                    title="Denial Management"
-                    processSteps={
-                      patients?.denialManagement.steps as ProcessSteps[]
+                        codeType.ref.current?.querySelectorAll(".not-acceptede").forEach((el) => {
+                          el.classList.add('border-error');
+                        });
+
+                        codeType.ref.current
+                          ?.querySelector('.error-text')
+                          ?.setAttribute('style', 'display:block');
+
+                        return;
+                      }
                     }
-                    data={
-                      patients?.denialManagement
-                        .denialAttempts as DenialAttempts[]
+                  }
+
+
+
+                  if (isError && errorDetails?.errorType == 'writeoff') {
+                    const isAccepted = writeList.some(item => item.status == 'Denied');
+
+                    if (isAccepted) {
+                      setWriteoffError(true)
+                      writeoffref.current
+                        ?.querySelector('.error-text')
+                        ?.classList.remove('hidden');
+                      writeoffref.current
+                        ?.querySelector('.ag-table')
+                        ?.setAttribute('class', 'border-error');
+                      writeoffref.current?.scrollIntoView({
+                        behavior: "smooth",
+                        block: "center",
+                      });
+                      return;
                     }
-                    processGap="h-[16px]"
-                  />
-                  <PostPaymentCard
-                    title="Post Payment"
-                    status={patients?.postPayment.status as StatusType}
-                    mode="process"
-                    processSteps={patients?.postPayment.steps as ProcessSteps[]}
-                    details={patients?.postPayment.details as PaymentDetails}
-                    titleGap="mb-[16px]"
-                    processGap="h-3"
-                  />
-                </div>
-              </div>
+                  }
+                  const ispartialApproved = partialTableData.every(item => item.status == 'Accepted');
 
-              
+                  if (information && information?.infoCode == 'CC-001' && !ispartialApproved) {
+                    paymentSectionRef.current
+                      ?.querySelector('.error-text')
+                      ?.classList.remove('hidden');
+                    paymentSectionRef.current
+                      ?.querySelector('.ag-table')
+                      ?.setAttribute('class', 'border-error');
+                    paymentSectionRef.current?.scrollIntoView({
+                      behavior: "smooth",
+                      block: "center",
+                    });
 
-              
-              {errorCode.includes(information?.infoCode as string) && (
-                <>
-                {getInfo()}
-                
-                </>
-                
-              )}
-   {information && information.infoCode == 'MN-REQ-001' && (<div>
-    {getInfo()}
-    <MedicalNecessity patient={patients} /></div>)}
+                    return;
 
-              {information?.infoCode == "APL-003" && (
-                <>
-                {getInfo()}
-                <div
-                  className="grid grid-cols-[70%_1fr] gap-4"
-                  ref={markdownRef}
-                >
-                  <div>
-                    <AppealLetter
-                      Icon={ReceiptText}
-                      title="Appeals Letter"
-                      className={`p-2.5 overflow-y-auto h-114`}
-                      appealDetails={appealDetails}
-                      acceptHandeler={acceptHandeler}
-                      markdownContent={appealLetterMarkDown}
+
+                  }
+                  // No errors found, open modal
+                  setModal(data.label.toLowerCase());
+
+                }
+              }}
+            >
+              {data.label}
+            </button>
+          ))}
+        </div>
+      </div>
+      <div className=" flex gap-4 mb-6 ">
+        <div className="flex-1 max-w-xs">
+          <PatientProfileCard
+            details={patients?.profile as PatientProfile}
+            mrn={patients?.id as string}
+          />
+        </div>
+
+        <div className="flex flex-col gap-4 flex-1 max-w-[315px]">
+          <HealthcareCard
+            title="Eligibility Check"
+            status={patients?.eligibilityCheck.status as StatusType}
+            gridData={
+              patients?.eligibilityCheck
+                .details as MedicalCodingDetail[]
+            }
+            insuranceDetails={patients?.eligibilityCheck.insuranDetials}
+            isInsuranceInfoCard={true}
+            processSteps={
+              patients?.eligibilityCheck.steps as ProcessSteps[]
+            }
+            titleGap="mb-[16px]"
+          />
+
+          <HealthcareCard
+            title="Prior Authorization"
+            status={patients?.priorAuthorization.status as StatusType}
+            gridData={
+              patients?.priorAuthorization
+                .details as MedicalCodingDetail[]
+            }
+            processSteps={
+              patients?.priorAuthorization.steps as ProcessSteps[]
+            }
+          />
+        </div>
+        <div className="flex flex-col gap-4 flex-1 max-w-[330px]">
+          <MedicalCodingCard
+            data={
+              patients?.medicalCoding.details as MedicalCodingDetail[]
+            }
+            title="Medical Coding"
+            status={patients?.medicalCoding.status as StatusType}
+            processSteps={
+              patients?.medicalCoding.steps as ProcessSteps[]
+            }
+          />
+          <CycleCard
+            type="claim"
+            status={patients?.claimSubmission.status as StatusType}
+            title="Claim Submission"
+            processSteps={
+              patients?.claimSubmission.steps as ProcessSteps[]
+            }
+            data={
+              patients?.claimSubmission.claimAttempts as ClaimAttempts[]
+            }
+          />
+        </div>
+
+        <div className="flex flex-col gap-4 flex-1 max-w-[330px]">
+          <CycleCard
+            type="denial"
+            status={patients?.denialManagement.status as StatusType}
+            title="Denial Management"
+            processSteps={
+              patients?.denialManagement.steps as ProcessSteps[]
+            }
+            data={
+              patients?.denialManagement
+                .denialAttempts as DenialAttempts[]
+            }
+            processGap="h-[16px]"
+          />
+          <PostPaymentCard
+            title="Post Payment"
+            status={patients?.postPayment.status as StatusType}
+            mode="process"
+            processSteps={patients?.postPayment.steps as ProcessSteps[]}
+            details={patients?.postPayment.details as PaymentDetails}
+            titleGap="mb-[16px]"
+            processGap="h-3"
+          />
+        </div>
+      </div>
+
+
+
+
+      {errorCode.includes(information?.infoCode as string) && (
+        <>
+          {getInfo()}
+
+        </>
+
+      )}
+      {information && information.infoCode == 'MN-REQ-001' && (<div>
+        {getInfo()}
+        <MedicalNecessity patient={patients} /></div>)}
+
+      {information?.infoCode == "APL-003" && (
+        <>
+          {getInfo()}
+          <div
+            className="grid grid-cols-[70%_1fr] gap-4"
+            ref={markdownRef}
+          >
+            <div>
+              <AppealLetter
+                Icon={ReceiptText}
+                title="Appeals Letter"
+                className={`p-2.5 overflow-y-auto h-114`}
+                appealDetails={appealDetails}
+                acceptHandeler={acceptHandeler}
+                markdownContent={appealLetterMarkDown}
+              />
+
+            </div>
+            <div>
+              <MedicalRecords title="Medical Records" Icon={Paperclip}>
+                <div className="space-y-3">
+                  {medicalReports?.map((data, key) => (
+                    <AttachmentCard
+                      key={key}
+                      ecgImageUrl={data.ecgImageUrl}
+                      fileName={data.fileName}
+                      fileSize={data.fileSize}
                     />
-                      
-                  </div>
-                  <div>
-                    <MedicalRecords title="Medical Records" Icon={Paperclip}>
-                      <div className="space-y-3">
-                       {medicalReports?.map((data, key) => (
-                          <AttachmentCard
-                            key={key}
-                            ecgImageUrl={data.ecgImageUrl}
-                            fileName={data.fileName}
-                            fileSize={data.fileSize}
-                          />
-                        ))}
-                        <div className="grid grid-cols-2 gap-2">
-                          {[
-                            { src: "/xray.png", label: "test" },
-                            { src: "/xray.png", label: "test" },
-                          ].map((img, idx) => (
-                            <div
-                              key={idx}
-                              className="relative group cursor-pointer"
-                            >
-                              {/* Image */}
-                              <img
-                                src={img.src}
-                                alt={img.label || `Image ${idx + 1}`}
-                                className="rounded-lg object-cover"
-                              />
+                  ))}
+                  <div className="grid grid-cols-2 gap-2">
+                    {[
+                      { src: "/xray.png", label: "test" },
+                      { src: "/xray.png", label: "test" },
+                    ].map((img, idx) => (
+                      <div
+                        key={idx}
+                        className="relative group cursor-pointer"
+                      >
+                        {/* Image */}
+                        <img
+                          src={img.src}
+                          alt={img.label || `Image ${idx + 1}`}
+                          className="rounded-lg object-cover"
+                        />
 
-                              {/* Hover overlay with icon */}
-                              <div
-                                onClick={() => setSelectedImage(img.src)}
-                                className="absolute inset-0 bg-black/40 opacity-0 rounded-lg group-hover:opacity-100 flex items-center justify-center transition-opacity"
-                              >
-                                <Expand className="text-white w-8 h-8" />
-                              </div>
-                            </div>
-                          ))}
+                        {/* Hover overlay with icon */}
+                        <div
+                          onClick={() => setSelectedImage(img.src)}
+                          className="absolute inset-0 bg-black/40 opacity-0 rounded-lg group-hover:opacity-100 flex items-center justify-center transition-opacity"
+                        >
+                          <Expand className="text-white w-8 h-8" />
                         </div>
                       </div>
-                    </MedicalRecords>
+                    ))}
                   </div>
                 </div>
-                </>
-                
-              )}
+              </MedicalRecords>
+            </div>
+          </div>
+        </>
 
-              {information && information.infoCode == "CMS-110" && (
-                <div>
-                  {getInfo()}
-                   <div
-                  className="grid grid-cols-[70%_1fr] gap-4"
-                  ref={markdownRef}
-                >
-                  <div>
-                    <SOAPNote tabs={tabs} defaultActiveTab="soap" />
-                  </div>
-                  <div>
-                    <SOAPNote tabs={icdTabs} ref={soapRef} defaultActiveTab="icd" />
-                  </div>
-                </div>
-                </div>
-               
-              )}
+      )}
 
-              {isError && errorDetails?.errorType == "writeoff" && (
-                <div ref={writeoffref}>{getInfo()}<WriteoffTable /></div>
-              )}
+      {information && information.infoCode == "CMS-110" && (
+        <div>
+          {getInfo()}
+          <div
+            className="grid grid-cols-[70%_1fr] gap-4"
+            ref={markdownRef}
+          >
+            <div>
+              <SOAPNote tabs={tabs} defaultActiveTab="soap" />
+            </div>
+            <div>
+              <SOAPNote tabs={icdTabs} ref={soapRef} defaultActiveTab="icd" />
+            </div>
+          </div>
+        </div>
 
-              {isError &&
-                (errorDetails?.errorType == "panotapproved" ||
-                  errorDetails?.errorType == "pandingapproval") && (
-                  <div className=" flex justify-end">
-                    <button
-                      className="flex items-center gap-2 cursor-pointer rounded-lg bg-[#AFD8D4] py-2 px-4"
-                      onClick={() => setModal("contactoop")}
-                    >
-                      <Send className="w-4 h-4" strokeWidth={1.5} /> Contact
-                      Patient
-                    </button>
-                  </div>
-                )}
+      )}
 
-              {/** Payment fault */}
-              {information?.infoCode == 'CC-001' && <div ref={paymentSectionRef}>{getInfo()}<PaymentDetailsTable type={postPayment.errorDetails?.errorType as string} patientId={patients?.id} /></div>}
-            
-            
-              {/* Cancel Modal */}
-            <AlertModal open={modal === "cancel"} onClose={() => setModal("")}>
-              <div>
-                <div className="font-semibold text-lg mb-2 text-base-primary">
-                  Cancel
-                </div>
-                <div className="text-muted mb-6">
-                  Are you sure you want to cancel your changes? Any unsaved
-                  changes will be lost.
-                </div>
-                <div className="flex justify-end gap-4">
-                  <button
-                    className="border rounded-xl px-5 py-2 text-base-primary bg-white"
-                    onClick={() => {
-                      setModal("");
-                    }}
-                  >
-                    No
-                  </button>
-                  <button
-                    className="rounded-xl px-5 py-2 text-white bg-base-destructive"
-                    onClick={() => {
-                      setModal("");
-                      route.push("/home");
-                    }}
-                  >
-                    Yes
-                  </button>
-                </div>
-              </div>
-            </AlertModal>
+      {isError && errorDetails?.errorType == "writeoff" && (
+        <div ref={writeoffref}>{getInfo()}<WriteoffTable /></div>
+      )}
 
-            {/* Save Modal */}
-            <AlertModal open={modal === "save"} onClose={() => setModal("")}>
-              <div>
-                <div className="font-semibold text-lg mb-2 text-base-primary">
-                  Save
-                </div>
-                <div className="text-muted mb-6">
-                  Are you sure you want to save your changes? This will update
-                  your record permanently.
-                </div>
-                <div className="flex justify-end gap-4">
-                  <button
-                    className="border rounded-xl px-5 py-2 text-base-primary bg-white"
-                    onClick={() => setModal("")}
-                  >
-                    No
-                  </button>
-                  <button
-                    className="rounded-xl px-5 py-2 text-white bg-green"
-                    onClick={() => setModal("")}
-                  >
-                    Yes
-                  </button>
-                </div>
-              </div>
-            </AlertModal>
+      {isError &&
+        (errorDetails?.errorType == "panotapproved" ||
+          errorDetails?.errorType == "pandingapproval") && (
+          <div className=" flex justify-end">
+            <button
+              className="flex items-center gap-2 cursor-pointer rounded-lg bg-[#AFD8D4] py-2 px-4"
+              onClick={() => setModal("contactoop")}
+            >
+              <Send className="w-4 h-4" strokeWidth={1.5} /> Contact
+              Patient
+            </button>
+          </div>
+        )}
 
-            {/* Submit Modal */}
-            <AlertModal open={modal === "submit"} onClose={() => setModal("")}>
-              <div>
-                <div className="font-semibold text-lg mb-2 text-base-primary">
-                  Submit
-                </div>
-                <div className="text-muted mb-6">
-                  Our <span className="font-semibold">agents</span> are on the{" "}
-                  <span className="font-semibold">claim submission</span>. We’ll
-                  notify you if anything else is needed.
-                </div>
-                <div className="mb-6">
-                  <ClaimSubmissionComponent
-                    cancelHandel={cancelHandel}
-                    userId={params.id as string}
-                  />
-                </div>
-              </div>
-            </AlertModal>
+      {/** Payment fault */}
+      {information?.infoCode == 'CC-001' && <div ref={paymentSectionRef}>{getInfo()}<PaymentDetailsTable type={postPayment.errorDetails?.errorType as string} patientId={patients?.id} /></div>}
 
-            <AlertModal open={modal === "appealSubmittion"} onClose={() => setModal("")}>
-              <div>
-                <div className="font-semibold text-lg mb-2 text-base-primary">
-                  Submit
-                </div>
-                <div className="text-muted mb-6">
-                  Our <span className="font-semibold">agents</span> are on the{" "}
-                  <span className="font-semibold">appeal letter</span>. We’ll
-                  notify you if anything else is needed.
-                </div>
-                <div className="mb-6">
-                  <ProcessMapping processGap="h-3.5" processSteps={appealSubmitStep as ProcessSteps[]} />
-                </div>
-                <div className="flex justify-end gap-4">
-                  {isAppealCompleted ? <button
-                    className="border rounded-xl px-5 py-2 cursor-pointer text-base-primary bg-white"
-                    onClick={() => {}}
-                  >
-                    Go Home
-                  </button> :
-                  <button
-                    className="rounded-xl px-5 py-2 cursor-pointer text-white bg-green"
-                    onClick={() => { route.push('/patient') ; dispatch(markPatientSubmitted(patients.id)) ;setModal("") ;}}
-                  >
-                    Yes
-                  </button>}
-                </div>
-              </div>
-            </AlertModal>
-            {selectedImage && (
-              <div
-                className="fixed inset-0 w-screen h-screen bg-ecg flex items-center justify-center z-50 transition-opacity duration-300 opacity-100"
-                onClick={(e) => setSelectedImage(null)}
-              >
-                <div
-                  className="rounded-xl p-6 shadow-lg max-w-7xl w-full relative flex flex-col items-center
+
+      {/* Cancel Modal */}
+      <AlertModal open={modal === "cancel"} onClose={() => setModal("")}>
+        <div>
+          <div className="font-semibold text-lg mb-2 text-base-primary">
+            Cancel
+          </div>
+          <div className="text-muted mb-6">
+            Are you sure you want to cancel your changes? Any unsaved
+            changes will be lost.
+          </div>
+          <div className="flex justify-end gap-4">
+            <button
+              className="border rounded-xl px-5 py-2 text-base-primary bg-white"
+              onClick={() => {
+                setModal("");
+              }}
+            >
+              No
+            </button>
+            <button
+              className="rounded-xl px-5 py-2 text-white bg-base-destructive"
+              onClick={() => {
+                setModal("");
+                route.push("/home");
+              }}
+            >
+              Yes
+            </button>
+          </div>
+        </div>
+      </AlertModal>
+
+      {/* Save Modal */}
+      <AlertModal open={modal === "save"} onClose={() => setModal("")}>
+        <div>
+          <div className="font-semibold text-lg mb-2 text-base-primary">
+            Save
+          </div>
+          <div className="text-muted mb-6">
+            Are you sure you want to save your changes? This will update
+            your record permanently.
+          </div>
+          <div className="flex justify-end gap-4">
+            <button
+              className="border rounded-xl px-5 py-2 text-base-primary bg-white"
+              onClick={() => setModal("")}
+            >
+              No
+            </button>
+            <button
+              className="rounded-xl px-5 py-2 text-white bg-green"
+              onClick={() => setModal("")}
+            >
+              Yes
+            </button>
+          </div>
+        </div>
+      </AlertModal>
+
+      {/* Submit Modal */}
+      <AlertModal open={modal === "submit"} onClose={() => setModal("")}>
+        <div>
+          <div className="font-semibold text-lg mb-2 text-base-primary">
+            Submit
+          </div>
+          <div className="text-muted mb-6">
+            Our <span className="font-semibold">agents</span> are on the{" "}
+            <span className="font-semibold">claim submission</span>. We’ll
+            notify you if anything else is needed.
+          </div>
+          <div className="mb-6">
+            <ClaimSubmissionComponent
+              cancelHandel={cancelHandel}
+              userId={params.id as string}
+            />
+          </div>
+        </div>
+      </AlertModal>
+
+      <AlertModal open={modal === "appealSubmittion"} onClose={() => setModal("")}>
+        <div>
+          <div className="font-semibold text-lg mb-2 text-base-primary">
+            Submit
+          </div>
+          <div className="text-muted mb-6">
+            Our <span className="font-semibold">agents</span> are on the{" "}
+            <span className="font-semibold">appeal letter</span>. We’ll
+            notify you if anything else is needed.
+          </div>
+          <div className="mb-6">
+            <ProcessMapping processGap="h-3.5" processSteps={appealSubmitStep as ProcessSteps[]} />
+          </div>
+          <div className="flex justify-end gap-4">
+            <button
+              className="border rounded-xl px-5 py-2 cursor-pointer text-base-primary bg-white"
+              onClick={() => {resetSteps() ; setModal("")}}
+            >
+              Cancel
+            </button>
+            <button
+              className="rounded-xl px-5 py-2 cursor-pointer text-white bg-green"
+              disabled={isProcessing}
+              onClick={() => { 
+                markAppealStepsAsComplete()
+                  }}
+            >
+              Confirm
+
+            </button>
+          </div>
+        </div>
+      </AlertModal>
+      {selectedImage && (
+        <div
+          className="fixed inset-0 w-screen h-screen bg-ecg flex items-center justify-center z-50 transition-opacity duration-300 opacity-100"
+          onClick={(e) => setSelectedImage(null)}
+        >
+          <div
+            className="rounded-xl p-6 shadow-lg max-w-7xl w-full relative flex flex-col items-center
         transform transition-transform duration-300 scale-100
         animate-modal-in"
-                >
-                  <img
-                    src={selectedImage}
-                    alt="Enlarged"
-                    className="max-h-[90%] max-w-[90%] object-contain rounded-lg"
-                  />
-                </div>
-              </div>
-            )}
+          >
+            <img
+              src={selectedImage}
+              alt="Enlarged"
+              className="max-h-[90%] max-w-[90%] object-contain rounded-lg"
+            />
+          </div>
+        </div>
+      )}
 
-            <AlertModal
-              open={modal === "contactoop"}
-              onClose={() => setModal("")}
-            >
-              <div>
-                <div className="font-semibold text-lg mb-2 text-base-primary">
-                  Save
-                </div>
-                <div className="text-muted mb-6">
-                  Are you sure you want to save your changes? This will update
-                  your record permanently.
-                </div>
+      <AlertModal
+        open={modal === "contactoop"}
+        onClose={() => setModal("")}
+      >
+        <div>
+          <div className="font-semibold text-lg mb-2 text-base-primary">
+            Save
+          </div>
+          <div className="text-muted mb-6">
+            Are you sure you want to save your changes? This will update
+            your record permanently.
+          </div>
 
-                {/* Whatsapp */}
-                <div className="space-y-3">
-                  {contactMethods.map((method) => {
-                    const isSelected = selectedMethod === method.id;
+          {/* Whatsapp */}
+          <div className="space-y-3">
+            {contactMethods.map((method) => {
+              const isSelected = selectedMethod === method.id;
 
-                    return (
-                      <label
-                        key={method.id}
-                        htmlFor={method.id}
-                        className={`flex items-center gap-4 rounded-lg px-4 py-3 cursor-pointer border border-base transition
+              return (
+                <label
+                  key={method.id}
+                  htmlFor={method.id}
+                  className={`flex items-center gap-4 rounded-lg px-4 py-3 cursor-pointer border border-base transition
                 ${isSelected ? "bg-[#CAE8E4]" : "hover:bg-gray-50"}
               `}
-                      >
-                        <input
-                          type="radio"
-                          name="contactMethod"
-                          id={method.id}
-                          value={method.id}
-                          checked={isSelected}
-                          onChange={() => setSelectedMethod(method.id)}
-                          className="hidden"
-                        />
-                        {method.icon}
-                        <div>
-                          <p className="text-sm font-semibold">
-                            {method.label}
-                          </p>
-                          <p className="">{method.value}</p>
-                        </div>
-                      </label>
-                    );
-                  })}
-                </div>
+                >
+                  <input
+                    type="radio"
+                    name="contactMethod"
+                    id={method.id}
+                    value={method.id}
+                    checked={isSelected}
+                    onChange={() => setSelectedMethod(method.id)}
+                    className="hidden"
+                  />
+                  {method.icon}
+                  <div>
+                    <p className="text-sm font-semibold">
+                      {method.label}
+                    </p>
+                    <p className="">{method.value}</p>
+                  </div>
+                </label>
+              );
+            })}
+          </div>
 
-                <div className="flex justify-end gap-4 mt-4">
-                  <button
-                    className=" cursor-pointer rounded-xl px-5 py-2 text-base-primary bg-white"
-                    onClick={() => setModal("")}
-                  >
-                    Cancel
-                  </button>
-                  <button
-                    className="cursor-pointer rounded-xl px-5 py-2 text-white bg-green"
-                    onClick={() => {
-                      setModal("oopsend");
-                      markStepsAsComplete();
-                    }}
-                  >
-                    OK
-                  </button>
-                </div>
-              </div>
-            </AlertModal>
+          <div className="flex justify-end gap-4 mt-4">
+            <button
+              className=" cursor-pointer rounded-xl px-5 py-2 text-base-primary bg-white"
+              onClick={() => setModal("")}
+            >
+              Cancel
+            </button>
+            <button
+              className="cursor-pointer rounded-xl px-5 py-2 text-white bg-green"
+              onClick={() => {
+                setModal("oopsend");
+                markStepsAsComplete();
+              }}
+            >
+              OK
+            </button>
+          </div>
+        </div>
+      </AlertModal>
 
-            <AlertModal open={modal === "oopsend"} onClose={() => setModal("")}>
-              <div>
-                <div className="font-semibold text-lg mb-2 text-base-primary">
-                  Submit
-                </div>
-                <div className="text-muted mb-6">
-                  OOP payment request sent to patient. We’ll notify you once the
-                  patient responds.
-                </div>
-                <ProcessMapping
-                  processSteps={contactSteps as ProcessSteps[]}
-                  processGap={"h-3.5"}
-                />
-                <div className="flex justify-end gap-4">
-                  <button
-                    className="cursor-pointer rounded-xl px-5 py-2 text-white bg-green"
-                    onClick={() => {
-                      setModal("");
-                      setContactSteps((prevSteps) =>
-                        prevSteps.map((step, index) => ({
-                          ...step,
-                          status: "pending",
-                        }))
-                      );
-                    }}
-                  >
-                    OK
-                  </button>
-                </div>
-              </div>
-            </AlertModal>
-            
-            </div>
+      <AlertModal open={modal === "oopsend"} onClose={() => setModal("")}>
+        <div>
+          <div className="font-semibold text-lg mb-2 text-base-primary">
+            Submit
+          </div>
+          <div className="text-muted mb-6">
+            OOP payment request sent to patient. We’ll notify you once the
+            patient responds.
+          </div>
+          <ProcessMapping
+            processSteps={contactSteps as ProcessSteps[]}
+            processGap={"h-3.5"}
+          />
+          <div className="flex justify-end gap-4">
+            <button
+              className="cursor-pointer rounded-xl px-5 py-2 text-white bg-green"
+              onClick={() => {
+                setModal("");
+                setContactSteps((prevSteps) =>
+                  prevSteps.map((step, index) => ({
+                    ...step,
+                    status: "pending",
+                  }))
+                );
+              }}
+            >
+              OK
+            </button>
+          </div>
+        </div>
+      </AlertModal>
 
-          
-        
-      
-  
+    </div>
+
+
+
+
+
   );
 }

@@ -103,10 +103,10 @@ export default function MedicalCodingCard({
                     acc.push(
                       <div key={index} className="flex justify-between">
                         <div className="min-w-[48%]">
-                          <h3 className="text-base block text-foreground">
+                          <h3 className="text-base block text-foreground ">
                             {value.label}
                           </h3>
-                          <p className="text-base font-semibold">
+                          <p className="text-base font-semibold truncate">
                             {value.value}
                           </p>
                         </div>
@@ -115,7 +115,7 @@ export default function MedicalCodingCard({
                             <h3 className="text-base block text-foreground">
                               {nextEntry[1].label}
                             </h3>
-                            <p className="text-base font-semibold">
+                            <p className="text-base font-semibold truncate">
                               {nextEntry[1].value}
                             </p>
                           </div>
