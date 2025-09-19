@@ -1792,6 +1792,8 @@ export const demoData: PatientPersona[] = [
  {
     "agentDetails": {
       "agents": ["Clara", "Dee"],
+      agentAction: 'Claim denied for insufficient documentation. Agent generated appeal letter with supporting documents and submitted to payer.',
+      currentProcess: "Dee",
       "agentSuggestion": "Appeal letter generated and submitted to payer for review of medical necessity.",
       "coT": "Claim denied for insufficient documentation. Agent generated appeal letter with supporting documents and submitted to payer."
     },

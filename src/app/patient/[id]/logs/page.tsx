@@ -19,6 +19,8 @@ import AttachmentGrid from "../../AttachmentGrid";
 import { useCallback, useRef, useState } from "react";
 import InfoCard from "@/components/ui/InfoCard";
 import { ErrorCode } from "@/types/error";
+import LogsList from "@/components/LogsList";
+import { claimWorkflow } from "@/lib/mocklogs";
 
 export default function Medical() {
 
@@ -139,7 +141,7 @@ export default function Medical() {
             </div>
 
             <div>
-                Logs
+               <LogsList data={claimWorkflow} />
             </div>
         </div>
 
