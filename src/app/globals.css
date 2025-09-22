@@ -557,3 +557,11 @@ body {
   border: 2px solid #CAE8E4; /* Apply a blue border */
   outline: none; /* Remove the default outline */
 }
+
+.insurance-detials input:disabled {
+  background-color: var(--base-card);
+}
+
+.insurance-detials select:disabled {
+  background-color: var(--base-card);
+}

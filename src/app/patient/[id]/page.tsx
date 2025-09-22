@@ -26,6 +26,7 @@ import AttachmentGrid from "../AttachmentGrid";
 import AlertModal from "@/components/AlertModal";
 import React, {
   useCallback,
+  useContext,
   useEffect,
   useMemo,
   useRef,
@@ -77,6 +78,8 @@ import { WriteoffTable } from "@/components/WriteoffTable";
 import ProcessMapping from "@/components/ui/ProcessMapping";
 import { MedicalNecessity } from "@/components/ui/MedicalNecessity/MedicalNecessity";
 import { markPatientSubmitted } from "@/store/slice/Patient";
+import InsuranceDetails from "@/components/EligibilityCheck/InsurenceDetails";
+import { AgentContext } from "@/app/layout";
 
 export default function DashboardPage() {
   const params = useParams();
@@ -139,7 +142,7 @@ export default function DashboardPage() {
       // );
        dispatch(markPatientSubmitted(patients.id)); 
       route.push("/patient")
-      setModal("");
+      changeModal("");
     }
   }, [isAppealCompleted])
 
@@ -226,9 +229,9 @@ export default function DashboardPage() {
   ];
 
 
+  const { modal, changeModal } = useContext(AgentContext);
 
 
-  const [modal, setModal] = React.useState<string>();
   const [isSubmitted, setIsSubmitted] = React.useState<boolean>(false);
   const buttons = [
     { label: "Cancel", style: "border border-base " },
@@ -238,7 +241,7 @@ export default function DashboardPage() {
 
   const route = useRouter();
   const cancelHandel = useCallback(() => {
-    setModal("");
+    changeModal("");
   }, []);
 
   const [highlightedText, setHighlightedText] = useState<string>("");
@@ -343,6 +346,12 @@ export default function DashboardPage() {
     { id: "4", label: "Update Ledger", status: "pending" },
   ]);
 
+  const [patientContactSteps, setPatientContactSteps] = useState([
+    { id: "1", label: "Contact Patient", status: "pending" },
+    { id: "2", label: "Updating Ledger", status: "pending" },
+    { id: "3", label: "Updating Patient on Outcome", status: "pending" },
+  ]);
+
   const [appealDetails, setAppealDetails] = useState<Appeal>({
     isAccepted: false,
     error: false,
@@ -355,6 +364,19 @@ export default function DashboardPage() {
       // Wait for 1 second
       await new Promise((resolve) => setTimeout(resolve, 1000));
       // Update the status of the current step to "complete"
+      setPatientContactSteps((prevSteps) =>
+        prevSteps.map((step, index) =>
+          index === i ? { ...step, status: "completed" } : step
+        )
+      );
+    }
+  };
+
+  const markcontactStep = async () => {
+    for (let i = 0; i < contactSteps.length; i++) {
+      // Wait for 1 second
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+      // Update the status of the current step to "complete"
       setContactSteps((prevSteps) =>
         prevSteps.map((step, index) =>
           index === i ? { ...step, status: "completed" } : step
@@ -362,6 +384,7 @@ export default function DashboardPage() {
       );
     }
   };
+
 
   const getInfo = () => {
     if (patients.information && patients.information.infoCode) {
@@ -385,7 +408,7 @@ export default function DashboardPage() {
   const showButton = () => {
 
     const code = patients?.information?.infoCode;
-    const error = ['AI-RESUB-001', 'T500', 'OA-ERR-001', 'MN-REQ-001']
+    const error = ['AI-RESUB-001', 'T500', 'OA-ERR-001', 'MN-REQ-001', 'notcovered']
     if (code && error.includes(code)) {
       return false
     }
@@ -430,7 +453,7 @@ export default function DashboardPage() {
                         block: "center",
                       });
                     } else {
-                      setModal('appealSubmittion');
+                      changeModal('appealSubmittion');
                     }
                     return;
                   }
@@ -519,7 +542,7 @@ export default function DashboardPage() {
 
                   }
                   // No errors found, open modal
-                  setModal(data.label.toLowerCase());
+                  changeModal(data.label.toLowerCase());
 
                 }
               }}
@@ -551,6 +574,7 @@ export default function DashboardPage() {
               patients?.eligibilityCheck.steps as ProcessSteps[]
             }
             titleGap="mb-[16px]"
+            processGap="h-5.5"
           />
 
           <HealthcareCard
@@ -563,6 +587,7 @@ export default function DashboardPage() {
             processSteps={
               patients?.priorAuthorization.steps as ProcessSteps[]
             }
+             processGap="h-5.5"
           />
         </div>
         <div className="flex flex-col gap-4 flex-1 max-w-[330px]">
@@ -575,6 +600,7 @@ export default function DashboardPage() {
             processSteps={
               patients?.medicalCoding.steps as ProcessSteps[]
             }
+            processGap="h-4.5"
           />
           <CycleCard
             type="claim"
@@ -601,7 +627,7 @@ export default function DashboardPage() {
               patients?.denialManagement
                 .denialAttempts as DenialAttempts[]
             }
-            processGap="h-[16px]"
+            processGap="h-[18px]"
           />
           <PostPaymentCard
             title="Post Payment"
@@ -714,26 +740,29 @@ export default function DashboardPage() {
         <div ref={writeoffref}>{getInfo()}<WriteoffTable /></div>
       )}
 
-      {isError &&
-        (errorDetails?.errorType == "panotapproved" ||
-          errorDetails?.errorType == "pandingapproval") && (
+       {information?.infoType == 'Not Covered' && (
+         <>
+         {getInfo()}
           <div className=" flex justify-end">
             <button
               className="flex items-center gap-2 cursor-pointer rounded-lg bg-[#AFD8D4] py-2 px-4"
-              onClick={() => setModal("contactoop")}
+              onClick={() => changeModal("notCoveredOOP")}
             >
               <Send className="w-4 h-4" strokeWidth={1.5} /> Contact
               Patient
             </button>
-          </div>
+          </div></>
         )}
 
       {/** Payment fault */}
       {information?.infoCode == 'CC-001' && <div ref={paymentSectionRef}>{getInfo()}<PaymentDetailsTable type={postPayment.errorDetails?.errorType as string} patientId={patients?.id} /></div>}
 
 
+     {information?.infoCode == 'test' &&   <InsuranceDetails />}
+
+
       {/* Cancel Modal */}
-      <AlertModal open={modal === "cancel"} onClose={() => setModal("")}>
+      <AlertModal open={modal === "cancel"} onClose={() => changeModal("")}>
         <div>
           <div className="font-semibold text-lg mb-2 text-base-primary">
             Cancel
@@ -746,7 +775,7 @@ export default function DashboardPage() {
             <button
               className="border rounded-xl px-5 py-2 text-base-primary bg-white"
               onClick={() => {
-                setModal("");
+                changeModal("");
               }}
             >
               No
@@ -754,7 +783,7 @@ export default function DashboardPage() {
             <button
               className="rounded-xl px-5 py-2 text-white bg-base-destructive"
               onClick={() => {
-                setModal("");
+                changeModal("");
                 route.push("/home");
               }}
             >
@@ -765,7 +794,7 @@ export default function DashboardPage() {
       </AlertModal>
 
       {/* Save Modal */}
-      <AlertModal open={modal === "save"} onClose={() => setModal("")}>
+      <AlertModal open={modal === "save"} onClose={() => changeModal("")}>
         <div>
           <div className="font-semibold text-lg mb-2 text-base-primary">
             Save
@@ -777,13 +806,13 @@ export default function DashboardPage() {
           <div className="flex justify-end gap-4">
             <button
               className="border rounded-xl px-5 py-2 text-base-primary bg-white"
-              onClick={() => setModal("")}
+              onClick={() => changeModal("")}
             >
               No
             </button>
             <button
               className="rounded-xl px-5 py-2 text-white bg-green"
-              onClick={() => setModal("")}
+              onClick={() => changeModal("")}
             >
               Yes
             </button>
@@ -792,7 +821,7 @@ export default function DashboardPage() {
       </AlertModal>
 
       {/* Submit Modal */}
-      <AlertModal open={modal === "submit"} onClose={() => setModal("")}>
+      <AlertModal open={modal === "submit"} onClose={() => changeModal("")}>
         <div>
           <div className="font-semibold text-lg mb-2 text-base-primary">
             Submit
@@ -811,7 +840,7 @@ export default function DashboardPage() {
         </div>
       </AlertModal>
 
-      <AlertModal open={modal === "appealSubmittion"} onClose={() => setModal("")}>
+      <AlertModal open={modal === "appealSubmittion"} onClose={() => changeModal("")}>
         <div>
           <div className="font-semibold text-lg mb-2 text-base-primary">
             Submit
@@ -827,7 +856,7 @@ export default function DashboardPage() {
           <div className="flex justify-end gap-4">
             <button
               className="border rounded-xl px-5 py-2 cursor-pointer text-base-primary bg-white"
-              onClick={() => {resetSteps() ; setModal("")}}
+              onClick={() => {resetSteps() ; changeModal("")}}
             >
               Cancel
             </button>
@@ -865,15 +894,14 @@ export default function DashboardPage() {
 
       <AlertModal
         open={modal === "contactoop"}
-        onClose={() => setModal("")}
+        onClose={() => changeModal("")}
       >
         <div>
           <div className="font-semibold text-lg mb-2 text-base-primary">
-            Save
+            Contact Patient for OOP
           </div>
           <div className="text-muted mb-6">
-            Are you sure you want to save your changes? This will update
-            your record permanently.
+            Use one of the <strong>following methods</strong> to connect with the patient for <strong>OOP information.</strong>
           </div>
 
           {/* Whatsapp */}
@@ -903,7 +931,11 @@ export default function DashboardPage() {
                     <p className="text-sm font-semibold">
                       {method.label}
                     </p>
-                    <p className="">{method.value}</p>
+                    <p className="">
+                      {method.id == 'whatsapp' && patients.profile.phoneNumber}
+                      {method.id == 'email' && patients.profile.email}
+                      {method.id == 'phone' && patients.profile.phoneNumber}
+                      </p>
                   </div>
                 </label>
               );
@@ -913,14 +945,14 @@ export default function DashboardPage() {
           <div className="flex justify-end gap-4 mt-4">
             <button
               className=" cursor-pointer rounded-xl px-5 py-2 text-base-primary bg-white"
-              onClick={() => setModal("")}
+              onClick={() => changeModal("")}
             >
               Cancel
             </button>
             <button
               className="cursor-pointer rounded-xl px-5 py-2 text-white bg-green"
               onClick={() => {
-                setModal("oopsend");
+                changeModal("oopPatientsend");
                 markStepsAsComplete();
               }}
             >
@@ -930,14 +962,115 @@ export default function DashboardPage() {
         </div>
       </AlertModal>
 
-      <AlertModal open={modal === "oopsend"} onClose={() => setModal("")}>
+      <AlertModal open={modal === "oopPatientsend"} onClose={() => changeModal("")}>
         <div>
           <div className="font-semibold text-lg mb-2 text-base-primary">
             Submit
           </div>
           <div className="text-muted mb-6">
-            OOP payment request sent to patient. We’ll notify you once the
-            patient responds.
+            Patient is not eligible. Patient has been notified to update coverage or proceed as self-pay.
+          </div>
+          <ProcessMapping
+            processSteps={patientContactSteps as ProcessSteps[]}
+            processGap={"h-3.5"}
+          />
+          <div className="flex justify-end gap-4">
+            <button
+              className="cursor-pointer rounded-xl px-5 py-2 text-white bg-green"
+              onClick={() => {
+                changeModal("");
+                setPatientContactSteps((prevSteps) =>
+                  prevSteps.map((step, index) => ({
+                    ...step,
+                    status: "pending",
+                  }))
+                );
+              }}
+            >
+              OK
+            </button>
+          </div>
+        </div>
+      </AlertModal>
+
+
+      <AlertModal
+        open={modal === "notCoveredOOP"}
+        onClose={() => changeModal("")}
+      >
+        <div>
+          <div className="font-semibold text-lg mb-2 text-base-primary">
+            Contact Patient for OOP
+          </div>
+          <div className="text-muted mb-6">
+           if accepted, appointment is booked, if declined, visit ends.
+          </div>
+
+          {/* Whatsapp */}
+          <div className="space-y-3">
+            {contactMethods.map((method) => {
+              const isSelected = selectedMethod === method.id;
+
+              return (
+                <label
+                  key={method.id}
+                  htmlFor={method.id}
+                  className={`flex items-center gap-4 rounded-lg px-4 py-3 cursor-pointer border border-base transition
+                ${isSelected ? "bg-[#CAE8E4]" : "hover:bg-gray-50"}
+              `}
+                >
+                  <input
+                    type="radio"
+                    name="contactMethod"
+                    id={method.id}
+                    value={method.id}
+                    checked={isSelected}
+                    onChange={() => setSelectedMethod(method.id)}
+                    className="hidden"
+                  />
+                  {method.icon}
+                  <div>
+                    <p className="text-sm font-semibold">
+                      {method.label}
+                    </p>
+                    <p className="">
+                      {method.id == 'whatsapp' && patients.profile.phoneNumber}
+                      {method.id == 'email' && patients.profile.email}
+                      {method.id == 'phone' && patients.profile.phoneNumber}
+                      </p>
+                  </div>
+                </label>
+              );
+            })}
+          </div>
+
+          <div className="flex justify-end gap-4 mt-4">
+            <button
+              className=" cursor-pointer rounded-xl px-5 py-2 text-base-primary bg-white"
+              onClick={() => changeModal("")}
+            >
+              Cancel
+            </button>
+            <button
+              className="cursor-pointer rounded-xl px-5 py-2 text-white bg-green"
+              onClick={() => {
+                changeModal("notCoveredOOPSend");
+                markcontactStep();
+              }}
+            >
+              OK
+            </button>
+          </div>
+        </div>
+      </AlertModal>
+
+      <AlertModal open={modal === "notCoveredOOPSend"} onClose={() => changeModal("")}>
+        <div>
+          <div className="font-semibold text-lg mb-2 text-base-primary">
+            Submit
+          </div>
+          <div className="text-muted mb-6">
+            OOP payment request sent to patient. We’ll notify you once the patient responds.
           </div>
           <ProcessMapping
             processSteps={contactSteps as ProcessSteps[]}
@@ -947,7 +1080,7 @@ export default function DashboardPage() {
             <button
               className="cursor-pointer rounded-xl px-5 py-2 text-white bg-green"
               onClick={() => {
-                setModal("");
+                changeModal("");
                 setContactSteps((prevSteps) =>
                   prevSteps.map((step, index) => ({
                     ...step,

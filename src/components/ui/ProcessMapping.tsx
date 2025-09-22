@@ -48,6 +48,8 @@ const ProcessMapping: React.FC<ProcessMappingProps> = ({
         return "text-alpha opacity-30";
       case "pending":
         return "text-alpha opacity-30";
+      case "denied":
+        return "text-[#CB3914]";
       default:
         // Exhaustive check for TypeScript
         const exhaustiveCheck = stepStatus;

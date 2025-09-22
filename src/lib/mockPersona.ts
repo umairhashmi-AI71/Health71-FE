@@ -113,7 +113,7 @@ export const demoData: PatientPersona[] = [
       "coT": "Two labs billed within 24h; agent cannot auto-resolve → flagged for review."
     },
     "profile": {
-      "profilePhoto": "/avatar.png",
+      "profilePhoto": "/1.png",
       "age": 39,
       "name": "Layla",
       "surname": "Al Fardan",
@@ -455,7 +455,7 @@ export const demoData: PatientPersona[] = [
       "coT": "Two labs billed within 24h; agent cannot auto-resolve → flagged for review."
     },
     "profile": {
-      "profilePhoto": "/avatar.png",
+      "profilePhoto": "/2.png",
       "age": 39,
       "name": "Fatima",
       "surname": "Al Mansoori",
@@ -1463,7 +1463,7 @@ export const demoData: PatientPersona[] = [
       "infoMessage": "Partial claim approved. Remaining services denied for insufficient documentation. Suggest write-off per policy."
     },
     "profile": {
-      "profilePhoto": "/avatar.png",
+      "profilePhoto": "/4.png",
       "age": 39,
       "name": "Amira",
       "surname": "Al Qassimi",
@@ -3192,30 +3192,46 @@ export const fakePersona: PatientPersona[] = [
       email: "Sara.nuaimi@gmail.com",
       profilePhoto: "/avatar.png",
     },
+    information: {
+      infoCode: 'test',
+      infoMessage: 'No insurance detected — agent requested policy details to validate coverage eligibility.',
+      infoType: "Manual Insurance"
+    },
     eligibilityCheck: {
         "steps": [
         {
           "id": "1",
           "label": "Extract Patient & Payer Data",
-          "status": "completed"
+          "status": "denied"
         },
         {
           "id": "2",
           "label": "Validate Coverage",
-          "status": "completed"
+          "status": "pending"
         },
         {
           "id": "3",
           "label": "Update & Flag Issues",
-          "status": "completed"
+          "status": "pending"
         }
       ],
-        isError: false,
-      status: "covered",
+        isError: true,
+      status: "waiting",
       insuranDetials: {
         insuranceProvider: "Daman-AUH-001",
         imageUrl: "/insurance-image.png",
         policyNumber: "42122566",
+        idType: 'passport',
+        IdNumber: '',
+        Clinician: '',
+        serviceCategory: '',
+        planType: '',
+        portalURL: '  ',
+        coverageStartDate: ''	,
+        coverageEndDate: '',
+        treatingProvider: '',
+        IntendedDOS: '',
+        error: ''
       },
       details: [
         { label: "Network", value: "Yes" },
@@ -3246,7 +3262,7 @@ export const fakePersona: PatientPersona[] = [
           "status": "pending"
         }
       ],
-      status: "inprogress", // Medical coding status
+      status: "waiting", // Medical coding status
       details: [
         { label: "Encounter Date", value: "2025-08-30" },
         { label: "Encounter Type", value: "Outpatient" },
@@ -3369,30 +3385,36 @@ export const fakePersona: PatientPersona[] = [
       email: "Sara.nuaimi@gmail.com",
       profilePhoto: "/avatar.png",
     },
+     information: {
+      infoCode: 'test',
+      infoMessage: 'No insurance detected — agent requested policy details to validate coverage eligibility.',
+      infoType: "Manual Insurance"
+    },
     eligibilityCheck: {
         "steps": [
         {
           "id": "1",
           "label": "Extract Patient & Payer Data",
-          "status": "completed"
+          "status": "denied"
         },
         {
           "id": "2",
           "label": "Validate Coverage",
-          "status": "completed"
+          "status": "pending"
         },
         {
           "id": "3",
           "label": "Update & Flag Issues",
-          "status": "completed"
+          "status": "pending"
         }
       ],
         isError: false,
-      status: "covered",
+      status: "waiting",
       insuranDetials: {
         insuranceProvider: "Daman-AUH-001",
         imageUrl: "/insurance-image.png",
         policyNumber: "42122566",
+        error: 'notvalid'
       },
       details: [
         { label: "Network", value: "Yes" },
@@ -3423,7 +3445,7 @@ export const fakePersona: PatientPersona[] = [
           "status": "pending"
         }
       ],
-      status: "inprogress", // Medical coding status
+      status: "waiting", // Medical coding status
       details: [
         { label: "Encounter Date", value: "2025-08-30" },
         { label: "Encounter Type", value: "Outpatient" },
@@ -3533,6 +3555,11 @@ export const fakePersona: PatientPersona[] = [
       agentSuggestion: "PA required for inpatient stay extension",
       coT: "Payer requires re-auth after 5 days; agent drafted but physician must confirm ongoing medical necessity.",
     },
+     information: {
+      infoCode: 'test',
+      infoMessage: 'Coverage expired at date of service — agent flagged ineligibility, fetched updated plan details, and prompted follow-up with patient or payer.',
+      infoType: "Expired Coverage"
+    },
     profile: {
       name: "Huda",
       surname: "Mansoor",
@@ -3570,6 +3597,7 @@ export const fakePersona: PatientPersona[] = [
         insuranceProvider: "Daman-AUH-001",
         imageUrl: "/insurance-image.png",
         policyNumber: "42122566",
+         error: 'coverage'
       },
       details: [
         { label: "Network", value: "Yes" },
@@ -3600,7 +3628,7 @@ export const fakePersona: PatientPersona[] = [
           "status": "pending"
         }
       ],
-      status: "inprogress", // Medical coding status
+      status: "waiting", // Medical coding status
       details: [
         { label: "Encounter Date", value: "2025-08-30" },
         { label: "Encounter Type", value: "Outpatient" },
@@ -3613,17 +3641,17 @@ export const fakePersona: PatientPersona[] = [
         {
           "id": "1",
           "label": "Extract & Prepare & (Code)",
-          "status": "pending"
+          "status": "completed"
         },
         {
           "id": "2",
           "label": "Submit Request",
-          "status": "pending"
+          "status": "completed"
         },
         {
           "id": "3",
           "label": "Prior Authorization Posted",
-          "status": "pending"
+          "status": "completed"
         },
         {
           "id": "4",
@@ -3710,6 +3738,11 @@ export const fakePersona: PatientPersona[] = [
       agentSuggestion: "Draft appeal: “not medically necessary”",
       coT: "Denial code 50; flagged for physician medical justification + supporting guidelines.",
     },
+    information: {
+infoCode: 'CMS-110',
+infoMessage: 'Prior authorization initially denied due to a coding issue, corrected codes below for resubmission.',
+infoType: 'Different Code Suggestion'
+    },
     profile: {
       name: "Olivier",
       surname: "Dubois",
@@ -3777,7 +3810,7 @@ export const fakePersona: PatientPersona[] = [
           "status": "pending"
         }
       ],
-      status: "inprogress", // Medical coding status
+      status: "waiting", // Medical coding status
       details: [
         { label: "Encounter Date", value: "2025-08-30" },
         { label: "Encounter Type", value: "Outpatient" },
@@ -3790,26 +3823,26 @@ export const fakePersona: PatientPersona[] = [
         {
           "id": "1",
           "label": "Extract & Prepare & (Code)",
-          "status": "pending"
+          "status": "completed"
         },
         {
           "id": "2",
           "label": "Submit Request",
-          "status": "pending"
+          "status": "completed"
         },
         {
           "id": "3",
           "label": "Prior Authorization Posted",
-          "status": "pending"
+          "status": "completed"
         },
         {
           "id": "4",
           "label": "Response Retrieved",
-          "status": "pending"
+          "status": "completed"
         }
       ],
         isError: false,
-      status: "waiting", // Prior authorization status
+      status: "denied", // Prior authorization status
       details: [
         { label: "Encounter ID", value: "ENC-2025-0789" },
         { label: "CPT Code", value: "29880" },
@@ -3830,7 +3863,7 @@ export const fakePersona: PatientPersona[] = [
       ],
     },
       
-    "drugCode": [],
+    
     denialManagement: {
         isError: false,
       status: "waiting", // Current status of the denial management process
@@ -3874,8 +3907,38 @@ export const fakePersona: PatientPersona[] = [
       },
     ],
     markdown,
-    icdCodes: [],
-    cptCode: [],
+     "icdCodes": [
+      {
+        "code": "M17.11",
+        "description": "Unilateral primary osteoarthritis, right knee",
+        "status": ''
+      }
+    ],
+    "cptCode": [
+      {
+        "code": "99203",
+        "newCode": "99213",
+        status: "Changed",
+        "description": "Confidence 95% - Patient is established, documentation shows follow-up with low complexity MDM. Updated code aligns with payer rules and avoids denial."
+      },
+      {
+        "code": "73562",
+        status: 'Deleted',
+        "description": "Confidence 80% - Duplicate knee X-ray within 30 days. Removal prevents automatic denial; attach documentation if repeat imaging is justified."
+      },
+      {
+        "code": "85027",
+        status: 'Accepted',
+        "description": "Confidence 98% - CBC retained. Clinical notes show knee swelling with suspected inflammation. Lab test supports ruling out infection or inflammatory arthritis"
+      }
+    ],
+    "drugCode": [
+      {
+        "code": "98765",
+        status: '',
+        "description": "Naproxen 500mg tablets, oral, BID x 7 days"
+      }
+    ],
   },
   {
     id: "824691",
@@ -3886,6 +3949,11 @@ export const fakePersona: PatientPersona[] = [
       agents: ["Dee"],
       agentSuggestion: "Denial reason: experimental procedure",
       coT: "Payer denial flagged as investigational; requires physician statement + clinical literature.",
+    },
+     information: {
+infoCode: 'notcovered',
+infoMessage: 'Prior authorization initially denied due to a coding issue, corrected codes below for resubmission.',
+infoType: 'Not Covered'
     },
     profile: {
       name: "Mariam ",
@@ -3954,7 +4022,7 @@ export const fakePersona: PatientPersona[] = [
           "status": "pending"
         }
       ],
-      status: "inprogress", // Medical coding status
+      status: "waiting", // Medical coding status
       details: [
         { label: "Encounter Date", value: "2025-08-30" },
         { label: "Encounter Type", value: "Outpatient" },
@@ -3967,26 +4035,26 @@ export const fakePersona: PatientPersona[] = [
         {
           "id": "1",
           "label": "Extract & Prepare & (Code)",
-          "status": "pending"
+          "status": "completed"
         },
         {
           "id": "2",
           "label": "Submit Request",
-          "status": "pending"
+          "status": "completed"
         },
         {
           "id": "3",
           "label": "Prior Authorization Posted",
-          "status": "pending"
+          "status": "completed"
         },
         {
           "id": "4",
           "label": "Response Retrieved",
-          "status": "pending"
+          "status": "completed"
         }
       ],
         isError: false,
-      status: "waiting", // Prior authorization status
+      status: "rejected", // Prior authorization status
       details: [
         { label: "Encounter ID", value: "ENC-2025-0789" },
         { label: "CPT Code", value: "29880" },

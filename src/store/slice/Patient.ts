@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import type { RootState } from "../index";
 import { patientPersona } from "@/lib/mockPersona";
-import { ICDCode, PatientPersona } from "@/types/patient";
+import { ICDCode, PatientPersona, StatusType } from "@/types/patient";
 import { ErrorCode, ErrorType } from "@/types/error";
 
 // Define the initial state using that type
@@ -113,20 +113,18 @@ export const patientSlice = createSlice({
       action: PayloadAction<{
         patientId: string;
         errorType: ErrorCode;
-        errorTitle : string;
+        errorTitle: string;
 
-                                    errorMessage: string;
+        errorMessage: string;
       }>
     ) {
-      const { patientId, errorType, errorTitle,
-                                    errorMessage } = action.payload;
+      const { patientId, errorType, errorTitle, errorMessage } = action.payload;
       const patient = state.find((p) => p.id === patientId);
 
       if (patient && patient.information) {
         patient.information.infoCode = errorType;
         patient.information.infoType = errorTitle;
         patient.information.infoMessage = errorMessage;
-       
       }
     },
     updatePaymentStep(
@@ -140,9 +138,7 @@ export const patientSlice = createSlice({
       const patient = state.find((p) => p.id === patientId);
 
       if (patient && patient.postPayment.steps) {
-        const step = patient.postPayment.steps.find(
-          (s) => s.label === title
-        );
+        const step = patient.postPayment.steps.find((s) => s.label === title);
 
         if (step) {
           step.status = "completed";
@@ -154,35 +150,31 @@ export const patientSlice = createSlice({
       action: PayloadAction<{
         patientId: string;
         code: string;
-        status: string,
-        type: string,
+        status: string;
+        type: string;
       }>
     ) {
-
       const { patientId, code, status, type } = action.payload;
       const patient = state.find((p) => p.id === patientId);
-      
 
-      if(type == 'icd') {
-        const  step = patient?.icdCodes.find((s) => s.code === code);
+      if (type == "icd") {
+        const step = patient?.icdCodes.find((s) => s.code === code);
         if (step) {
-        step.status = status;
+          step.status = status;
+        }
       }
-      }
-      if(type == 'cpt') {
-        const  step = patient?.cptCode.find((s) => s.code === code);
+      if (type == "cpt") {
+        const step = patient?.cptCode.find((s) => s.code === code);
         if (step) {
-        step.status = status;
+          step.status = status;
+        }
       }
-      }
-       if(type == 'drug') {
-        const  step = patient?.drugCode.find((s) => s.code === code);
+      if (type == "drug") {
+        const step = patient?.drugCode.find((s) => s.code === code);
         if (step) {
-        step.status = status;
+          step.status = status;
+        }
       }
-      }
-      
-      
     },
     changeStatus(
       state,
@@ -194,12 +186,43 @@ export const patientSlice = createSlice({
       const patient = state.find((p) => p.id === patientId);
 
       if (patient && patient.postPayment) {
-
         if (patient.postPayment) {
           patient.postPayment.status = "done";
         }
       }
-    }
+    },
+    changePatientStatus(
+      state,
+      action: PayloadAction<{
+        patientId: string;
+        step: string;
+        status: StatusType;
+      }>
+    ) {
+      const { patientId, step, status } = action.payload;
+      const patient = state.find((p) => p.id === patientId);
+
+      if (!patient) return;
+
+      // Optional: Check if the step exists on the patient
+      const stepData = patient[step as keyof typeof patient];
+      if (!stepData || typeof stepData !== "object" || !("status" in stepData))
+        return;
+
+      
+
+      if(status == 'valid') {
+if (stepData && stepData.steps) {
+         stepData.steps.map((s) => s.status = 'completed');
+
+        
+      }
+      }
+      // Apply status change only if postPayment exists
+      if (stepData) {
+        stepData.status = status;
+      }
+    },
   },
 });
 
@@ -213,7 +236,8 @@ export const {
   changeErrorCode,
   updatePaymentStep,
   changeStatus,
-  changeCodeStatus
+  changeCodeStatus,
+  changePatientStatus
 } = patientSlice.actions;
 
 export default patientSlice.reducer;

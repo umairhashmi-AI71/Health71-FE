@@ -40,11 +40,11 @@ const LogsList: React.FC<LogsListProps> = ({ data }) => {
                             <table className="w-full">
                                 <tbody>
                                     <tr className="">
-                                        <td className="px-6 py-3 font-medium  w-[18%]">Date & Time</td>
-                                        <td className="px-6 py-3 font-medium  w-[10%]">Actor</td>
-                                        <td className="px-6 py-3 font-medium  w-[15%]">Step</td>
-                                        <td className="px-6 py-3 font-medium w-[30%]">Action Performed</td>
-                                        <td className="px-6 py-3 font-medium "> Evidence / File Location</td>
+                                        <td className="px-6 py-3 font-semibold  w-[18%]">Date & Time</td>
+                                        <td className="px-6 py-3 font-semibold  w-[10%]">Actor</td>
+                                        <td className="px-6 py-3 font-semibold  w-[15%]">Step</td>
+                                        <td className="px-6 py-3 font-semibold w-[30%]">Action Performed</td>
+                                        <td className="px-6 py-3 font-semibold w-[100px]"> Evidence / File Location</td>
                                     </tr>
                                     {round.map((roundItem, idx) => {
                                         return (
@@ -70,9 +70,9 @@ const LogsList: React.FC<LogsListProps> = ({ data }) => {
                                                     {roundItem.action}
                                                 </td>
 
-                                                <td className="px-6 py-3">
-
-                                                    {roundItem.fileLocation}
+                                                <td className="px-6 py-3 w-10">
+<code className="truncate">{roundItem.fileLocation}</code>
+                                                    
                                                 </td>
 
                                             </tr>

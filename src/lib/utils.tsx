@@ -13,6 +13,11 @@ export const getStatusConfig = (status: StatusType): StatusConfig => {
         text: "Approved",
         className: "bg-primary-foreground text-green",
       };
+      case "valid":
+      return {
+        text: "Valid",
+        className: "bg-primary-foreground text-green",
+      };
     case "notinvoked":
         return {
         text: "Not Invoked",
@@ -47,6 +52,11 @@ export const getStatusConfig = (status: StatusType): StatusConfig => {
       return {
         text: "Pending",
         className: "bg-warm-gray text-white",
+      };
+       case "notvalid":
+      return {
+        text: "Not Valid",
+        className: "bg-base-agent-10 text-pixel-bloom",
       };
     case "paused":
       return {

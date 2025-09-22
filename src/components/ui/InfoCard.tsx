@@ -40,6 +40,9 @@ const InfoCard: React.FC<InfoCardProps> = ({
       //  case "pandingapproval":
       //   case "partialapproval":
           case "OA-ERR-001" :
+            case 'test':
+                           case 'notcovered':
+
         return (
           <NotebookPen className="w-10 h-10 bg-[#EFF7F6]  rounded-lg p-2"  strokeWidth={1.5} />
         );
@@ -70,6 +73,9 @@ const InfoCard: React.FC<InfoCardProps> = ({
       //  case "pandingapproval":
       //   case "partialapproval":
           case "OA-ERR-001" :
+             case 'test':
+             case 'notcovered':
+              
         return 'border-[#AFD8D4]';
       // case "paymentmatch":
       //   return (

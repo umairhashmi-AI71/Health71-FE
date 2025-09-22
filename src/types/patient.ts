@@ -42,6 +42,8 @@ export type StatusType =
   | "received"
   | "notinvoked"
   | "denied"
+  | "notvalid"
+  | "valid"
   | "waiting";
 
 export interface MedicalCoding {
@@ -160,9 +162,20 @@ export interface ICDCode {
   imageUrl: string;
   policyNumber: string;
   insurance?: string;
-  number?: string
-  network?: string
-  coverage?: string
+  number?: string;
+  network?: string;
+  coverage?: string;
+  idType?: string;
+  IdNumber?: string;
+  Clinician?: string;
+  serviceCategory?: string;
+  planType?: string;
+  portalURL?: string;
+  coverageStartDate?: string;
+  coverageEndDate?: string;
+  treatingProvider?: string;
+  IntendedDOS?: string;
+   error?: string
 }
 export interface EligibilityCheck {
   status: StatusType;                  // ✅ "waiting"

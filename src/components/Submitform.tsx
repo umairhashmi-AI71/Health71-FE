@@ -26,8 +26,9 @@ const ClaimSubmissionComponent = ({
   ];
 
   const handleSubmit = async () => {
+    if(isSubmited) {route.push("/patient")
+cancelHandel()
 
-    if(isSubmited) {route.push("/home")
       dispatch(markPatientSubmitted(userId));
     } 
         

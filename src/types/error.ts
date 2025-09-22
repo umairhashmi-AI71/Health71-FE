@@ -29,4 +29,6 @@ export type ErrorCode =
   | "CC-001"
   | "MN-002"
   | "APL-003"
+  | "test"
+| "notcovered"
   | "OA-ERR-001";
