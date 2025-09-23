@@ -554,6 +554,10 @@ export default function DashboardPage() {
 
 
                   }
+                   if(information && information?.infoType == 'Eligible') {
+                    changeModal("submiteligibility")
+                    return;
+                  }
                   // No errors found, open modal
                   changeModal(data.label.toLowerCase());
 

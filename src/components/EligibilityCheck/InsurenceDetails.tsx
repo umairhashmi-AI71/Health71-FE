@@ -71,39 +71,64 @@ export default function InsuranceDetails() {
 
   const cancelRef = useRef(false);
 
-const [insurenceCheckStep, setInsurenceCheckStep] = useState([
+  const [insurenceCheckStep, setInsurenceCheckStep] = useState([
     { id: "1", label: "Verify Insurance Status", status: "pending" },
     { id: "2", label: "Capture Payment & Consent", status: "pending" },
     { id: "3", label: "Confirm Financial Clearance", status: "pending" },
   ]);
- 
+
+  const [submitEligibilityStep, setsubmitEligibilityStep] = useState([
+    { id: "1", label: "Compliance Check & Adjustment", status: "pending" },
+    { id: "2", label: "Contact insurance", status: "pending" },
+    { id: "3", label: "Update Ledger", status: "pending" },
+    { id: "4", label: "Inform Patient", status: "pending" },
+  ]);
+
+  const markSubmitEligibilityStep = async () => {
+    cancelRef.current = false; // reset cancel flag before starting
+    setisSubmiting(true)
+    for (let i = 0; i < 2; i++) {
+      // Wait for 1 second
+      if (cancelRef.current) break;
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+      // Update the status of the current step to "complete"
+      if (cancelRef.current) break;
+      setsubmitEligibilityStep((prevSteps) =>
+        prevSteps.map((step, index) =>
+          index === i ? { ...step, status: "completed" } : step
+        )
+      );
+    }
+  };
+
+
 
   const markInsurenceStep = async () => {
     cancelRef.current = false; // reset cancel flag before starting
     setisSubmiting(true)
     for (let i = 0; i < 1; i++) {
       // Wait for 1 second
-  if (cancelRef.current) break;
+      if (cancelRef.current) break;
       await new Promise((resolve) => setTimeout(resolve, 1000));
       // Update the status of the current step to "complete"
-  if (cancelRef.current) break;
+      if (cancelRef.current) break;
 
-  if(patients.id == "483920")  {
-    setInsurenceCheckStep((prevSteps) =>
-        prevSteps.map((step, index) =>
-          index === i ? { ...step, status: "denied" } : step
-        )
-      );
-  }
+      if (patients.id == "483920") {
+        setInsurenceCheckStep((prevSteps) =>
+          prevSteps.map((step, index) =>
+            index === i ? { ...step, status: "denied" } : step
+          )
+        );
+      }
 
-   if(patients.id == "762145")  {
-    setInsurenceCheckStep((prevSteps) =>
-        prevSteps.map((step, index) =>
-          index === i ? { ...step, status: "completed" } : step
-        )
-      );
-  }
-      
+      if (patients.id == "762145") {
+        setInsurenceCheckStep((prevSteps) =>
+          prevSteps.map((step, index) =>
+            index === i ? { ...step, status: "completed" } : step
+          )
+        );
+      }
+
     }
   };
 
@@ -118,20 +143,20 @@ const [insurenceCheckStep, setInsurenceCheckStep] = useState([
     []
   );
   const handleSubmit = async () => {
-    const {provider, policyNumber, clinician, serviceCategory} = formData;
+    const { provider, policyNumber, clinician, serviceCategory } = formData;
 
-    if(provider && policyNumber && clinician && serviceCategory) {
-setError(false)
-changeModal('checkInsurance')
- 
+    if (provider && policyNumber && clinician && serviceCategory) {
+      setError(false)
+      changeModal('checkInsurance')
+
 
     } else {
-setError(true)
+      setError(true)
     }
-   
 
-  
-   
+
+
+
 
     // try {
     //   const data = new FormData();
@@ -162,7 +187,7 @@ setError(true)
   };
 
   const updateState = () => {
-          dispatch(
+    dispatch(
       updateInsurence({
         patientId: patients.id,
         insuranceDetailsForm: formData,
@@ -187,7 +212,7 @@ setError(true)
         })
       );
     }
-    }
+  }
 
   return (
     <>
@@ -213,7 +238,7 @@ setError(true)
         {/* Insurance and Encounter Details */}
 
         <div>
-          <TabCard title="Insurance and Encounter Details" Icon={Paperclip}  isError={error}>
+          <TabCard title="Insurance and Encounter Details" Icon={Paperclip} isError={error}>
             <div className="grid grid-cols-2 gap-4 p-6">
               {/* Provider + Policy Number */}
               <div>
@@ -337,7 +362,7 @@ setError(true)
               {/* Dates */}
               <div>
                 <label className="block text-sm font-medium">
-                  Coverage Start Date	
+                  Coverage Start Date
                 </label>
                 <input
                   onChange={(e) => changeHandel(e)}
@@ -365,7 +390,7 @@ setError(true)
               {/* Department + Service Date */}
               <div>
                 <label className="block text-sm font-medium">
-                 Treating Provider / Department
+                  Treating Provider / Department
                 </label>
                 <input
                   onChange={(e) => changeHandel(e)}
@@ -485,54 +510,103 @@ setError(true)
 
 
 
-   <AlertModal open={modal === "checkInsurance"} onClose={() => changeModal("")}>
-        <div>
-          <div className="font-semibold text-lg mb-2 text-base-primary">
-            Submit
-          </div>
-          <div className="text-muted mb-6">
-            OOP payment request sent to patient. We’ll notify you once the patient responds.
-          </div>
-          <ProcessMapping
-            processSteps={insurenceCheckStep as ProcessSteps[]}
-            processGap={"h-3.5"}
-          />
-          <div className="flex justify-end gap-4">
-             <button
-              className=" cursor-pointer rounded-xl px-5 py-2 text-base-primary border bg-white"
-              onClick={() => {changeModal(""); setisSubmiting(false)}}
-            >
-              Cancel
-            </button>
+        <AlertModal open={modal === "checkInsurance"} onClose={() => changeModal("")}>
+          <div>
+            <div className="font-semibold text-lg mb-2 text-base-primary">
+              Submit
+            </div>
+            <div className="text-muted mb-6">
+              OOP payment request sent to patient. We’ll notify you once the patient responds.
+            </div>
+            <ProcessMapping
+              processSteps={insurenceCheckStep as ProcessSteps[]}
+              processGap={"h-3.5"}
+            />
+            <div className="flex justify-end gap-4">
+              <button
+                className=" cursor-pointer rounded-xl px-5 py-2 text-base-primary border bg-white"
+                onClick={() => { changeModal(""); setisSubmiting(false) }}
+              >
+                Cancel
+              </button>
 
-            
-            <button
-              className="cursor-pointer rounded-xl px-5 py-2 text-white bg-green"
-              onClick={() => {
-                if(isSubmiting) {
-                  updateState()
 
-                  changeModal("")
-                  cancelRef.current = false;
+              <button
+                className="cursor-pointer rounded-xl px-5 py-2 text-white bg-green"
+                onClick={() => {
+                  if (isSubmiting) {
+                    updateState()
 
-                  setInsurenceCheckStep((prevSteps) =>
-                  prevSteps.map((step, index) => ({
-                    ...step,
-                    status: "pending",
-                  }))
-                );
-                                  setisSubmiting(false)
-                setisDisable(true)
-                } else {
-                markInsurenceStep()
-                }
-              }}
-            >
-              OK
-            </button>
+                    changeModal("")
+                    cancelRef.current = false;
+
+                    setInsurenceCheckStep((prevSteps) =>
+                      prevSteps.map((step, index) => ({
+                        ...step,
+                        status: "pending",
+                      }))
+                    );
+                    setisSubmiting(false)
+                    setisDisable(true)
+                  } else {
+                    markInsurenceStep()
+                  }
+                }}
+              >
+                OK
+              </button>
+            </div>
           </div>
-        </div>
-      </AlertModal>
+        </AlertModal>
+
+
+
+        <AlertModal open={modal === "submiteligibility"} onClose={() => changeModal("")}>
+          <div>
+            <div className="font-semibold text-lg mb-2 text-base-primary">
+              Submit
+            </div>
+            <div className="text-muted mb-6">
+              Our <strong>agents</strong> are checking the <strong>eligibility</strong>. We’ll notify you if anything else is needed.
+            </div>
+            <ProcessMapping
+              processSteps={submitEligibilityStep as ProcessSteps[]}
+              processGap={"h-3.5"}
+            />
+            <div className="flex justify-end gap-4">
+              <button
+                className=" cursor-pointer rounded-xl px-5 py-2 text-base-primary border bg-white"
+                onClick={() => { changeModal(""); setisSubmiting(false) }}
+              >
+                Cancel
+              </button>
+
+
+              <button
+                className="cursor-pointer rounded-xl px-5 py-2 text-white bg-green"
+                onClick={() => {
+                  if (isSubmiting) {
+
+                    changeModal("")
+                    cancelRef.current = false;
+
+                    setsubmitEligibilityStep((prevSteps) =>
+                      prevSteps.map((step, index) => ({
+                        ...step,
+                        status: "pending",
+                      }))
+                    );
+                    setisSubmiting(false)
+                  } else {
+                    markSubmitEligibilityStep()
+                  }
+                }}
+              >
+                OK
+              </button>
+            </div>
+          </div>
+        </AlertModal>
 
 
         {/* Action Button */}
