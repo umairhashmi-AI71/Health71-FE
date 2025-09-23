@@ -1,33 +1,63 @@
-import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+"use client"
+import { Inter } from "next/font/google";
+import localFont from "next/font/local";
+
 import "./globals.css";
+import ChatWidget from "@/components/ChatWidget";
+import { Provider } from 'react-redux';
+import { store } from '../store';
+import { createContext, useState } from "react";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
+const inter = Inter({ subsets: ['latin'] });
+
+
+const mackinacBook = localFont({
+  src: "../../public/fonts/Mackinac-Book.woff2",
+  variable: "--font-mackinac-book",
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+interface AgentProps {
+  agent: string,
+  modal: string,
+  changeModal: (modal: string) => void
+  changeAgent: (agent: string) => void
+}
 
-export const metadata: Metadata = {
-  title: "Health71 RCM",
-  description: "Healthcare Revenue Cycle Management System",
-};
+export const AgentContext = createContext<AgentProps>({
+  agent: "",
+  modal: '',
+  changeModal:  () => { },
+  changeAgent: () => { },
+});
 
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+
+  const [agent, setAgent] = useState("");
+  const [modal, setModal] = useState("");
+
+  const changeAgent = (agent: string) => {
+    setAgent(agent);
+  };
+
+  const changeModal = (modal: string) => {
+    setModal(modal)
+  }
   return (
+
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${inter.className} ${mackinacBook.variable}`}
       >
-        {children}
+        <Provider store={store}>
+          <AgentContext.Provider value={{ agent, modal, changeAgent, changeModal }}>
+            {children}
+          </AgentContext.Provider>
+        </Provider>
+
       </body>
     </html>
   );

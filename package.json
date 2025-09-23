@@ -9,12 +9,24 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@ai-sdk/openai": "^2.0.23",
+    "@heroui/react": "^2.8.3",
     "@hookform/resolvers": "^5.2.1",
+    "@reduxjs/toolkit": "^2.8.2",
+    "ag-grid-community": "^34.1.2",
+    "ag-grid-react": "^34.1.2",
+    "ai": "^5.0.28",
+    "antd": "^5.27.1",
+    "dayjs": "^1.11.18",
     "lucide-react": "^0.540.0",
     "next": "15.4.6",
     "react": "19.1.0",
     "react-dom": "19.1.0",
     "react-hook-form": "^7.62.0",
+    "react-markdown": "^10.1.0",
+    "react-redux": "^9.2.0",
+    "rehype-raw": "^7.0.0",
+    "remark-gfm": "^4.0.1",
     "zod": "^4.0.17"
   },
   "devDependencies": {

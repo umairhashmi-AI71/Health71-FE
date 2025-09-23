@@ -25,14 +25,14 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
       setInputType(showPassword ? 'password' : 'text');
     };
 
-    const baseInputClasses = 'block w-full px-3 py-2 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors';
+    const baseInputClasses = 'text-sm block w-full px-3 py-2 border rounded-lg  focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors';
     const errorClasses = error ? 'border-red-300 focus:ring-red-500 focus:border-red-500' : 'border-gray-300';
     const inputClasses = `${baseInputClasses} ${errorClasses} ${className}`;
 
     return (
       <div className="w-full">
         {label && (
-          <label className="block text-sm font-medium text-gray-700 mb-1">
+          <label className="block text-sm font-medium mb-2">
             {label}
           </label>
         )}

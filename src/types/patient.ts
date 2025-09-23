@@ -1,158 +1,260 @@
-// FHIR Base Types
-export interface FhirReference {
-  reference?: string;
-  display?: string;
+import { int } from "zod";
+import { ErrorType } from "./error";
+
+export interface PatientListProps {
+  initialPatients?: PatientPersona[];
 }
 
-export interface FhirCoding {
-  system?: string;
-  code?: string;
-  display?: string;
+// Define types for each part of the user persona
+export interface PatientProfile {
+  name: string;
+  surname: string;
+  emiratesId: string;
+  sex: "Male" | "Female";
+  dateOfBirth: string; // YYYY-MM-DD format
+  nationality: string;
+  language: string;
+  phoneNumber: number;
+  email: string;
+  age: number;
+  profilePhoto: string;
+  mrn?: number | string
+  eid?: string
+  dob?: number
 }
 
-export interface FhirCodeableConcept {
-  coding?: FhirCoding[];
-  text?: string;
+export interface MedicalCodingDetail {
+  label: string;
+  value: string | number;
 }
 
-export interface FhirPeriod {
-  start?: string;
-  end?: string;
+export type StatusType =
+  | "approved"
+  | "inprogress"
+  | "pending"
+  | "rejected"
+  | "covered"
+  | "paused"
+  | "completed"
+  | "current"
+  | "done"
+  | "submitted"
+  | "received"
+  | "notinvoked"
+  | "denied"
+  | "notvalid"
+  | "valid"
+  | "noteligible"
+  | "waiting";
+
+export interface MedicalCoding {
+  status: StatusType;
+  details: MedicalCodingDetail[]; // Array of label-value pairs
+  steps: ProcessSteps[]
+  isError: boolean;
+  errorDetails? :{
+    errorType: ErrorType,
+  }
 }
 
-export interface FhirIdentifier {
-  use?: string;
-  system?: string;
-  value?: string;
+export interface PriorAuthorizationDetail {
+  label: string;
+  value: string;
 }
 
-// Patient Types
-export interface FhirName {
-  use?: string;
-  family?: string;
-  given?: string[];
-  prefix?: string[];
-  suffix?: string[];
+export interface PriorAuthorization {
+  status: StatusType; // Status of prior authorization
+  details: PriorAuthorizationDetail[]; // Array of label-value pairs
+  steps: ProcessSteps[]
+  isError: boolean;
+  errorDetails? :{
+    errorType: ErrorType,
+  }
 }
 
-export interface FhirAddress {
-  use?: string;
-  type?: string;
-  line?: string[];
-  city?: string;
-  state?: string;
-  postalCode?: string;
-  country?: string;
-}
-
-export interface FhirTelecom {
-  system?: string;
-  value?: string;
-  use?: string;
-}
-
-export interface FhirPatient {
+export interface ProcessSteps {
   id: string;
-  resourceType: string;
-  identifier?: FhirIdentifier[];
-  active?: boolean;
-  name?: FhirName[];
-  telecom?: FhirTelecom[];
-  gender?: string;
-  birthDate?: string;
-  address?: FhirAddress[];
-  maritalStatus?: {
-    coding?: Array<{
-      system?: string;
-      code?: string;
-      display?: string;
-    }>;
-  };
-  contact?: Array<{
-    relationship?: Array<{
-      coding?: Array<{
-        system?: string;
-        code?: string;
-        display?: string;
-      }>;
-    }>;
-    name?: FhirName;
-    telecom?: FhirTelecom[];
-    address?: FhirAddress;
-  }>;
+  label: string;
+  status: StatusType;
 }
 
-// Coverage Types
-export interface FhirCoverageClass {
-  type?: FhirCodeableConcept;
-  value?: string;
-  name?: string;
+type processStepStatusType =
+  | "completed"
+  | "current"
+  | "pending"
+  | "paused"
+  | "inprogress"
+  | "done"
+  | "received"
+  | "notinvoked"
+  | "submitted"
+  | "waiting";
+
+export interface ClaimAttempts {
+  claimRound?: string;
+  date: string;
+  claimAmount: string;
+  claimId: string;
+  rejectionCode: string;
+}
+export interface ClaimSubmission {
+  status: processStepStatusType;
+  steps: ProcessSteps[]; // Array of steps for claim submission
+  claimAttempts?: ClaimAttempts[];
+  isError: boolean;
+  errorDetails? :{
+    errorType: ErrorType,
+  }
 }
 
-export interface FhirCoverage {
-  id: string;
-  resourceType: string;
-  identifier?: Array<{
-    system?: string;
-    value?: string;
-  }>;
-  status?: string;
-  type?: FhirCodeableConcept;
-  policyHolder?: FhirReference;
-  subscriber?: FhirReference;
-  beneficiary: FhirReference;
-  dependent?: string;
-  relationship?: FhirCodeableConcept;
-  period?: FhirPeriod;
-  payor: FhirReference[];
-  class?: FhirCoverageClass[];
-  order?: number;
-  network?: string;
+export interface DenialAttempts {
+  claimRound: string
+  claimId: string;
+  denialId: string;
+  denialAmount: string;
+  denialCode: string;
 }
 
-// Encounter Types
-export interface FhirEncounterDiagnosis {
-  condition: FhirReference;
-  use?: FhirCodeableConcept;
-  rank?: number;
+export interface DenialManagement {
+  status: processStepStatusType;
+  steps: ProcessSteps[]; // Array of steps for denial management
+  denialAttempts?: DenialAttempts[];
+  isError: boolean;
+  errorDetails? :{
+    errorType: ErrorType,
+  }
 }
 
-export interface FhirEncounter {
-  id: string;
-  resourceType: string;
-  identifier?: FhirIdentifier[];
+export interface PaymentDetails {
+  date: string;
+  paymentFile: number;
+  claimId: string;
+  ar?: number;
+  difference?:number;
+}
+export interface PostPayment {
+  status: StatusType;
+  steps: ProcessSteps[]; // Array of steps for post-payment process
+  details?: PaymentDetails
+  isError: boolean;
+  errorDetails? :{
+    errorType: ErrorType,
+  }
+}
+
+export interface Attachment {
+  fileName: string;
+  fileSize: string;
+  ecgImageUrl: string;
+}
+
+export interface ICDCode {
+  code: string;
+  newCode?: string;
   status: string;
-  class?: FhirCodeableConcept;
-  type?: FhirCodeableConcept[];
-  subject: FhirReference;
-  period?: FhirPeriod;
-  diagnosis?: FhirEncounterDiagnosis[];
-  serviceProvider?: FhirReference;
+  confidence?: number;
+  isApproved?: boolean;
+  description?: string;
+  suggestion?: string
+  suggestionCode?:string
 }
 
-// Diagnosis Types
-export interface FhirDiagnosis {
+export interface InsuranceFullDetailsData {
+  provider?: string;
+  policyNumber?: string;
+  identificationType?: string;
+  identificationNumber?: string;
+  clinician?: string;
+  serviceCategory?: string;
+  portalUrl?: string;
+  planType?: string;
+  coverageStart?: string;
+  coverageEnd?: string;
+  department?: string;
+  paymentdateserviceDate?: string;
+  paymentdate?: string;
+  paymentmethod?: string;
+}
+export interface InsuranDetials {
+  insuranceProvider: string;
+  imageUrl: string;
+  policyNumber: string;
+  insurance?: string;
+  number?: string;
+  network?: string;
+  coverage?: string;
+  idType?: string;
+  IdNumber?: string;
+  clinician?: string;
+  serviceCategory?: string;
+  planType?: string;
+  portalURL?: string;
+  coverageStartDate?: string;
+  coverageEndDate?: string;
+  treatingProvider?: string;
+  IntendedDOS?: string;
+   error?: string
+   department?:string
+}
+export interface EligibilityCheck {
+  status: StatusType;                  // ✅ "waiting"
+  insuranDetials: InsuranDetials;      // ✅ object with provider, policy, etc.
+  details: MedicalCodingDetail[];      // ✅ array of label/value pairs
+  steps: ProcessSteps[];               // ✅ array of process steps
+  isError: boolean;                      // (optional, stored inside insuranDetials)
+  errorDetails?: { errorType: ErrorType } // (optional, not included)
+}
+
+// Main User Persona Interface that integrates all the sections
+
+export interface Information {
+  infoType: string;
+  infoCode: string,
+  infoMessage: string
+}
+export interface PatientPersona {
   id: string;
-  resourceType: string;
-  identifier?: FhirIdentifier[];
-  clinicalStatus?: FhirCodeableConcept;
-  verificationStatus?: FhirCodeableConcept;
-  category?: FhirCodeableConcept[];
-  severity?: FhirCodeableConcept;
-  code?: FhirCodeableConcept;
-  subject: FhirReference;
-  encounter?: FhirReference;
-  onsetDateTime?: string;
-  recordedDate?: string;
-  recorder?: FhirReference;
-  asserter?: FhirReference;
+  profileCreatedDate: string; 
+  insuranceDetailsForm?: InsuranceFullDetailsData;
+
+  isSubmitted: boolean;
+  agentDetails?: {
+     agents: string[]
+     currentProcess?:string;
+     agentAction?:string;
+    agentSuggestion: string;
+    coT: string; // Chain of Thought
+  };
+  profile: PatientProfile;
+  eligibilityCheck: EligibilityCheck;
+  medicalCoding: MedicalCoding;
+  priorAuthorization: PriorAuthorization;
+  claimSubmission: ClaimSubmission;
+  denialManagement: DenialManagement;
+  postPayment: PostPayment;
+  medicalReports? :Attachment[];
+  attachments?: Attachment[];
+  information?:Information;
+  otherErrors? :Information[];
+  markdown?: string; // Markdown content for the patient notes
+  icdCodes: ICDCode[];
+  cptCode: ICDCode[];
+  drugCode: ICDCode[];
+  ProcessStepsStatus?: ProcessSteps[];
+  postPaymentStatus?: ProcessSteps[];
+  dentalManagementStatus?: ProcessSteps[];
 }
 
-// Main Response Type
-export interface PatientFhirResponse {
-  patientId: string;
-  patient?: FhirPatient;
-  coverage?: FhirCoverage[];
-  encounters?: FhirEncounter[];
-  diagnoses?: FhirDiagnosis[];
+export interface PatientTableRow {
+  id: string;
+  name: string;
+  surname: string;
+  age: number;
+  agents: string[];
+  agentAction?:string;
+  currentProcess?:string;
+  agentSuggestion: string;
+  cot: string;
+  lastUpdated: string;
+  selected: boolean;
 }
