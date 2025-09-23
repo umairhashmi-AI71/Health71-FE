@@ -133,19 +133,29 @@ export default function DashboardPage() {
   return (
     <DashboardLayout>
       <div
-        className={`flex-1 flex min-h-[100vh] flex-col lg:ml-0 rounded-xl bg-white`}
+        className={`flex-1 flex min-h-[100vh] flex-col lg:ml-0 rounded-xl comingsoon-bg`}
       >
         <main className="size-full max-w-345 xl:mx-auto ">
           <div className="min-h-full size-full max-w-345 xl:mx-auto">
             <div className="p-6 space-y-8">
+              
               <WelcomeCard />
 
-              <div className="grid grid-cols-3 gap-6 mb-8">
-                {agents.map((agent, idx) => (
+              <div className="mt-5 grid grid-cols-[75%_1fr] gap-8 px-1 ">
+             <div>
+              <h1 className="text-[28px] mb-4 mackinac mb-3">Today's Contribution Summary</h1>
+              <p className="mb-4">Breakdown of time saved, tasks completed, and opportunities flagged by each AI agent.</p>
+                 {agents.map((agent, idx) => (
                   <AgentCard key={idx} {...agent} />
                 ))}
               </div>
-              <DashboardMetrics />
+              <div>
+                <h1 className="text-[28px] mb-4 mackinac mb-3">Your Performance </h1>
+              <p className="mb-4">Neila, track your contribution.</p>
+                 <DashboardMetrics />
+              </div>
+             </div>
+             
             </div>
           </div>
         </main>

@@ -330,7 +330,7 @@ body {
 
 
 .comingsoon-bg {
-  background: radial-gradient(85.95% 70.71% at 100% 0%, var(--base-sidebar-primary-foreground, #AFD8D4) 10%, var(--base-sidebar-background, #ffffff) 75%);
+  background: radial-gradient(85.95% 70.71% at 100% 0%, var(--base-sidebar-primary-foreground, #AFD8D4) 10%, var(--base-sidebar-background, #ffffff) 505px);
 
 }
 
@@ -430,6 +430,13 @@ body {
 .welcome-bg {
   background-color: #CAE8E4;
   box-shadow: 8px 8px 48px 8px rgba(0, 0, 0, 0.08);
+  background: radial-gradient(
+    600px 90.71% at 100% 0%, var(--base-sidebar-primary-foreground, #AFD8D4) 10%,
+   var(--base-sidebar-background, #ffffff) 100%);
+   background-blend-mode: normal, plus-lighter, color-burn;
+
+
+
 }
 
 
