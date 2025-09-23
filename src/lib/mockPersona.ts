@@ -3180,17 +3180,17 @@ export const fakePersona: PatientPersona[] = [
       coT: "Diagnostic report mentioned in SOAP but not attached; agent cannot confirm if payer’s criteria for MRI are met.",
     },
     profile: {
-      name: "Fatima",
-      surname: "Rahman",
+      name: "Mariam",
+      surname: "Al Suwaidi",
       age: 34,
-      emiratesId: "748-1985-2233445-4",
+      emiratesId: "784-1994-3322110-5",
       sex: "Female",
-      dateOfBirth: "1985-07-21",
+      dateOfBirth: "1994-07-14",
       nationality: "UAE",
       language: "Arabic",
-      phoneNumber: 97155467830,
-      email: "Sara.nuaimi@gmail.com",
-      profilePhoto: "/avatar.png",
+      phoneNumber: 971524439876,
+      email: "mariam.suwaidi@example.com",
+      profilePhoto: "/7.png",
     },
     information: {
       infoCode: 'test',
@@ -3221,13 +3221,13 @@ export const fakePersona: PatientPersona[] = [
         isError: true,
       status: "waiting",
       insuranDetials: {
-        insuranceProvider: "Daman-AUH-001",
+        insuranceProvider: "Daman",
         imageUrl: "/insurance-image.png",
-        policyNumber: "42122566",
+        policyNumber: "DAM-554433",
       },
       details: [
-        { label: "Network", value: "Yes" },
-        { label: "Coverage", value: "100%" },
+        { label: "Network", value: "Thiqa" },
+        { label: "Coverage", value: "Not Valid" },
       ],
     },
     medicalCoding: {
@@ -3365,17 +3365,17 @@ export const fakePersona: PatientPersona[] = [
       coT: "Denial code shows “insufficient medical necessity” → agent requests isError with radiology justification.",
     },
     profile: {
-      name: "Layla",
-      surname: "Mansour",
+      name: "Omar",
+      surname: "Al Mazrouei",
       age: 55,
-      emiratesId: "748-1985-2233445-4",
-      sex: "Female",
-      dateOfBirth: "1985-07-21",
+      emiratesId: "784-1987-1122334-8",
+      sex: "Male",
+      dateOfBirth: "1987-02-17",
       nationality: "UAE",
       language: "Arabic",
-      phoneNumber: 97155467830,
-      email: "Sara.nuaimi@gmail.com",
-      profilePhoto: "/avatar.png",
+      phoneNumber: 971502236781,
+      email: "omar.mazrouei@example.com",
+      profilePhoto: "/m1.png",
     },
      information: {
       infoCode: 'test',
@@ -3403,14 +3403,14 @@ export const fakePersona: PatientPersona[] = [
         isError: false,
       status: "waiting",
       insuranDetials: {
-        insuranceProvider: "Daman-AUH-001",
+        insuranceProvider: "ADNIC",
         imageUrl: "/insurance-image.png",
-        policyNumber: "42122566",
+        policyNumber: "AD-998877",
         error: 'notvalid'
       },
       details: [
-        { label: "Network", value: "Yes" },
-        { label: "Coverage", value: "100%" },
+        { label: "Network", value: "GN+" },
+        { label: "Coverage", value: "Active" },
       ],
     },
     medicalCoding: {
@@ -3563,8 +3563,8 @@ export const fakePersona: PatientPersona[] = [
       nationality: "UAE",
       language: "Arabic",
       phoneNumber: 97155467830,
-      email: "Sara.nuaimi@gmail.com",
-      profilePhoto: "/avatar.png",
+      email: "huda.mansoor@example.com",
+      profilePhoto: "/9.png",
     },
     eligibilityCheck: {
         "steps": [
@@ -3587,7 +3587,7 @@ export const fakePersona: PatientPersona[] = [
         isError: false,
       status: "covered",
       insuranDetials: {
-        insuranceProvider: "Daman-AUH-001",
+        insuranceProvider: "ADNIC",
         imageUrl: "/insurance-image.png",
         policyNumber: "42122566",
          error: 'coverage'

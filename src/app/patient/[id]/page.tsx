@@ -422,7 +422,7 @@ export default function DashboardPage() {
     const error = ['AI-RESUB-001', 'T500', 'OA-ERR-001', 'MN-REQ-001', 'notcovered']
     if (code && error.includes(code)) {
       return false
-    } else if(patients.eligibilityCheck.status == 'notvalid') {
+    } else if(patients.eligibilityCheck.status == 'notvalid' || patients.eligibilityCheck.status == 'valid') {
        return false
     }
 
@@ -992,6 +992,7 @@ export default function DashboardPage() {
               className="cursor-pointer rounded-xl px-5 py-2 text-white bg-green"
               onClick={() => {
                 changeModal("");
+                cancelRef.current = true
                 setPatientContactSteps((prevSteps) =>
                   prevSteps.map((step, index) => ({
                     ...step,

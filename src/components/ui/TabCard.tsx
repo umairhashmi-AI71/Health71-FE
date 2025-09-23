@@ -8,6 +8,7 @@ export type TabCardProps = {
   id?: string;
   title: string;
   className?: string;
+  isError?: boolean;
   Icon: LucideIcon; 
   children: ReactNode;
 
@@ -20,12 +21,13 @@ const TabCard: React.FC<TabCardProps> = ({
   className = "",
   Icon,
   children,
+  isError = false
 }) => {
  
  
   return (
     <div>
-      <div className={`mx-auto bg-white border rounded-lg drop-shadow-sm border-base`}>
+      <div className={`mx-auto bg-white border rounded-lg drop-shadow-sm border-base ${isError ? 'border-error' : ''}`}>
         {/* Header with Tabs */}
 
         <div className="border-b px-3 py-3 h-10 border-base items-center justify-between bg-base-muted rounded-lg  flex gap-x-1">
@@ -44,6 +46,7 @@ const TabCard: React.FC<TabCardProps> = ({
           </div>
         </div>
       </div>
+      <p className={`${isError ? '': 'hidden'} text-base-destructive text-right mt-1`}>Action Required: Please fill out all mandatory field prior to contacting the insurance</p>
     </div>
   );
 };
