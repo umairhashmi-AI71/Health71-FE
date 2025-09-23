@@ -558,6 +558,9 @@ body {
   outline: none; /* Remove the default outline */
 }
 
+.insurance-detials label {
+  padding-bottom: 5px;
+}
 .insurance-detials input:disabled {
   background-color: var(--base-card);
 }

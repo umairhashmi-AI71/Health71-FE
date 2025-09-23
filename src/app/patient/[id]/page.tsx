@@ -359,11 +359,17 @@ export default function DashboardPage() {
 
   const [writeoffError, setWriteoffError] = useState<boolean>(false);
 
+ 
+
   const markStepsAsComplete = async () => {
+    cancelRef.current = false; // reset cancel flag before starting
+    
     for (let i = 0; i < contactSteps.length; i++) {
       // Wait for 1 second
+  if (cancelRef.current) break;
       await new Promise((resolve) => setTimeout(resolve, 1000));
       // Update the status of the current step to "complete"
+  if (cancelRef.current) break;
       setPatientContactSteps((prevSteps) =>
         prevSteps.map((step, index) =>
           index === i ? { ...step, status: "completed" } : step
@@ -373,10 +379,15 @@ export default function DashboardPage() {
   };
 
   const markcontactStep = async () => {
+    cancelRef.current = false; // reset cancel flag before starting
     for (let i = 0; i < contactSteps.length; i++) {
       // Wait for 1 second
+  if (cancelRef.current) break;
+
       await new Promise((resolve) => setTimeout(resolve, 1000));
       // Update the status of the current step to "complete"
+  if (cancelRef.current) break;
+
       setContactSteps((prevSteps) =>
         prevSteps.map((step, index) =>
           index === i ? { ...step, status: "completed" } : step
@@ -411,6 +422,8 @@ export default function DashboardPage() {
     const error = ['AI-RESUB-001', 'T500', 'OA-ERR-001', 'MN-REQ-001', 'notcovered']
     if (code && error.includes(code)) {
       return false
+    } else if(patients.eligibilityCheck.status == 'notvalid') {
+       return false
     }
 
 
@@ -1081,6 +1094,7 @@ export default function DashboardPage() {
               className="cursor-pointer rounded-xl px-5 py-2 text-white bg-green"
               onClick={() => {
                 changeModal("");
+                stopSteps()
                 setContactSteps((prevSteps) =>
                   prevSteps.map((step, index) => ({
                     ...step,

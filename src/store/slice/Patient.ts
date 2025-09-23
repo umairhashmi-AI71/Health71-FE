@@ -2,11 +2,13 @@ import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import type { RootState } from "../index";
 import { patientPersona } from "@/lib/mockPersona";
-import { ICDCode, PatientPersona, StatusType } from "@/types/patient";
+import { ICDCode, InsuranceFullDetailsData, PatientPersona, StatusType } from "@/types/patient";
 import { ErrorCode, ErrorType } from "@/types/error";
 
 // Define the initial state using that type
 const initialState: PatientPersona[] = patientPersona;
+
+
 
 export const patientSlice = createSlice({
   name: "patientlist",
@@ -23,6 +25,17 @@ export const patientSlice = createSlice({
       if (patient) {
         patient.isSubmitted = true;
       }
+    },
+    updateInsurence: (state, action: PayloadAction<{
+      patientId: string;
+      insuranceDetailsForm: InsuranceFullDetailsData
+    }>) => {
+      const { patientId, insuranceDetailsForm } = action.payload;
+      const patient = state.find((p) => p.id === action.payload.patientId);
+      if (patient?.insuranceDetailsForm) {
+        patient.insuranceDetailsForm = insuranceDetailsForm;
+      }
+
     },
     updatePatientICDCode(
       state,
@@ -209,14 +222,25 @@ export const patientSlice = createSlice({
       if (!stepData || typeof stepData !== "object" || !("status" in stepData))
         return;
 
-      
 
-      if(status == 'valid') {
-if (stepData && stepData.steps) {
-         stepData.steps.map((s) => s.status = 'completed');
 
-        
+      if (status == 'valid') {
+        if (stepData && stepData.steps) {
+          stepData.steps.map((s) => s.status = 'completed');
+
+
+        }
       }
+
+      if (status == 'notvalid') {
+if (stepData && stepData.steps) {
+ const step = stepData.steps.find((s) => s.label === 'Validate Coverage');
+ if(step) 
+{
+  step.status = 'denied'
+}
+
+        }
       }
       // Apply status change only if postPayment exists
       if (stepData) {
@@ -237,7 +261,8 @@ export const {
   updatePaymentStep,
   changeStatus,
   changeCodeStatus,
-  changePatientStatus
+  changePatientStatus,
+  updateInsurence
 } = patientSlice.actions;
 
 export default patientSlice.reducer;

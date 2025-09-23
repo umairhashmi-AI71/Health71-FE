@@ -44,6 +44,7 @@ export type StatusType =
   | "denied"
   | "notvalid"
   | "valid"
+  | "noteligible"
   | "waiting";
 
 export interface MedicalCoding {
@@ -157,7 +158,24 @@ export interface ICDCode {
   suggestion?: string
   suggestionCode?:string
 }
- export interface InsuranDetials {
+
+export interface InsuranceFullDetailsData {
+  provider?: string;
+  policyNumber?: string;
+  identificationType?: string;
+  identificationNumber?: string;
+  clinician?: string;
+  serviceCategory?: string;
+  portalUrl?: string;
+  planType?: string;
+  coverageStart?: string;
+  coverageEnd?: string;
+  department?: string;
+  paymentdateserviceDate?: string;
+  paymentdate?: string;
+  paymentmethod?: string;
+}
+export interface InsuranDetials {
   insuranceProvider: string;
   imageUrl: string;
   policyNumber: string;
@@ -167,7 +185,7 @@ export interface ICDCode {
   coverage?: string;
   idType?: string;
   IdNumber?: string;
-  Clinician?: string;
+  clinician?: string;
   serviceCategory?: string;
   planType?: string;
   portalURL?: string;
@@ -176,6 +194,7 @@ export interface ICDCode {
   treatingProvider?: string;
   IntendedDOS?: string;
    error?: string
+   department?:string
 }
 export interface EligibilityCheck {
   status: StatusType;                  // ✅ "waiting"
@@ -195,7 +214,8 @@ export interface Information {
 }
 export interface PatientPersona {
   id: string;
-  profileCreatedDate: string;
+  profileCreatedDate: string; 
+  insuranceDetailsForm?: InsuranceFullDetailsData;
 
   isSubmitted: boolean;
   agentDetails?: {

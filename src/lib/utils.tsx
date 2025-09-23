@@ -48,6 +48,11 @@ export const getStatusConfig = (status: StatusType): StatusConfig => {
         text: "Denied",
         className: "bg-base-agent-10 text-pixel-bloom",
       };
+    case 'noteligible': 
+     return {
+        text: "Not Eligible",
+        className: "bg-base-agent-10 text-pixel-bloom",
+      };
     case "pending":
       return {
         text: "Pending",

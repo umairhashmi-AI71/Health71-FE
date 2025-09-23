@@ -3197,6 +3197,9 @@ export const fakePersona: PatientPersona[] = [
       infoMessage: 'No insurance detected — agent requested policy details to validate coverage eligibility.',
       infoType: "Manual Insurance"
     },
+    insuranceDetailsForm: {
+
+    },
     eligibilityCheck: {
         "steps": [
         {
@@ -3221,17 +3224,6 @@ export const fakePersona: PatientPersona[] = [
         insuranceProvider: "Daman-AUH-001",
         imageUrl: "/insurance-image.png",
         policyNumber: "42122566",
-        idType: 'passport',
-        IdNumber: '',
-        Clinician: '',
-        serviceCategory: '',
-        planType: '',
-        portalURL: '  ',
-        coverageStartDate: ''	,
-        coverageEndDate: '',
-        treatingProvider: '',
-        IntendedDOS: '',
-        error: ''
       },
       details: [
         { label: "Network", value: "Yes" },
@@ -3557,9 +3549,10 @@ export const fakePersona: PatientPersona[] = [
     },
      information: {
       infoCode: 'test',
-      infoMessage: 'Coverage expired at date of service — agent flagged ineligibility, fetched updated plan details, and prompted follow-up with patient or payer.',
-      infoType: "Expired Coverage"
+      infoMessage: 'Coverage is active and in-network — patient is marked Covered. Moving on to Prior Authorization.',
+      infoType: "Eligible"
     },
+    
     profile: {
       name: "Huda",
       surname: "Mansoor",
@@ -4146,6 +4139,11 @@ infoType: 'Not Covered'
       email: "Sara.nuaimi@gmail.com",
       profilePhoto: "/avatar.png",
     },
+     information: {
+      infoCode: 'test',
+      infoMessage: 'Coverage expired at date of service — agent flagged ineligibility, fetched updated plan details, and prompted follow-up with patient or payer.',
+      infoType: "Expired Coverage"
+    },
     eligibilityCheck: {
         "steps": [
         {
@@ -4165,15 +4163,15 @@ infoType: 'Not Covered'
         }
       ],
         isError: false,
-      status: "covered",
+      status: "noteligible",
       insuranDetials: {
         insuranceProvider: "Daman-AUH-001",
         imageUrl: "/insurance-image.png",
         policyNumber: "42122566",
       },
       details: [
-        { label: "Network", value: "Yes" },
-        { label: "Coverage", value: "100%" },
+        { label: "Coverage End", value: "19.04.2025" },
+        { label: "Coverage", value: "-" },
       ],
     },
     medicalCoding: {
@@ -4200,7 +4198,7 @@ infoType: 'Not Covered'
           "status": "pending"
         }
       ],
-      status: "inprogress", // Medical coding status
+      status: "waiting", // Medical coding status
       details: [
         { label: "Encounter Date", value: "2025-08-30" },
         { label: "Encounter Type", value: "Outpatient" },
