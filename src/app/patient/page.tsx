@@ -537,9 +537,9 @@ const RedirectPage = () => {
             </table>
 
  {filteredAndSortedPatients.length <= 5 && filteredAndSortedPatients.length > 0 && (
-              <div className="nopatientcard p-10 m-4 rounded-2xl mt-40">
+              <div className="vectorbg m-4"> <div className="nopatientcard p-10 rounded-2xl mt-40">
             <h1 className="text-4xl mackinac pb-4 mt-4">Together, we saved ~3.2 hours today. Only {filteredAndSortedPatients.length} cases left for today</h1>
-        </div>
+        </div></div>
             )}
             {filteredAndSortedPatients.length === 0 && (
              <NoPatientFound />

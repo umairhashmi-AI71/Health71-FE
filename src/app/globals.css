@@ -586,6 +586,10 @@ border: 2px solid #fff;
 
 }
 
+.vectorbg {
+  background: url("/vector.png") no-repeat center bottom;
+  background-size: cover;
+}
 .nopatientcard {
   background: linear-gradient(180deg, rgba(255, 255, 255, 0.40) -8.3%, var(--base-agent-3, rgba(217, 201, 232, 0.40)) 93.08%);
  

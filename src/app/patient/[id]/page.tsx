@@ -701,32 +701,7 @@ export default function DashboardPage() {
                       fileSize={data.fileSize}
                     />
                   ))}
-                  <div className="grid grid-cols-2 gap-2">
-                    {[
-                      { src: "/xray.png", label: "test" },
-                      { src: "/xray.png", label: "test" },
-                    ].map((img, idx) => (
-                      <div
-                        key={idx}
-                        className="relative group cursor-pointer"
-                      >
-                        {/* Image */}
-                        <img
-                          src={img.src}
-                          alt={img.label || `Image ${idx + 1}`}
-                          className="rounded-lg object-cover"
-                        />
-
-                        {/* Hover overlay with icon */}
-                        <div
-                          onClick={() => setSelectedImage(img.src)}
-                          className="absolute inset-0 bg-black/40 opacity-0 rounded-lg group-hover:opacity-100 flex items-center justify-center transition-opacity"
-                        >
-                          <Expand className="text-white w-8 h-8" />
-                        </div>
-                      </div>
-                    ))}
-                  </div>
+                
                 </div>
               </MedicalRecords>
             </div>

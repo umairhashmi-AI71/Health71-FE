@@ -154,7 +154,7 @@ export const demoData: PatientPersona[] = [
     agentDetails: {
       agents: ["Clara"],
       agentAction:
-        "Submission not reaching payer due to timeout. Retrying connection...",
+        "Continue monitoring claim transmission until payer ACK is received. If ACK not received in 24h, escalate to IT.",
       currentProcess: "Clara",
       agentSuggestion: "Payer denial: duplicate lab test billed",
       coT: "Two labs billed within 24h; agent cannot auto-resolve → flagged for review.",
@@ -489,7 +489,7 @@ export const demoData: PatientPersona[] = [
     agentDetails: {
       agents: ["Clara"],
       agentAction:
-        "Claim rejected due to missing Rendering Provider Specialty Code. Clara agent fetched specialty code from provider master, updated payload, and resubmitted automatically. Claim approved on resubmission.",
+        "Reconcile payment posting with remittance advice (ERA). Mark claim as paid and close case.",
       currentProcess: "Payne",
       agentSuggestion: "Payer denial: duplicate lab test billed",
       coT: "Two labs billed within 24h; agent cannot auto-resolve → flagged for review.",
@@ -808,6 +808,8 @@ export const demoData: PatientPersona[] = [
   {
     agentDetails: {
       agents: ["Clara", "Coda", "Dee"],
+      currentProcess: 'Payne',
+      agentAction: 'Wait for payer adjudication result. Post payment or trigger Dee if denied.',
       agentSuggestion:
         "Claim denied due to coding mismatch. Resubmitting with updated CPT and ICD codes.",
       coT: "Claim denied for coding mismatch. Agent flagged to review mapped CPT/ICD codes and resubmit with corrected combination.",
@@ -1095,20 +1097,23 @@ export const demoData: PatientPersona[] = [
         code: "99203",
         newCode: "99213",
         status: "Changed",
+        confidence: 95,
         description:
-          "Confidence 95% - Patient is established, documentation shows follow-up with low complexity MDM. Updated code aligns with payer rules and avoids denial.",
+          "Patient is established, documentation shows follow-up with low complexity MDM. Updated code aligns with payer rules and avoids denial.",
       },
       {
         code: "73562",
         status: "Deleted",
+        confidence: 80,
         description:
-          "Confidence 80% - Duplicate knee X-ray within 30 days. Removal prevents automatic denial; attach documentation if repeat imaging is justified.",
+          "Duplicate knee X-ray within 30 days. Removal prevents automatic denial; attach documentation if repeat imaging is justified.",
       },
       {
         code: "85027",
         status: "Accepted",
+        confidence: 98,
         description:
-          "Confidence 98% - CBC retained. Clinical notes show knee swelling with suspected inflammation. Lab test supports ruling out infection or inflammatory arthritis",
+          "CBC retained. Clinical notes show knee swelling with suspected inflammation. Lab test supports ruling out infection or inflammatory arthritis",
       },
     ],
     drugCode: [
@@ -1180,7 +1185,7 @@ export const demoData: PatientPersona[] = [
     agentDetails: {
       agents: ["Clara", "Coda"],
       agentAction:
-        "On 2025-09-08, at 12:12 pm Dr. Al Shamsi was contacted for the third time to submit medical-necessity documentation to support the patient’s appeal and resolve the denial.",
+        "Track appeal status with payer. If still pending after SLA, trigger automated reminder and escalate to Medical Director.",
       currentProcess: "Clara",
       agentSuggestion: "Payer denial: duplicate lab test billed",
       coT: "Two labs billed within 24h; agent cannot auto-resolve → flagged for review.",
@@ -1499,6 +1504,8 @@ export const demoData: PatientPersona[] = [
   {
     agentDetails: {
       agents: ["Clara", "Dee"],
+      agentAction: 'Same as above – monitor payer response.',
+      currentProcess: 'Payne',
       agentSuggestion:
         "Partial claim approved. Remaining services denied for insufficient documentation. Suggest write-off per policy.",
       coT: "Partial claim approved but some services denied for insufficient documentation. Agent recommended write-off as per payer guidelines.",
@@ -1839,7 +1846,7 @@ export const demoData: PatientPersona[] = [
     agentDetails: {
       agents: ["Clara", "Dee"],
       agentAction:
-        "Claim denied for insufficient documentation. Agent generated appeal letter with supporting documents and submitted to payer.",
+        "Monitor claim in clearinghouse queue.",
       currentProcess: "Dee",
       agentSuggestion:
         "Appeal letter generated and submitted to payer for review of medical necessity.",
@@ -2204,7 +2211,7 @@ export const demoData: PatientPersona[] = [
     agentDetails: {
       agents: ["Clara"],
       agentAction:
-        "Claim was denied due to incorrect automated payer rule application. Dee flagged the issue, HITL corrected the rule logic, and the claim was resubmitted and approved. System updated to prevent recurrence.",
+        "Verify payer remittance in next payment batch to confirm no residual balance.",
       currentProcess: "Payne",
       agentSuggestion: "Payer denial: duplicate lab test billed",
       coT: "Two labs billed within 24h; agent cannot auto-resolve → flagged for review.",
@@ -2534,6 +2541,8 @@ export const demoData: PatientPersona[] = [
   {
     agentDetails: {
       agents: ["Clara", "Dee"],
+      agentAction:'Monitor adjudication. Trigger denial agent if payer returns code.',
+      currentProcess: 'Payne',
       agentSuggestion:
         "Partial approval received. Agent flagged CPT code mismatch, retrieved correct CPT from codebook, re-ran medical coding, and resubmitted claim. Claim approved on second round.",
       coT: "Agent identified CPT code mismatch, retrieved correct CPT, and suggest rerunning coding.",
@@ -2905,6 +2914,8 @@ export const demoData: PatientPersona[] = [
   {
     agentDetails: {
       agents: ["Clara", "Dee"],
+      agentAction: 'Await response. If partial payment → trigger Payne underpayment workflow.',
+      currentProcess: 'Payne',
       agentSuggestion:
         "Partial approval received. Agent flagged CPT code mismatch, retrieved correct CPT from codebook, re-ran medical coding, and resubmitted claim. Claim approved on second round.",
       coT: "Agent identified CPT code mismatch, retrieved correct CPT, and suggest rerunning coding.",
@@ -3237,6 +3248,8 @@ export const fakePersona: PatientPersona[] = [
 
     agentDetails: {
       agents: ["Autho"],
+      agentAction: 'Mark eligibility case as cleared and hand off to Autho for monitoring claim status.',
+      currentProcess: 'Autho',
       agentSuggestion: "Attach clinical notes for MRI PA",
       coT: "Diagnostic report mentioned in SOAP but not attached; agent cannot confirm if payer’s criteria for MRI are met.",
     },
@@ -3420,6 +3433,8 @@ export const fakePersona: PatientPersona[] = [
     profileCreatedDate: new Date("9/2/2025 21:07:30").toISOString(),
     agentDetails: {
       agents: ["Autho"],
+      agentAction: 'Close eligibility case. No further action.',
+      currentProcess: 'Autho',
       agentSuggestion: "Resubmit PA for CT scan (denied once)",
       coT: "Denial code shows “insufficient medical necessity” → agent requests isError with radiology justification.",
     },
@@ -3600,6 +3615,14 @@ export const fakePersona: PatientPersona[] = [
   {
     id: "198307",
     isSubmitted: false,
+    agentDetails: {
+       agents: ["Eli"],
+      agentAction:
+        "Await payer decision on inpatient stay extension. If approved → continue coverage; if denied → flag Dee for denial management.",
+      currentProcess: "Autho",
+      agentSuggestion: "PA required for inpatient stay extension",
+      coT: "Payer requires re-auth after 5 days; agent drafted but physician must confirm ongoing medical necessity.",
+    },
     profileCreatedDate: new Date("9/2/2025 21:41:15").toISOString(),
     insuranceDetailsForm: {
       provider: "ADNIC",
@@ -3616,11 +3639,6 @@ export const fakePersona: PatientPersona[] = [
       paymentdateserviceDate: "2025-09-20",
       paymentdate: "",
       paymentmethod: "",
-    },
-    agentDetails: {
-      agents: ["Autho"],
-      agentSuggestion: "PA required for inpatient stay extension",
-      coT: "Payer requires re-auth after 5 days; agent drafted but physician must confirm ongoing medical necessity.",
     },
     information: {
       infoCode: "test",
@@ -3804,6 +3822,8 @@ export const fakePersona: PatientPersona[] = [
 
     agentDetails: {
       agents: ["Dee"],
+      agentAction: 'Track PA decision. If approved → book appointment  →  notify Clara to proceed with claim. If denied → generate appeal draft.',
+      currentProcess: 'Autho',
       agentSuggestion: "Draft appeal: “not medically necessary”",
       coT: "Denial code 50; flagged for physician medical justification + supporting guidelines.",
     },
@@ -4033,6 +4053,8 @@ export const fakePersona: PatientPersona[] = [
 
     agentDetails: {
       agents: ["Dee"],
+      agentAction: 'Submit PA with correct CPT. Monitor for payer response.',
+      currentProcess: 'Autho',
       agentSuggestion: "Denial reason: experimental procedure",
       coT: "Payer denial flagged as investigational; requires physician statement + clinical literature.",
     },
@@ -4215,7 +4237,9 @@ export const fakePersona: PatientPersona[] = [
     profileCreatedDate: new Date("9/2/2025 23:22:30").toISOString(),
 
     agentDetails: {
-      agents: ["Coda"],
+      agents: ["Eli"],
+      agentAction: 'Mark eligibility case as closed since claim submitted.',
+      currentProcess: 'Eli',
       agentSuggestion:
         "ICD-10: C34.9 (Malignant neoplasm of lung, unspecified)",
       coT: "SOAP: “suspicious lung lesion” without biopsy confirmation → risk of premature cancer coding.",
