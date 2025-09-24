@@ -27,7 +27,7 @@ const RedirectPage = () => {
   const { agent } = useContext(AgentContext);
 
   const list = useSelector((state: RootState) => state.patientlist);
-  const [patients, setPatients] = useState<PatientTableRow[]>([]);
+   const [patients, setPatients] = useState<PatientTableRow[]>([]);
 
   useEffect(() => {
     setPatients(
@@ -197,7 +197,7 @@ const RedirectPage = () => {
   return (
     <DashboardLayout>
       <div
-        className={`flex-1 flex min-h-[100vh] flex-col lg:ml-0 rounded-xl bg-white`}
+        className={`flex-1 flex min-h-screen flex-col lg:ml-0 rounded-xl bg-white`}
       >
         <div className="border-b  border-patient">
           <div className="max-w-345 xl:mx-auto flex gap-3 items-center py-6">
@@ -206,7 +206,7 @@ const RedirectPage = () => {
           </div>
         </div>
 
-        <main className="size-full max-w-345 xl:mx-auto ">
+        <main className="size-full max-w-345 xl:mx-auto  ">
           {/* Controls */}
           <div className="flex  justify-between items-center-safe md:flex-row gap-4 py-6">
             <div className="flex justify-between items-center-safe flex-1">
@@ -537,6 +537,9 @@ const RedirectPage = () => {
             </table>
           </div>
 
+          
+        </main>
+        <div>
           {filteredAndSortedPatients.length > 0 && <div className="flex justify-end mb-10">
             <button
               className={` text-white px-6 py-2 rounded-lg  ${selectedCount > 0 ? "bg-green" : "bg-[#F5F2EF]"
@@ -556,7 +559,7 @@ const RedirectPage = () => {
           {filteredAndSortedPatients.length === 0 && (
             <NoPatientFound />
           )}
-        </main>
+        </div>
       </div>
       <AlertModal open={modal === "accept"} onClose={() => setModal("")}>
         <div>
