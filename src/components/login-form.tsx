@@ -92,7 +92,7 @@ export function LoginForm({ onSuccess }: LoginFormProps) {
             Sign in
           </h2>
           <p className="mb-6 text-sm text-col text-muted">
-            Access your secure RCM71 agents and continue where you left off.
+            Access your secure RCM agents and continue where you left off.
           </p>
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
             {/* Email Field */}

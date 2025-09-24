@@ -311,6 +311,7 @@ export default function InsuranceDetails() {
                   <option value={"Enhanced Silver"}>Enhanced Silver</option>
                   <option value={"Basic"}>Basic</option>
                   <option value={"Gold"}>Gold</option>
+                  <option value={"GN+"}>GN+</option>
                 </select>
               </div>
               <div>

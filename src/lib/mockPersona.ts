@@ -1192,7 +1192,7 @@ export const demoData: PatientPersona[] = [
     },
     profile: {
       profilePhoto: "/avatar.png",
-      age: 39,
+      age: 40,
       name: "Sara",
       surname: "Al Nuaimi",
       mrn: 101300,
@@ -3247,7 +3247,7 @@ export const fakePersona: PatientPersona[] = [
     profileCreatedDate: new Date("9/2/2025 20:33:45").toISOString(),
 
     agentDetails: {
-      agents: ["Autho"],
+      agents: ["Eli"],
       agentAction: 'Mark eligibility case as cleared and hand off to Autho for monitoring claim status.',
       currentProcess: 'Autho',
       agentSuggestion: "Attach clinical notes for MRI PA",
@@ -3432,7 +3432,7 @@ export const fakePersona: PatientPersona[] = [
     isSubmitted: false,
     profileCreatedDate: new Date("9/2/2025 21:07:30").toISOString(),
     agentDetails: {
-      agents: ["Autho"],
+      agents: ["Eli"],
       agentAction: 'Close eligibility case. No further action.',
       currentProcess: 'Autho',
       agentSuggestion: "Resubmit PA for CT scan (denied once)",
@@ -3821,7 +3821,7 @@ export const fakePersona: PatientPersona[] = [
     profileCreatedDate: new Date("9/2/2025 22:15:00").toISOString(),
 
     agentDetails: {
-      agents: ["Dee"],
+      agents: ["Autho"],
       agentAction: 'Track PA decision. If approved → book appointment  →  notify Clara to proceed with claim. If denied → generate appeal draft.',
       currentProcess: 'Autho',
       agentSuggestion: "Draft appeal: “not medically necessary”",
@@ -4052,10 +4052,10 @@ export const fakePersona: PatientPersona[] = [
     profileCreatedDate: new Date("9/2/2025 22:48:45").toISOString(),
 
     agentDetails: {
-      agents: ["Dee"],
+      agents: ["Autho"],
       agentAction: 'Submit PA with correct CPT. Monitor for payer response.',
       currentProcess: 'Autho',
-      agentSuggestion: "Denial reason: experimental procedure",
+      agentSuggestion: "Code Suggestion – refine CPT",
       coT: "Payer denial flagged as investigational; requires physician statement + clinical literature.",
     },
     information: {
@@ -4271,7 +4271,7 @@ export const fakePersona: PatientPersona[] = [
       language: "Arabic",
       phoneNumber: 971508821145,
       email: "khalid.nuaimi@example.com",
-      profilePhoto: "/avatar.png",
+      profilePhoto: "/m4.png",
     },
     information: {
       infoCode: "test",

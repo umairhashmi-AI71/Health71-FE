@@ -151,7 +151,7 @@ export default function DashboardPage() {
               </div>
               <div>
                 <h1 className="text-[28px] mb-4 mackinac mb-3">Your Performance </h1>
-              <p className="mb-4">Neila, track your contribution.</p>
+              <p className="mb-4">Neila, track last quarter’s output.</p>
                  <DashboardMetrics />
               </div>
              </div>
