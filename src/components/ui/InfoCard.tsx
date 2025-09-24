@@ -1,6 +1,6 @@
 import { checkHealthWorkflowErrors } from "@/lib/utils";
 import { ErrorCode, ErrorType } from "@/types/error";
-import { Check, Info, NotebookPen, TriangleAlert, X } from "lucide-react";
+import { Check, Info, ListTodo, NotebookPen, TriangleAlert, X } from "lucide-react";
 
 
 interface InfoCardProps {
@@ -24,14 +24,14 @@ const InfoCard: React.FC<InfoCardProps> = ({
           <TriangleAlert className="w-10 h-10 bg-base-agent-10 text-base-destructive rounded-lg p-2" strokeWidth={1.5} />
         );
       case "AI-RESUB-001":
-        return (<Info className="w-10 h-10 bg-agent-5 rounded-lg p-2"  strokeWidth={1.5}/>);
+        return (<Info className="w-10 h-10 bg-agent-5 rounded-lg p-2" strokeWidth={1.5} />);
       case "CMS-110":
       case "CMS-110":
       // case "unmatchpayment":
       case "WR-105":
-        case "CC-001":
-          case "MN-REQ-001" :
-            case "APL-003" :
+      case "CC-001":
+      case "MN-REQ-001":
+      case "APL-003":
       // case "noteligible":
       //   case "panotrequire":
       //   case "paapproved":
@@ -39,12 +39,12 @@ const InfoCard: React.FC<InfoCardProps> = ({
       //   case "paappeal":
       //  case "pandingapproval":
       //   case "partialapproval":
-          case "OA-ERR-001" :
-            case 'test':
-                           case 'notcovered':
+      case "OA-ERR-001":
+      case 'test':
+      case 'notcovered':
 
         return (
-          <NotebookPen className="w-10 h-10 bg-[#EFF7F6]  rounded-lg p-2"  strokeWidth={1.5} />
+          <NotebookPen className="w-10 h-10 bg-[#EFF7F6]  rounded-lg p-2" strokeWidth={1.5} />
         );
       // case "paymentmatch":
       //   return (
@@ -52,7 +52,7 @@ const InfoCard: React.FC<InfoCardProps> = ({
       //   );
     }
   };
-   const getBorder = (type: ErrorCode) => {
+  const getBorder = (type: ErrorCode) => {
     switch (type) {
       case "T500":
         return 'technical-border';
@@ -62,9 +62,9 @@ const InfoCard: React.FC<InfoCardProps> = ({
       case "CMS-110":
       // case "unmatchpayment":
       case "WR-105":
-        case "CC-001":
-          case "MN-REQ-001" :
-          case "APL-003" :
+      case "CC-001":
+      case "MN-REQ-001":
+      case "APL-003":
       // case "noteligible":
       //   case "panotrequire":
       //   case "paapproved":
@@ -72,10 +72,10 @@ const InfoCard: React.FC<InfoCardProps> = ({
       //   case "paappeal":
       //  case "pandingapproval":
       //   case "partialapproval":
-          case "OA-ERR-001" :
-             case 'test':
-             case 'notcovered':
-              
+      case "OA-ERR-001":
+      case 'test':
+      case 'notcovered':
+
         return 'border-[#AFD8D4]';
       // case "paymentmatch":
       //   return (
@@ -85,7 +85,10 @@ const InfoCard: React.FC<InfoCardProps> = ({
   };
   return (
     <div className={`flex gap-9 items-center mb-6  justify-between ${style}`}>
-      <p className="text-2xl mackinac min-w-[330px] ">{title}</p>
+      <div className=" mackinac min-w-[330px]">  
+        <p className="flex gap-2 pb-2 "><ListTodo className="w-3 h-4" strokeWidth={1.5} /> Status Update</p>
+        <p className="text-2xl">{title}</p>
+        </div>
 
       <div
         className={`px-3.5 py-5 flex gap-3 rounded-xl items-center shadow grow max-w-[969px] border ${getBorder(type)}`}

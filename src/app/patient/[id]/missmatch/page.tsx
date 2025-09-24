@@ -212,6 +212,9 @@ export default function Medical() {
             }
         }
     ];
+
+      const medical = patients && patients?.otherErrors?.find(i => i.infoType == 'Code Correction');
+
     return (
         <div className="w-full">
             <div className="flex justify-between items-center items-start">
@@ -317,12 +320,13 @@ export default function Medical() {
             </div>
 
             <div>
-                {patients.information && <InfoCard
-                    title={patients.information.infoType}
-                    errorDescription={patients.information.infoMessage}
-                    type={patients.information.infoCode as ErrorCode}
-                    style={`mb-5`}
-                />}
+               
+                 {medical && <InfoCard
+            title={medical?.infoType}
+            errorDescription={medical?.infoMessage}
+            type={medical?.infoCode as ErrorCode}
+            style={`mb-5`}
+        />}
                 <div
                     className="grid grid-cols-[70%_1fr] gap-4"
                     ref={markdownRef}

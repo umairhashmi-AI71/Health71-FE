@@ -223,6 +223,7 @@ export const PaymentDetailsTable: React.FC<PaymentDetailsTable> = ({
                          headerName: "",
                         sortable: false,
                         filter: false,
+                        width:100,
                         cellRenderer: partialApprovalAction,
                         // cellClass: "flex items-center flex justify-center items-center",
                     },

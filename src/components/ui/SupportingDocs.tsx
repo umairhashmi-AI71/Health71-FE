@@ -19,7 +19,6 @@ const fileInputRefs: Record<string, React.MutableRefObject<HTMLInputElement | nu
   const handleClick = (doc: string) => {
     fileInputRefs[doc].current?.click();
   };
-console.log(files)
   return (
     <div className="space-y-4">
       {(["Abbreviation", "Exclusion", "SoB"] as string[]).map((doc) => (

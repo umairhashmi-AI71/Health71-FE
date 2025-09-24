@@ -153,37 +153,6 @@ export default function InsuranceDetails() {
     } else {
       setError(true)
     }
-
-
-
-
-
-    // try {
-    //   const data = new FormData();
-
-    //   // Append form fields
-    //   Object.entries(formData).forEach(([key, value]) => {
-    //     data.append(key, value);
-    //   });
-
-    //   // Append files
-    //   Object.entries(docs).forEach(([key, file]) => {
-    //     if (file) data.append(key, file);
-    //   });
-
-    //   const res = await fetch("/api/insurance-check", {
-    //     method: "POST",
-    //     body: data,
-    //   });
-    //   console.log(data)
-
-    //   if (!res.ok) throw new Error("Upload failed");
-
-    //   const result = await res.json();
-    //   console.log("✅ Success:", result);
-    // } catch (err) {
-    //   console.error("❌ Error uploading:", err);
-    // }
   };
 
   const updateState = () => {

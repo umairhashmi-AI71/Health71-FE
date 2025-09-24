@@ -422,7 +422,7 @@ export default function DashboardPage() {
     const error = ['AI-RESUB-001', 'T500', 'OA-ERR-001', 'MN-REQ-001', 'notcovered']
     if (code && error.includes(code)) {
       return false
-    } else if(patients.eligibilityCheck.status == 'notvalid' || patients.eligibilityCheck.status == 'valid') {
+    } else if(patients.eligibilityCheck.status == 'notvalid' || patients.eligibilityCheck.status == 'valid'|| patients.information?.infoType == 'Eligible') {
        return false
     }
 
@@ -644,7 +644,7 @@ export default function DashboardPage() {
               patients?.denialManagement
                 .denialAttempts as DenialAttempts[]
             }
-            processGap="h-[18px]"
+            processGap="h-[20px]"
           />
           <PostPaymentCard
             title="Post Payment"
@@ -683,7 +683,7 @@ export default function DashboardPage() {
               <AppealLetter
                 Icon={ReceiptText}
                 title="Appeals Letter"
-                className={`p-2.5 overflow-y-auto h-114`}
+                className={`p-2.5 overflow-y-auto h-104`}
                 appealDetails={appealDetails}
                 acceptHandeler={acceptHandeler}
                 markdownContent={appealLetterMarkDown}

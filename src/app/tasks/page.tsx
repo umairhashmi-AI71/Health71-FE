@@ -21,6 +21,7 @@ import { formatDate } from "@/lib/dateformate";
 import AlertModal from "@/components/AlertModal";
 import { markPatientSubmitted } from "@/store/slice/Patient";
 import { AgentContext } from "../layout";
+import { NoPatientFound } from "@/components/NoPatientFound";
 
 const RedirectPage = () => {
   const router = useRouter();
@@ -537,11 +538,7 @@ const RedirectPage = () => {
             </table>
 
             {filteredAndSortedPatients.length === 0 && (
-              <div className="text-center py-12">
-                <p className="text-gray-500">
-                  No patients found matching your criteria.
-                </p>
-              </div>
+               <NoPatientFound />
             )}
           </div>
 

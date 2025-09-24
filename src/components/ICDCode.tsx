@@ -111,7 +111,7 @@ const ICDCodes = forwardRef<HTMLDivElement, ICDCodesProps>(
     }
 
     return (
-      <div className="max-w-2xl mx-auto bg-white p-4" >
+      <div className="max-w-2xl mx-auto bg-white p-1" >
         {/* Header */}
         <div className="flex items-center mb-3 gap-x-4">
           <h1 className="text-2xl font-semibold text-gray-900">{title}</h1>

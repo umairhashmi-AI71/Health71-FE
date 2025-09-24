@@ -20,7 +20,7 @@ export interface PatientProfile {
   profilePhoto: string;
   mrn?: number | string
   eid?: string
-  dob?: number
+  dob?: number | string
 }
 
 export interface MedicalCodingDetail {

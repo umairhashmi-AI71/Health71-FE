@@ -161,7 +161,7 @@ const CycleCard: React.FC<Props> = ({
             </div>
           </div>
           {/* Pagination Dots */}
-          {totalPages > 1 && (
+          {totalPages > 1 ? (
             <div className="flex justify-center mt-2 gap-2">
               {Array.from({ length: totalPages }).map((_, i) => (
                 <button
@@ -173,7 +173,9 @@ const CycleCard: React.FC<Props> = ({
                 />
               ))}
             </div>
-          )}
+          ) :  <div className="flex justify-center mt-2 gap-2 h-2">
+           
+                </div>}
         </div>
       )}
     </div>

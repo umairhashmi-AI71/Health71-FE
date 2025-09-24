@@ -43,7 +43,7 @@ export default function DashboardMetrics() {
   return (
     <div className="w-full">
       <div className="bg-basecard rounded-xl shadow border border-base p-6">
-        <div className="  space-y-10 overflow-x-auto">
+        <div className="  space-y-12 overflow-x-auto">
           {metrics.map((metric, index) => {
             const IconComponent = metric.icon
             return (

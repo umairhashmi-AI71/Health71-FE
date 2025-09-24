@@ -160,7 +160,7 @@ export const demoData: PatientPersona[] = [
       coT: "Two labs billed within 24h; agent cannot auto-resolve → flagged for review.",
     },
     profile: {
-      profilePhoto: "/1.png",
+      profilePhoto: "/2.png",
       age: 39,
       name: "Layla",
       surname: "Al Fardan",
@@ -169,7 +169,7 @@ export const demoData: PatientPersona[] = [
       emiratesId: "784-1990-1234567-3",
       sex: "Female",
       dob: 32947,
-      dateOfBirth: "Jan 1, 1970",
+      dateOfBirth: "1990-03-15",
       nationality: "UAE",
       language: "Arabic",
       phoneNumber: 971501234567,
@@ -288,20 +288,20 @@ export const demoData: PatientPersona[] = [
           value: "ENC-2025-0456",
         },
         {
-          label: "CPT codes",
-          value: "99214",
+          label: "Prior AuthID",
+          value: "PA-2025-001",
         },
         {
           label: "Physician",
           value: "Dr. Fatima Al Mansoori",
         },
         {
-          label: "ICD codes",
-          value: "M54.5",
+          label: "CPT codes",
+          value: "99214",
         },
         {
-          label: "Prior AuthID",
-          value: "PA-556677",
+          label: "ICD codes",
+          value: "M54.5",
         },
         {
           label: "Drug codes",
@@ -359,21 +359,21 @@ export const demoData: PatientPersona[] = [
       claimAttempts: [
         {
           claimRound: "1",
-          date: "45913",
+          date: "2025-09-13",
           claimAmount: "780 AED",
           claimId: "20250913-A01",
           rejectionCode: "F22",
         },
         {
           claimRound: "2",
-          date: "45918",
+          date: "2025-09-18",
           claimAmount: "780 AED",
           claimId: "20250918-B02",
           rejectionCode: "F14",
         },
         {
           claimRound: "3",
-          date: "45922",
+          date: "2025-09-22",
           claimAmount: "780 AED",
           claimId: "20250922-C03",
           rejectionCode: "F02",
@@ -382,27 +382,27 @@ export const demoData: PatientPersona[] = [
       isError: true,
     },
     denialManagement: {
-      status: "waiting",
+      status: "inprogress",
       steps: [
         {
           id: "1",
           label: "Denial Code Analyzed",
-          status: "pending",
+          status: "completed",
         },
         {
           id: "2",
           label: "Suggested Edits",
-          status: "pending",
+          status: "completed",
         },
         {
           id: "3",
           label: "Appeal Generated",
-          status: "pending",
+          status: "completed",
         },
         {
           id: "4",
           label: "Appeal Submitted",
-          status: "pending",
+          status: "completed",
         },
       ],
       denialAttempts: [
@@ -420,13 +420,7 @@ export const demoData: PatientPersona[] = [
           denialAmount: "780 AED",
           denialCode: "D05",
         },
-        {
-          claimRound: "3",
-          claimId: "20250922-C03",
-          denialId: "DEN-1003",
-          denialAmount: "780 AED",
-          denialCode: "D99",
-        },
+       
       ],
       isError: false,
     },
@@ -520,7 +514,7 @@ export const demoData: PatientPersona[] = [
       infoType: "Auto-Resubmission",
       infoCode: "AI-RESUB-001",
       infoMessage:
-        "Claim rejected due to missing Rendering Provider Specialty Code. Clara agent fetched specialty code from provider master, updated payload, and resubmitted automatically. Claim approved on resubmission. Validation engine updated with new schema rule.",
+        "Rejected — missing provider specialty code. Code fetched, claim resubmitted and approved, validation updated to prevent future errors.",
     },
     markdown: "-",
     eligibilityCheck: {
@@ -744,8 +738,8 @@ export const demoData: PatientPersona[] = [
           claimRound: "1",
           claimId: "20250916-A01",
           denialId: "DEN-2053",
-          denialAmount: "-",
-          denialCode: "-",
+          denialAmount: "780 AED",
+          denialCode: "D12",
         },
       ],
       isError: false,
@@ -992,7 +986,7 @@ export const demoData: PatientPersona[] = [
       isError: false,
     },
     claimSubmission: {
-      status: "done",
+      status: "inprogress",
       steps: [
         {
           id: "1",
@@ -1274,7 +1268,7 @@ export const demoData: PatientPersona[] = [
         },
         {
           label: "Encounter Date",
-          value: "45950",
+          value: "2025-10-20",
         },
         {
           label: "Physician",
@@ -1391,15 +1385,15 @@ export const demoData: PatientPersona[] = [
       claimAttempts: [
         {
           claimRound: "1",
-          date: "45950",
-          claimAmount: "836 AED",
+          date: "2025-10-20",
+          claimAmount: "836",
           claimId: "20251020-C01",
           rejectionCode: "F14",
         },
         {
           claimRound: "2",
-          date: "45955",
-          claimAmount: "836 AED",
+          date: "2025-10-25",
+          claimAmount: "836",
           claimId: "20251025-C02",
           rejectionCode: "-",
         },
@@ -2390,7 +2384,7 @@ export const demoData: PatientPersona[] = [
       isError: false,
     },
     claimSubmission: {
-      status: "done",
+      status: "inprogress",
       steps: [
         {
           id: "1",
@@ -2432,7 +2426,7 @@ export const demoData: PatientPersona[] = [
       isError: false,
     },
     denialManagement: {
-      status: "done",
+      status: "inprogress",
       steps: [
         {
           id: "1",
@@ -2545,7 +2539,7 @@ export const demoData: PatientPersona[] = [
       coT: "Agent identified CPT code mismatch, retrieved correct CPT, and suggest rerunning coding.",
     },
     profile: {
-      profilePhoto: "/avatar.png",
+      profilePhoto: "/m2.png",
       age: 39,
       name: "Khalid",
       surname: "Al Ameri",
@@ -2561,7 +2555,7 @@ export const demoData: PatientPersona[] = [
       email: "khalid.alameri@example.com",
     },
     information: {
-      infoType: "Code Correction",
+      infoType: "Partial Approval",
       infoCode: "CC-001",
       infoMessage:
         "Partial approval received. Agent flagged CT code mismatch, retrieved correct CPT from codebook, re-ran medical coding, and resubmitted claim. Claim approved on second round.",
@@ -2573,6 +2567,12 @@ export const demoData: PatientPersona[] = [
         infoMessage:
           "One service denied for medical necessity. Agent is obtaining required documentation.",
       },
+      {
+      infoType: "Code Correction",
+      infoCode: "CC-001",
+      infoMessage:
+        "Partial approval received. Agent flagged CT code mismatch, retrieved correct CPT from codebook, re-ran medical coding, and resubmitted claim. Claim approved on second round.",
+    }
     ],
     markdown:
       'Chief Complaint: Right knee pain and limited mobility for 3 weeks, worsening with activity.\r\n\r\nHistory of Present Illness: 35-year-old male presents with progressive right knee pain, swelling, and stiffness for 3 weeks. Pain is constant (7/10), worse with weight-bearing and stairs. No trauma history. Minimal relief with OTC analgesics. Reports occasional "locking" sensation and difficulty with extension.\r\n\r\nReview of Systems:\r\n- Musculoskeletal: Pain, swelling, limited ROM right knee.\r\n- Constitutional: No fever, weight loss.\r\n- Neurological: No weakness or paresthesia.\r\n\r\nObjective: \r\nVitals stable. Right knee: swelling, mild effusion, medial joint line tenderness, positive McMurray’s sign. No erythema. ROM mildly restricted.\r\n\r\nAssessment:\r\nM25.561 – Pain in right knee, likely medial meniscus tear. Imaging required to exclude fracture, infection, or tumor.\r\n\r\nPlan:\r\n- MRI (73721) right knee\r\n- CBC (85027) to rule out infection\r\n- CT scan — updated to contrast-enhanced (70452) based on concern for occult bone lesion\r\n- Analgesics PRN',

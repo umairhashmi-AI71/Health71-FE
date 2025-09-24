@@ -128,9 +128,9 @@ export default function ChatWidget() {
       <button
         aria-label="Open chat"
         onClick={() => setOpen((v) => !v)}
-        className="fixed bottom-5 right-11  rounded-xl bg-green text-primary-foreground shadow-lg flex items-center justify-center cursor-pointer hover:bg-gray-100"
+        className="fixed bottom-5 right-11  rounded-full  shadow-lg  cursor-pointer chatbg"
       >
-        {open ? "" : <MessagesSquare className="w-8 h-8 m-4" />}
+        {open ? "" : <MessagesSquare className="w-6 6-8 m-4" color="#0D826B" />}
       </button>
     ),
     [open]

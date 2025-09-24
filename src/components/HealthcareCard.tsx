@@ -93,18 +93,18 @@ const HealthcareCard: React.FC<HealthcareCardProps> = ({
 
                 acc.push(
                   <div key={index} className="flex justify-between">
-                    <div className="min-w-[48%]">
+                    <div className="w-[47%] overflow-hidden">
                       <h3 className="text-base block text-foreground">
                         {value.label}
                       </h3>
-                      <p className={`text-base font-semibold truncate ${(status == 'denied' && (value.label == 'Prior Auth ID' || value.label == 'CPT Code')) ? 'text-base-destructive' : ''}`}>{value.value}</p>
+                      <p className={`text-base font-semibold truncate  ${(status == 'denied' && (value.label == 'Prior Auth ID' || value.label == 'CPT Code')) ? 'text-base-destructive' : ''}`}>{value.value}</p>
                     </div>
                     {nextEntry && (
-                      <div className="min-w-[48%]">
+                      <div className="w-[47%] overflow-hidden">
                         <h3 className="text-base block text-foreground">
                           {nextEntry[1].label}
                         </h3>
-                        <p className={`text-base font-semibold truncate ${(status == 'denied' && (nextEntry[1].label == 'CPT Code' || nextEntry[1].label == 'Prior Auth ID')) ? 'text-base-destructive' : ''}`}>
+                        <p className={`text-base font-semibold truncate  ${(status == 'denied' && (nextEntry[1].label == 'CPT Code' || nextEntry[1].label == 'Prior Auth ID')) ? 'text-base-destructive' : ''}`}>
                           {nextEntry[1].value}
                         </p>
                       </div>
