@@ -453,7 +453,7 @@ export default function DashboardPage() {
               className={`rounded-xl cursor-pointer px-4 py-3 text-sm font-medium text-base-primary ${data.style}`}
               onClick={() => {
                 if (data.label == 'Save' || data.label == 'Cancel') {
-                  route.push('/patient')
+                 changeModal(data.label.toLowerCase());
                 } else {
                   // Handle error on denialManagement step
                   if (
@@ -801,7 +801,7 @@ export default function DashboardPage() {
               className="rounded-xl px-5 py-2 text-white bg-base-destructive"
               onClick={() => {
                 changeModal("");
-                route.push("/home");
+                route.push("/patient");
               }}
             >
               Yes
@@ -829,7 +829,7 @@ export default function DashboardPage() {
             </button>
             <button
               className="rounded-xl px-5 py-2 text-white bg-green"
-              onClick={() => changeModal("")}
+              onClick={() => {changeModal(""); route.push('/patient')}}
             >
               Yes
             </button>

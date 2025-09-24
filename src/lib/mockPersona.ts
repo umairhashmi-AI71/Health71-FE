@@ -2156,22 +2156,22 @@ export const demoData: PatientPersona[] = [
       {
         fileName: "Appeal Letter.pdf",
         fileSize: "200 KB",
-        ecgImageUrl: "/sob.pdf",
+        ecgImageUrl: "/Appeal_leter.pdf",
       },
       {
         fileName: "Clinical Notes.pdf",
         fileSize: "200 KB",
-        ecgImageUrl: "/sob.pdf",
+        ecgImageUrl: "/Treating_Notes.pdf",
       },
       {
         fileName: "Radiology Request & MRI Report.pdf",
         fileSize: "200 KB",
-        ecgImageUrl: "/sob.pdf",
+        ecgImageUrl: "/Referral_letter.pdf",
       },
       {
         fileName: "Pre-Auth Approval Document.pdf",
         fileSize: "200 KB",
-        ecgImageUrl: "/sob.pdf",
+        ecgImageUrl: "/PriAuth_RequestForm.pdf",
       },
     ],
     attachments: [
