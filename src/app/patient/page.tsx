@@ -535,18 +535,9 @@ const RedirectPage = () => {
                 })}
               </tbody>
             </table>
-
- {filteredAndSortedPatients.length <= 5 && filteredAndSortedPatients.length > 0 && (
-              <div className="vectorbg m-4"> <div className="nopatientcard p-10 rounded-2xl mt-40">
-            <h1 className="text-4xl mackinac pb-4 mt-4">Together, we saved ~3.2 hours today. Only {filteredAndSortedPatients.length} cases left for today</h1>
-        </div></div>
-            )}
-            {filteredAndSortedPatients.length === 0 && (
-             <NoPatientFound />
-            )}
           </div>
 
-          <div className="flex justify-end mb-10">
+          {filteredAndSortedPatients.length > 0 && <div className="flex justify-end mb-10">
             <button
               className={` text-white px-6 py-2 rounded-lg  ${selectedCount > 0 ? "bg-green" : "bg-[#F5F2EF]"
                 }`}
@@ -555,7 +546,16 @@ const RedirectPage = () => {
             >
               Accept
             </button>
-          </div>
+          </div>}
+
+          {filteredAndSortedPatients.length <= 5 && filteredAndSortedPatients.length > 0 && (
+            <div className="vectorbg m-4"> <div className="nopatientcard p-10 rounded-2xl mt-40">
+              <h1 className="text-4xl mackinac pb-4 mt-4">Together, we saved ~3.2 hours today. Only {filteredAndSortedPatients.length} cases left for today</h1>
+            </div></div>
+          )}
+          {filteredAndSortedPatients.length === 0 && (
+            <NoPatientFound />
+          )}
         </main>
       </div>
       <AlertModal open={modal === "accept"} onClose={() => setModal("")}>

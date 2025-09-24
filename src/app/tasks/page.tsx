@@ -537,12 +537,11 @@ const RedirectPage = () => {
               </tbody>
             </table>
 
-            {filteredAndSortedPatients.length === 0 && (
-               <NoPatientFound />
-            )}
+          
           </div>
 
-          <div className="flex justify-end mb-10">
+{/*           
+{filteredAndSortedPatients.length > 0 && <div className="flex justify-end mb-10">
             <button
               className={` text-white px-6 py-2 rounded-lg  ${selectedCount > 0 ? "bg-green" : "bg-[#F5F2EF]"
                 }`}
@@ -551,7 +550,10 @@ const RedirectPage = () => {
             >
               Accept
             </button>
-          </div>
+          </div>} */}
+            {/* {filteredAndSortedPatients.length === 0 && (
+               <NoPatientFound />
+            )} */}
         </main>
       </div>
       <AlertModal open={modal === "accept"} onClose={() => setModal("")}>
