@@ -5,7 +5,7 @@ export default function DashboardMetrics() {
     {
       icon: Medal,
       value: "2/12",
-      label: "Rank",
+      label: "Team Rank",
       bgColor: "bg-blue-100",
     },
     {
@@ -17,7 +17,7 @@ export default function DashboardMetrics() {
     {
       icon: BadgeDollarSign,
       value: "$42,500",
-      label: "Revenue Impact",
+      label: "Your revenue Impact",
       bgColor: "bg-green-100",
     },
     {
@@ -34,7 +34,7 @@ export default function DashboardMetrics() {
     },
     {
       icon: Users,
-      value: "$9,800",
+      value: "$25,800",
       label: "Team Average",
       bgColor: "bg-orange-100",
     }
@@ -43,7 +43,7 @@ export default function DashboardMetrics() {
   return (
     <div className="w-full">
       <div className="bg-basecard rounded-xl shadow border border-base p-6">
-        <div className="  space-y-10 overflow-x-auto">
+        <div className="  space-y-12 overflow-x-auto">
           {metrics.map((metric, index) => {
             const IconComponent = metric.icon
             return (

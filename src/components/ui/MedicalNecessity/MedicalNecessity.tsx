@@ -11,7 +11,21 @@ export const MedicalNecessity: React.FC<{ patient: PatientPersona, }> = ({ patie
 
     const { id, information, profile, eligibilityCheck, medicalCoding, claimSubmission, denialManagement } = patient;
     const denial = denialManagement?.denialAttempts && denialManagement?.denialAttempts[denialManagement?.denialAttempts?.length - 1 || 0]
-    return (<div>
+ 
+
+     const  toCamelCase = (str: string) => {
+  return str
+    .toLowerCase()
+    .replace(/\s+([a-z])/g, (_, char) => char.toUpperCase());
+}
+
+    const priorDetails: Record<string, string | number> = {};
+    const medicalDetail: Record<string, string | number> = {};
+
+
+        patient.priorAuthorization.details.forEach((data, index) => priorDetails[toCamelCase(data.label)] = data.value)
+        medicalCoding.details.forEach((data, index) => medicalDetail[toCamelCase(data.label)] = data.value)
+      return (<div>
 
 
         <div
@@ -45,21 +59,35 @@ export const MedicalNecessity: React.FC<{ patient: PatientPersona, }> = ({ patie
                                                 <td className="px-6 py-4 w-1/4">{profile.mrn}</td>
                                             </tr>
                                             <tr className="border-b border-gray-200">
-                                                <td className="px-6 py-4 font-medium ">Sex/ DoB</td>
-                                                <td className="px-6 py-4">{profile.sex} • {profile.dateOfBirth}</td>
-                                                <td className="px-6 py-4 font-medium ">Nationality / Language</td>
-                                                <td className="px-6 py-4">{profile.nationality} • {profile.language}</td>
+                                                <td className="px-6 py-4 font-medium ">Sex</td>
+                                                <td className="px-6 py-4">{profile.sex}</td>
+                                                <td className="px-6 py-4 font-medium ">Nationality</td>
+                                                <td className="px-6 py-4">{profile.nationality}</td>
+                                            </tr>
+                                             <tr className="border-b border-gray-200">
+                                                <td className="px-6 py-4 font-medium ">DoB</td>
+                                                <td className="px-6 py-4">{profile.dateOfBirth}</td>
+                                                <td className="px-6 py-4 font-medium ">Language</td>
+                                                <td className="px-6 py-4">{profile.language}</td>
                                             </tr>
                                             <tr className="border-b border-gray-200">
-                                                <td className="px-6 py-4 font-medium ">Contact</td>
+                                                <td className="px-6 py-4 font-medium ">Mobile</td>
                                                 <td className="px-6 py-4">
-                                                    {profile.phoneNumber}<br />
-                                                    • {profile.email}
+                                                    {profile.phoneNumber}
                                                 </td>
                                                 <td className="px-6 py-4 font-medium ">Insurance</td>
                                                 <td className="px-6 py-4">
-                                                    {eligibilityCheck.insuranDetials.insuranceProvider} • Policy #:  {eligibilityCheck.insuranDetials.policyNumber}<br />
-                                                    • Coverage: {eligibilityCheck.details[1].value} (Network: {eligibilityCheck.details[0].value})
+                                                    {eligibilityCheck.insuranDetials.insuranceProvider}
+                                                </td>
+                                            </tr>
+                                             <tr className="border-b border-gray-200">
+                                                <td className="px-6 py-4 font-medium ">E-Mail</td>
+                                                <td className="px-6 py-4">
+                                                    {profile.email}
+                                                </td>
+                                                <td className="px-6 py-4 font-medium ">Coverage</td>
+                                                <td className="px-6 py-4">
+                                                    Coverage: {eligibilityCheck.insuranDetials.coverage}  (Network: {eligibilityCheck.details[0].value})
                                                 </td>
                                             </tr>
                                         </tbody>
@@ -71,36 +99,43 @@ export const MedicalNecessity: React.FC<{ patient: PatientPersona, }> = ({ patie
                             <div className="mb-8">
                                 <h2 className="text-xl font-bold mb-6">Encounter:</h2>
 
-                                <div className="border border-gray-300 rounded-lg overflow-hidden">
+                                
+                                   <div className="border border-gray-300 rounded-lg overflow-hidden">
                                     <table className="w-full">
                                         <tbody>
-
-
-                                            {medicalCoding.details.reduce<MedicalCodingDetail[][]>((rows, item, index) => {
-                                                if (index % 2 === 0) rows.push([item]);
-                                                else rows[rows.length - 1].push(item);
-                                                return rows;
-                                            }, []).map((pair, idx) => (
-                                                <tr key={idx} className="border-b border-gray-200">
-                                                    {pair.map((d, idx) => (
-                                                        <React.Fragment key={idx}>
-                                                            <td className="px-6 py-4 font-medium w-1/8">{d.label}</td>
-                                                            <td className="px-6 py-4 w-1/4">{d.value}</td>
-                                                        </React.Fragment>
-                                                    ))}
-                                                    {/* fill empty if odd number of items */}
-                                                    {pair.length === 1 && (
-                                                        <React.Fragment key={idx}>
-                                                            <td className="px-6 py-4 w-1/8"></td>
-                                                            <td className="px-6 py-4 w-1/4"></td>
-                                                        </React.Fragment>
-                                                    )}
-                                                </tr>
-                                            ))}
-
+                                            <tr className="border-b border-gray-200">
+                                                <td className="px-6 py-4 font-medium  w-1/8">Encounter ID</td>
+                                                <td className="px-6 py-4 w-1/4">{priorDetails.encounterId}</td>
+                                                <td className="px-6 py-4 font-medium  w-1/8">Encounter Type</td>
+                                                <td className="px-6 py-4 w-1/4">{medicalDetail.encounterType}</td>
+                                            </tr>
+                                            <tr className="border-b border-gray-200">
+                                                <td className="px-6 py-4 font-medium ">Date</td>
+                                                <td className="px-6 py-4">{medicalDetail.encounterDate}</td>
+                                                <td className="px-6 py-4 font-medium ">Department</td>
+                                                <td className="px-6 py-4">{medicalDetail.department}</td>
+                                            </tr>
+                                             <tr className="border-b border-gray-200">
+                                                <td className="px-6 py-4 font-medium ">Physician</td>
+                                                <td className="px-6 py-4">{medicalDetail.physician}</td>
+                                                <td className="px-6 py-4 font-medium ">Drug Codes</td>
+                                                <td className="px-6 py-4">{medicalDetail.drugCodes}</td>
+                                            </tr>
+                                            <tr className="border-b border-gray-200">
+                                                <td className="px-6 py-4 font-medium ">CPT Codes</td>
+                                                <td className="px-6 py-4">
+                                                    {medicalDetail.cptCodes}
+                                                </td>
+                                                <td className="px-6 py-4 font-medium ">ICD Codes</td>
+                                                <td className="px-6 py-4">
+                                                    {medicalDetail.icdCodes}
+                                                </td>
+                                            </tr>
+                                           
                                         </tbody>
                                     </table>
                                 </div>
+                                 
                             </div>
 
                             {/* Claim Submission History */}
@@ -114,7 +149,7 @@ export const MedicalNecessity: React.FC<{ patient: PatientPersona, }> = ({ patie
                                                 <th className="px-6 py-3 font-medium text-left border-b border-gray-200">Round</th>
                                                 <th className="px-6 py-3 font-medium text-left border-b border-gray-200">Date</th>
                                                 <th className="px-6 py-3 font-medium text-left border-b border-gray-200">Claim ID</th>
-                                                <th className="px-6 py-3 font-medium text-left border-b border-gray-200">Amount</th>
+                                                <th className="px-6 py-3 font-medium text-left border-b border-gray-200">{`Amount (AED)`}</th>
                                                 <th className="px-6 py-3 font-medium text-left border-b border-gray-200">Rejection Reason</th>
                                             </tr>
                                         </thead>
@@ -163,7 +198,7 @@ export const MedicalNecessity: React.FC<{ patient: PatientPersona, }> = ({ patie
             <div>
                 <MedicalRecords title="Medical Records" Icon={Paperclip}>
                     <div className="space-y-3">
-                        {patient?.medicalReports?.map((data, key) => (
+                        {patient?.attachments?.map((data, key) => (
                             <AttachmentCard
                                 key={key}
                                 ecgImageUrl={data.ecgImageUrl}

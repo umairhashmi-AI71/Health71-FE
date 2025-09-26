@@ -46,7 +46,7 @@ export const writeofcolumnDef: ColDef[] = [
   {
     headerName: "Status",
     field: "status",
-    width: 160,
+    width: 130,
     wrapText: true,
     // cellClass: (params) =>
     //   params.value === "Denied"
@@ -57,6 +57,7 @@ export const writeofcolumnDef: ColDef[] = [
   {
     headerName: "Rejection Reason",
     field: "rejectionReason",
+    width: 350,
     wrapText: true,
     autoHeight: true,
   },

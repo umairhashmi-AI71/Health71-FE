@@ -90,23 +90,6 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
     return currentPage?.label || "Dashboard";
   };
 
-  // const getpageclass = () => {
-  //   console.log('page', getPageTitle().toLocaleLowerCase())
-  //   switch (getPageTitle().toLocaleLowerCase()) {
-  //     case 'notification':
-  //     // case 'dashboard':
-  //     case 'tasks':
-  //     case 'search': 
-  //     return 'comingsoon-bg';
-
-  //     case 'patient/101300' :
-  //       return 'bg-white'
-
-  //     default:
-  //     return 'bg-white';
-
-  //   }
-  // }
   if (!user) {
     return (
       <div className="h-screen flex items-center justify-center">

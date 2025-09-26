@@ -50,7 +50,7 @@ setisProcessing(true)
       // break early if cancel button clicked
       if (cancelRef.current) break;
 
-      await new Promise((resolve) => setTimeout(resolve, 500));
+      await new Promise((resolve) => setTimeout(resolve, 1000));
 
       if (cancelRef.current) break;
 
@@ -115,32 +115,31 @@ setisProcessing(true)
           {
             headerName: "",
             field: "actions",
-            width: 280,
+            width: 140,
             cellRenderer: (params: ICellRendererParams) => {
               const { status, id } = params.data as {
                 status: string;
                 id: number;
               };
               return (
-                <div className="flex gap-2 items-center">
+                <div className="flex gap-3 items-center justify-end">
                   {status != "Denied → Accepted" && status != "Accepted"  && status != 'Denied → Escalated' && (
                     <>
                       <button
-                        className="cursor-pointer  border-base bg-white items-center rounded-xl border p-4 py-2 flex gap-2"
+                        className="cursor-pointer p-2"
                         onClick={() => {
                           setModal("escalate");
                         }}
                       >
-                        <Send className="w-4 h-4" strokeWidth={1.5} />{" "}
-                        Escalate
+                        <Send className="w-6 h-6" strokeWidth={1.5} />{" "}
                       </button>
                       <button
-                        className="cursor-pointer rounded-xl items-center bg-[#AFD8D4] p-4 py-2 flex gap-2"
+                        className="cursor-pointer p-2 "
                         onClick={() => {
                           setModal("accept");
                         }}
                       >
-                        <Check className="w-4 h-4" strokeWidth={2} /> Accept
+                        <Check className="w-6 h-6" strokeWidth={1.5} />
                       </button>
                     </>
                   )}
@@ -193,7 +192,7 @@ setisProcessing(true)
             Accept Confirmation
           </div>
           <div className="text-muted mb-6">
-            Are you sure you want to accept the {selectedRows.length > 1 ? selectedRows.length : ''} write-offs? Important: Once accepted, this action cannot be undone.
+            Are you sure you want to accept the {selectedRows.length > 1 ? selectedRows.length : ''} write-offs? <br /> Important: Once accepted, this action cannot be undone.
           </div>
           <div className="flex justify-end gap-4">
             <button

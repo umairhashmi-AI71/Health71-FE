@@ -144,14 +144,14 @@ export default function DashboardPage() {
               <div className="mt-5 grid grid-cols-[75%_1fr] gap-8 px-1 ">
              <div>
               <h1 className="text-[28px] mb-4 mackinac mb-3">Today&apos;s Contribution Summary</h1>
-              <p className="mb-4">Breakdown of time saved, tasks completed, and opportunities flagged by each AI agent.</p>
+              <p className="mb-4.5">Breakdown of time saved, tasks completed, and opportunities flagged by each AI agent.</p>
                  {agents.map((agent, idx) => (
                   <AgentCard key={idx} {...agent} />
                 ))}
               </div>
               <div>
                 <h1 className="text-[28px] mb-4 mackinac mb-3">Your Performance </h1>
-              <p className="mb-4">Neila, track your contribution.</p>
+              <p className="mb-4">Neila, track last quarter’s output.</p>
                  <DashboardMetrics />
               </div>
              </div>

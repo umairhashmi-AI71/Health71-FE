@@ -20,13 +20,14 @@ import { formatDate } from "@/lib/dateformate";
 import AlertModal from "@/components/AlertModal";
 import { markPatientSubmitted } from "@/store/slice/Patient";
 import { AgentContext } from "../layout";
+import { NoPatientFound } from "@/components/NoPatientFound";
 
 const RedirectPage = () => {
   const router = useRouter();
   const { agent } = useContext(AgentContext);
 
   const list = useSelector((state: RootState) => state.patientlist);
-  const [patients, setPatients] = useState<PatientTableRow[]>([]);
+   const [patients, setPatients] = useState<PatientTableRow[]>([]);
 
   useEffect(() => {
     setPatients(
@@ -196,7 +197,7 @@ const RedirectPage = () => {
   return (
     <DashboardLayout>
       <div
-        className={`flex-1 flex min-h-[100vh] flex-col lg:ml-0 rounded-xl bg-white`}
+        className={`flex-1 flex min-h-screen flex-col lg:ml-0 rounded-xl bg-white`}
       >
         <div className="border-b  border-patient">
           <div className="max-w-345 xl:mx-auto flex gap-3 items-center py-6">
@@ -205,7 +206,7 @@ const RedirectPage = () => {
           </div>
         </div>
 
-        <main className="size-full max-w-345 xl:mx-auto ">
+        <main className="size-full max-w-345 xl:mx-auto  ">
           {/* Controls */}
           <div className="flex  justify-between items-center-safe md:flex-row gap-4 py-6">
             <div className="flex justify-between items-center-safe flex-1">
@@ -534,17 +535,12 @@ const RedirectPage = () => {
                 })}
               </tbody>
             </table>
-
-            {filteredAndSortedPatients.length === 0 && (
-              <div className="text-center py-12">
-                <p className="text-gray-500">
-                  No patients found matching your criteria.
-                </p>
-              </div>
-            )}
           </div>
 
-          <div className="flex justify-end mb-10">
+          
+        </main>
+        <div>
+          {filteredAndSortedPatients.length > 0 && <div className="flex justify-end mb-10">
             <button
               className={` text-white px-6 py-2 rounded-lg  ${selectedCount > 0 ? "bg-green" : "bg-[#F5F2EF]"
                 }`}
@@ -553,8 +549,17 @@ const RedirectPage = () => {
             >
               Accept
             </button>
-          </div>
-        </main>
+          </div>}
+
+          {filteredAndSortedPatients.length <= 5 && filteredAndSortedPatients.length > 0 && (
+            <div className="vectorbg m-4"> <div className="nopatientcard p-10 rounded-2xl mt-40">
+              <h1 className="text-4xl mackinac pb-4 mt-4">Together, we saved ~3.2 hours today. Only {filteredAndSortedPatients.length} cases left for today</h1>
+            </div></div>
+          )}
+          {filteredAndSortedPatients.length === 0 && (
+            <NoPatientFound />
+          )}
+        </div>
       </div>
       <AlertModal open={modal === "accept"} onClose={() => setModal("")}>
         <div>

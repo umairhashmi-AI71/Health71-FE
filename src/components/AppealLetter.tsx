@@ -56,7 +56,7 @@ const AppealLetter: React.FC<Type> = ({
 
             {isEditing ? (
               <textarea
-                className={`w-full h-full  p-2 border border-base appeal-textarea rounded focus:border-gray-200
+                className={`w-full h-[98%]  p-2 border border-base appeal-textarea rounded focus:border-gray-200
     focus:ring-1 focus:ring-gray-200
     focus:outline-none `}
                 value={markdown}

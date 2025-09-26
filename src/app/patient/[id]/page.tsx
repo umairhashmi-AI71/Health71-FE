@@ -422,7 +422,7 @@ export default function DashboardPage() {
     const error = ['AI-RESUB-001', 'T500', 'OA-ERR-001', 'MN-REQ-001', 'notcovered']
     if (code && error.includes(code)) {
       return false
-    } else if(patients.eligibilityCheck.status == 'notvalid' || patients.eligibilityCheck.status == 'valid') {
+    } else if(patients.eligibilityCheck.status == 'notvalid' || patients.eligibilityCheck.status == 'valid'|| patients.information?.infoType == 'Eligible') {
        return false
     }
 
@@ -453,7 +453,7 @@ export default function DashboardPage() {
               className={`rounded-xl cursor-pointer px-4 py-3 text-sm font-medium text-base-primary ${data.style}`}
               onClick={() => {
                 if (data.label == 'Save' || data.label == 'Cancel') {
-                  route.push('/patient')
+                 changeModal(data.label.toLowerCase());
                 } else {
                   // Handle error on denialManagement step
                   if (
@@ -644,7 +644,7 @@ export default function DashboardPage() {
               patients?.denialManagement
                 .denialAttempts as DenialAttempts[]
             }
-            processGap="h-[18px]"
+            processGap="h-[20px]"
           />
           <PostPaymentCard
             title="Post Payment"
@@ -683,7 +683,7 @@ export default function DashboardPage() {
               <AppealLetter
                 Icon={ReceiptText}
                 title="Appeals Letter"
-                className={`p-2.5 overflow-y-auto h-114`}
+                className={`p-2.5 overflow-y-auto h-104`}
                 appealDetails={appealDetails}
                 acceptHandeler={acceptHandeler}
                 markdownContent={appealLetterMarkDown}
@@ -701,32 +701,7 @@ export default function DashboardPage() {
                       fileSize={data.fileSize}
                     />
                   ))}
-                  <div className="grid grid-cols-2 gap-2">
-                    {[
-                      { src: "/xray.png", label: "test" },
-                      { src: "/xray.png", label: "test" },
-                    ].map((img, idx) => (
-                      <div
-                        key={idx}
-                        className="relative group cursor-pointer"
-                      >
-                        {/* Image */}
-                        <img
-                          src={img.src}
-                          alt={img.label || `Image ${idx + 1}`}
-                          className="rounded-lg object-cover"
-                        />
-
-                        {/* Hover overlay with icon */}
-                        <div
-                          onClick={() => setSelectedImage(img.src)}
-                          className="absolute inset-0 bg-black/40 opacity-0 rounded-lg group-hover:opacity-100 flex items-center justify-center transition-opacity"
-                        >
-                          <Expand className="text-white w-8 h-8" />
-                        </div>
-                      </div>
-                    ))}
-                  </div>
+                
                 </div>
               </MedicalRecords>
             </div>
@@ -801,7 +776,7 @@ export default function DashboardPage() {
               className="rounded-xl px-5 py-2 text-white bg-base-destructive"
               onClick={() => {
                 changeModal("");
-                route.push("/home");
+                route.push("/patient");
               }}
             >
               Yes
@@ -829,7 +804,7 @@ export default function DashboardPage() {
             </button>
             <button
               className="rounded-xl px-5 py-2 text-white bg-green"
-              onClick={() => changeModal("")}
+              onClick={() => {changeModal(""); route.push('/patient')}}
             >
               Yes
             </button>

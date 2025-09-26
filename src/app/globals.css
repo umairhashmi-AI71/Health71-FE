@@ -427,17 +427,7 @@ body {
 }
 
 
-.welcome-bg {
-  background-color: #CAE8E4;
-  box-shadow: 8px 8px 48px 8px rgba(0, 0, 0, 0.08);
-  background: radial-gradient(
-    600px 90.71% at 100% 0%, var(--base-sidebar-primary-foreground, #AFD8D4) 10%,
-   var(--base-sidebar-background, #ffffff) 100%);
-   background-blend-mode: normal, plus-lighter, color-burn;
 
-
-
-}
 
 
 .mackinac {
@@ -574,4 +564,33 @@ body {
 
 .insurance-detials select:disabled {
   background-color: var(--base-card);
+}
+
+
+.chatbg {
+background: #CAE8E4;
+background: linear-gradient(180deg,rgba(202, 232, 228, 1) 0%, rgba(202, 232, 228, 0.60) 51%, rgba(255, 255, 255, 0) 100%);
+border: 2px solid #fff;
+
+}
+
+.welcome-bg {
+  background-color: #CAE8E4;
+  box-shadow: 8px 8px 48px 8px rgba(0, 0, 0, 0.08);
+  background: radial-gradient(
+    600px 90.71% at 100% 0%, var(--base-sidebar-primary-foreground, #AFD8D4) 10%,
+   var(--base-sidebar-background, #ffffff) 100%);
+   background-blend-mode: normal, plus-lighter, color-burn;
+
+
+
+}
+
+.vectorbg {
+  background: url("/vector.png") no-repeat center bottom;
+  background-size: cover;
+}
+.nopatientcard {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.40) -8.3%, var(--base-agent-3, rgba(217, 201, 232, 0.40)) 93.08%);
+ 
 }

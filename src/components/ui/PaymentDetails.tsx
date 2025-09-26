@@ -223,6 +223,7 @@ export const PaymentDetailsTable: React.FC<PaymentDetailsTable> = ({
                          headerName: "",
                         sortable: false,
                         filter: false,
+                        width:100,
                         cellRenderer: partialApprovalAction,
                         // cellClass: "flex items-center flex justify-center items-center",
                     },
@@ -472,7 +473,7 @@ export const PaymentDetailsTable: React.FC<PaymentDetailsTable> = ({
                         Accept Confirmation
                     </div>
                     <div className="text-muted mb-6">
-                        Are you sure you want to accept the {selectedRows.length > 1 ? selectedRows.length : ''} code suggestion(s)? Important: Once accepted, this action cannot be undone.
+                        Are you sure you want to accept the {selectedRows.length > 1 ? selectedRows.length : ''} code suggestion(s)?<br /> Important: Once accepted, this action cannot be undone.
                     </div>
                     <div className="flex justify-end gap-4">
                         <button

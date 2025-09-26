@@ -111,7 +111,7 @@ const ICDCodes = forwardRef<HTMLDivElement, ICDCodesProps>(
     }
 
     return (
-      <div className="max-w-2xl mx-auto bg-white p-4" >
+      <div className="max-w-2xl mx-auto bg-white p-1" >
         {/* Header */}
         <div className="flex items-center mb-3 gap-x-4">
           <h1 className="text-2xl font-semibold text-gray-900">{title}</h1>
@@ -182,13 +182,16 @@ const ICDCodes = forwardRef<HTMLDivElement, ICDCodesProps>(
                   }
                 }}
               >
-                {icdCode.status == 'Changed' ? <p className="mb-1 pl-2">Changed from {icdCode.code} to {icdCode.newCode}</p>: ''}
-                <p className="pl-2">{icdCode.description}</p>
-
-
+                <div className="pl-2">
+                 {icdCode.status == 'Changed' ? <p className="mb-2">Changed from {icdCode.code} to {icdCode.newCode}</p>: ''}
                 {icdCode.confidence && (
-                  <p className="mt-1">Confidence Score: {icdCode.confidence}</p>
+                  <p className="mb-2">Confidence: {icdCode.confidence}%</p>
                 )}
+                <p>{icdCode.description}</p>
+
+                </div>
+
+                
               </div>}
               {icdCode.suggestion && <div>
                 {icdCode.suggestion}</div>}

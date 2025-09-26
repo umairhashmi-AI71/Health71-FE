@@ -14,15 +14,15 @@ const LogsList: React.FC<LogsListProps> = ({ data }) => {
 
 
     return (
-        <div className="mx-auto bg-white border border-base rounded-lg drop-shadow-sm " >
+        <div className="mx-auto " >
             {/* Header with Tabs */}
 
-            <div className="border-b px-1 py-1 h-10 border-base bg-base-muted rounded-lg  flex gap-x-4">
+            <div className="border-b p-1.5  border-base bg-base-muted rounded-lg  flex gap-x-4 mb-5">
                 {data.map((tab, index) => (
                     <button
                         key={index}
                         onClick={() => setActiveTab(index)}
-                        className={`flex items-center justify-center rounded-lg text-center grow transition-colors ${activeTab === index ? "bg-white" : ""
+                        className={`flex py-1 items-center justify-center rounded-lg text-center grow transition-colors ${activeTab === index ? "bg-white" : ""
                             }`}
                     >
                         <span className="text-sm">Round {index + 1}</span>
@@ -33,18 +33,18 @@ const LogsList: React.FC<LogsListProps> = ({ data }) => {
             <div className="relative">
                 {data.map((round, index) => {
                     return (
-                        <div className={`rounded-lg   ${activeTab === index ? "" : "hidden"}`} key={index}>
+                        <div className={`border border-base rounded-lg    ${activeTab === index ? "" : "hidden"}`} key={index}>
 
 
 
                             <table className="w-full">
                                 <tbody>
                                     <tr className="">
-                                        <td className="px-6 py-3 font-semibold  w-[18%]">Date & Time</td>
-                                        <td className="px-6 py-3 font-semibold  w-[10%]">Actor</td>
-                                        <td className="px-6 py-3 font-semibold  w-[15%]">Step</td>
-                                        <td className="px-6 py-3 font-semibold w-[30%]">Action Performed</td>
-                                        <td className="px-6 py-3 font-semibold w-[100px]"> Evidence / File Location</td>
+                                        <td className="px-3 py-3 font-semibold  w-[14%]">Date & Time</td>
+                                        <td className="px-3 py-3 font-semibold  w-[8%]">Actor</td>
+                                        <td className="px-3 py-3 font-semibold  w-[18%]">Step</td>
+                                        <td className="px-3 py-3 font-semibold w-[30%]">Action Performed</td>
+                                        <td className="px-3 py-3 font-semibold w-[100px]"> Evidence / File Location</td>
                                     </tr>
                                     {round.map((roundItem, idx) => {
                                         return (
@@ -52,26 +52,26 @@ const LogsList: React.FC<LogsListProps> = ({ data }) => {
                                                 key={idx}
                                                 className={`cursor-pointer transition-colors duration-20 patient-list hover:bg-[#EFF7F6] border-t border-gray-200 `}
                                             >
-                                                <td className="px-6 py-3">
+                                                <td className="px-3 py-3">
                                                     {roundItem.date}
 
                                                 </td>
-                                                <td className="px-6 py-3">
+                                                <td className="px-3 py-3">
                                                     <span
                                                         className={`border text-center bg-white rounded-2xl py-1 px-3 ${roundItem.actor.toLowerCase()}-border`}
                                                     >
                                                         {roundItem.actor}
                                                     </span>
                                                 </td>
-                                                <td className="px-6 py-3 ">
+                                                <td className="px-3 py-3 ">
                                                     {roundItem.step}
                                                 </td>
-                                                <td className="px-6 py-3 ">
+                                                <td className="px-3 py-3 ">
                                                     {roundItem.action}
                                                 </td>
 
-                                                <td className="px-6 py-3 w-10">
-<code className="truncate">{roundItem.fileLocation}</code>
+                                                <td className="px-3 py-3 w-10">
+<code className="truncate mackinac bg-basecard p-2 px-3 text-xs rounded-lg">{roundItem.fileLocation}</code>
                                                     
                                                 </td>
 

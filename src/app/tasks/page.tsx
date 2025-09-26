@@ -21,6 +21,7 @@ import { formatDate } from "@/lib/dateformate";
 import AlertModal from "@/components/AlertModal";
 import { markPatientSubmitted } from "@/store/slice/Patient";
 import { AgentContext } from "../layout";
+import { NoPatientFound } from "@/components/NoPatientFound";
 
 const RedirectPage = () => {
   const router = useRouter();
@@ -536,16 +537,11 @@ const RedirectPage = () => {
               </tbody>
             </table>
 
-            {filteredAndSortedPatients.length === 0 && (
-              <div className="text-center py-12">
-                <p className="text-gray-500">
-                  No patients found matching your criteria.
-                </p>
-              </div>
-            )}
+          
           </div>
 
-          <div className="flex justify-end mb-10">
+{/*           
+{filteredAndSortedPatients.length > 0 && <div className="flex justify-end mb-10">
             <button
               className={` text-white px-6 py-2 rounded-lg  ${selectedCount > 0 ? "bg-green" : "bg-[#F5F2EF]"
                 }`}
@@ -554,7 +550,10 @@ const RedirectPage = () => {
             >
               Accept
             </button>
-          </div>
+          </div>} */}
+            {/* {filteredAndSortedPatients.length === 0 && (
+               <NoPatientFound />
+            )} */}
         </main>
       </div>
       <AlertModal open={modal === "accept"} onClose={() => setModal("")}>
